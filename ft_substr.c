@@ -6,7 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:33:54 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 13:33:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 14:53:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	
+}
