@@ -6,7 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 13:34:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:35:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	
+}

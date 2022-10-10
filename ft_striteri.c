@@ -6,7 +6,18 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 13:34:10 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 10:19:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, s + i);
+		i++;
+	}
+}

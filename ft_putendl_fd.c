@@ -6,7 +6,20 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:22 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 13:34:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 09:49:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (!s)
+		return (0);
+	while (*s != '\0')
+	{
+		write (fd, s, 1);
+		s++;
+	}
+	write (fd, "\n", 1)
+}
