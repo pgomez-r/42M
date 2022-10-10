@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:42:54 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/10 09:07:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 14:26:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_calloc(size_t n, size_t size)
 {
-	int	*array;
-	int	i;
+	char	*array;
+	size_t	i;
 
 	array = ((char *)malloc(n * size));
 	i = 0;
