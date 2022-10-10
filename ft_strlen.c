@@ -6,11 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:59:08 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/05 12:59:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:38:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	cont;
 	int	num_char;

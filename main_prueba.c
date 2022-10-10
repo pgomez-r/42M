@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:43:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 13:05:47 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:00:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,62 @@
 #include <string.h>
 #include <stdlib.h>
 
-int	main(void)
+int	ft_strlen(const char *str)
 {
-	int	n;
+	int	cont;
+	int	num_char;
 
-	n = 35542;
-	ft_itoa(n);
+	cont = 0;
+	num_char = 0;
+	while (str[cont] != '\0')
+	{
+		num_char++;
+		cont++;
+	}
+	return (num_char);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+static int	ft_char_in_set(char c, char const *set)
 {
-	char	*str;
 	size_t	i;
 
 	i = 0;
-	str = (char *)malloc(count * size);
-	if (str == 0)
-		return (0);
-	while (i < count * size)
+	while (set[i])
 	{
-		str[i] = 0;
+		if (set[i] == c)
+			return (1);
 		i++;
 	}
-	return ((void *)str);
+	return (0);
 }
 
-int	count_char(int n)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	if (n == -2147483648)
-		return (11);
-	else if (n < 0)
-		return (count_char(n * (-1)) + 1);
-	else if (n < 10)
-		return (1);
-	else
-		return (count_char(n / 10) + 1);
-}
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
-void	convert_to_char(char *sol, int size, long int num)
-{
-	sol[size] = '\0';
-	if (num < 0)
-	{
-		sol[0] = '-';
-		num *= -1;
-		while (size > 1)
-		{
-			sol[size - 1] = num % 10 + '0';
-			num = num / 10;
-			size--;
-		}
-	}
-	else
-	{
-		while (size > 0)
-		{
-			sol[size - 1] = num % 10 + '0';
-			num = num / 10;
-			size--;
-		}
-	}
-}
-
-char	*ft_itoa(int n)
-{
-	int			size;
-	char		*result;
-	long int	num;
-
-	size = count_char(n);
-	result = (char *)ft_calloc(size + 1, sizeof(char));
-	if (!result)
+	start = 0;
+	while (s1[start] && ft_char_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_char_in_set(s1[end - 1], set))
+		end--;
+	str = (char *)malloc(sizeof(*s1) * (end - start + 1));
+	if (!str)
 		return (NULL);
-	num = (long int)n;
-	convert_to_char(result, size, num);
-	return (result);
+	i = 0;
+	while (start < end)
+		str[i++] = s1[start++];
+	str[i] = 0;
+	return (str);
+}
+
+int	main(void)
+{
+	char	*nueva;
+
+	nueva = ft_strtrim("cadena nueva de cadena", "cadena");
+	printf("%s\n", nueva);
 }

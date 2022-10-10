@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/10 11:35:20 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:52:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,17 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	
+	unsigned int	i;
+	char			*str;
+
+	i = 0;
+	str = (char *) malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	return (str);
 }
