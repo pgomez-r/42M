@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:33:57 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/10 12:04:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:47:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		str[i] = s1[i];
 		i++;
 	}
-	
 	return (str);
 }
