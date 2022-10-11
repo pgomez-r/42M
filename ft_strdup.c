@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 11:03:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:54:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@ char	*ft_strdup(const char *src)
 {
 	char	*dup;
 
+	dup = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
 	while (*src != '\0')
 	{
 		*dup = *src;
