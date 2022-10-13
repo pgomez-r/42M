@@ -6,11 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:01:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/05 13:01:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:05:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+#include "libft.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {	
 	unsigned int	i;
 

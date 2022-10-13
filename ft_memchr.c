@@ -6,9 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:39:14 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/06 14:54:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:03:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

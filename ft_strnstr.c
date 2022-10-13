@@ -6,9 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:21 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 11:28:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:05:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strnstr(const char *hs, const char *nd, size_t n)
 {

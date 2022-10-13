@@ -6,9 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:45:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 10:46:25 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:03:34 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_memcmp(const void *str1, const void *str2, size_t count)
 {

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:44:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/11 15:02:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:45:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 
+	str = (char *)malloc(sizeof(char) * 12);
 	if (n == -2147483648)
 		return (ft_strcpy(str, "-2147483648"));
 	str = (char *)malloc(sizeof(char) * 2);

@@ -6,11 +6,9 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 09:29:12 by pgomez-r          #+#    #+#              #
-#    Updated: 2022/10/10 14:23:16 by pgomez-r         ###   ########.fr        #
+#    Updated: 2022/10/13 12:21:57 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME = libft.a
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 			ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
@@ -27,7 +25,10 @@ RM		= rm -f
 
 CFLAGS	= -Wall -Wextra -Werror -I.
 
-$(NAME): $(OBJS)
+NAME = libft.a
+
+$(NAME): 
+	gcc -c $(CFLAGS) $(SRCS)
 	ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)

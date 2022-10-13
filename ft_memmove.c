@@ -6,9 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:45:53 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 10:23:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:04:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t count)
 {
