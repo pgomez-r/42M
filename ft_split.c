@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/12 18:39:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 09:28:17 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	cont_word(char const *s, char c)
 	return (count);
 }
 
-/*Qué hace el contador = un ciclo con tres "checks" dentro:
+/*Qué hace cont_word = un ciclo con tres "checks" dentro:
 while(recorrer toda la cadena original *s)
 	while(si lo que hay en cada posicion de str == c, seguimos i++)
 	if(terminado el while de arriba, porque str != c, aumentamos cntr+ 1 vez)

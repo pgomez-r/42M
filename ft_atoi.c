@@ -6,11 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:05:26 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/05 12:53:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/13 10:50:34 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int		sig;
 	int		num;
