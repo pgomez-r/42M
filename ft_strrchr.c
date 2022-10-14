@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/07 12:32:24 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:14:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *str, int ch)
 	while (i >= 0)
 	{
 		if (str[i] == (char)ch)
-			return ((char)str[i]);
+			return ((char *)str);
 		i--;
 	}
 	return (NULL);

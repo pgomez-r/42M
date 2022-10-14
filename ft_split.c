@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 09:28:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:52:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,23 @@ el parámetro char c*/
 
 #include "libft.h"
 
-int	cont_word(char const *s, char c)
+char	*ft_strncpy(char *dest, const char *src, unsigned int n)
+{
+	unsigned int	cnt;
+
+	cnt = 0;
+	while (cnt <= n)
+	{
+		dest[cnt] = src[cnt];
+		cnt++;
+	}
+	dest[cnt] = '\0';
+	return (dest);
+}
+
+/*puedo o debo añadir funciones como strncpy a libft.h??*/
+
+int	ft_count_word(char const *s, char c)
 {
 	unsigned int	i;
 	int				count;
@@ -44,7 +60,7 @@ while(recorrer toda la cadena original *s)
 	while(si no ha terminado str y s[i] es distinto a c, seguimos i++)
 Así ya tenemos el número de strings que va a tener nuestra tabla resultado*/
 
-char	*ft_savewords(const char *s, size_t n)
+char	*ft_savewords(const char *s, unsigned int n)
 {
 	char			*str;
 
@@ -72,7 +88,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	tab = (char **)malloc(sizeof(char *) * (ft_cntwrd(s, c)) + 1);
+	tab = (char **)malloc(sizeof(char *) * (ft_count_word(s, c)) + 1);
 	if (tab == NULL)
 		return (NULL);
 	while (s[i])
@@ -84,10 +100,13 @@ char	**ft_split(char const *s, char c)
 			i++;
 		if (i > j)
 		{	
-			tab[k] = ft_savewords(s[j], i - j);
+			tab[k] = ft_savewords(s + j, i - j);
 			k++;
 		}
 	}
-	tab[k] = '\0';
+	tab[k] = NULL;
 	return (tab);
 }
+
+/*Why tab[k] = NULL y no '\0'?? porque la posicion de tab no es un char, 
+sino otra cadena de chars, así que cerramos la cadena de cadena con NULL*/

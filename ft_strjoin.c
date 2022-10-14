@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/10 11:24:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:47:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	str = (char *)malloc((ft_strlen(s1) + ft_strelen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i] != '\0')

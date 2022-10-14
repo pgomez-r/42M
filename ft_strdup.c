@@ -6,24 +6,27 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 09:35:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:22:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 char	*ft_strdup(const char *src)
 {
-	char	*dup;
+	char			*dup;
+	unsigned int	i;
 
+	i = 0;
 	dup = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
 	if (!dup)
 		return (NULL);
 	while (*src != '\0')
 	{
-		*dup = *src;
-		src++;
-		dup++;
+		dup[i] = src[i];
+		i++;
 	}
-	*dup + 1 = '\0';
+	dup[i + 1] = '\0';
 	return (dup);
 }
 

@@ -6,16 +6,18 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/06 10:05:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:12:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *str, int c)
 {
 	while (*str != '\0')
 	{
 		if (*str == c)
-			return ((char *) str);
+			return ((char *)str);
 		str++;
 	}
 	return (NULL);

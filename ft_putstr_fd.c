@@ -6,13 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/10 09:53:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:06:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char const *s, int fd)
 {
 	write (fd, s, ft_strlen(s));
 }

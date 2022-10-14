@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:21 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 14:05:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:33:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ char	*ft_strnstr(const char *hs, const char *nd, size_t n)
 	size_t	i;
 	size_t	j;
 
-	if (!*nd)
-		return (*hs);
+	if (!nd)
+		return ((char *)hs);
 	i = 0;
 	while ((hs[i] != '\0') && (i < n))
 	{
 		j = 0;
 		if (hs[i] == nd[j])
 		{
-			while ((nd[j] == hs[i + j]) && (i + j < len))
+			while ((nd[j] == hs[i + j]) && (i + j < n))
 			{
 				if (nd[j + 1] == '\0')
 					return ((char *)hs + i);
