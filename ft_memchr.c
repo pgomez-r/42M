@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:39:14 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 14:17:26 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:13:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-/* No etiendo por qué CONST VOID, yo intentaba const char */

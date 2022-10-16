@@ -6,34 +6,71 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:13:51 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/15 20:14:24 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:55:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "libft.h"
 
-// char	*ft_strrchr(const char *str, int ch)
+// size_t	ft_strlen(const char *str)
 // {
+// 	int	cont;
+// 	int	num_char;
+
+// 	cont = 0;
+// 	num_char = 0;
+// 	while (str[cont] != '\0')
+// 	{
+// 		num_char++;
+// 		cont++;
+// 	}
+// 	return (num_char);
+// }
+
+// void	*ft_calloc(size_t n, size_t size)
+// {
+// 	char	*array;
 // 	size_t	i;
 
-// 	i = ft_strlen(str);
-// 	if (ch == 0)
-// 		return ((char *)str + i);
-// 	while (i >= 0)
+// 	array = ((char *)malloc(n * size));
+// 	i = 0;
+// 	if (array == 0)
+// 		return (0);
+// 	while (i < n * size)
 // 	{
-// 		if (str[i] == ch)
-// 			return ((char *)str + i);
-// 		i--;
+// 		array[i] = 0;
+// 		i++;
 // 	}
-// 	return (NULL);
+// 	return ((void *)array);
+// }
+
+// char	*ft_substr(char const *s, unsigned int start, size_t len)
+// {
+// 	unsigned int	i;
+// 	char			*str;
+
+// 	if (start > ft_strlen(s))
+// 		return (ft_calloc(1, 1));
+// 	if (len > ft_strlen(s))
+// 		len = ft_strlen(s) - start;
+// 	str = (char *)ft_calloc(sizeof(*s), (len + 1));
+// 	if (!str)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < len)
+// 	{
+// 		str[i] = s[start + i];
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	return (str);
 // }
 
 // int	main(void)
 // {
-// 	char	*src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
-// 	char	*d1 = strrchr(src, '\0');
-// 	char	*d2 = ft_strrchr(src, '\0');
-
-// 	printf("%s\n", d1);
-// 	printf("%s\n", d2);
+// 	char *str = "01234";
+//  	size_t size = 10;
+// 	printf("%s\n", ft_substr(str, 10, size));
+// 	printf("%s\n", ft_substr(str, 10, size));
+// 	return (0);
 // }

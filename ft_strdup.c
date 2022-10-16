@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/14 10:22:21 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:01:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 char	*ft_strdup(const char *src)
 {
-	char			*dup;
-	unsigned int	i;
+	char	*dup;
+	size_t	i;
+	size_t	len;
 
+	len = ft_strlen(src);
 	i = 0;
-	dup = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	dup = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return (NULL);
-	while (*src != '\0')
+	while (i < len)
 	{
 		dup[i] = src[i];
 		i++;
 	}
-	dup[i + 1] = '\0';
+	dup[i] = '\0';
 	return (dup);
 }
 
 /*Esta función aloja suficiente memoria para copiar s1, hace la copia y devuelve
- * un puntero al string, si no hay suficiente memoria devuelve 0*/
+ * un puntero al string, si no se pudo asignar la memoría devuelve NULL*/
