@@ -6,24 +6,24 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/15 20:09:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:10:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int ch)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	int	len;
 
-	i = ft_strlen(str);
-	if (ch == 0)
-		return ((char *)str + i);
-	while (i >= 0)
+	len = ft_strlen(s);
+	if (c == 0)
+		return ((char *)s + len);
+	while (len >= 0)
 	{
-		if (str[i] == ch)
-			return ((char *)str + i);
-		i--;
+		if (s[len] == (char)c)
+			return ((char *)s + len);
+		len--;
 	}
 	return (NULL);
 }
@@ -31,9 +31,10 @@ char	*ft_strrchr(const char *str, int ch)
 /*Misma idea que la función strchr pero empezando a buscar desde el final de str
 Esta función busca la última aparición de un caracter en un string, si el 
 caracter a buscar es '\0' también lo encontrará, devolverá un puntero al 
-aracter si lo encuentra o 0 si no lo encuentra
+caracter si lo encuentra o 0 si no lo encuentra
 En vez de usar puntero, vamos a movernos con un contador con valor strlen de str
 así nos situamos en la última posición de str, el if para comprobar si el final
 de cadena es lo que busca ch lo hacemos lo primeor, ya que empezamos por el final
-Igual que con strch, PACO me lo tira abajo, pero yo paso las pruebas de paco
-a "mano" con un main y se comporta como la función original*/
+Luego vamos haciendo len-- cada vez que s[len] no coincida con c, hasta llegar a
+la posicion 0 (len >= 0), que también comprobamos, si no ha encontrado ninguna
+coincidencia, return (NULL)*/

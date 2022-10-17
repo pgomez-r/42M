@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/14 13:52:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:31:43 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 	unsigned int	cnt;
 
 	cnt = 0;
-	while (cnt <= n)
+	while (cnt < n)
 	{
 		dest[cnt] = src[cnt];
 		cnt++;
@@ -31,8 +31,6 @@ char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 	dest[cnt] = '\0';
 	return (dest);
 }
-
-/*puedo o debo añadir funciones como strncpy a libft.h??*/
 
 int	ft_count_word(char const *s, char c)
 {
@@ -64,7 +62,7 @@ char	*ft_savewords(const char *s, unsigned int n)
 {
 	char			*str;
 
-	str = (char *)malloc(sizeof(char) * n + 1);
+	str = (char *)malloc(sizeof(char) * (n + 1));
 	if (str == NULL)
 		return (NULL);
 	str = ft_strncpy(str, s, n);
@@ -88,15 +86,15 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	tab = (char **)malloc(sizeof(char *) * (ft_count_word(s, c)) + 1);
-	if (tab == NULL)
+	tab = (char **)malloc(sizeof(char *) * ((ft_count_word(s, c)) + 1));
+	if (!tab || !s)
 		return (NULL);
 	while (s[i])
 	{
 		while (s[i] == c)
 			i++;
 		j = i;
-		while (s[i] && s[1] != c)
+		while (s[i] && s[i] != c)
 			i++;
 		if (i > j)
 		{	

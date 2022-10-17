@@ -5,72 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 19:13:51 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/16 15:55:41 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/10/17 10:10:47 by pgomez-r          #+#    #+#             */
+/*   Updated: 2022/10/17 14:34:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "libft.h"
 
-// size_t	ft_strlen(const char *str)
+// char	*ft_strnstr(const char *hs, const char *nd, size_t n)
 // {
-// 	int	cont;
-// 	int	num_char;
-
-// 	cont = 0;
-// 	num_char = 0;
-// 	while (str[cont] != '\0')
-// 	{
-// 		num_char++;
-// 		cont++;
-// 	}
-// 	return (num_char);
-// }
-
-// void	*ft_calloc(size_t n, size_t size)
-// {
-// 	char	*array;
 // 	size_t	i;
+// 	size_t	j;
 
-// 	array = ((char *)malloc(n * size));
+// 	if (!nd)
+// 		return ((char *)hs);
 // 	i = 0;
-// 	if (array == 0)
-// 		return (0);
-// 	while (i < n * size)
+// 	while (hs[i] != '\0' && i <= n)
 // 	{
-// 		array[i] = 0;
+// 		j = 0;
+// 		while (i + j < n && hs[i + j] == nd[j] && nd[j] != '\0')
+// 			j++;
+// 		if (nd[j] == '\0')
+// 			return ((char *)hs + i);
 // 		i++;
 // 	}
-// 	return ((void *)array);
-// }
-
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	unsigned int	i;
-// 	char			*str;
-
-// 	if (start > ft_strlen(s))
-// 		return (ft_calloc(1, 1));
-// 	if (len > ft_strlen(s))
-// 		len = ft_strlen(s) - start;
-// 	str = (char *)ft_calloc(sizeof(*s), (len + 1));
-// 	if (!str)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		str[i] = s[start + i];
-// 		i++;
-// 	}
-// 	str[i] = '\0';
-// 	return (str);
+// 	return (NULL);
 // }
 
 // int	main(void)
 // {
-// 	char *str = "01234";
-//  	size_t size = 10;
-// 	printf("%s\n", ft_substr(str, 10, size));
-// 	printf("%s\n", ft_substr(str, 10, size));
+// 	char *s1 = "oh no not the empty string !";
+//  	char *s2 = "";
+// 	size_t max = strlen(s1);
+// 	printf("%s\n", strnstr(s1, s2, max));
+// 	printf("%s\n", ft_strnstr(s1, s2, max));
 // 	return (0);
 // }
