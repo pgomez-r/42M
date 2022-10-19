@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:33:57 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/14 13:11:34 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:50:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_set(char c, char const *set)
 {
 	while (*set)
 	{
-		if (*set == c)
+		if (c == *set)
 			return (1);
 		set++;
 	}
@@ -31,7 +31,7 @@ int	ft_check_set(char c, char const *set)
 }
 
 /*En la función principal vamos a crear tres contadores: start, end, i
-tart y end comienzan en la posicion inicial y final (respectv) de s1
+start y end comienzan en la posicion inicial y final (respectv) de s1
 Usando check_set, hacemos un while para start y otro para end, vamos a 
 hacer que ambos se muevan por la cadena, star de izq a der, end al reves,
 hasta que el contenido de ambas posiciones en s1 sea diferente de set

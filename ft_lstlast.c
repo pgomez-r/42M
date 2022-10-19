@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:58:30 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/18 14:03:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:12:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*last;
+	t_list	*fwrd;
 
-	while (lst)
-		last = lst->next;
-	return (last);
+	if (!lst)
+		return (0);
+	fwrd = lst->next;
+	while (fwrd)
+	{
+		lst = fwrd;
+		fwrd = lst->next;
+	}
+	return (lst);
 }
