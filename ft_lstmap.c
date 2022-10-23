@@ -6,34 +6,51 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:49:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/21 20:09:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:06:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//
+// Description
+// Iterates the list ’lst’ and applies the function ’f’
+// to the content of each element.
+// Creates a new list resulting of
+// the successive applications of the function ’f’.
+// The ’del’ function is used to delete the content of an element if needed.
+//
+// Parameters
+// #1. The adress of a pointer to an element.
+// #2. The adress of the function used to iterate on the list.
+// #3. The adress of the function used to delete
+// the content of an element if needed.
+//
+// Return
+// The new list. NULL if the allocation fails.
+//
+// External functs.
+// malloc, free
+//
 
 #include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	mapped;
-	t_list	aux;
+	t_list	*new_element;
+	t_list	*new_list;
 
-	if (!lst)
+	new_list = NULL;
+	if ((*f) == NULL || (*del) == NULL)
 		return (NULL);
-	mapped = ft_sltnew(f(lst->content));
-	if (!mapped)
-		return (NULL);
-	aux = mapped;
-	
-	
-	mapped->next = NULL;
-	return (mapped);
+	while (lst != NULL)
+	{
+		if (!(new_element = ft_lstnew((*f)(lst->content))))
+		{
+			if (new_element != NULL)
+				ft_lstclear(&new_list, (*del));
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_element);
+		lst = lst->next;
+	}
+	return (new_list);
 }
-
-/*lstmap crea una t_list nueva, resultado de aplicar la función f al contenido
-de cada nodo de una t_list original que entra como parámetro, es decir, lstiter
-pero generando una lista nueva resultado de modificar con f cada content
-Metemos como siempre el if para comprobar si los parametros que recibe estan ok
-Creamos dos variables t_list, una para la lista final que va a devolver lstmap y 
-otra para que sirva de auxiliar para poder ir moviendo los nodos(como lstclear)
-
-*/

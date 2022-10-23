@@ -1,2 +1,5 @@
 .DS_store
 .vscode
+objs/
+libft.a
+*.swp
