@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:23:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/20 13:47:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:55:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 }
 
 /*En el if comprobamos que la lista lst no esté vacia, si lo está, simplemente
-*lst = new, lo que haría que new sea el primer y último nodo de la lista
-Si no es así, creamos una variable puntero a lista, le declaramos como valor
-ft_lstlast, por lo que aux = ultimo nodo de lst, luego decimos que el link(next)
+*lst = new, lo que haría que new sea el primer y último nodo de la lista, hacemos
+return para que no continue la función después de este punto
+Si no es así, creamos una variable t_list *, le declaramos como valor ft_lstlast 
+de lst, por lo que aux = ultimo nodo de lst, luego decimos que el link(next)
 de ese ultimo nodo es igual a new, así, el ultimo link de la lista apunta
 al nuevo nodo, que pasa a ser el último de la lista*/

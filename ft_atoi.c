@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:05:26 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 11:28:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:14:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,9 @@ int	ft_atoi(const char *str)
 	}
 	return (num * sig);
 }
+
+/*La función recibe como parámetro una cadena char que se supone que va a 
+contener números y devuelve estos numeros representados en una variable de 
+tipo int
+Es igual que el atoi de la piscina, pero solo admite un signo -/+ antes de
+que comiencen los números, es decir ++-+43 devolvería NULL */

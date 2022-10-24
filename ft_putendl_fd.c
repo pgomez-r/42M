@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:22 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 13:26:45 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:04:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_putendl_fd(char const *s, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
-/*La función escribe el string que entra como parámetro char *s 
-en el file descriptor fd seguido de \n para hacer un salto de linea
-es como putendl, que simplemente añade el salto de linea a un str, pero usando fd
-para llevarla a cabo usamos dos funciones anteriores: putstr_fd + putchar_fd
+/*la función putendl añade un salto de línea a una cadena char, en el caso de
+putendl_fd, además tiene en cuenta el filedescriptor para escribir tanto la
+cadena como el salto de linea
+para llevarla a cabo usamos putstr y putchar, ambos usando el file descriptor,
 es decir: "imprimir" cadena + "imprimir char" ambos usando fd*/

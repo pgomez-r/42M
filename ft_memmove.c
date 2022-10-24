@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:45:53 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/14 16:10:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:50:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	*ft_memmove(void *dest, const void *src, size_t count)
 	return (dest);
 }
 
-/*Esta función copia de forma no destructiva, si el recurso y el destino se
- * solapan lo hará de forma que se pueda completar la copia*/
-/*si el src es menor que el destino empezamos a copiar desde detrás hacia 
- * adelante (primera condición)*/
-/* si no simplemente copiamos de izquierda a derecha*/
+/*Esta función copia de forma no destructiva, si el source y el destino se
+solapan lo hará de forma que se pueda completar la copia, así que hacemos 
+un proceso parecido al de memcpy, pero con dos supuestos: if dest<src y else
+If dest es menor que src, copiamos de "izq a der" hasta count bytes
+Si el src es menor que el destino empezamos a copiar desde detrás hacia 
+adelante, asignando a al contador i el valor de count - 1 y moviendolo con i--
+*/

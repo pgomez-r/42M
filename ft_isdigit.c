@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:16:42 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/05 14:19:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:29:15 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,3 +16,5 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
+/*comprueba si el valor de una variable tipo int es numérico*/

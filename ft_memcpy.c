@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:45:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/18 10:55:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:40:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char			*dest_cpy;
-	const char		*src_cpy;
-	size_t			i;
+	char	*dest_cpy;
+	char	*src_cpy;
+	size_t	i;
 
-	dest_cpy = dest;
-	src_cpy = src;
+	dest_cpy = (char *)dest;
+	src_cpy = (char *)src;
 	i = 0;
 	if (dest == NULL && src == NULL)
 		return (NULL);
@@ -31,24 +31,9 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-// void	*ft_memcpy(void *dest, const void *src, size_t n)
-// {
-// 	char		*p;
-// 	const char	*q;
-
-// 	q = src;
-// 	p = dest;
-// 	if (dest == NULL && src == NULL)
-// 		return (NULL);
-// 	while (n > 0)
-// 	{
-// 		*p = *q;
-// 		p++;
-// 		q++;
-// 		n--;
-// 	}
-// 	return (dest);
-// }
-
-/* En ejemplo del compi, src es CONST, n es SIZE_T, 
-y los _cpy son unsigned char (src UNSIGNED CONST)*/
+/*Copia n número de bytes del espacio de memoria de src al de dest, si ambos se
+sobreponen, el comportamiento de la función no está definido (man), 3 variables: 
+un contador y dos punteros a cadena char, que son para darles el valor de dest 
+y src del prototipo casteados y asi poder movernos por las cadenas
+Mientras el contador sea menor que el valor de n, vamos copiando 1 a 1 cada
+valor de una cadena a otra, luego devolvemos dest*/

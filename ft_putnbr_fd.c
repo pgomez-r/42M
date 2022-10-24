@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:19 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 10:24:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:06:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd(n + '0', fd);
 }
 
-/*Funciona exactamente igual que putnbr, simplemente usamos 
-la función putchar_fd en lugar de putchar, para hacer uso de la varible fd*/
+/*Funciona igual que ft_putnbr que ya hicimos en la piscina (recursivo),
+simplemente, a la hora de "imprimir" usamos las funciones putstr_fd y putchar_fd,
+ya que necesitamos usar el fd que la función recibe como parámetro*/

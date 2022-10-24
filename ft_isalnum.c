@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:30:42 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/05 14:29:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:27:26 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,6 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
+
+/*comprueba si una variable tipo int es alfanúmerica, con un if que comprueba 
+alpha y digit, si cualquier OK, return 1, sino 0, easy*/

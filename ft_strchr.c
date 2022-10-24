@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 17:35:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*ft_strchr(const char *s, int c)
 }
 
 /*Esta función busca la primera aparición de un caracter en un string, si el
- * caracter a buscar es '\0' también lo encontrará, devolverá un puntero al 
- * caracter si lo encuentra o 0 si no lo encuentra*/
+caracter a buscar es '\0' también lo encontrará, devolverá un puntero al 
+caracter si lo encuentra o 0 si no lo encuentra*/
 
 /*Creamos un puntero nuevo, tipo char, le asignamos el valor de str casteado
 como char en lugar de const char y hacemos un bucle mientras el contenido de ptr
@@ -37,23 +37,3 @@ cuando no lo sea, devolvemos ptr, que estará ya en la posición que coincide co
 Añadimos un if *p == fin de cadena, para devolver NULL, ya que no ha encontrado
 coincidencias con c* (si en algun momento ptr y c ambos == '\0' no se daria el if
 porque no se entraria al while anterior, pasariamos a return ptr)*/
-
-// char	*ft_strchr(const char *s, int c)
-// {
-// 	char	*ptr;
-
-// 	ptr = (char *)s;
-// 	while (*ptr != '\0')
-// 	{
-// 		if (*ptr == (char)c)
-// 			return (ptr);
-// 		ptr++;
-// 	}
-// 	if (*ptr == '\0' && c == '\0')
-// 		return (ptr);
-// 	return (NULL);
-// }
-
-/* Esta de aquí arriba es mi primera versión, da un solo error en test,
-he tenido que cambiarla por la de un compañero, la cual entiendo, el problema
-es que todavía no entiendo por qué la mia falla... */
