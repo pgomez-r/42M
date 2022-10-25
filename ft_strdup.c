@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/16 14:01:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 08:13:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ char	*ft_strdup(const char *src)
 }
 
 /*Esta función aloja suficiente memoria para copiar s1, hace la copia y devuelve
- * un puntero al string, si no se pudo asignar la memoría devuelve NULL*/
+un puntero al string, si no se pudo asignar la memoría devuelve NULL
+Primero calculamos el tamaño de la cadena src con strlen, reservamos memoria con
+malloc para char* tamaño char * len + 1 (para añadir luego '\0') luego recorremos
+la cadena aumentando un contador y vamos copiando [i] de src a [i] de dup
+cuando termine de copiar, cerramos la ultima posicion de la nueva cadena con '0'
+y la devolvemos*/

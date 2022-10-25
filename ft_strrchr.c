@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 18:10:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:40:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ caracter a buscar es '\0' también lo encontrará, devolverá un puntero al
 caracter si lo encuentra o 0 si no lo encuentra
 En vez de usar puntero, vamos a movernos con un contador con valor strlen de str
 así nos situamos en la última posición de str, el if para comprobar si el final
-de cadena es lo que busca ch lo hacemos lo primeor, ya que empezamos por el final
+de cadena es lo que busca ch lo hacemos lo primero, ya que empezamos por el final
 Luego vamos haciendo len-- cada vez que s[len] no coincida con c, hasta llegar a
 la posicion 0 (len >= 0), que también comprobamos, si no ha encontrado ninguna
-coincidencia, return (NULL)*/
+coincidencia, return (NULL)
+Igual que en strchr, lo que devolvemos es un puntero a la posición de s en la que
+se produce la coincidencia, por lo que devolvemos s + len para que el puntero se
+envíe "desplazado" a la posición correcta, además este debe ser casteado, ya que
+recibe como parámetro en el prototipo un const char, pero debe devolver char*/

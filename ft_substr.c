@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:33:54 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/16 15:52:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:55:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str[i] = s[start + i];
 		i++;
 	}
-	str[i] = '\0';
 	return (str);
 }
 
 /*Esta función designa memoria y devuelve una cadena nueva que es
 una copia de una porción de la cadena dada en el prototipo
 La porción a copiar será desde la posición de la cadena que marque start
-y tantos bytes siguientes como sea el valor de len*/
+y tantos bytes siguientes como sea el valor de len
 
-/*Creamos un contador i y un char * para la nueva cadena y le asignamos memoria
-con CALLOC, de tamaño len + 1 (para luego añadir '\0' la final de cadena) 
-Luego, como siempre, hacemos el if (comprobación) para retornar 
-NULL si no se pudiese asiganar la memoria*/
-
-/*En esta función usamos CALLOC en lugar de malloc, WHY?*/
-
-/*Luego es solo crear un bucle para ir copiando desde start hasta len,
-mientras el contador sea menor que len, copiamos a str y seguimos aumentando i
-Para terminar cerramos la cadena con '\0' y hacemos return(str)*/
+Comprobamos si el punto de inicio se sale de la cadena (si start es mayor
+que strlen de s), en ese caso devolvemos memoria vacia con calloc(1,1)
+Comprobamos si la longitud solicitada para la copia es mayor que el tamaño
+de la cadena s, en ese caso: cambiamos el valor de len a strlen(s) menos start
+Creamos un contador i y un char * para la nueva cadena y le asignamos memoria
+con CALLOC, de tamaño len + 1 (para el '\0' de final de cadena) + if por si no
+se ha podido reservar la memoria abortar misión
+Luego es solo crear un bucle para ir copiando desde start hasta len, mientras 
+el contador sea menor que len, copiamos a str y seguimos aumentando i*/

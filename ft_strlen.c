@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:59:08 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/13 14:05:08 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:08:29 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int	cont;
-	int	num_char;
+	size_t	i;
 
-	cont = 0;
-	num_char = 0;
-	while (str[cont] != '\0')
-	{
-		num_char++;
-		cont++;
-	}
-	return (num_char);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
+
+/*misma función de la piscina, recorrer una cadena con un contador y cuando
+termine, devolver el contador para obtener el valor del tamaño de cadena*/

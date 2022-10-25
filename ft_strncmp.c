@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:01:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/16 12:09:13 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:16:47 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 desde la posición inicial, cuando encuentra un char diferente, devuelve un int
 que es el resultado de la diferencia entre los caracteres que encuentra, si no
 encuentra ninguna diferencia, devuelve 0
-la diferencia con strcmp es que compara n número de caracteres
-nos movemos por las dos cadenas con un contador size_t porque lo vamos a comparar
-con el size_t n dado por la función
+la diferencia con strcmp es que compara un número máximo n de caracteres
+nos movemos por las dos cadenas con un contador size_t (porque lo vamos a 
+comparar con el size_t n dado por la función)
 si n=0 devolvemos 0, en cualquier otro caso, recorremos str mientras se cumplan
 3 condiciones: que no estemos en final de cadena s1, que el contenido de ambas en
 la posicion del contador sea igual, que i sea menor que n - 1
@@ -38,7 +38,4 @@ cuando se deje de cumplir alguna de estas, devolvemos la diferencia de s1 y s2 e
 la posicion del contador, casteados como unsigned char (man strncmp)
 
 no me queda del todo claro por qué n - 1, entiendo que se supone que n va a ser
-siempre el len total de s1 y que nunca va a ser valor 0
-
-AGAIN :  unit tester me da dos FAILED, pero pruebo ambos ejemplos y obtengo
-mismo resultado de strncmp y ft_strncmp...T_T*/
+siempre el len total de s1, por lo que si n = 10, la posicion 10 será '\0'*/

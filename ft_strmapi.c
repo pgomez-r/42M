@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 10:08:16 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:07:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,11 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+
+/*Esta función aplica la función f dada como parámetro a cada caracter de la 
+string s y genera una nueva string con el resultado, es el mismo funcionamiento
+que en strteri, pero copiando el resultado de cada "repeticion" a una nueva str
+Primero creamos y reservamos memoria para la cadena nueva, luego comenzamos el
+mismo while que en strteri, pero al mismo tiempo, str[i] tendrá el valor 
+resultante de la función f... str[i] = f(i, s[i]), al final cerramos cadena y 
+la devolvemos*/

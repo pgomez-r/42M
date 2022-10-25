@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/14 10:47:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/10/25 08:23:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ primero, declaramos 3 variables: dos contadores y la cadena final
 con malloc, asignamos el espacio necesario para la nueva cadena, calculado con
 strlen de las dos cadenas iniciales + 1 (el más uno, para añadir al final '\0')
 luego hacemos dos bucles while para ir copiando uno a uno cada byte de s1 primero
-y luego continuar con s2, al final, asignamos '\0' a la ultima posicion de str*/
+y luego continuar con s2, cuando empecemos a copiar s2, el indice para movernos 
+por str será [i+j] al final, asignamos '\0' a la ultima posicion de str*/
