@@ -3,3 +3,5 @@
 objs/
 libft.a
 *.swp
+.vscode
+main_split.dSYM/Contents
