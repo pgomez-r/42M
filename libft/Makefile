@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 09:29:12 by pgomez-r          #+#    #+#              #
-#    Updated: 2022/10/25 11:05:57 by pgomez-r         ###   ########.fr        #
+#    Updated: 2022/10/26 13:34:49 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ all: $(NAME)
 	$(CC) -c $(CFLAGS) $?
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BONUS_OBJS)
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
