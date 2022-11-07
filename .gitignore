@@ -3,5 +3,4 @@
 objs/
 libft.a
 *.swp
-.vscode
 .gitignore
