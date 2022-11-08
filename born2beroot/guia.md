@@ -291,7 +291,7 @@ Empezaremos creando esta:
 
 34 ◦ Ahora debemos crear todas las particiones lógicas. Dejo captura de los tamaños que he usado yo para cada una en una máquina de 12Gb , ya que VirtualBox no me permitía asginarle 30Gb de disco a mi máquina (como el ejemplo del subject), no es necesario un tamaño en concreto.
 
-AQUÍ TENGO QUE AÑADIR CAPTURA, EN EDITOR WEB =)
+<img width="690" alt="Screen Shot 2022-11-08 at 8 49 05 AM" src="https://user-images.githubusercontent.com/115219064/200511370-1f1d732f-f9fc-408a-b632-915bd428a9ad.png">
 
 El orden de la creación de las unidades lógicas será el mismo que indica el subject; empezamos por root y terminamos con var-log. Solo aparecen capturas de la creación de la primera unidad para que se refleje el proceso (ignorad el tamaño que se usa en la captura), las demás las haremos igual, simplemente cambiando nombre y tamaño.
 
