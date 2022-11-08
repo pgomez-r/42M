@@ -1,13 +1,13 @@
 # Born2beroot-Guía 💻
 # Índice
 
-## 0. Sgoinfre 
+## 0. sgoinfre 
 Importante tener creada la carpeta en sgoingfre/perso/<tu_login>, y modificar sus permisos (chmod 700)
 
 Aquí vamos a trabajar todo el proyecto, guardaremos la ISO del sistema operativo y el archivo que genera VirtualBox
 
 ## 1. Descarga de Debian💿
-[Click aqui](https://www.debian.org/distrib/index.es.html) Seleccionar aquitectra amd64
+[Click aqui](https://www.debian.org/distrib/index.es.html) para descargar la ISO de Debian desde su web oficial. Seleccionar aquitectra amd64.
 
 ## 2- Instalacion de la maquina 🛠
 
