@@ -1,5 +1,7 @@
 # Born2beroot-Guía 💻
 
+Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos los requisitos del subject, incluyendo los bonus. No incluye guía de evaluación.
+
 # Índice
 
 0. [sgoingfre 📁](#0--sgoinfre)
@@ -27,8 +29,17 @@
 
 	5.1 [Resultado total del script 🆗](#5-13-resultado-total-del-script)
 	
-6. [Crontab ⏰ vs SystemD ⌚](#6--crontab-vs-systemd)
+6. [Crontab vs Systemd ⌚](#6--crontab-vs-systemd-)
 7. [Signature.txt 📝](#7--signaturetxt-)
+8. [Instalación y configuración de servicios extra 📰](#8--instalación-y-configuración-de-servicios-extra-)
+	
+	8.1 - [Lighttpd](#81---lighttpd)
+
+	8.2 - [MariaDB](#82---mariadb)
+
+	8.3 - [Php y WordPress](#83---php-y-wordpress)
+
+	8.4 - [File Transfer Protocol](#84---file-transfer-protocol)
 
 ## 0. sgoinfre 
 Importante tener creada la carpeta en sgoingfre/perso/<tu_login>, y modificar sus permisos (chmod 700)
@@ -840,5 +851,129 @@ El problema de usar este método es que el script se va a ejecutar a cada 10 min
 
 El script sería así () y se incluye al final de crontab así () _tengo que añadirlo, como no he usado este método no lo tengo de momento_
 
-La alternativa que he usado yo es crear un servicio de systemd con un timer. Básicamente se trata de crear dos archivos que se comunican entre si (.service y .timer), ajustar bien el timer y habilitar e iniciar el servicio, como ya hemos hecho antes con otros (como ssh por ejemplo).
+La alternativa que he usado yo es crear un servicio de systemd con un timer. Básicamente se trata de crear dos archivos que se comunican entre si (```monitoring.service``` y ```monitoring.timer```), ajustar bien el timer y habilitar e iniciar el servicio, como ya hemos hecho antes con otros (como ssh por ejemplo).
+
+Para esto, nos vamos a la carpeta ```/etc/systemd/system```, aquí creamos los dos archivos: touch ```monitoring.service``` y ```monitoring.timer```. Vamos a editarlos con nano o vim para que tengan la siguiente estructura:
+
+`$sudo nano monitoring.service`, escribimos las siguientes líneas:
+
+>[Unit]
+
+>Description=monitoring.sh
+
+>Wants=monitoring.timer
+
+>[Service]
+
+>Type=oneshot
+
+>ExecStart=<ruta_del_script>
+
+>[Install]
+
+>WantedBy=multi_user.target
+
+`$ sudo nano monitoring.timer`, escribimos las siguientes líneas:
+
+>[Unit]
+
+>Description=monitoring.sh
+
+>Requires=monitoring.service
+
+>[Timer]
+
+>Unit=monitoring.service
+
+>AccuraySec=1ms
+
+>OnStartupSec=10m
+
+>OnUnitActiveSec=10m
+
+>[Install]
+
+>WantedBy=timers.target
+
+Ya hemos creado el servicio, ahora recargamos el administrador de configuraciones de systemctl para que se "registre" el nuevo servicio.
+
+`$ sudo systemctl daemon-reload`
+
+Para terminar, tenemos que habilitar el servicio que hemos creado para que siempre se ejecute al iniciar nuestra máquina virtual.
+
+`$ sudo systemctl enable monitoring.service`
+
+Y sí queremos iniciarlo en la sesión actual sin reiniciar.
+
+`$ sudo systemctl start monitoring.service`
+
+## 7- Signature.txt 📝
+
+Para obtener la firma lo primero que debemos hacer es apagar la máquina virtual ya que una vez la enciendas o modifiques algo la firma cambiará.
+
+<img width="834" alt="Captura de pantalla 2022-08-03 a las 4 47 32" src="https://user-images.githubusercontent.com/66915274/182513283-1cfc319f-982d-47cf-a596-8475d4c96616.png">
+
+El siguiente paso será ubicarnos en la ruta donde tengamos el .vdi de nuestra maquina virtual. 
+
+<img width="465" alt="Screen Shot 2022-08-03 at 4 57 37 AM" src="https://user-images.githubusercontent.com/66915274/182514499-f0ad5ba7-c0c2-493e-b0ae-9b79c970816e.png">
+
+Por último haremos ```$ shasum nombremaquina.vdi``` y esto nos dara la firma. El resultado de esta firma es lo que tendremos añadir a nuestro fichero signature.txt para posteriormente subir el fichero al repositorio de la intra. Muy importante no volver a abrir la maquina ya que se modificara la firma. Para las correcciones recuerda clonar la maquina ya que asi podras encenderla sin miedo a que cambie la firma.
+
+<img width="416" alt="Screen Shot 2022-08-03 at 4 58 48 AM" src="https://user-images.githubusercontent.com/66915274/182514627-f11026d0-de0d-447d-a2e4-31a3c1af0f35.png">
+
+## 8- Instalación y configuración de servicios extra 📰
+
+### 8.1 - Lighttpd
+
+1 ◦ Instalación de paquetes de lighttpd.
+
+<img width="791" alt="Screen Shot 2022-10-27 at 4 09 24 AM" src="https://user-images.githubusercontent.com/66915274/198174389-428c30e0-c437-4bc1-b8df-40dd2fb0c0ce.png">
+
+2 ◦ Permitimos las conexiones mediante el puerto 80 con el comando ```sudo ufw allow 80```.
+
+<img width="306" alt="Screen Shot 2022-10-27 at 4 15 24 AM" src="https://user-images.githubusercontent.com/66915274/198175046-8ea3f052-32f1-4107-a9a1-c9271d6c9ce6.png">
+
+3 ◦ Checkeamos que realmente hayamos permitido. Debe aparecer el puerto 80 y allow.
+
+<img width="460" alt="Screen Shot 2022-10-27 at 4 15 45 AM" src="https://user-images.githubusercontent.com/66915274/198175075-da6833f1-2360-4e08-b708-99f920b8215c.png">
+
+### 8.2 - MariaDB
+
+Instalamos el servidor de MariaDB.
+
+$ sudo apt install mariadb-server 
+
+Verificamos que se haya instalado bien (opcional).
+
+$ sudo dpkg -l | grep mariadb-server
+
+Instalamos el servicio de mysql_server.
+
+$ sudo mysql_service_installation 
+
+Aceptamos todas los [Y/N] excepto el primero (N, Y, Y, Y, Y).
+
+Entramos a MariaDB.
+
+$ sudo mariadb
+
+Ahora estamos en la "consola" de MariaDB, tiene sus propios comandos y sintaxis, nosotros vamos a usar los siguientes para crear un usuario, una base de datos y otras configuraciones.
+
+$ CREATE DATABASE <nombre_base_datos>;
+
+$ CREATE USER '<user_name>'@localhost IDENTIFIED BY '<password>';
+
+$ GRANT ALL ON <nombre_base_datos>.* TO '<user_name>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION; 
+
+$ FLUSH PRIVILEGES; 
+
+$ SHOW DATABASES; 
+
+(opcional, para comprobar si se han creado la base de datos y usuario, estado, etc)
+
+$ exit
+
+### 8.3 - Php y WordPress
+
+### 8.4 - File Transfer Protocol
 
