@@ -1,4 +1,4 @@
-# 42M
+![42Malaga_fondoblack](https://user-images.githubusercontent.com/115219064/200868528-7f0e7313-6a1e-43a0-943e-85207ed868f0.png)
 
 Repositorio público de `pgomez-r`, estudiante de 42 Málaga.
 
