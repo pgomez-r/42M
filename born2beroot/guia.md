@@ -39,7 +39,9 @@ Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos 
 
 	8.3 - [Php y WordPress](#83---php-y-wordpress)
 
-	8.4 - [File Transfer Protocol](#84---file-transfer-protocol)
+	8.4 - [FTP (File Transfer Protocol)](#84---ftp-(file-transfer-protocol))
+
+	8.5 - [NTP (Network Time Protocol)](#85---ntp-(network-time-protocol))
 
 ## 0. sgoinfre 
 Importante tener creada la carpeta en sgoingfre/perso/<tu_login>, y modificar sus permisos (chmod 700)
@@ -933,7 +935,7 @@ Por último haremos ```$ shasum nombremaquina.vdi``` y esto nos dara la firma. E
 
 <img width="306" alt="Screen Shot 2022-10-27 at 4 15 24 AM" src="https://user-images.githubusercontent.com/66915274/198175046-8ea3f052-32f1-4107-a9a1-c9271d6c9ce6.png">
 
-3 ◦ Checkeamos que realmente hayamos permitido. Debe aparecer el puerto 80 y allow.
+3 ◦ Checkeamos que realmente hayamos permitido ```sudo ufw status```. Debe aparecer el puerto 80 y allow. 
 
 <img width="460" alt="Screen Shot 2022-10-27 at 4 15 45 AM" src="https://user-images.githubusercontent.com/66915274/198175075-da6833f1-2360-4e08-b708-99f920b8215c.png">
 
@@ -941,39 +943,159 @@ Por último haremos ```$ shasum nombremaquina.vdi``` y esto nos dara la firma. E
 
 Instalamos el servidor de MariaDB.
 
-$ sudo apt install mariadb-server 
+`$ sudo apt install mariadb-server` 
+
+<img width="797" alt="Screen Shot 2022-10-27 at 4 17 09 AM" src="https://user-images.githubusercontent.com/66915274/198175218-65dec75f-5727-425c-97d0-2baa2b8cd457.p
+ng">
 
 Verificamos que se haya instalado bien (opcional).
 
-$ sudo dpkg -l | grep mariadb-server
+`$ sudo dpkg -l | grep mariadb-server`
 
-Instalamos el servicio de mysql_server.
+Instalamos el servicio mysql_server.
 
-$ sudo mysql_service_installation 
+`$ sudo mysql_service_installation`
 
-Aceptamos todas los [Y/N] excepto el primero (N, Y, Y, Y, Y).
+<img width="629" alt="Screen Shot 2022-10-27 at 4 19 25 AM" src="https://user-images.githubusercontent.com/66915274/198175511-d826b699-770e-4142-b464-cd6a91211d6a.png">
+
+Aceptamos todas los [Y/N] excepto los dos primeros (N, N, Y, Y, Y, Y).
+
+<img width="704" alt="Screen Shot 2022-10-27 at 1 00 20 AM" src="https://user-images.githubusercontent.com/66915274/198175719-b22bd572-ab50-4590-9298-5f5a69f98862.png">
+
+<img width="551" alt="Screen Shot 2022-10-27 at 1 00 40 AM" src="https://user-images.githubusercontent.com/66915274/198175732-eff97e65-d8ef-4b44-8930-62d58d910598.png">
 
 Entramos a MariaDB.
 
-$ sudo mariadb
+`$ sudo mariadb`
 
 Ahora estamos en la "consola" de MariaDB, tiene sus propios comandos y sintaxis, nosotros vamos a usar los siguientes para crear un usuario, una base de datos y otras configuraciones.
 
-$ CREATE DATABASE <nombre_base_datos>;
+Primero, vamos a crear una base de datos nueva, con el nombre que queramos, sin espacios ni símbolos (al menos en mi caso, me dió problemas al intentar añadir barra baja o guión).
 
-$ CREATE USER '<user_name>'@localhost IDENTIFIED BY '<password>';
+`$ CREATE DATABASE <nombre_base_datos>;`
 
-$ GRANT ALL ON <nombre_base_datos>.* TO '<user_name>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION; 
+Ahora creamos un nuevo usuario, en el local host y con la contraseña que queramos.  Importante: tanto el usuario como la contraseña se escribirán entre comillas simples, pero no es el caso del local host.
 
-$ FLUSH PRIVILEGES; 
+`$ CREATE USER '<user_name>'@localhost IDENTIFIED BY '<password>';`
 
-$ SHOW DATABASES; 
+Concedemos permisos a nuestro usuario, la sintaxis es un poco rara aquí también, el nombre de la base de datos irá sin comillas, pero user, pass y, ahora sí, host estarán entre comillas simples.
 
-(opcional, para comprobar si se han creado la base de datos y usuario, estado, etc)
+`$ GRANT ALL ON <nombre_base_datos>.* TO '<user_name>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION;` 
 
-$ exit
+"Refrescamos" los privilegios de MariaDB con el comando `$ FLUSH PRIVILEGES;`.
+
+Salimos de MariaDB con el comando `$ exit`.
+
+Si queremos comprobar que tanto usuario como base de datos se han añadido correctamente, podemos acceder a MariaDB con nuestro usuario `$ mariadb -u <nombre_usuario> -p <password>` y una vez logeados, usar el comando `$ SHOW DATABASES;`.
 
 ### 8.3 - Php y WordPress
 
-### 8.4 - File Transfer Protocol
+Instalamos el CGI (interfaz de entrada común) y MYSQL (sistema gestión de bases de datos) para PHP.
 
+`sudo apt install php-cgi php-mysql`
+
+Para comprobar que se instaló correctamente, podemos usar el comando `dpkg -ll | grep php`.
+
+Antes de instalar `WordPress`, vamos a necesitar tener instalado en nuestro sistema el comando `wget`, ya que este nos permite recuperar archivos de servidores web, qué es como vamos a descargar el archivo comprimido para instalar `WordPress`.
+
+`sudo apt install wget`
+
+Ahora que tenemos `wget`instalado, vamos a descargar el `.tar` que contiene el instalador y lo vamos a guardar en `/var/www/html`.
+
+`sudo wget http://wordpress.org/latest.tar.gz -P /var/www/html`
+
+Extraemos el contenido del `.tar` con el comando `sudo tar -xzvf /var/www/html/latest.tar.gz`
+
+Eliminamos el archivo `.tar` que ya hemos extraido y no necesitamos con `sudo rm /var/www/html/latest.tar.gz`.
+
+Copiamos el contenido de `/var/www/html/wordpress` a `/var/www/html` con el comando `sudo cp -r /var/www/html/wordpress/* /var/www/html`.
+
+Borramos la carpeta `/var/www/html/wordpress`, que ha quedado vacía al mover antes su contenido, usando el comando `sudo rm -rf /var/www/html/wordpress`.
+
+Ahora vamos a crear y modificar el archivo de configuración de `WordPress`, para ello primero copiamos el archivo por defecto de configuración con el comando: 
+
+`cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php`. 
+
+Y luego lo modificamos con `sudo nano /var/www/html/wp-config.php`.
+
+Editamos las siguientes líneas: 
+
+```
+23 define( 'DB_NAME', 'database_name_here' );^M
+26 define( 'DB_USER', 'username_here' );^M
+29 define( 'DB_PASSWORD', 'password_here' );^M
+```
+
+Añadimos en la 23 el nombre de nuestra base de datos creada antes en `MariaDB`, en la 24 nuestro nombre de usuario para `MariaDB` y en la siguiente su password (todo entre comillas simples).
+
+El último paso para tener todos los servicios necesarios para WordPress será habilitar en `Lighttpd` los últimos módulos que hemos instalado, lo que haremos con los siguientes comandos: 
+
+```
+$ sudo lighty-enable-mod fastcgi
+$ sudo lighty-enable-mod fastcgi-php
+$ sudo service lighttpd force-reload
+
+```
+
+Ya podemos ir a nuestro navegador y escribir en la barra de dirección `localhost` o introducir la IP de nuestro equipo (system preferences/network/ethernet/IP address/10.13.X.X).
+
+Nos aparece la ventana de login de Wordpress, tenemos que usar user y pass del usuario de la máquina virtual y ya estaremos dentro de nuestro wordpress.
+
+### 8.4 - FTP (File Transfer Protocol)
+
+Una opción para el servicio extra que pide el subject para la parte BONUS.
+
+Instalamos `FTP` con el comando `sudo apt install vsftpd`.
+
+Podemos comprobar si se ha instalado correctamente con el comando `dpkg -l | grep vsftpd`. 
+
+Permitimos la conexion por el puerto 21 `con sudo ufw allow 21`. (Luego tendremos también que habilitarlo desde la `configuración` de nuestra máquina virtual en `VirtualBox`).
+
+Establecemos la carpeta root para el usuario que se conecte vía `FTP` con permisos de escritura (si no, no podremos crear ni mover ningun archivo aunque estemos conectados por `FTP`). Para eso usamos los siguientes comandos:
+
+```
+$ sudo mkdir /home/<username>/ftp
+$ sudo mkdir /home/<username>/ftp/files
+$ sudo chown nobody:nogroup /home/<username>/ftp
+$ sudo chmod a-w /home/<username>/ftp
+```
+Luego, editamos el archivo de configuración de `vsftpd` con el comando `sudo nano /etc/vsftpd.conf`, haciendo las siguientes modificaciones:
+
+Descomentamos (borramos #) la línea 31, `write_enable=YES` y la línea 114, `chroot_local_user=YES`. 
+
+Añadimos las siguientes líneas al final del archivo:
+
+```
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
+allow_writeable_chroot=YES
+```
+
+Ya deberíamos tenerlo todo listo para poder conectar a nuestra máquina usando `$ ftp <ip_number>` desde otro terminal o equipo conecntado a la misma red y desde él poder crear y modificar archivos. 
+
+Al acceder, nos pedirá el login y pass de nuestro usuario en la máquina virtual. Una vez dentro, no podremos movernos de la carpeta "raiz", que es la carpeta que hemos establecido nosotros y que en nuestro sistema se encuentra en `/home/<user_name>/ftp`.
+
+### 8.5 - NTP (Network Time Protocol)
+
+Otra opción (más sencilla) para el servicio extra del BONUS. Muy sencillo, se trata de un servicio con el que elegimos con qué servidor web queremos sincronizar el reloj de nuestro equipo. 
+
+Instalamos el servicio `ntp` con el comando `sudo apt-get ntp`.
+
+Habilitamos el puerto 123 para este servicio, con `sudo ufw allow 123`.
+
+Editamos el archivo de configuración de `ntp` para añadir el servidor web que hemos elegido para sincronizar con nuestro reloj: `sudo nano /etc/ntp.conf`. Dentro del archivo, comenta los servidores anteriores y añade el nuevo al final con un denominación de servidor antes, por ejemplo `server 0` o `pool 0` seguido de la url. Quedaría algo así: 
+
+```
+# pool 0.debian.pool.ntp.org iburst
+# pool 1.debian.pool.ntp.org iburst
+# pool 2.debian.pool.ntp.org iburst
+# pool 3.debian.pool.ntp.org iburst
+server 0.pool.ntp.org
+```
+
+Ahora tenemos que habilitar el servicio, para que se ejecute siempre desde el inicio de sesión, con el comando `sudo systemctl enable ntp.service`.
+
+Reiniciamos el servicio para que se apliquen los cambios en el manager de servicios del sistema, `sudo systemctl restart ntp`.
+
+Por último, para sincronizar el reloj de nuestro equipo con el servidor podemos instalar el cliente de apt usando el comando `sudo apt install ntpdate` y luego ejecutarlo con el nombre del servidor: `sudo ntpdate -u <server_url>`.
