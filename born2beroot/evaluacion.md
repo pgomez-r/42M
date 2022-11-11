@@ -2,6 +2,30 @@
 
 Esta es una guía para realizar paso a paso todos los comandos, pruebas y consideraciones necesarias para comprobar cada parte de la hoja de evaluación del proyecto.
 
+# Índice
+
+1. [Preliminaries](#preliminaries)
+2. [General instructions](#general-instructions)
+3. [Mandatory part](#mandatory-part)
+
+	3.1. [Overview](#overview)
+
+	3.2. [Setup](#setup)
+
+	3.3. [User](#user)
+
+	3.4. [Hostname and partitions](#hostname-and-partitions)
+
+	3.5. [Sudo](#sudo)
+
+	3.6. [UFW](#ufw)
+
+	3.7. [SSH](#ssh)
+
+	3.8. [Script](#script)
+
+4. [Bonus](#bonus)
+
 ## Preliminaries
 
 Simplemente hacer la evaluación de manera presencial y descargar el repositorio git de intra del evaluado para comprobar que contiende los archivos que especifica el subject. 
