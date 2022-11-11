@@ -1072,6 +1072,8 @@ userlist_deny=NO
 allow_writeable_chroot=YES
 ```
 
+❗❗ Recuerda habilitar el puerto 21 desde la configuración de nuestra máquina virtual en VirtualBox ❗❗
+
 Ya deberíamos tenerlo todo listo para poder conectar a nuestra máquina usando `$ ftp <ip_number>` desde otro terminal o equipo conecntado a la misma red y desde él poder crear y modificar archivos. 
 
 Al acceder, nos pedirá el login y pass de nuestro usuario en la máquina virtual. Una vez dentro, no podremos movernos de la carpeta "raiz", que es la carpeta que hemos establecido nosotros y que en nuestro sistema se encuentra en `/home/<user_name>/ftp`.
