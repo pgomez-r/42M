@@ -843,6 +843,8 @@ Resultado tras la ejecución del script ↙️
 
 <img width="796" alt="Captura de pantalla 2022-08-03 a las 3 46 15" src="https://user-images.githubusercontent.com/66915274/182506357-f5466a97-380b-4b6d-9b79-89e01a31498a.png">
 
+El script termina con `wall` porque este comando lo que hace es escribir en pantalla de las terminales de todos los usuarios un mensaje, admite texto entre comillas a la vez que el valor de variables, por eso primero establecemos cada variable del script y luego con `wall` añadimos todo entre comillas y añadimos el texto necesario para cada apartado a mostrar. 
+
 ## 6- Crontab ⏰ vs SystemD ⌚
 
 Para mostrar en pantalla el script cada 10 minutos, como pide el subject, tenemos varias opciones. En todas las guías que he consultado, l@s compañer@s han usado crontab, pero en mi caso he terminado usando un servicio "personalizado".
