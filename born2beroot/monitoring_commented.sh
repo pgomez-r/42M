@@ -61,27 +61,49 @@ cpul=$(vmstat 1 2 | tail -1 | awk '{printf $15}')
 cpu_op=$(expr 100 - $cpul)
 cpu_fin=$(printf "%.1f" $cpu_op)
 
-# vmstat muestra información del sistema, 1 es el intervalo de tiempo entre muestras, y 2 es el número de muestras que se toman.
-# tail -1 muestra la última línea del archivo, y awk muestra la columna 15, que es la que nos interesa, que es la carga de la CPU.		
+# vmstat muestra información del sistema, añadimos 1 2 para que muestre la información de un intervalo de 1 a 2 segundos
+# tail -1 muestra la última línea del archivo, y awk muestra la columna 15, que es la que nos interesa, que es uso de CPU
+# con el primer comando tenemos cpul (uso de cpu), ahora para obtner cpu_op (el porcentaje de uso de cpu libre), restamos 
+# 100 - cpul, para imprimir el resultado con solo 1 decimal (cpu_fin), usamos printf "%.1f" y le pasamos la variable cpu_op		
 
 # LAST BOOT
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
 
+# who muestra información de los usuarios conectados, -b muestra la información del último inicio de sesión, y luego con awk
+# filtramos la información para que de esa información solo muestre la fecha y la hora del último inicio de sesión (columnas 3 y 4)
+
 # LVM USE
 lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
+
+# lsblk muestra información de los discos del sistema, y con grep buscamos si hay algún disco que tenga "lvm" en su nombre
+# luego hacemos un if, si el resultado de la búsqueda es mayor que 0, es decir, si hay algún disco con "lvm" en su nombre,
+# mostramos "yes", si no, mostramos "no"
 
 # TCP CONNEXIONS
 tcpc=$(ss -ta | grep ESTAB | wc -l)
 
+# ss muestra información de las conexiones establecidas, -ta muestra solo conexiones TCP, y luego con grep buscamos las líneas
+# que contengan ESTAB (establecidas), y con wc -l contamos el número de líneas que coinciden con la búsqueda, para que el valor
+# final de la variable tcpc sea el número de conexiones TCP establecidas
+
 # USER LOG
 ulog=$(users | wc -w)
+
+# users muestra los usuarios conectados, y con wc -w contamos el número de palabras obtenidas, lo que nos dará el número de usuarios
 
 # NETWORK
 ip=$(hostname -I)
 mac=$(ip link | grep "link/ether" | awk '{print $2}')
 
+# hostname -I muestra la IP del host, ip link muestra información de las interfaces de red, y con grep buscamos las líneas que
+# contengan "link/ether", y con awk mostramos la segunda columna de cada fila que coincida con la búsqueda, que será la dirección MAC
+
 # SUDO
 cmnd=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+
+# journalctl recopila y administra registros del sistema, -_COMM=sudo filtra los registros de este comando y muestra solo los de sudo, 
+# luego con grep buscamos las líneas que contengan COMMAND (ya que solo queremos los comandos sudo, de otra manera también tendría en
+# cuenta inicios de sesión, por ejemplo), y con wc -l contamos el número de líneas que coinciden con la búsqueda para sacar el número
 
 wall "	Architecture: $arch
 	CPU physical: $cpuf

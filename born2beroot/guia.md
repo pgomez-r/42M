@@ -4,8 +4,8 @@ Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos 
 
 # Índice
 
-0. [sgoingfre 📁](#0--sgoinfre)
-1. [Descargar imagen de la maquina virtual 💿](#1--descargar-imagen-de-la-maquina-virtual-)
+0. [sgoingfre 📁](#0-sgoinfre)
+1. [Descargar imagen de la maquina virtual 💿](#1-descarga-de-debian)
 2. [Instalación de la maquina 🛠](#2--instalacion-de-la-maquina-)
 3. [Instalación Debian 🌀](#3--instalación-debian-)
 	
@@ -19,7 +19,7 @@ Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos 
 	
 	4.3 [Conectarse via SSH 🗣](#4-3-conectarse-via-ssh-)
 
-	4.4 [Instalación y configuración de UFW 🔥🧱](#4-4-instalació-y-configuración-de-ufw-)
+	4.4 [Instalación y configuración de UFW 🔥🧱](#4-4-instalación-y-configuración-de-ufw-)
 	
 	4.5 [Configurar contraseña fuerte para sudo 🔒](#4-5-configurar-contraseña-fuerte-para-sudo-)
 	
@@ -29,7 +29,7 @@ Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos 
 
 	5.1 [Resultado total del script 🆗](#5-13-resultado-total-del-script)
 	
-6. [Crontab vs Systemd ⌚](#6--crontab-vs-systemd-)
+6. [Crontab vs Systemd ⌚](#6--crontab--vs-systemd-)
 7. [Signature.txt 📝](#7--signaturetxt-)
 8. [Instalación y configuración de servicios extra 📰](#8--instalación-y-configuración-de-servicios-extra-)
 	
@@ -39,9 +39,9 @@ Esta es una guía para instalar/configurar la máquina virtual cumpliendo todos 
 
 	8.3 - [Php y WordPress](#83---php-y-wordpress)
 
-	8.4 - [FTP (File Transfer Protocol)](#84---ftp-(file-transfer-protocol))
+	8.4 - [FTP (File Transfer Protocol)](#84---ftp-file-transfer-protocol)
 
-	8.5 - [NTP (Network Time Protocol)](#85---ntp-(network-time-protocol))
+	8.5 - [NTP (Network Time Protocol)](#85---ntp-network-time-protocol)
 
 ## 0. sgoinfre 
 Importante tener creada la carpeta en sgoingfre/perso/<tu_login>, y modificar sus permisos (chmod 700)
@@ -851,9 +851,38 @@ Para mostrar en pantalla el script cada 10 minutos, como pide el subject, tenemo
 
 En el caso de usar cron, tenemos que editar el fichero crontab con el comando ```sudo crontab -u root -e```. Debemos añadir esta línea justo al final del arhicvo para que el script se ejecute cada 10 minutos: ```*/10 * * * * sh /ruta del script```. 
 
-El problema de usar este método es que el script se va a ejecutar a cada 10 minutos del reloj, es decir, a las 10:00, 10:10, 10:20, 10:30... No son 10 minutos reales desde el momento de iniciar la máquina virtual o logearse, por ejemplo. Esto se puede corregir creando otro script, ```sleep.sh```, para compensar el "desfase". Lo que hace ```sleep``` es que, justo cuando se va a ejecutar ```monitoring``` lo detiene, y hace que espere el tiempo que faltaría para que se cumplan 10 minutos reales desde que se inició el sistema. Por ejemplo; arrancamos sistema a 10:45, ```sleep``` calcula que de la hora de inicio hasta el siguiente multiplo de 10 en el reloj son 05 minutos, así que cuando ```monitoring``` vaya a ejecutarse, lo retrasa esos 5 minutos.
+El problema de usar este método es que el script se va a ejecutar a cada 10 minutos del reloj, es decir, a las 10:00, 10:10, 10:20, 10:30... No son 10 minutos reales desde el momento de iniciar la máquina virtual o logearse, por ejemplo. Esto se puede corregir creando otro script, ```sleep.sh```, para compensar el "desfase". 
 
-El script sería así () y se incluye al final de crontab así () _tengo que añadirlo, como no he usado este método no lo tengo de momento_
+Este script primero calcula los minutos y segundos del inicio de sistema
+```
+BOOT_MIN=$(uptime -s | cut -d ":" -f 2)
+BOOT_SEC=$(uptime -s | cut -d ":" -f 3)
+```
+Se calcula el número de segundos hasta el siguiente :10 del reloj. 
+Ejemplo: inicio de sistema a 11:43:36
+43 % 10 = 3 minutos después de las 11:40 
+3 * 60 = 180 segundos después de las 11:40
+180 + 36 = el inicio de sesión ha sido 216 segundos en total después de las 11:40
+
+`DELAY=$(bc <<< $BOOT_MIN%10*60+$BOOT_SEC)`
+
+Hacemos un delay de ese tiempo total que hemos calculado antes, cuando sean las 11:50, sleep hará un delay de 216 segundos
+`sleep $DELAY`
+
+SCRIPT `sleep.sh`
+
+```
+#!bin/bash
+
+BOOT_MIN=$(uptime -s | cut -d ":" -f 2)
+BOOT_SEC=$(uptime -s | cut -d ":" -f 3)
+
+DELAY=$(bc <<< $BOOT_MIN%10*60+$BOOT_SEC)
+
+sleep $DELAY
+```
+
+Por último, habría que añadir la ruta del script a crontab ANTES de la ruta de `monitoring.sh`, y usar el booleano `&&`, para que no se ejecute monitoring hasta que termine de ejecutarse `sleep.sh`.
 
 La alternativa que he usado yo es crear un servicio de systemd con un timer. Básicamente se trata de crear dos archivos que se comunican entre si (```monitoring.service``` y ```monitoring.timer```), ajustar bien el timer y habilitar e iniciar el servicio, como ya hemos hecho antes con otros (como ssh por ejemplo).
 
@@ -899,7 +928,7 @@ Para esto, nos vamos a la carpeta ```/etc/systemd/system```, aquí creamos los d
 
 >WantedBy=timers.target
 
-Ya hemos creado el servicio, ahora recargamos el administrador de configuraciones de systemctl para que se "registre" el nuevo servicio.
+Ya hemos creado el servicio, ahora recargamos el administrador de configuraciones de systemctl para que se "registre" el nuevo servicio. Esto también tendremos que hacerlo en la evaluación cuando hagamos cambios en el tiempo de ejecución del script o detengamos el servicio (IMPORTANTE!).
 
 `$ sudo systemctl daemon-reload`
 
@@ -910,6 +939,7 @@ Para terminar, tenemos que habilitar el servicio que hemos creado para que siemp
 Y sí queremos iniciarlo en la sesión actual sin reiniciar.
 
 `$ sudo systemctl start monitoring.service`
+
 
 ## 7- Signature.txt 📝
 
