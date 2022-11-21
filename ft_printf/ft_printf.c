@@ -6,30 +6,37 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/18 19:38:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:49:29 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_printf.h"
 
-void	ft_index(va_list arg, char *str, size_t *i)
+void	ft_checkformat(va_list arg, char *str, size_t *i)
 {
 	if (*str == 'c')
-		ft_putchar(va_arg(arg, char), i);
+		ft_putchar(va_arg(arg, int), i);
 	else if (*str == 's')
 		ft_putstr(va_arg(arg, char *), i);
 	else if (*str == '%')
 		ft_putchar(*str, i);
 	else if ((*str == 'd') || (*str == 'i'))
-		ft_putnumber(va_arg(arg, int), i);
+		ft_putnbr(va_arg(arg, int), i);
 	else if (*str == 'u')
-		ft_putunsig(va_arg(arg, int), i);
+		ft_putunsig(va_arg(arg, unsigned int), i);
 	else if (*str == 'x')
-		ft_puthex(va_arg(arg, unsigned int), i);
+	{	
+		ft_puthexall(va_arg(arg, unsigned int), "0123456789abcdef", i);
+	}
 	else if (*str == 'X')
-		ft_putuphex(va_arg(arg, int), i);
+	{	
+		ft_puthexall(va_arg(arg, unsigned int), "0123456789ABCDEF", i);
+	}
 	else if (*str == 'p')
-		ft_putptr(va_arg(arg, unsigned long int), i);
+	{
+		ft_putstr("0x", i);
+		ft_puthexall(va_arg(arg, unsigned long int), "0123456789abcdef", i);
+	}
 }
 
 int	ft_printf(char const *str, ...)

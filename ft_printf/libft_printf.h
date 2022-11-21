@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:14:08 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/18 19:58:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:49:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-void	ft_putchar(char c, size_t *i);
+int		ft_printf(char const *str, ...);
+void	ft_checkformat(va_list arg, char *str, size_t *i);
+void	ft_putchar(int c, size_t *i);
 void	ft_putstr(char *str, size_t *i);
-void	ft_putnumber(int n, size_t *i);
+void	ft_putnbr(int n, size_t *i);
+void	ft_putunsig(unsigned int n, size_t *i);
+void	ft_puthexall(unsigned long int n, char *base, size_t *i);
 
 #endif
