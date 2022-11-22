@@ -6,11 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:51:20 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/18 19:55:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/22 08:18:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "ft_printf.h"
 
 void	ft_putstr(char *str, size_t *i)
 {

@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2022/11/21 16:10:29 by pgomez-r         ###   ########.fr        #
+#    Updated: 2022/11/22 08:19:54 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = libftft_printf.a
+NAME = libftprintf.a
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)

@@ -6,13 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:51:18 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/18 19:54:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/22 08:18:54 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c, size_t *i)
+void	ft_putchar(int c, size_t *i)
 {
 	write(1, &c, 1);
 	(*i)++;

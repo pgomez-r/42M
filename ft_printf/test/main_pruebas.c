@@ -6,13 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:21:42 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/21 16:22:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:24:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c, size_t *i)
+void	ft_putchar(int c, size_t *i)
 {
 	write(1, &c, 1);
 	(*i)++;
@@ -20,6 +20,8 @@ void	ft_putchar(char c, size_t *i)
 
 void	ft_putstr(char *str, size_t *i)
 {
+	if (!str)
+		str = "(null)";
 	while (*str)
 	{
 		ft_putchar(*str, i);
@@ -30,7 +32,10 @@ void	ft_putstr(char *str, size_t *i)
 void	ft_putnbr(int n, size_t *i)
 {
 	if (n == -2147483648)
+	{
 		ft_putstr("-2147483648", i);
+		return ;
+	}
 	if (n < 0)
 	{
 		ft_putchar('-', i);
@@ -60,20 +65,20 @@ void	ft_putunsig(unsigned int n, size_t *i)
 
 void	ft_puthexall(unsigned long int n, char *base, size_t *i)
 {
-	char	str[20];
-	int		j;
+	char	c;
 
-	j = 0;
-	if (n == 0)
-		ft_putchar('0', i);
-	while (n != 0)
+	if (n < 16)
 	{
-		str[j] = base [n % 16];
-		n = n / 16;
-		j++;
+		c = base [n];
+		ft_putchar(c, i);
 	}
-	while (j--)
-		ft_putchar(str[j], i);
+	if (n >= 16)
+	{
+		c = base [n % 16];
+		n = n / 16;
+		ft_puthexall(n, base, i);
+		ft_putchar(c, i);
+	}
 }
 
 void	ft_checkformat(va_list arg, char *str, size_t *i)
@@ -132,7 +137,12 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	ft_printf("Hola %s, %d, %c, %u, %x, %X, %p", "tu", 42, 'a', 42, 42, 42, 42);
-	printf("Hola %s, %d, %c, %u, %x, %X, %p", "tu", 42, 'a', 42, 42, 42, 42);
+	// char	*str;
+
+	// str = NULL;
+	// ft_printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
+	// printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
+	printf("MIN %x\n", 483648);
+	ft_printf("MIN %x\n", 483648);
 	return (0);
 }
