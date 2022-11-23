@@ -6,12 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/22 16:33:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:11:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-La función imprime uno a uno cada char de la cadena que entra como primer 
+/*La función imprime uno a uno cada char de la cadena que entra como primer 
 parámetro y cuando encuentra un % dentro de esta, comprueba a qué tipo de 
 variable hace referencia, la obtiene desde los argumentos (va_list/va_arg) y 
 luego la convierte a char, en el formato deseado, para poder imprimirla caracter 
@@ -21,62 +20,93 @@ Necesitamos 1)función para comprobar el tipo de variable de cada argumento
 (comprobando que caracter hay en la posición después del %) 2)comprender y usar
 los macros va_list, va_start, va_arg y va_end 3)varias funciones para convertir
 cada tipo(s) de variable a char en el formato correcto para imprimir 4)contador 
-que aumente con cada char que se imprima, para el return final. 
-
-Cada caracter se imprime con putchar (todas las funciones para cada tipo de 
-argumento terminan llamando a putchar), cada vez que se ejecuta putchar termina 
-en i++ Es importante pasarlo de una función a otra y que no se pierda o cambie, 
-yo utilizo dirección/puntero
-*/
+que aumente con cada char que se imprima, para el return final. */
 
 #include "ft_printf.h"
 
-void	ft_checkformat(va_list arg, char *str, size_t *i)
+void	ft_checkformat(va_list args, char *str, size_t *i)
 {
 	if (*str == 'c')
-		ft_putchar(va_arg(arg, int), i);
+		ft_putchar(va_arg(args, int), i);
 	else if (*str == 's')
-		ft_putstr(va_arg(arg, char *), i);
+		ft_putstr(va_arg(args, char *), i);
 	else if (*str == '%')
 		ft_putchar(*str, i);
 	else if ((*str == 'd') || (*str == 'i'))
-		ft_putnbr(va_arg(arg, int), i);
+		ft_putnbr(va_arg(args, int), i);
 	else if (*str == 'u')
-		ft_putunsig(va_arg(arg, unsigned int), i);
+		ft_putunsig(va_arg(args, unsigned int), i);
 	else if (*str == 'x')
-		ft_puthexall(va_arg(arg, unsigned int), "0123456789abcdef", i);
+		ft_puthexall(va_arg(args, unsigned int), "0123456789abcdef", i);
 	else if (*str == 'X')
-		ft_puthexall(va_arg(arg, unsigned int), "0123456789ABCDEF", i);
+		ft_puthexall(va_arg(args, unsigned int), "0123456789ABCDEF", i);
 	else if (*str == 'p')
 	{
 		ft_putstr("0x", i);
-		ft_puthexall(va_arg(arg, unsigned long int), "0123456789abcdef", i);
+		ft_puthexall(va_arg(args, unsigned long int), "0123456789abcdef", i);
 	}
 }
 
+/*a ft_checkformat le llega el siguiente carácter después de % (y el contador)
+tiene un if con cada especificador de formato que pide el subject y en cada
+caso llama a una función para que lo imprima, enviando también el contador*/
+
 int	ft_printf(char const *str, ...)
 {
-	va_list	arg;
+	va_list	args;
 	size_t	i;
 
 	i = 0;
-	va_start(arg, str);
+	va_start(args, str);
 	if (!str)
 	{
 		str = "(null)";
-		va_end(arg);
+		va_end(args);
 	}
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
-			ft_checkformat(arg, (char *)str, &i);
+			ft_checkformat(args, (char *)str, &i);
 		}
 		else
 			ft_putchar(*str, &i);
 		str++;
 	}
-	va_end(arg);
+	va_end(args);
 	return (i);
 }
+
+int	main(void)
+{
+	// char	*str;
+
+	// str = NULL;
+	// ft_printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
+	// printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
+	printf("MIN %x\n", 483648);
+	ft_printf("MIN %x\n", 483648);
+	return (0);
+}
+
+/*Declaramos una estructura va_list donde se guardaran los argumentos(args)
+y un contador que aumentará con cada char que se imprima, para el return.
+Llamamos al macro va_start y le pasamos args y str (la variable va_list, y 
+el último parámetro conocido de ft_print), esto inicializa la lista de 
+argumentos. Si la cadena de caracteres es nula, la rellenamos con "(null)"
+y llamamos al macro va_end para terminar la lista de argumentos, ya que 
+sabemos que no hay más argumentos a parte de str. Ahora vamos desplazando 
+un puntero a lo largo de str para comprobar cada char, si no es % lo imprimimos
+con putchar y seguimos aumentando el puntero, si es % aumentamos el puntero y
+llamamos a checkformat (aumentamos el puntero antes, para que el char que llegue
+a check sea el siguiente después de %)
+
+Para mantener contorlado el contador de caracteres impresos: cada caracter se 
+imprime con putchar (todas las funciones para cada tipo de argumento terminan 
+llamando a putchar), cada vez que se ejecuta putchar termina en i++ 
+Es importante pasarlo de una función a otra y que no se pierda o cambie, yo 
+utilizo dirección/puntero, por lo que cuando llamo a checkformat o a putchar
+en la función principal (donde se ha declarado el contador por primera vez)
+lo que se envía es la dirección de la variable &i y luego aumentamos el valor
+que se encuentra en esa dirección +1 (*i)++*/
