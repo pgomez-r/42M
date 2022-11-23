@@ -8,4 +8,3 @@ Además de esto, printf cuenta y devuelve (en return, aunque no sea visible) el 
 
 El output final de printf (en pantalla, no el return de la función) es siempre una cadena char, ya que es una impresión en pantalla y también sabemos que el primer parámetro que recibe es una const char* donde se encuentran los especificadores de formato que indican el tipo de variable de los otros parámetros. 
 Por lo tanto, vamos a hacer que nuestra función imprima uno a uno cada char de la cadena que entra como primer parámetro y que cuando encuentre un % dentro de esta compruebe a qué tipo de variable hace referencia, la obtenga desde los argumentos (`va_list`/`va_arg`) y luego la convierta a char, en el formato deseado, para poder imprimirla caracter a caracter en pantalla.
-
