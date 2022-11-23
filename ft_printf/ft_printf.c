@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/23 17:11:01 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:11:13 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,6 @@ int	ft_printf(char const *str, ...)
 	}
 	va_end(args);
 	return (i);
-}
-
-int	main(void)
-{
-	// char	*str;
-
-	// str = NULL;
-	// ft_printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
-	// printf("Hola %s, %d, %c, %u, %x, %X, %p\n", "tu", 42, 'a', 42, 42, 42, 42);
-	printf("MIN %x\n", 483648);
-	ft_printf("MIN %x\n", 483648);
-	return (0);
 }
 
 /*Declaramos una estructura va_list donde se guardaran los argumentos(args)

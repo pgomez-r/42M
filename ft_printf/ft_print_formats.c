@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:28:36 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/23 15:52:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:12:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	ft_puthexall(unsigned long int n, char *base, size_t *i)
 /*ft_puthexall tiene el mismo principio de que putnbr, pero como queremos
 imprimir el valor en base hexadecimal, hacemos módulo/división de 16 para ir
 descomponiendo el número, y luego usamos una cadena str que contiene la base
-hexadecimal para obtener cada dígito, haciendo que 
-para poder usarlo tanto para %x como %X y %p, */
+hexadecimal para obtener cada dígito, haciendo que putchar imprima el char
+de la base corresponiente a la posicion de base [n/16] para poder usarlo 
+tanto para %x como %X y %p, */
