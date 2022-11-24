@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/24 15:14:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:20:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ los macros va_list, va_start, va_arg y va_end 3)varias funciones para convertir
 cada tipo(s) de variable a char en el formato correcto para imprimir 4)contador 
 que aumente con cada char que se imprima, para el return final. */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_checkprintformat(va_list args, char *str, size_t *i)
 {

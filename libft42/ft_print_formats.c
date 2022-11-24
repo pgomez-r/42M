@@ -16,7 +16,7 @@ añadirle siempre el puntero a la dirección de nuestro contador, para actualiza
 siempre que imprimamos un char y haremos otras modificaciones para ajustarnos al
 man de printf*/
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putchari(int c, size_t *i)
 {
