@@ -1,0 +1,1 @@
+La carpeta test contiene, en archivos separados, cada función para imprimir cada especificador de formato. También hay una función con todas juntas y un main para hacer pruebas. No es la versión final, de hecho algunas funciones las he terminado cambiando o unificando, pero voy a conservar esta primera versión del proyecto para tener presente también otras formas de resolverlo.
