@@ -6,60 +6,46 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:25:40 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/28 09:39:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:12:59 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*save_text(int fd)
-{
-	int		ctr;
-	char	*full_text;
+/*cada vez que pull_line extrae una línea nueva, no necesitamos más esos chars,
+así que esta función se encarga eliminarlos de nuestra pila para que solo 
+queden los chars que vamos a seguir usando*/
 
-	ctr = read(fd, full_text, BUFF_SIZE);
-	while (ctr)
-	{
-		ctr += read(fd, full_text, BUFF_SIZE);
-	}
-	return (full_text);
+void	update_stack()
+{
+	
 }
+
+/*extrae chars de la pila hasta encontrar un \n y los devuelve como *line*/
+
+void	pull_line()
+{
+	
+}
+
+/*coloca la cadena de char obtenida por read_and_save al final de la pila
+donde vamos a ir guardando todo el texto*/
+
+void	move_to_stack()
+{
+	
+}
+
+/*usa read() para guardar chars en una cadena*/
+
+void	read_and_save()
+{
+	
+}
+
+/*función principal, llama a todas las auxiliares necesarias y devuelve *line*/
 
 char	*get_next_line(int fd)
 {
-	static char	*full_text;
-	char		line[BUFF_SIZE];
-	char		*aux_str;
-	size_t		read_return;
-
-	if (!fd)
-		return (-1);
-	full_text = save_text(fd, line);
-	read_return = read(fd, line, BUFF_SIZE);
-	while (read_return > 0)
-	{
-		line[read_return] = '\0';
-	}
-	return (line);
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("sometext.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error al abrir el archivo \n");
-		return (1);
-	}
-	line = get_next_line(fd);
-	while (line)
-	{
-		line = get_next_line(fd);
-		printf("LINEA: %s\n", line);
-	}
-	close (fd);
-	return (0);
+	
 }
