@@ -6,13 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:25:56 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/29 12:46:13 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:41:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 5
+//# define BUFFER_SIZE 5
 
 # include <stdio.h>
 # include <stdlib.h>
