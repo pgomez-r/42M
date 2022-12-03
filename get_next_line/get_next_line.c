@@ -3,63 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 09:54:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/30 21:39:11 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/11/24 15:25:40 by pgomez-r          #+#    #+#             */
+/*   Updated: 2022/12/03 23:15:35 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return (str);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	char	*ptr;
-
-	ptr = (char *)s;
-	while (*ptr != (char)c)
-	{
-		if (*ptr == '\0')
-			return (NULL);
-		ptr++;
-	}
-	return (ptr);
-}
 
 char	*create_line(char *stack)
 {
@@ -111,7 +62,7 @@ char	*update_stack(char *stack)
 	free (stack);
 	return (aux);
 }
-char	*ft_free_and_join(char *stack, char *tmp)
+char	*join_and_free(char *stack, char *tmp)
 {
 	char *temp;
 
@@ -144,38 +95,10 @@ char	*get_next_line(int fd)
 		if (readbytes < 0)
 			return (NULL);
 		tmp[readbytes] = '\0';
-		stack = ft_free_and_join(stack, tmp);
+		stack = join_and_free(stack, tmp);
 	}
 	free (tmp);
 	line = create_line(stack);
 	stack = update_stack(stack);
 	return (line);
-}
-
-void	ft_leaks(void)
-{
-	system("leaks -q gnl");
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	atexit(ft_leaks);
-	fd = open("nl", O_RDONLY);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-	free (line);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-
-	// line = get_next_line(fd);
-	// printf("Línea:%s\n", line);
-	// free (line);
-	// line = get_next_line(fd);
-	// printf("Línea:%s\n", line);
-	free (line);
-	close (fd);
-	return (0);
 }
