@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pruebas_GNL.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:54:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/04 00:13:19 by pgruz            ###   ########.fr       */
+/*   Updated: 2022/12/05 17:26:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str != NULL && str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -31,7 +31,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	while (s1[i] != '\0')
 	{
@@ -66,8 +66,8 @@ char	*create_line(char *stack)
 	char	*line;
 	int		i;
 
-	//if (!stack || !*stack)
-	//	return (NULL);
+	if (!stack || !*stack)
+		return (NULL);
 	i = 0;
 	while (stack[i] != '\n' && stack[i] != '\0')
 		i++;
@@ -100,10 +100,7 @@ char	*update_stack(char *stack)
 	i = 0;
 	p = ft_strchr(stack, '\n');
 	if (!p)
-	{
-		free (stack);
-		return (NULL);
-	}
+		return (free (stack), NULL);
 	p++;
 	aux = malloc(sizeof(char) * (ft_strlen(p) + 1));
 	if (!aux)
@@ -115,13 +112,12 @@ char	*update_stack(char *stack)
 		p++;
 	}
 	aux[i] = '\0';
-	free (stack);
-	return (aux);
+	return (free (stack), aux);
 }
 
 char	*join_and_free(char *stack, char *tmp)
 {
-	char *aux;
+	char	*aux;
 
 	aux = ft_strjoin(stack, tmp);
 	free (stack);
@@ -131,34 +127,23 @@ char	*join_and_free(char *stack, char *tmp)
 char	*get_next_line(int fd)
 {
 	static char	*stack;
-	char		*tmp;
+	char		tmp[BUFFER_SIZE + 1];
 	char		*line;
 	ssize_t		readbytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (-1);
-	// if (!stack)
-	// {
-	// 	stack = malloc (sizeof(char) * 1);
-	// 	if (!stack)
-	// 		return (NULL);
-	// }
-	tmp = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!tmp)
 		return (NULL);
+	if (!stack)
+		stack = malloc (sizeof(char) * 1);
 	readbytes = 1;
 	while (!(ft_strchr(stack, '\n')) && readbytes > 0)
 	{
 		readbytes = read(fd, tmp, BUFFER_SIZE);
 		if (readbytes < 0)
-		{
-			free(tmp);
-			return (NULL);
-		}
+			return (free(stack), NULL);
 		tmp[readbytes] = '\0';
 		stack = join_and_free(stack, tmp);
 	}
-	free (tmp);
 	line = create_line(stack);
 	stack = update_stack(stack);
 	return (line);
@@ -175,19 +160,21 @@ int	main(void)
 	char	*line;
 
 	atexit(ft_leaks);
-	fd = open("nl", O_RDONLY);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-	free (line);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-
+	// fd = open("41_with_nl", O_RDONLY);
+	// printf("Holaaaaa %d", fd);
 	// line = get_next_line(fd);
+	// fd = open("some", O_RDONLY);
 	// printf("Línea:%s\n", line);
 	// free (line);
 	// line = get_next_line(fd);
 	// printf("Línea:%s\n", line);
-	free (line);
-	close (fd);
+	// line = get_next_line(7896);
+	// printf("Línea:%s\n", line);
+	// free (line);
+	// close (fd);
+	fd = open("empty", O_RDONLY);
+	get_next_line(1000);
+	get_next_line(-1); close(fd);
+	get_next_line(fd);
 	return (0);
 }
