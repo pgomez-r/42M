@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:25:40 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/06 12:19:53 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:00:08 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*join_and_free(char *stack, char *tmp)
 
 char	*get_next_line(int fd)
 {
-	static char	*stack = NULL;
+	static char	*stack[1024] = {NULL};
 	char		tmp[BUFFER_SIZE + 1];
 	char		*line;
 	ssize_t		readbytes;
@@ -93,17 +93,17 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	readbytes = 1;
-	while (!(ft_strchr(stack, '\n')) && readbytes > 0)
+	while (!(ft_strchr(stack[fd], '\n')) && readbytes > 0)
 	{
 		readbytes = read(fd, tmp, BUFFER_SIZE);
 		if (readbytes < 0)
-			return (free(stack), stack = NULL, NULL);
+			return (free(stack[fd]), stack[fd] = NULL, NULL);
 		tmp[readbytes] = '\0';
-		stack = join_and_free(stack, tmp);
-		if (!stack)
+		stack[fd] = join_and_free(stack[fd], tmp);
+		if (!stack[fd])
 			return (NULL);
 	}
-	line = create_line(stack);
-	stack = update_stack(stack);
+	line = create_line(stack[fd]);
+	stack[fd] = update_stack(stack[fd]);
 	return (line);
 }

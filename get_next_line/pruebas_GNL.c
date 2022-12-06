@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:54:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/05 17:26:52 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/06 09:55:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	*ptr;
 
+	if (!s)
+		return (NULL);
 	ptr = (char *)s;
 	while (*ptr != (char)c)
 	{
@@ -119,6 +121,13 @@ char	*join_and_free(char *stack, char *tmp)
 {
 	char	*aux;
 
+	if (!stack)
+	{
+		stack = malloc(1);
+		stack[0] = 0;
+	}
+	if (!stack)
+		return (NULL);
 	aux = ft_strjoin(stack, tmp);
 	free (stack);
 	return (aux);
@@ -126,15 +135,13 @@ char	*join_and_free(char *stack, char *tmp)
 
 char	*get_next_line(int fd)
 {
-	static char	*stack;
+	static char	*stack = NULL;
 	char		tmp[BUFFER_SIZE + 1];
 	char		*line;
 	ssize_t		readbytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stack)
-		stack = malloc (sizeof(char) * 1);
 	readbytes = 1;
 	while (!(ft_strchr(stack, '\n')) && readbytes > 0)
 	{
@@ -143,6 +150,8 @@ char	*get_next_line(int fd)
 			return (free(stack), NULL);
 		tmp[readbytes] = '\0';
 		stack = join_and_free(stack, tmp);
+		if (!stack)
+			return (NULL);
 	}
 	line = create_line(stack);
 	stack = update_stack(stack);
@@ -160,21 +169,16 @@ int	main(void)
 	char	*line;
 
 	atexit(ft_leaks);
-	// fd = open("41_with_nl", O_RDONLY);
-	// printf("Holaaaaa %d", fd);
-	// line = get_next_line(fd);
-	// fd = open("some", O_RDONLY);
-	// printf("Línea:%s\n", line);
-	// free (line);
-	// line = get_next_line(fd);
-	// printf("Línea:%s\n", line);
-	// line = get_next_line(7896);
-	// printf("Línea:%s\n", line);
-	// free (line);
-	// close (fd);
-	fd = open("empty", O_RDONLY);
-	get_next_line(1000);
-	get_next_line(-1); close(fd);
-	get_next_line(fd);
+	fd = open("41_with_nl", O_RDONLY);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	close (fd);
 	return (0);
 }
