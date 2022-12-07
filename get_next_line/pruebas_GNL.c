@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:54:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/06 09:55:37 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:16:38 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ char	*create_line(char *stack)
 		i++;
 	}
 	if (stack[i] == '\n')
-	{	
-		line[i] = stack[i];
-		i++;
-	}
+		line[i++] = '\n';
 	line [i] = '\0';
 	return (line);
 }
@@ -99,7 +96,6 @@ char	*update_stack(char *stack)
 	char	*p;
 	int		i;
 
-	i = 0;
 	p = ft_strchr(stack, '\n');
 	if (!p)
 		return (free (stack), NULL);
@@ -107,6 +103,7 @@ char	*update_stack(char *stack)
 	aux = malloc(sizeof(char) * (ft_strlen(p) + 1));
 	if (!aux)
 		return (NULL);
+	i = 0;
 	while (*p != '\0')
 	{
 		aux[i] = *p;
@@ -158,27 +155,27 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void	ft_leaks(void)
-{
-	system("leaks -q gnl");
-}
+// void	ft_leaks(void)
+// {
+// 	system("leaks -q gnl");
+// }
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
 
-	atexit(ft_leaks);
-	fd = open("41_with_nl", O_RDONLY);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-	free (line);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-	free (line);
-	line = get_next_line(fd);
-	printf("Línea:%s\n", line);
-	free (line);
-	close (fd);
-	return (0);
-}
+// 	atexit(ft_leaks);
+// 	fd = open("sometext.txt", O_RDONLY);
+// 	line = get_next_line(fd);
+// 	printf("Línea:%s\n", line);
+// 	free (line);
+// 	line = get_next_line(fd);
+// 	printf("Línea:%s\n", line);
+// 	free (line);
+// 	line = get_next_line(fd);
+// 	printf("Línea:%s\n", line);
+// 	free (line);
+// 	close (fd);
+// 	return (0);
+// }
