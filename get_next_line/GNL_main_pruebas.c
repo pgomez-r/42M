@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pruebas_GNL.c                                      :+:      :+:    :+:   */
+/*   GNL_main_pruebas.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:54:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/07 13:16:38 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:11:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,27 +155,27 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// void	ft_leaks(void)
-// {
-// 	system("leaks -q gnl");
-// }
+void	ft_leaks(void)
+{
+	system("leaks -q gnl");
+}
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
+int	main(void)
+{
+	int		fd;
+	char	*line;
 
-// 	atexit(ft_leaks);
-// 	fd = open("sometext.txt", O_RDONLY);
-// 	line = get_next_line(fd);
-// 	printf("Línea:%s\n", line);
-// 	free (line);
-// 	line = get_next_line(fd);
-// 	printf("Línea:%s\n", line);
-// 	free (line);
-// 	line = get_next_line(fd);
-// 	printf("Línea:%s\n", line);
-// 	free (line);
-// 	close (fd);
-// 	return (0);
-// }
+	atexit(ft_leaks);
+	fd = open("sometext.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	line = get_next_line(fd);
+	printf("Línea:%s\n", line);
+	free (line);
+	close (fd);
+	return (0);
+}
