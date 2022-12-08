@@ -1,5 +1,2 @@
 Hello World
 javi
-Que pasa cabeza
-42
-texto
