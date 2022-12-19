@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/19 15:10:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:13:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ int	main(int ac, char **av)
 	{
 		i = 0;
 		numbers = malloc(sizeof(char *) * ac);
+		if (!numbers)
+			return (-1);
 		while (av[i + 1])
 		{
 			numbers[i] = ft_strcpy_free(numbers[i], av[i + 1]);
