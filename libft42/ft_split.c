@@ -6,14 +6,14 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/17 09:31:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:25:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*La función asigna memoria y devuelve una array de strings terminados en '\0'
 que se genera a partir de una string que recibe como parámetro
 Esa cadena origen la queremos separar en otras cadenas (palabras), split tiene
-que econtrar y separar cada palabra, dejando de lado el caracter dado por 
+que encontrar y separar cada palabra, dejando de lado el caracter dado por 
 el parámetro char c*/
 
 #include "libft.h"
