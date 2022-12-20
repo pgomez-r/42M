@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/19 15:13:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:17:56 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strcpy_free(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-	// char	*aux;
-	int		cnt;
+	int		i;
 
 	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
-	cnt = 0;
-	while (src[cnt] != '\0')
+	i = 0;
+	while (src[i] != '\0')
 	{
-		dest[cnt] = src[cnt];
-		cnt++;
+		dest[i] = src[i];
+		i++;
 	}
-	dest[cnt] = '\0';
-	// free(dest);
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -72,15 +70,15 @@ int	ft_checkargs(char **numbers)
 
 char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {
-	unsigned int	cnt;
+	unsigned int	i;
 
-	cnt = 0;
-	while (cnt < n)
+	i = 0;
+	while (i < n)
 	{
-		dest[cnt] = src[cnt];
-		cnt++;
+		dest[i] = src[i];
+		i++;
 	}
-	dest[cnt] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -144,6 +142,44 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
+int	ft_atoi(const char *str)
+{
+	int		sig;
+	int		num;
+
+	sig = 1;
+	num = 0;
+	while ((*str == ' ') || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sig = -1;
+		str++;
+	}
+	if (ft_isdigit((int) *str) == 0)
+		return (0);
+	while (*str >= '0' && *str <= '9')
+	{	
+		num = (*str - '0') + (num * 10);
+		str++;
+	}
+	return (num * sig);
+}
+
+void	ft_totalfree(char **numbers)
+{
+	int	i;
+
+	i = 0;
+	while (numbers[i])
+	{	
+		free(numbers[i]);
+		i++;
+	}
+	free(numbers);
+}
+
 void	ft_leaks(void)
 {
 	system("leaks -q test");
@@ -151,8 +187,9 @@ void	ft_leaks(void)
 
 int	main(int ac, char **av)
 {
-	char	**numbers;
-	int		i;
+	char			**numbers;
+	unsigned long	i;
+	int				*array;
 
 	atexit(ft_leaks);
 	if (ac <= 1)
@@ -167,18 +204,38 @@ int	main(int ac, char **av)
 			return (-1);
 		while (av[i + 1])
 		{
-			numbers[i] = ft_strcpy_free(numbers[i], av[i + 1]);
+			numbers[i] = ft_strcpy(numbers[i], av[i + 1]);
 			i++;
 		}
 		numbers[i] = NULL;
 	}
-	i = 0;
-	while (numbers[i])
-	{	
-		printf ("%s ", numbers[i]);
-		i++;
-	}
 	if (!ft_checkargs(numbers))
 		return (printf("Argumentos erróneos, taluego"), -1);
+	//aquí tengo que añadir otro ft_checkduplicates(numbers)
+	if (ft_duplicates)
+		return (printf("Argumentos erróneos, taluego"), -1);
+	i = 0;
+	while (numbers[i])
+		i++;
+	array = malloc(sizeof(int) * i);
+	i = 0;
+	while (numbers[i])
+	{
+		array[i] = ft_atoi(numbers[i]);
+		i++;
+	}
+	//aquí hay que comprobar si el array está ordenado
+	if (ft_sortcheck)
+		return (printf("Números ya se han enviado ordenados, taluego"), -1);
+	i = 0;
+	while (numbers[i])
+		printf ("%s ", numbers[i++]);
+	printf ("CHAR STRING\n");
+	i = 0;
+	while (i < sizeof(array))
+		printf ("%d ", array[i++]);
+	printf ("INT ARRAY\n");
+	ft_totalfree(numbers);
+	free(array);
 	return (0);
 }
