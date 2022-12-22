@@ -6,11 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:25:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/07 13:18:10 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:36:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(char *str)
 {

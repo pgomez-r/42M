@@ -6,18 +6,26 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/11/24 15:20:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/21 09:39:09 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+
+# endif
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h> 
 # include <unistd.h>
 # include <stdarg.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
 /*ESTRUCURA PARA LISTAS ENLAZADAS DEL BONUS LIBFT*/
 
@@ -26,6 +34,11 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+/*FUNCIONES PISCINERAS*/
+
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strcpy(char *dest, char *src);
 
 /*FUNCIONES DE LIBFT*/
 
@@ -82,5 +95,12 @@ void	ft_putstri(char *str, size_t *i);
 void	ft_putnbri(int n, size_t *i);
 void	ft_putunsigi(unsigned int n, size_t *i);
 void	ft_puthexalli(unsigned long int n, char *base, size_t *i);
+
+/*FUNCIONES GNL*/
+
+char	*get_next_line(int fd);
+char	*join_and_free(char *stack, char *tmp);
+char	*update_stack(char *stack);
+char	*create_line(char *stack);
 
 #endif

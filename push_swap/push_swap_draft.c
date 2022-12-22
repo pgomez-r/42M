@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/20 19:17:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:42:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,23 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
 char	*ft_strcpy(char *dest, char *src)
 {
 	int		i;
 
 	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
 	i = 0;
 	while (src[i] != '\0')
 	{
@@ -180,6 +192,30 @@ void	ft_totalfree(char **numbers)
 	free(numbers);
 }
 
+int	ft_checkduplicates(char **str)
+{
+	int	i;
+	int	j;
+	int	ctr;
+
+	i = 0;
+	while (i < (int)ft_strlen((const char *)str))
+	{
+		j = 0;
+		ctr = 0;
+		while (j < (int)ft_strlen((const char *)str))
+		{	
+			if (!ft_strcmp(str[i], str[j]))
+				ctr++;
+			j++;
+		}
+		if (ctr > 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_leaks(void)
 {
 	system("leaks -q test");
@@ -209,11 +245,13 @@ int	main(int ac, char **av)
 		}
 		numbers[i] = NULL;
 	}
+	//PROBLEMA si entran 4 argumentos, pero uno es una cadena con numeros entre "
+	//qué hacemos? ej: "4 2 5 6" 4 8 esto creo que se lo traga y no debería
 	if (!ft_checkargs(numbers))
-		return (printf("Argumentos erróneos, taluego"), -1);
-	//aquí tengo que añadir otro ft_checkduplicates(numbers)
-	if (ft_duplicates)
-		return (printf("Argumentos erróneos, taluego"), -1);
+		return (ft_totalfree(numbers), printf("Argumentos erróneos"), -1);
+	if (ft_checkduplicates(numbers))
+		return (ft_totalfree(numbers), printf("Argumentos erróneos"), -1);
+	//y otro ft_checkmin_max (o quizás se pueda comprobar en ft_atoi modificado)
 	i = 0;
 	while (numbers[i])
 		i++;
@@ -225,8 +263,8 @@ int	main(int ac, char **av)
 		i++;
 	}
 	//aquí hay que comprobar si el array está ordenado
-	if (ft_sortcheck)
-		return (printf("Números ya se han enviado ordenados, taluego"), -1);
+	// if (ft_sortcheck)
+	// 	return (printf("Números ya se han enviado ordenados, taluego"), -1);
 	i = 0;
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);
@@ -239,3 +277,4 @@ int	main(int ac, char **av)
 	free(array);
 	return (0);
 }
+
