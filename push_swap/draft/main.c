@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 14:46:20 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:54:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 
 	atexit(ft_leaks);
 	if (ac <= 1)
-		return (printf("Sin argumentos, taluego"), -1);
+		return (-1);
 	if (ac == 2)
 	{
 		numbers = malloc(sizeof(char *) * ac);
@@ -58,16 +58,13 @@ int	main(int ac, char **av)
 		numbers[i] = NULL;
 	}
 	if (!ft_checkargs(numbers))
-		return (ft_totalfree(numbers), printf("Argumentos erróneos"), -1);
+		return (ft_totalfree(numbers), printf("Error"), -1);
 	if (!ft_checkduplicates(numbers))
-		return (ft_totalfree(numbers), printf("Argumentos erróneos"), -1);
-	//y otro ft_checkmin_max (o quizás se pueda comprobar en ft_atoi modificado)
+		return (ft_totalfree(numbers), printf("Error"), -1);
+	//y otro ft_checkMAXINT (o quizás se pueda comprobar en ft_atoi modificado)
+	array = malloc(sizeof(int) * ft_strdlen(numbers));
 	i = 0;
-	while (numbers[i])
-		i++;
-	array = (int *)malloc(sizeof(int) * i);
-	i = 0;
-	while (numbers[i])
+	while (numbers[i] != NULL)
 	{
 		array[i] = ft_atoi(numbers[i]);
 		i++;

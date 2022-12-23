@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 14:48:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:25:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		ft_atoi(const char *str);
 /*arg_check.c*/
 int		ft_checkduplicates(char **str);
 int		ft_checkargs(char **numbers);
+size_t	ft_strdlen(char **str);
 /*main.c*/
 void	ft_totalfree(char **numbers);
 

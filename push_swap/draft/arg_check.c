@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 14:45:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:12:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,32 @@ int	ft_checkargs(char **numbers)
 	return (1);
 }
 
+size_t	ft_strdlen(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != NULL)
+		i++;
+	return (i);
+}
+
 int	ft_checkduplicates(char **str)
 {
-	int	i;
-	int	j;
-	int	ctr;
+	size_t	i;
+	size_t	j;
+	int		ctr;
+	size_t	len;
 
 	if (!*str || !**str)
 		return (0);
+	len = ft_strdlen(str);
 	i = 0;
-	while (i < (int)ft_strlen((const char *)str))
+	while (i < len)
 	{
 		j = 0;
 		ctr = 0;
-		while (j < (int)ft_strlen((const char *)str))
+		while (j < len)
 		{	
 			if (!ft_strcmp(str[i], str[j]))
 				ctr++;
