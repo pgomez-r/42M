@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_atoi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:56:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 12:56:47 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:39:08 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ int	ft_atoi(const char *str)
 		num = (*str - '0') + (num * 10);
 		str++;
 	}
-	return (num * sig);
+	num = num * sig;
+	if (num > INT_MAX || num < INT_MIN)
+		num = NULL;
+	return (num);
 }

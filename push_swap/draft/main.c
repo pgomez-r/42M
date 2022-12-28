@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 17:54:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:35:33 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,19 @@ int	main(int ac, char **av)
 		return (ft_totalfree(numbers), printf("Error"), -1);
 	if (!ft_checkduplicates(numbers))
 		return (ft_totalfree(numbers), printf("Error"), -1);
-	//y otro ft_checkMAXINT (o quizás se pueda comprobar en ft_atoi modificado)
 	array = malloc(sizeof(int) * ft_strdlen(numbers));
 	i = 0;
 	while (numbers[i] != NULL)
 	{
 		array[i] = ft_atoi(numbers[i]);
+		if (array[i] == NULL)
+			return (ft_totalfree(numbers), free(array), printf("Error"),-1);
+		//aquí compruebo, si atoi se encuentra con max o min int, return NULL
+			//pero no sé si return 0 entra en conflicto? ej. array [i] = 0??
 		i++;
 	}
-	//aquí hay que comprobar si el array está ordenado
-	// if (ft_sortcheck)
-	// 	return (printf("Números ya se han enviado ordenados, taluego"), -1);
+	if (!ft_checksorted)
+		return (ft_totalfree(numbers), free(array), printf("Error"),-1);
 	i = 0;
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);

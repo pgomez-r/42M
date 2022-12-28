@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 17:25:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:52:22 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <limits.h>
 
 /*libft_utils.c*/
 size_t	ft_strlen(const char *str);
@@ -37,6 +38,7 @@ int		ft_atoi(const char *str);
 int		ft_checkduplicates(char **str);
 int		ft_checkargs(char **numbers);
 size_t	ft_strdlen(char **str);
+int		ft_checksorted(int *array);
 /*main.c*/
 void	ft_totalfree(char **numbers);
 

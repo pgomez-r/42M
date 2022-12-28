@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/23 17:12:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:37:50 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+size_t	ft_strdlen(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != NULL)
+		i++;
+	return (i);
+}
 
 int	ft_checkargs(char **numbers)
 {
@@ -34,16 +44,6 @@ int	ft_checkargs(char **numbers)
 		i++;
 	}
 	return (1);
-}
-
-size_t	ft_strdlen(char **str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != NULL)
-		i++;
-	return (i);
 }
 
 int	ft_checkduplicates(char **str)
@@ -72,4 +72,20 @@ int	ft_checkduplicates(char **str)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_checksorted(int *array)
+{
+  	int	i;
+  	int	array_len;
+  
+  	array_len = sizeof(array) / sizeof(array[0]);
+  	i = 0;
+  	while (i < array_len)
+	{
+		if(array[i] > array[i + 1])
+			return (0);
+      	i++;
+    }
+  	return (1);
 }
