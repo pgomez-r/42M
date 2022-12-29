@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/28 22:35:33 by pgruz            ###   ########.fr       */
+/*   Updated: 2022/12/29 16:07:55 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 	while (numbers[i] != NULL)
 	{
 		array[i] = ft_atoi(numbers[i]);
-		if (array[i] == NULL)
+		if (!array[i])
 			return (ft_totalfree(numbers), free(array), printf("Error"),-1);
 		//aquí compruebo, si atoi se encuentra con max o min int, return NULL
 			//pero no sé si return 0 entra en conflicto? ej. array [i] = 0??
