@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/29 16:07:55 by pgruz            ###   ########.fr       */
+/*   Updated: 2022/12/30 13:19:04 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	ft_totalfree(char **numbers)
 
 int	main(int ac, char **av)
 {
-	char			**numbers;
-	unsigned long	i;
-	int				*array;
+	char	**numbers;
+	size_t	i;
+	int		*array;
 
 	atexit(ft_leaks);
 	if (ac <= 1)
-		return (-1);
+		return (printf("Error"), -1);
 	if (ac == 2)
 	{
 		numbers = malloc(sizeof(char *) * ac);
@@ -66,14 +66,14 @@ int	main(int ac, char **av)
 	while (numbers[i] != NULL)
 	{
 		array[i] = ft_atoi(numbers[i]);
-		if (!array[i])
-			return (ft_totalfree(numbers), free(array), printf("Error"),-1);
-		//aquí compruebo, si atoi se encuentra con max o min int, return NULL
-			//pero no sé si return 0 entra en conflicto? ej. array [i] = 0??
+		if (array[i] > INT_MAX || array[i] < INT_MIN)
+			return (ft_totalfree(numbers), free(array), printf("Error"), -1);
+		//aquí compruebo, si atoi se encuentra con max o min int, abortamos
+		//problema(creo), que ahora atoi devuelve long, pero array es tamaño int?
 		i++;
 	}
-	if (!ft_checksorted)
-		return (ft_totalfree(numbers), free(array), printf("Error"),-1);
+	if (!ft_checksorted(array, i))
+		return (ft_totalfree(numbers), free(array), printf("Error"), -1);
 	i = 0;
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);

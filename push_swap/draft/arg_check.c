@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/28 22:37:50 by pgruz            ###   ########.fr       */
+/*   Updated: 2022/12/30 13:05:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,16 @@ int	ft_checkduplicates(char **str)
 	return (1);
 }
 
-int	ft_checksorted(int *array)
+int	ft_checksorted(int *array, size_t array_len)
 {
-  	int	i;
-  	int	array_len;
-  
-  	array_len = sizeof(array) / sizeof(array[0]);
-  	i = 0;
-  	while (i < array_len)
+	size_t	i;
+
+	i = 0;
+	while (i < array_len)
 	{
-		if(array[i] > array[i + 1])
+		if (array[i] > array[i + 1])
 			return (0);
-      	i++;
-    }
-  	return (1);
+		i++;
+	}
+	return (1);
 }

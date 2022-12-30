@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   pruebas.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:14:31 by pgruz             #+#    #+#             */
-/*   Updated: 2022/12/29 19:36:15 by pgruz            ###   ########.fr       */
+/*   Updated: 2022/12/30 12:43:08 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h> 
+# include <unistd.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <limits.h>
 
 int	ft_isdigit(int c)
 {
@@ -19,7 +27,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
 	int			sig;
 	long int	num;
@@ -47,12 +55,14 @@ int	ft_atoi(const char *str)
 	return (num);
 }
 
-int	main()
+int	main(void)
 {
 	const char	*input_num;
 	long int	output_num;
-	
+
 	input_num = "-214748364890";
 	output_num = ft_atoi(input_num);
+	if (output_num < INT_MIN || output_num > INT_MAX)
+		return (printf("Error"), -1);
 	printf("Output_num:%ld\n", output_num);
 }
