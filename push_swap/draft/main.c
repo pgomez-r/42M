@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/30 13:19:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:57:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,24 @@ void	ft_totalfree(char **numbers)
 	free(numbers);
 }
 
+size_t	ft_arrlen(int *array)
+{
+	size_t	len;
+
+	len = 0;
+	while (array[len])
+		len++;
+	return (len);
+}
+
 int	main(int ac, char **av)
 {
 	char	**numbers;
 	size_t	i;
 	int		*array;
+	size_t	arrlen;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	if (ac <= 1)
 		return (printf("Error"), -1);
 	if (ac == 2)
@@ -57,29 +68,25 @@ int	main(int ac, char **av)
 		}
 		numbers[i] = NULL;
 	}
-	if (!ft_checkargs(numbers))
-		return (ft_totalfree(numbers), printf("Error"), -1);
-	if (!ft_checkduplicates(numbers))
+	if (!ft_chkarg(numbers) || !ft_chkdup(numbers) || !ft_chklimit(numbers))
 		return (ft_totalfree(numbers), printf("Error"), -1);
 	array = malloc(sizeof(int) * ft_strdlen(numbers));
 	i = 0;
 	while (numbers[i] != NULL)
 	{
 		array[i] = ft_atoi(numbers[i]);
-		if (array[i] > INT_MAX || array[i] < INT_MIN)
-			return (ft_totalfree(numbers), free(array), printf("Error"), -1);
-		//aquí compruebo, si atoi se encuentra con max o min int, abortamos
-		//problema(creo), que ahora atoi devuelve long, pero array es tamaño int?
 		i++;
 	}
-	if (!ft_checksorted(array, i))
+	if (!ft_chksort(array, i))
 		return (ft_totalfree(numbers), free(array), printf("Error"), -1);
 	i = 0;
+	//ahora toca simplificar los números del array
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);
 	printf ("CHAR STRING\n");
+	arrlen = ft_arrlen(array);
 	i = 0;
-	while (i < sizeof(array))
+	while (i < arrlen)
 		printf ("%i ", array[i++]);
 	printf ("INT ARRAY\n");
 	ft_totalfree(numbers);

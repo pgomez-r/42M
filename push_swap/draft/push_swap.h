@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/12/30 13:05:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:46:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 int			ft_count_word(char const *s, char c);
 char		*ft_savewords(const char *s, unsigned int n);
 char		**ft_split(char const *s, char c);
-long int	ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 /*arg_check.c*/
-int			ft_checkduplicates(char **str);
-int			ft_checkargs(char **numbers);
+int			ft_chkdup(char **str);
+int			ft_chkarg(char **str);
 size_t		ft_strdlen(char **str);
-int			ft_checksorted(int *array, size_t array_len);
+int			ft_chksort(int *array, size_t array_len);
+int			ft_chklimit(char **str);
 /*main.c*/
 void		ft_totalfree(char **numbers);
+size_t		ft_arrlen(int *array);
 
 #endif
