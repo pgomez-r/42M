@@ -3,37 +3,31 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2022/12/23 14:45:53 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/01/06 17:09:13 by pgruz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = split_atoi.c libft_utils.c main.c arg_check.c
-
-OBJS	=	$(SRCS:.c=.o)
-
-CC = gcc
-
-RM = rm -f
-
+EXE    = push_swap
+LIB    = push_swap.h
+SRCS   = main.c ps_utils.c libft_utils.c split_atoi.c arg_check.c
+OBJS   = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = push_swap.a
+$(EXE) : $(OBJS)
+	gcc $(CFLAGS) $(OBJS) -o $(EXE)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-
-all: $(NAME)
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+%.o : %.c
+	gcc -c $(CFLAGS) -g $< -o $@
 
 clean:
-	$(RM) $(OBJS)
-fclean:
-	$(RM) $(NAME)
-re: fclean all
+	rm -f *.o
 
-.PHONY:	all clean fclean re
+fclean:
+	rm -f *.o $(EXE)
+
+re: fclean $(EXE)
+
+.PHONY: clean fclean re
