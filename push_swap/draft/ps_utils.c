@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/05 16:28:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:06:58 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,26 @@ int	*ft_simpler(int	*array, size_t len)
 {
 	size_t	i;
 	size_t	j;
-
-	i = 1;
+	size_t	num;
+	int		*aux;
+	
+	aux = malloc(sizeof(int) * ft_arrlen(array));
+	i = 0;
 	while (i < len)
-	{
-		//comparar cada número con todos, encontrar cuantos menores hay y así
-		//asignarle una posición/número nuevo 
-	}
-	return (array);
+    {
+        j = 0;
+        num = 1;
+        while (j < len)
+        {
+            if (array[i] > array[j])
+                num++;
+            j++;
+        }
+        aux[i] = num;
+        i++;
+    }
+	free(array);
+    return (aux);
 }
 
 int	*ft_getarray(char **numbers)
