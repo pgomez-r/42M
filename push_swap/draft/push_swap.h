@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/05 16:16:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:22:52 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ int			ft_chksort(int *array, size_t array_len);
 int			ft_chklimit(char **str);
 /*main.c*/
 void		ft_leaks(void);
+/*operations.c*/
+void		swap_a(int *array_a);
+void		swap_b(int *array_b);
 
 #endif
