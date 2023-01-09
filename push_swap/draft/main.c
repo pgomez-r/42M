@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/08 22:30:38 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/01/09 19:23:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_leaks(void)
 {
-	system("leaks -q test");
+	system("leaks -q push_swap");
 }
 
 int	main(int ac, char **av)
@@ -27,18 +27,14 @@ int	main(int ac, char **av)
 	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (printf("Error"), -1);
+		return (printf("NO_ARGS"), -1);
 	array_a = ft_getarray(numbers);
 	if (!ft_chksort(array_a, ft_arrlen(array_a)))
-		return (ft_totalfree(numbers), free(array_a), printf("Error"), -1);
-	//le doy mismo tamaño a B y lo lleno de ceros (provisional)
+		return (ft_totalfree(numbers), free(array_a), printf("SORTED"), -1);
 	array_b = malloc(sizeof(int) * ft_arrlen(array_a));
 	i = 0;
 	while (i < ft_arrlen(array_a))
-	{
-		array_b[i] = 0;
-		i++;
-	}
+		array_b[i++] = 0;
 	i = 0;
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);
@@ -47,11 +43,10 @@ int	main(int ac, char **av)
 	while (i < ft_arrlen(array_a))
 		printf ("%i ", array_a[i++]);
 	printf ("INT ARRAY\n");
-	// swap_a(array_a);
-	// i = 0;
-	// while (i < ft_arrlen(array_a))
-	// 	printf ("%i ", array_a[i++]);
-	// printf ("INT ARRAY_AFTER\n");
+	i = 0;
+	while (i < ft_arrlen(array_b))
+		printf ("%i ", array_b[i++]);
+	printf ("INT ARRAY_B\n");
 	ft_totalfree(numbers);
 	free(array_a);
 	return (0);
