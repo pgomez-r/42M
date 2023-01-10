@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/09 19:39:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:52:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ void	ft_totalfree(char **numbers)
 		i++;
 	}
 	free(numbers);
-}
-
-size_t	ft_arrlen(int *array)
-{
-	size_t	len;
-
-	len = 0;
-	while (array[len])
-		len++;
-	return (len);
 }
 
 size_t	ft_strdlen(char **str)
@@ -52,7 +42,7 @@ int	*ft_simpler(int	*array, size_t len)
 	size_t	num;
 	int		*aux;
 
-	aux = malloc(sizeof(int) * ft_arrlen(array));
+	aux = malloc(sizeof(int) * len);
 	i = 0;
 	while (i < len)
 	{
@@ -83,6 +73,18 @@ int	*ft_getarray(char **numbers)
 		array[i] = ft_atoi(numbers[i]);
 		i++;
 	}
-	array = ft_simpler(array, ft_arrlen(array));
+	array = ft_simpler(array, i);
 	return (array);
+}
+
+int	*ft_arraycalloc(size_t arrlen)
+{
+	size_t	i;
+	int		*array_b;
+
+	array_b = malloc(sizeof(int) * arrlen);
+	i = 0;
+	while (i < arrlen)
+		array_b[i++] = 0;
+	return (array_b);
 }

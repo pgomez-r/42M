@@ -6,17 +6,17 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:29:35 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/09 18:59:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:35:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_a(int *array_a)
+void	swap_a(int *array_a, size_t arrlen)
 {
 	size_t	aux;
 
-	if (ft_arrlen(array_a) <= 1)
+	if (arrlen <= 1)
 		return ;
 	aux = array_a[0];
 	array_a[0] = array_a[1];
@@ -24,11 +24,11 @@ void	swap_a(int *array_a)
 	write(1, "sa\n", 3);
 }
 
-void	swap_b(int *array_b)
+void	swap_b(int *array_b, size_t arrlen)
 {
 	size_t	aux;
 
-	if (ft_arrlen(array_b) <= 1)
+	if (arrlen <= 1)
 		return ;
 	aux = array_b[0];
 	array_b[0] = array_b[1];
@@ -36,14 +36,14 @@ void	swap_b(int *array_b)
 	write(1, "sb\n", 3);
 }
 
-void	swap_ab(int *array_a, int*array_b)
+void	swap_ab(int *array_a, int*array_b, size_t arrlen)
 {
-	swap_a(array_a);
-	swap_b(array_b);
+	swap_a(array_a, arrlen);
+	swap_b(array_b, arrlen);
 	write(1, "ss\n", 3);
 }
 
-void	push_a(int *array_a, int *array_b)
+void	push_a(int *array_a, int *array_b, size_t arrlen)
 {
 	int		*ptr;
 	size_t	i;
@@ -61,18 +61,18 @@ void	push_a(int *array_a, int *array_b)
 	*ptr = array_b[0];
 	ptr = array_b;
 	i = 0;
-	while (*ptr != 0 && i < ((ft_arrlen(array_b) - 1)))
+	while (*ptr != 0 && i < (arrlen - 1))
 	{
 		*ptr = *(ptr + 1);
 		ptr++;
 		i++;
 	}
-	if (i == (ft_arrlen(array_b) - 1))
+	if (i == (arrlen - 1))
 		array_b[i] = 0;
 	write(1, "push_a\n", 7);
 }
 
-void	push_b(int *array_a, int *array_b)
+void	push_b(int *array_a, int *array_b, size_t arrlen)
 {
 	int		*ptr;
 	size_t	i;
@@ -90,13 +90,13 @@ void	push_b(int *array_a, int *array_b)
 	*ptr = array_a[0];
 	ptr = array_a;
 	i = 0;
-	while (*ptr != 0 && i < ((ft_arrlen(array_a) - 1)))
+	while (*ptr != 0 && i < (arrlen - 1))
 	{
 		*ptr = *(ptr + 1);
 		ptr++;
 		i++;
 	}
-	if (i == (ft_arrlen(array_a) - 1))
+	if (i == (arrlen - 1))
 		array_a[i] = 0;
 	write(1, "push_b\n", 7);
 }

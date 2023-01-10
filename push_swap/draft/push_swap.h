@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/08 22:22:52 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/01/10 13:53:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int			ft_isdigit(int c);
 char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 /*ps_utils.c*/
 size_t		ft_strdlen(char **str);
-size_t		ft_arrlen(int *array);
 void		ft_totalfree(char **numbers);
 int			*ft_getarray(char **numbers);
+int			*ft_simpler(int	*array, size_t len);
+int			*ft_arraycalloc(size_t arrlen);
 /*split_atoi.c*/
 int			ft_count_word(char const *s, char c);
 char		*ft_savewords(const char *s, unsigned int n);
@@ -48,7 +49,10 @@ int			ft_chklimit(char **str);
 /*main.c*/
 void		ft_leaks(void);
 /*operations.c*/
-void		swap_a(int *array_a);
-void		swap_b(int *array_b);
+void		swap_a(int *array_a, size_t arrlen);
+void		swap_b(int *array_b, size_t arrlen);
+void		swap_ab(int *array_a, int*array_b, size_t arrlen);
+void		push_a(int *array_a, int *array_b, size_t arrlen);
+void		push_b(int *array_a, int *array_b, size_t arrlen);
 
 #endif
