@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/05 15:58:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:40:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ int	ft_chklimit(char **str)
 	i = 0;
 	while (i < len)
 	{
-		if (ft_strlen(str[i]) > 11)
-			return (0);
 		if (ft_strlen(str[i]) >= 10 && ft_strcmp(str[i], "2147483647") > 0)
 			return (0);
 		if (ft_strlen(str[i]) >= 11 && ft_strcmp(str[i], "-2147483648") > 0)

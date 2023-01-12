@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/10 13:53:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:19:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 /*ps_utils.c*/
 size_t		ft_strdlen(char **str);
 void		ft_totalfree(char **numbers);
-int			*ft_getarray(char **numbers);
+int			*ft_getarray(char **numbers, size_t *arrlen);
 int			*ft_simpler(int	*array, size_t len);
 int			*ft_arraycalloc(size_t arrlen);
 /*split_atoi.c*/
@@ -54,5 +54,6 @@ void		swap_b(int *array_b, size_t arrlen);
 void		swap_ab(int *array_a, int*array_b, size_t arrlen);
 void		push_a(int *array_a, int *array_b, size_t arrlen);
 void		push_b(int *array_a, int *array_b, size_t arrlen);
+/*rev_operations.c*/
 
 #endif

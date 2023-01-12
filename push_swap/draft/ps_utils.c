@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/10 13:52:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:31:17 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	*ft_simpler(int	*array, size_t len)
 	return (aux);
 }
 
-int	*ft_getarray(char **numbers)
+int	*ft_getarray(char **numbers, size_t *arrlen)
 {
 	int		*array;
 	size_t	i;
@@ -73,6 +73,7 @@ int	*ft_getarray(char **numbers)
 		array[i] = ft_atoi(numbers[i]);
 		i++;
 	}
+	*arrlen = i;
 	array = ft_simpler(array, i);
 	return (array);
 }

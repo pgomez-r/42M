@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/10 14:26:34 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:49:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	main(int ac, char **av)
 	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (printf("NO_ARGS"), -1);
-	array_a = ft_getarray(numbers);
-	arrlen = sizeof(&array_a) / sizeof(array_a[0]);
+		return (printf("Error"), -1);
+	array_a = ft_getarray(numbers, &arrlen);
 	if (!ft_chksort(array_a, arrlen))
 		return (ft_totalfree(numbers), free(array_a), printf("SORTED"), -1);
 	array_b = ft_arraycalloc(arrlen);
