@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/12 13:19:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:13:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/uio.h>
 # include <limits.h>
 
+/*main.c*/
+void		ft_leaks(void);
 /*libft_utils.c*/
 size_t		ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
@@ -46,14 +48,19 @@ int			ft_chkdup(char **str);
 int			ft_chkdigit(char **str);
 int			ft_chksort(int *array, size_t array_len);
 int			ft_chklimit(char **str);
-/*main.c*/
-void		ft_leaks(void);
-/*operations.c*/
+/*operations_ps.c*/
 void		swap_a(int *array_a, size_t arrlen);
 void		swap_b(int *array_b, size_t arrlen);
 void		swap_ab(int *array_a, int*array_b, size_t arrlen);
 void		push_a(int *array_a, int *array_b, size_t arrlen);
 void		push_b(int *array_a, int *array_b, size_t arrlen);
-/*rev_operations.c*/
+/*operations_rot.c*/
+void		rotate_a(int *array_a, size_t arrlen);
+void		rotate_b(int *array_b, size_t arrlen);
+void		revrot_a(int *array_a, size_t arrlen);
+void		revrot_b(int *array_b, size_t arrlen);
+/*operations_db*/
+void		rotate_ab(int *array_a, int *array_b, size_t arrlen);
+void		revrot_ab(int *array_a, int *array_b, size_t arrlen);
 
 #endif

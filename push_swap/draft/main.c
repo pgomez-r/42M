@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/11 13:49:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:38:09 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	int		*array_a;
 	int		*array_b;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (printf("Error"), -1);
@@ -33,6 +33,7 @@ int	main(int ac, char **av)
 	if (!ft_chksort(array_a, arrlen))
 		return (ft_totalfree(numbers), free(array_a), printf("SORTED"), -1);
 	array_b = ft_arraycalloc(arrlen);
+	//COMPROBACIÓN PARSEO EN PANTALLA
 	i = 0;
 	while (numbers[i])
 		printf ("%s ", numbers[i++]);
@@ -41,10 +42,12 @@ int	main(int ac, char **av)
 	while (i < arrlen)
 		printf ("%i ", array_a[i++]);
 	printf ("INT ARRAY\n");
+	//COMPROBACIÓN OPERACIONES EN PANTALLA
+	revrot_a(array_a, arrlen);
 	i = 0;
 	while (i < arrlen)
-		printf ("%i ", array_b[i++]);
-	printf ("INT ARRAY_B\n");
+		printf ("%i ", array_a[i++]);
+	printf ("INT ARRAY\n");
 	ft_totalfree(numbers);
 	free(array_a);
 	return (0);

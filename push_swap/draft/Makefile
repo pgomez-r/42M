@@ -3,24 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/01/06 17:09:13 by pgruz            ###   ########.fr        #
+#    Updated: 2023/01/14 14:24:12 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXE    = push_swap
 LIB    = push_swap.h
-SRCS   = main.c ps_utils.c libft_utils.c split_atoi.c arg_check.c
+SRCS   = arg_check.c libft_utils.c main.c operations_db.c operations_ps.c \
+			operations_rot.c ps_utils.c split_atoi.c
 OBJS   = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
 $(EXE) : $(OBJS)
-	gcc $(CFLAGS) $(OBJS) -o $(EXE)
+	gcc $(CFLAGS) -g $(OBJS) -o $(EXE)
 
 %.o : %.c
-	gcc -c $(CFLAGS) -g $< -o $@
+	gcc -c $(CFLAGS) $< -o $@
 
 clean:
 	rm -f *.o
