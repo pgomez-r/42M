@@ -6,22 +6,33 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/14 14:38:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:07:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*lavin laqueeliao, tengo que hacer en el struct size_a, size_b, size_tot
+y si puedo las dos arrays, modificar las operaciones para +- size a o b
+y luego a por el mid_alg*/
 void	ft_leaks(void)
 {
 	system("leaks -q push_swap");
+}
+
+void	ft_initstruct(t_index *index)
+{
+	index->arrlen_a = 0;
+	index->numlen_a = 0;
+	index->arrlen_a = 0;
+	index->numlen_a = 0;
 }
 
 int	main(int ac, char **av)
 {
 	char	**numbers;
 	size_t	i;
-	size_t	arrlen;
+	t_index	*index;
 	int		*array_a;
 	int		*array_b;
 
@@ -29,7 +40,8 @@ int	main(int ac, char **av)
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (printf("Error"), -1);
-	array_a = ft_getarray(numbers, &arrlen);
+	ft_initstruct(index);
+	array_a = ft_getarray(numbers, *index);
 	if (!ft_chksort(array_a, arrlen))
 		return (ft_totalfree(numbers), free(array_a), printf("SORTED"), -1);
 	array_b = ft_arraycalloc(arrlen);

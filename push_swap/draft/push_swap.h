@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/14 14:13:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:30:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 # include <sys/uio.h>
 # include <limits.h>
 
+/*struct*/
+typedef struct s_index
+{
+	size_t	arrlen_a;
+	size_t	numlen_a;
+	size_t	arrlen_a;
+	size_t	numlen_a;
+}			t_index;
+
 /*main.c*/
 void		ft_leaks(void);
 /*libft_utils.c*/
@@ -34,7 +43,7 @@ char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 /*ps_utils.c*/
 size_t		ft_strdlen(char **str);
 void		ft_totalfree(char **numbers);
-int			*ft_getarray(char **numbers, size_t *arrlen);
+int			*ft_getarray(char **numbers, t_index *index);
 int			*ft_simpler(int	*array, size_t len);
 int			*ft_arraycalloc(size_t arrlen);
 /*split_atoi.c*/
