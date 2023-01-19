@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/18 14:30:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:33:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,57 +35,49 @@ size_t	ft_strdlen(char **str)
 	return (i);
 }
 
-int	*ft_simpler(int	*array, size_t len)
+int	*ft_simpler(t_index	*index)
 {
 	size_t	i;
 	size_t	j;
 	size_t	num;
 	int		*aux;
 
-	aux = malloc(sizeof(int) * len);
+	aux = malloc(sizeof(int) * index->arrlen);
 	i = 0;
-	while (i < len)
+	while (i < index->arrlen)
 	{
 		j = 0;
 		num = 1;
-		while (j < len)
+		while (j < index->arrlen)
 		{
-			if (array[i] > array[j])
+			if (index->array_a[i] > index->array_a[j])
 				num++;
 			j++;
 		}
 		aux[i] = num;
 		i++;
 	}
-	free(array);
+	free(index->array_a);
 	return (aux);
 }
 
-int	*ft_getarray(char **numbers, t_index *index)
+void	ft_getarrays(char **numbers, t_index *index)
 {
-	int		*array;
 	size_t	i;
 
-	array = malloc(sizeof(int) * ft_strdlen(numbers));
+	index->array_a = malloc(sizeof(int) * ft_strdlen(numbers));
 	i = 0;
 	while (numbers[i] != NULL)
 	{
-		array[i] = ft_atoi(numbers[i]);
+		index->array_a[i] = ft_atoi(numbers[i]);
 		i++;
 	}
-	*arrlen = i;
-	array = ft_simpler(array, i);
-	return (array);
-}
-
-int	*ft_arraycalloc(size_t arrlen)
-{
-	size_t	i;
-	int		*array_b;
-
-	array_b = malloc(sizeof(int) * arrlen);
+	index->arrlen = i;
+	index->size_a = i;
+	index->size_b = i;
+	index->array_b = malloc(sizeof(int) * index->arrlen);
 	i = 0;
-	while (i < arrlen)
-		array_b[i++] = 0;
-	return (array_b);
+	while (i < index->arrlen)
+		index->array_b[i++] = 0;
+	index->array_a = ft_simpler(index);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/11 13:40:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:34:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,16 @@ int	ft_chkdup(char **str)
 	return (1);
 }
 
-int	ft_chksort(int *array, size_t array_len)
+int	ft_chksort(t_index *index)
 {
 	size_t	i;
 
-	if (array_len <= 1)
+	if (index->arrlen <= 1)
 		return (0);
 	i = 0;
-	while (i < (array_len - 1))
+	while (i < (index->arrlen - 1))
 	{
-		if (array[i] > array[i + 1])
+		if (index->array_a[i] > index->array_a[i + 1])
 			return (1);
 		i++;
 	}
@@ -129,4 +129,4 @@ int	ft_chklimit(char **str)
 		i++;
 	}
 	return (1);
-}
+} 
