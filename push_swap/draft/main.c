@@ -6,15 +6,15 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/19 13:38:52 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:46:05 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*lavin laqueeliao, tengo que hacer en el struct size_a, size_b, size_tot
-y si puedo las dos arrays, modificar las operaciones para +- size a o b
-y luego a por el mid_alg*/
+/*PENDIENTE: "optimizar swaps y push (arrlen - 1 vs size_ab)"
+	reformular rotates con el struc
+	meter pruebas a fuego y cruzar dedos*/
 void	ft_leaks(void)
 {
 	system("leaks -q push_swap");
@@ -29,10 +29,10 @@ int	main(int ac, char **av)
 	//atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (printf("Error"), -1);
+		return (write(2, "Error\n", 6), -1);
 	ft_getarrays(numbers, &index);
 	if (!ft_chksort(&index))
-		return (ft_totalfree(numbers), free(index.array_a), printf("SORT"), -1);
+		return (ft_totalfree(numbers), free(index.array_a), write(2, "SORT\n", 5), -1);
 	//COMPROBACIÓN PARSEO EN PANTALLA
 	i = 0;
 	while (numbers[i])
@@ -43,6 +43,7 @@ int	main(int ac, char **av)
 		printf ("%i ", index.array_a[i++]);
 	printf ("INT ARRAY\n");
 	ft_totalfree(numbers);
-	free(index.array_a, index.array_b);
+	free(index.array_a);
+	free(index.array_b);
 	return (0);
 }

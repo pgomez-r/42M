@@ -1,103 +1,103 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   operations_ps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:29:35 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/10 13:35:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:43:43 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_a(int *array_a, size_t arrlen)
+void	swap_a(t_index *index)
 {
 	size_t	aux;
 
-	if (arrlen <= 1)
+	if (index->size_a <= 1)
 		return ;
-	aux = array_a[0];
-	array_a[0] = array_a[1];
-	array_a[1] = aux;
+	aux = index->array_a[0];
+	index->array_a[0] = index->array_a[1];
+	index->array_a[1] = aux;
 	write(1, "sa\n", 3);
 }
 
-void	swap_b(int *array_b, size_t arrlen)
+void	swap_b(t_index *index)
 {
 	size_t	aux;
 
-	if (arrlen <= 1)
+	if (index->size_b <= 1)
 		return ;
-	aux = array_b[0];
-	array_b[0] = array_b[1];
-	array_b[1] = aux;
+	aux = index->array_b[0];
+	index->array_b[0] = index->array_b[1];
+	index->array_b[1] = aux;
 	write(1, "sb\n", 3);
 }
 
-void	swap_ab(int *array_a, int*array_b, size_t arrlen)
+void	swap_ab(t_index *index)
 {
-	swap_a(array_a, arrlen);
-	swap_b(array_b, arrlen);
+	swap_a(index);
+	swap_b(index);
 	write(1, "ss\n", 3);
 }
 
-void	push_a(int *array_a, int *array_b, size_t arrlen)
+void	push_a(t_index *index)
 {
 	int		*ptr;
 	size_t	i;
 
-	if (array_b[0] == 0)
+	if (index->size_b == 0)
 		return ;
-	ptr = array_a;
+	ptr = index->array_a;
 	while (*ptr != 0)
 		ptr++;
-	while (*ptr != array_a[0])
+	while (*ptr != index->array_a[0])
 	{
 		*ptr = *(ptr - 1);
 		ptr--;
 	}
-	*ptr = array_b[0];
-	ptr = array_b;
+	*ptr = index->array_b[0];
+	ptr = index->array_b;
 	i = 0;
-	while (*ptr != 0 && i < (arrlen - 1))
+	while (*ptr != 0 && i < (index->arrlen - 1))
 	{
 		*ptr = *(ptr + 1);
 		ptr++;
 		i++;
 	}
-	if (i == (arrlen - 1))
-		array_b[i] = 0;
+	if (i == (index->arrlen - 1))
+		index->array_b[i] = 0;
 	write(1, "push_a\n", 7);
 }
 
-void	push_b(int *array_a, int *array_b, size_t arrlen)
+void	push_b(t_index *index)
 {
 	int		*ptr;
 	size_t	i;
 
-	if (array_a[0] == 0)
+	if (index->size_a == 0)
 		return ;
-	ptr = array_b;
+	ptr = index->array_b;
 	while (*ptr != 0)
 		ptr++;
-	while (*ptr != array_b[0])
+	while (*ptr != index->array_b[0])
 	{
 		*ptr = *(ptr - 1);
 		ptr--;
 	}
-	*ptr = array_a[0];
-	ptr = array_a;
+	*ptr = index->array_a[0];
+	ptr = index->array_a;
 	i = 0;
-	while (*ptr != 0 && i < (arrlen - 1))
+	while (*ptr != 0 && i < (index->arrlen - 1))
 	{
 		*ptr = *(ptr + 1);
 		ptr++;
 		i++;
 	}
-	if (i == (arrlen - 1))
-		array_a[i] = 0;
+	if (i == (index->arrlen - 1))
+		index->array_a[i] = 0;
 	write(1, "push_b\n", 7);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/19 12:51:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:44:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int			ft_chkdigit(char **str);
 int			ft_chksort(t_index *index);
 int			ft_chklimit(char **str);
 /*operations_ps.c*/
-void		swap_a(int *array_a, size_t arrlen);
-void		swap_b(int *array_b, size_t arrlen);
-void		swap_ab(int *array_a, int*array_b, size_t arrlen);
-void		push_a(int *array_a, int *array_b, size_t arrlen);
-void		push_b(int *array_a, int *array_b, size_t arrlen);
+void		swap_a(t_index *index);
+void		swap_b(t_index *index);
+void		swap_ab(t_index *index);
+void		push_a(t_index *index);
+void		push_b(t_index *index);
 /*operations_rot.c*/
-void		rotate_a(int *array_a, size_t arrlen);
+void		rotate_a(t_index *indexint *array_a, size_t arrlen);
 void		rotate_b(int *array_b, size_t arrlen);
 void		revrot_a(int *array_a, size_t arrlen);
 void		revrot_b(int *array_b, size_t arrlen);

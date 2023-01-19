@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/19 12:33:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:40:30 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_getarrays(char **numbers, t_index *index)
 	}
 	index->arrlen = i;
 	index->size_a = i;
-	index->size_b = i;
+	index->size_b = 0;
 	index->array_b = malloc(sizeof(int) * index->arrlen);
 	i = 0;
 	while (i < index->arrlen)
