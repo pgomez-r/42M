@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/20 14:48:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:21:07 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@
 /*struct*/
 typedef struct s_index
 {
-	int		*array_a;
-	int		*array_b;
-	size_t	arrlen;
-	size_t	size_a;
-	size_t	size_b;
+	size_t	arrlen_a;
+	size_t	numlen_a;
+	size_t	arrlen_a;
+	size_t	numlen_a;
 }			t_index;
 
 /*main.c*/
@@ -44,8 +43,9 @@ char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 /*ps_utils.c*/
 size_t		ft_strdlen(char **str);
 void		ft_totalfree(char **numbers);
-void		ft_getarrays(char **numbers, t_index *index);
-int			*ft_simpler(t_index *index);
+int			*ft_getarray(char **numbers, size_t *arrlen);
+int			*ft_simpler(int	*array, size_t len);
+int			*ft_arraycalloc(size_t arrlen);
 /*split_atoi.c*/
 int			ft_count_word(char const *s, char c);
 char		*ft_savewords(const char *s, unsigned int n);
@@ -55,16 +55,16 @@ int			ft_atoi(const char *str);
 char		**ft_argtochar(int ac, char **av);
 int			ft_chkdup(char **str);
 int			ft_chkdigit(char **str);
-int			ft_chksort(t_index *index);
+int			ft_chksort(int *array, size_t array_len);
 int			ft_chklimit(char **str);
 /*operations_ps.c*/
-void		swap_a(t_index *index);
-void		swap_b(t_index *index);
-void		swap_ab(t_index *index);
-void		push_a(t_index *index);
-void		push_b(t_index *index);
+void		swap_a(int *array_a, size_t arrlen);
+void		swap_b(int *array_b, size_t arrlen);
+void		swap_ab(int *array_a, int*array_b, size_t arrlen);
+void		push_a(int *array_a, int *array_b, size_t arrlen);
+void		push_b(int *array_a, int *array_b, size_t arrlen);
 /*operations_rot.c*/
-void		rotate_a(t_index *index);
+void		rotate_a(int *array_a, size_t arrlen);
 void		rotate_b(int *array_b, size_t arrlen);
 void		revrot_a(int *array_a, size_t arrlen);
 void		revrot_b(int *array_b, size_t arrlen);
