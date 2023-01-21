@@ -6,22 +6,22 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:02:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/14 14:07:12 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:29:28 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_ab(int *array_a, int *array_b, size_t arrlen)
+void	rotate_ab(t_index *index)
 {
-	rotate_a(array_a, arrlen);
-	rotate_b(array_b, arrlen);
+	rotate_a(index);
+	rotate_b(index);
 	write(1, "rr\n", 3);
 }
 
-void	revrot_ab(int *array_a, int *array_b, size_t arrlen)
+void	revrot_ab(t_index *index)
 {
-	revrot_a(array_a, arrlen);
-	revrot_b(array_b, arrlen);
+	revrot_a(index);
+	revrot_b(index);
 	write(1, "rrr\n", 4);
 }

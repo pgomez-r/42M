@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:29:35 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/19 14:43:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:12:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	swap_a(t_index *index)
 {
-	size_t	aux;
+	int	aux;
 
 	if (index->size_a <= 1)
 		return ;
@@ -26,7 +26,7 @@ void	swap_a(t_index *index)
 
 void	swap_b(t_index *index)
 {
-	size_t	aux;
+	int	aux;
 
 	if (index->size_b <= 1)
 		return ;
@@ -45,60 +45,48 @@ void	swap_ab(t_index *index)
 
 void	push_a(t_index *index)
 {
-	int		*ptr;
 	size_t	i;
 
 	if (index->size_b == 0)
 		return ;
-	ptr = index->array_a;
-	while (*ptr != 0)
-		ptr++;
-	while (*ptr != index->array_a[0])
+	i = index->size_a;
+	while (i > 0)
 	{
-		*ptr = *(ptr - 1);
-		ptr--;
+		index->array_a[i] = index->array_a[i - 1];
+		i--;
 	}
-	*ptr = index->array_b[0];
-	ptr = index->array_b;
-	i = 0;
-	while (*ptr != 0 && i < (index->arrlen - 1))
+	index->array_a[i] = index->array_b[0];
+	while (i < index->size_b)
 	{
-		*ptr = *(ptr + 1);
-		ptr++;
+		index->array_b[i] = index->array_b[i + 1];
 		i++;
 	}
-	if (i == (index->arrlen - 1))
-		index->array_b[i] = 0;
-	write(1, "push_a\n", 7);
+	index->size_a++;
+	index->size_b--;
+	write(1, "pa\n", 3);
 }
 
 void	push_b(t_index *index)
 {
-	int		*ptr;
 	size_t	i;
 
-	if (index->size_a == 0)
+	if (index->size_b == 0)
 		return ;
-	ptr = index->array_b;
-	while (*ptr != 0)
-		ptr++;
-	while (*ptr != index->array_b[0])
+	i = index->size_b;
+	while (i > 0)
 	{
-		*ptr = *(ptr - 1);
-		ptr--;
+		index->array_b[i] = index->array_b[i - 1];
+		i--;
 	}
-	*ptr = index->array_a[0];
-	ptr = index->array_a;
-	i = 0;
-	while (*ptr != 0 && i < (index->arrlen - 1))
+	index->array_b[i] = index->array_a[0];
+	while (i < index->size_a)
 	{
-		*ptr = *(ptr + 1);
-		ptr++;
+		index->array_a[i] = index->array_a[i + 1];
 		i++;
 	}
-	if (i == (index->arrlen - 1))
-		index->array_a[i] = 0;
-	write(1, "push_b\n", 7);
+	index->size_a++;
+	index->size_b--;
+	write(1, "pb\n", 3);
 }
 
 // 4 8 2 6 0 0 0  A

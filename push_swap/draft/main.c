@@ -6,15 +6,15 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/20 14:23:24 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:31:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*PENDIENTE: "optimizar swaps y push (arrlen - 1 vs size_ab)"
+/*PENDIENTE: 
 	reformular rotates con el struct
-	meter pruebas a fuego y cruzar dedos*/
+	meter pruebas a fuego y cruzar dedos(operations_checker.c)*/
 void	ft_leaks(void)
 {
 	system("leaks -q push_swap");

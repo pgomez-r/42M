@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/20 14:48:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:13:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void		push_a(t_index *index);
 void		push_b(t_index *index);
 /*operations_rot.c*/
 void		rotate_a(t_index *index);
-void		rotate_b(int *array_b, size_t arrlen);
-void		revrot_a(int *array_a, size_t arrlen);
-void		revrot_b(int *array_b, size_t arrlen);
+void		rotate_b(t_index *index);
+void		revrot_a(t_index *index);
+void		revrot_b(t_index *index);
 /*operations_db*/
-void		rotate_ab(int *array_a, int *array_b, size_t arrlen);
-void		revrot_ab(int *array_a, int *array_b, size_t arrlen);
+void		rotate_ab(t_index *index);
+void		revrot_ab(t_index *index);
 
 #endif
