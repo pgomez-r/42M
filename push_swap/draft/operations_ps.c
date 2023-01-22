@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_ps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:29:35 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/21 12:12:12 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:10:03 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	push_b(t_index *index)
 {
 	size_t	i;
 
-	if (index->size_b == 0)
+	if (index->size_a == 0)
 		return ;
 	i = index->size_b;
 	while (i > 0)
@@ -84,8 +84,8 @@ void	push_b(t_index *index)
 		index->array_a[i] = index->array_a[i + 1];
 		i++;
 	}
-	index->size_a++;
-	index->size_b--;
+	index->size_a--;
+	index->size_b++;
 	write(1, "pb\n", 3);
 }
 
