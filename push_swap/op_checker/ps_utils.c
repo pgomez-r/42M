@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/23 12:52:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:40:30 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,4 @@ void	ft_getarrays(char **numbers, t_index *index)
 	while (i < index->arrlen)
 		index->array_b[i++] = 0;
 	index->array_a = ft_simpler(index);
-}
-
-int	*ft_duparray(int *array, size_t arrlen)
-{
-	size_t	i;
-	int		*array_aux;
-
-	array_aux = malloc(sizeof(int) * arrlen);
-	i = 0;
-	while (i < arrlen)
-	{
-		array_aux[i] = array[i];
-		i++;
-	}
-	return (array_aux);
 }

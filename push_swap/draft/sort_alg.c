@@ -6,26 +6,13 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/17 13:13:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:54:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ft_duparray(int *array, size_t arrlen)
-{
-	size_t	i;
-	int		*array_aux;
-
-	array_aux = malloc(sizeof(int) * arrlen);
-	i = 0;
-	while (i < arrlen)
-	{
-		array_aux[i] = array[i];
-		i++;
-	}
-	return (array_aux);
-}
+/*BORRADOR, por si sigo con mid algorithym, pero seguramente no me haga falta*/
 
 int	get_mid_value(int *array_a, size_t arrlen)
 {
