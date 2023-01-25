@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_ps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:29:35 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/23 00:10:03 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:51:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ void	swap_b(t_index *index)
 	index->array_b[0] = index->array_b[1];
 	index->array_b[1] = aux;
 	write(1, "sb\n", 3);
-}
-
-void	swap_ab(t_index *index)
-{
-	swap_a(index);
-	swap_b(index);
-	write(1, "ss\n", 3);
 }
 
 void	push_a(t_index *index)

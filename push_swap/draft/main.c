@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/23 12:31:07 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:32:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	ft_leaks(void)
 int	main(int ac, char **av)
 {
 	char	**numbers;
-	size_t	i;
 	t_index	index;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (write(2, "Error\n", 6), -1);
 	ft_getarrays(numbers, &index);
 	if (!ft_chksort(&index))
 		return (ft_totalfree(numbers), free(index.array_a), -1);
+	sort_three(&index);
 	free(index.array_a);
 	free(index.array_b);
 	return (0);

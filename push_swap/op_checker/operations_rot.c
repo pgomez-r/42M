@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:35:44 by pgruz             #+#    #+#             */
-/*   Updated: 2023/01/21 12:28:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:28:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void	revrot_b(t_index *index)
 	int		aux;
 	size_t	i;
 
-	aux = index->array_a[index->size_a - 1];
-	i = index->size_a - 1;
+	aux = index->array_b[index->size_b - 1];
+	i = index->size_b - 1;
 	while (i > 0)
 	{
-		index->array_a[i] = index->array_a[i - 1];
+		index->array_b[i] = index->array_b[i - 1];
 		i--;
 	}
-	index->array_a[i] = aux;
+	index->array_b[i] = aux;
 	write(1, "rrb\n", 4);
 }
 

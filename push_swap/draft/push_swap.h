@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/23 12:53:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:26:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void		revrot_b(t_index *index);
 void		swap_ab(t_index *index);
 void		rotate_ab(t_index *index);
 void		revrot_ab(t_index *index);
+/*sort_five*/
+void		sort_three(t_index *index);
 
 #endif
