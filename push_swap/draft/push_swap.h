@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/26 17:08:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:36:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_index
 {
 	int		*array_a;
 	int		*array_b;
+	int		*temp;
 	size_t	arrlen;
 	size_t	size_a;
 	size_t	size_b;

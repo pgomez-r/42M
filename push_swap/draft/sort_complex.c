@@ -6,24 +6,46 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/26 17:08:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:39:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*BORRADOR, por si sigo con mid algorithym, pero seguramente no me haga falta*/
+/*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
+una vez allí, encontrar el LIS*/
+void	min_to_top(t_index *index)
+{
+	size_t	min_pos;
+	int		target;
 
-int	get_mid_value(int *array_a, size_t arrlen)
+	index->temp = ft_duparray(index->array_a, index->size_a);
+	min_pos = ft_minvalue_pos(index->temp, index->size_a);
+	target = index->temp[min_pos];
+	if (min_pos <= index->size_a / 2)
+	{
+		while (index->temp[0] != target)
+			rotate_a(index);
+	}
+	if (min_pos > index->size_a / 2)
+	{
+		while (index->temp[0] != target)
+			revrot_a(index);
+	}
+	//calcular LIS de cadena temp
+	free(index->temp);
+}
+
+int	get_mid_value(int *array, size_t len)
 {
 	size_t	i;
 	size_t	j;
 	int		*array_aux;
 	int		aux;
 
-	array_aux = ft_duparray(array_a, arrlen);
+	array_aux = ft_duparray(array, len);
 	i = 1;
-	while (i < arrlen)
+	while (i < len)
 	{
 		j = i - 1;
 		while (array_aux[i] < array_aux[j] && j >= 0)
@@ -34,9 +56,10 @@ int	get_mid_value(int *array_a, size_t arrlen)
 			j--;
 		}
 		i++;
-		j = i -1;
 	}
-	return (array_aux[arrlen / 2]);
+	aux = array_aux[len / 2];
+	free(array_aux);
+	return (aux);
 }
 
 void	mid_alg(int *array_a, int *array_b, size_t arrlen)
