@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/25 14:26:12 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:08:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ void		rotate_a(t_index *index);
 void		rotate_b(t_index *index);
 void		revrot_a(t_index *index);
 void		revrot_b(t_index *index);
-/*operations_db*/
+/*operations_db.c*/
 void		swap_ab(t_index *index);
 void		rotate_ab(t_index *index);
 void		revrot_ab(t_index *index);
-/*sort_five*/
+/*sort_easy.c*/
 void		sort_three(t_index *index);
+size_t		ft_minvalue_pos(int *array, size_t len);
+void		sort_easy(t_index *index);
 
 #endif

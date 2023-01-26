@@ -6,14 +6,14 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/01/25 14:26:32 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/01/26 17:08:06 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXE    = push_swap
 LIB    = push_swap.h
 SRCS   = arg_check.c libft_utils.c main.c operations_db.c operations_ps.c \
-			operations_rot.c ps_utils.c split_atoi.c sort_five.c
+			operations_rot.c ps_utils.c split_atoi.c sort_easy.c
 OBJS   = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
