@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/26 20:39:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:13:37 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,35 @@ void	min_to_top(t_index *index)
 	}
 	//calcular LIS de cadena temp
 	free(index->temp);
+}
+
+size_t	ft_lis_nondup(t_index *index)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	tmp_lis;
+	size_t	lis;
+
+	i = index->size_a - 1;
+	tmp_lis = 1;
+	lis = 1;
+	while (i >= 0)
+	{ 
+		j = i + 1;
+		k = i;
+		while (j < index->size_a)
+		{
+			if (index->array_a[k] < index->array_a[j])
+				tmp_lis++;
+			j++;
+			k++;
+		}
+		if (tmp_lis > lis)
+			lis = tmp_lis;
+		i--;
+	}
+	return (lis);
 }
 
 int	get_mid_value(int *array, size_t len)
