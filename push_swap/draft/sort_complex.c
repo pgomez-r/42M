@@ -6,12 +6,12 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/27 00:13:37 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/01/27 01:43:20 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+//esto es una prueba para el temita github ssh
 /*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
 una vez allí, encontrar el LIS*/
 void	min_to_top(t_index *index)
