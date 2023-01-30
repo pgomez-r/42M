@@ -11,6 +11,30 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//LIS_ALG implementation - entender/modificar//
+int main()
+{
+int previous_len=0, start=0, c[10], len=0;  //c = final array; will contain the longest consecutive, increasing sequence of numbers
+int a[] = {1, 3, 5, 1, 5, 7, 8, 9, 10, 11, 12};
+for (int i = 0; i < (sizeof(a)/sizeof(int)); ++i) {
+    if(a[i+1] > a[i]) {
+        len++;
+        if (len > previous_len) { 
+            previous_len=len;
+            start=i+1-len;
+        }
+    } else {
+        previous_len=len;       
+        len=0;
+    }
+}
+for(int i = 0; i <= previous_len; ++i) {
+    c[i]=a[start+i]; //here you can copy data to output array, if you need it
+    printf("%d ",c[i]); //you can output a[start+i] instead
+}
+return 0;
+}
 //esto es una prueba para el temita github ssh
 /*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
 una vez allí, encontrar el LIS*/
