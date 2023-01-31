@@ -3,39 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/27 01:43:20 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/01/31 09:13:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//LIS_ALG implementation - entender/modificar//
-int main()
+/*NO_FUNCIONA_T_T*/
+int	ft_getlis(t_index *index)
 {
-int previous_len=0, start=0, c[10], len=0;  //c = final array; will contain the longest consecutive, increasing sequence of numbers
-int a[] = {1, 3, 5, 1, 5, 7, 8, 9, 10, 11, 12};
-for (int i = 0; i < (sizeof(a)/sizeof(int)); ++i) {
-    if(a[i+1] > a[i]) {
-        len++;
-        if (len > previous_len) { 
-            previous_len=len;
-            start=i+1-len;
-        }
-    } else {
-        previous_len=len;       
-        len=0;
-    }
+	int	*lis;
+	int	prev_len;
+	int	start;
+	int	len;
+	int	i;
+
+	lis = malloc(sizeof(int) * index->size_a);
+	i = 0;
+	while (i < index->size_a)
+	{
+		if (index->array_a[i + 1] > index->array_a[i])
+		{
+			len++;
+			if (len > prev_len)
+			{
+				prev_len = len;
+				start = i + 1 - len;
+			}
+		}
+		else
+		{
+			prev_len = len;
+			len = 0;
+		}
+		i++;
+	}
+	i = 0;
+	while (i <= prev_len)
+	{
+		lis[i] = index->array_a[start + i];
+		i++;
+	}
+	return (lis);
 }
-for(int i = 0; i <= previous_len; ++i) {
-    c[i]=a[start+i]; //here you can copy data to output array, if you need it
-    printf("%d ",c[i]); //you can output a[start+i] instead
-}
-return 0;
-}
-//esto es una prueba para el temita github ssh
+
 /*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
 una vez allí, encontrar el LIS*/
 void	min_to_top(t_index *index)
@@ -58,35 +71,6 @@ void	min_to_top(t_index *index)
 	}
 	//calcular LIS de cadena temp
 	free(index->temp);
-}
-
-size_t	ft_lis_nondup(t_index *index)
-{
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	size_t	tmp_lis;
-	size_t	lis;
-
-	i = index->size_a - 1;
-	tmp_lis = 1;
-	lis = 1;
-	while (i >= 0)
-	{ 
-		j = i + 1;
-		k = i;
-		while (j < index->size_a)
-		{
-			if (index->array_a[k] < index->array_a[j])
-				tmp_lis++;
-			j++;
-			k++;
-		}
-		if (tmp_lis > lis)
-			lis = tmp_lis;
-		i--;
-	}
-	return (lis);
 }
 
 int	get_mid_value(int *array, size_t len)
@@ -115,55 +99,30 @@ int	get_mid_value(int *array, size_t len)
 	return (aux);
 }
 
-void	mid_alg(int *array_a, int *array_b, size_t arrlen)
-{
-	size_t	i;
-	int		mid_value;
-	int		max_reps;
+// void	mid_alg(int *array_a, int *array_b, size_t arrlen)
+// {
+// 	size_t	i;
+// 	int		mid_value;
+// 	int		max_reps;
 
-	i = 0;
-	max_reps = 0;
-	while (i < arrlen && max_reps < mid_value)
-	{
-		mid_value = get_mid_value(array_a, arrlen);
-		if (array_a[0] < mid_value)
-		{
-			push_b(array_a, array_b, arrlen);
-			max_reps++;
-		}
-		else if (array_a[arrlen] < mid_value)
-		{
-			revrot_a(array_a, arrlen);
-			push_b(array_a, array_b, arrlen);
-			max_reps++;
-		}
-		else
-			rotate_a(array_a, arrlen);
-		i++;
-	}
-}
-
-void	ft_calculator(int *array_a, int *array_b, size_t arrlen)
-{
-	size_t	current_len;
-	int		flag;
-
-	flag = 1;
-	current_len = 0;
-	while (flag)
-	{
-		while (array_a[current_len] != 0)
-			current_len++;
-		if (current_len > 2)
-			mid_alg(array_a, array_b, arrlen);
-			//aqui controlar los chunks
-		else if (current_len == 2 && array_a[0] > array_a[1])
-		{
-			swap_a(array_a, arrlen);
-			flag = 0;
-		}
-		else
-			flag = 0;
-	}
-	//llevar controlados los chunks de B ->
-}
+// 	i = 0;
+// 	max_reps = 0;
+// 	while (i < arrlen && max_reps < mid_value)
+// 	{
+// 		mid_value = get_mid_value(array_a, arrlen);
+// 		if (array_a[0] < mid_value)
+// 		{
+// 			push_b(array_a, array_b, arrlen);
+// 			max_reps++;
+// 		}
+// 		else if (array_a[arrlen] < mid_value)
+// 		{
+// 			revrot_a(array_a, arrlen);
+// 			push_b(array_a, array_b, arrlen);
+// 			max_reps++;
+// 		}
+// 		else
+// 			rotate_a(array_a, arrlen);
+// 		i++;
+// 	}
+// }
