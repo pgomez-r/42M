@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/31 09:13:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:17:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,7 @@
 /*NO_FUNCIONA_T_T*/
 int	ft_getlis(t_index *index)
 {
-	int	*lis;
-	int	prev_len;
-	int	start;
-	int	len;
-	int	i;
-
-	lis = malloc(sizeof(int) * index->size_a);
-	i = 0;
-	while (i < index->size_a)
-	{
-		if (index->array_a[i + 1] > index->array_a[i])
-		{
-			len++;
-			if (len > prev_len)
-			{
-				prev_len = len;
-				start = i + 1 - len;
-			}
-		}
-		else
-		{
-			prev_len = len;
-			len = 0;
-		}
-		i++;
-	}
-	i = 0;
-	while (i <= prev_len)
-	{
-		lis[i] = index->array_a[start + i];
-		i++;
-	}
-	return (lis);
 }
-
 /*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
 una vez allí, encontrar el LIS*/
 void	min_to_top(t_index *index)
