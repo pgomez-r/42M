@@ -6,17 +6,21 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/31 22:17:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:10:47 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*NO_FUNCIONA_T_T*/
-int	ft_getlis(t_index *index)
-{
-}
-/*PoA = encontrar valor mínimo (tenemos la funcion), rotarlo al primer puesto,
-una vez allí, encontrar el LIS*/
+
+/*TAREAS PENDIENTES:
+-min_to_top: crear/modificar o encontrar forma de no imprimir nada en ra y rr
+-llamar a lis después de crear el temporal con el mínimo al principio, guardar
+array con la LIS para usarlo luego en otra función
+-crear función que compare cada índice en orden del array_a con la LIS y usarla 
+en un bucle donde si no coicinde = PB, si coincide comprobar el ultimo índice, 
+en ese caso = RRA + PB, si tampoco coincide = RA y vuelta a comprobar... 
+TANTAS VECES COMO SIZE ORIGINAL (no size_a)*/
+
 void	min_to_top(t_index *index)
 {
 	size_t	min_pos;
@@ -92,3 +96,5 @@ int	get_mid_value(int *array, size_t len)
 // 		i++;
 // 	}
 // }
+
+/*ESTA FUNCION SE PUEDE ADAPTAR PARA LIS_CHECK*/
