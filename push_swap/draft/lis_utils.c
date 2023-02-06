@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:44:00 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/03 02:57:50 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/06 22:18:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int	*ft_lis(int *array, size_t size)
 	array_index = malloc(sizeof(int) * size);
 	lis_len_index(array, array_len, array_index, size);
 	lis = generate_lis(array, array_len, array_index, size);
-	return (free(array_len), free(array_index), lis);
+	return (free(array_len), free(array_index), free(array), lis);
 }
