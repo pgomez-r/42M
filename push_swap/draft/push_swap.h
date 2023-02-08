@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/06 22:40:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/08 23:22:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,26 @@
 # include <sys/uio.h>
 # include <limits.h>
 
-/*struct*/
+/*structs*/
 typedef struct s_index
 {
 	int		*array_a;
 	int		*array_b;
-	int		*array_lis;
+	int		*array_tmp;
+	int		*lis;
 	size_t	arrlen;
 	size_t	size_a;
 	size_t	size_b;
 	size_t	size_lis;
 }			t_index;
+
+typedef struct s_lis_utils
+{
+	int		*array_len;
+	int		*array_index;
+	int		*lis;
+	size_t	lis_len;
+}			t_lis_utils;
 
 /*main.c*/
 void	ft_leaks(void);
@@ -49,6 +58,11 @@ void	ft_totalfree(char **numbers);
 void	ft_getarrays(char **numbers, t_index *index);
 int		*ft_simpler(t_index *index);
 int		*ft_duparray(int *array, size_t arrlen);
+/*ps_utils_b.c*/
+void	muted_rotate_a(t_index *index);
+void	muted_revrot_a(t_index *index);
+int		ft_isinarray(int num, int *array, size_t size);
+int		ft_max_in_array(int *array, size_t size);
 /*split_atoi.c*/
 int		ft_count_word(char const *s, char c);
 char	*ft_savewords(const char *s, unsigned int n);
@@ -75,13 +89,15 @@ void	swap_ab(t_index *index);
 void	rotate_ab(t_index *index);
 void	revrot_ab(t_index *index);
 /*lis_utils.c*/
-int		ft_max_in_array(int *array, size_t size);
-void	lis_len_index(int *array, int *array_len, int *array_i, size_t size);
-int		*generate_lis(int *array, int *array_len, int *array_i, size_t size);
-int		*ft_lis(int *array, size_t size);
+void	lis_len_index(int *array, t_lis_utils *utils, size_t size);
+int		*generate_lis(int *array, t_lis_utils *utils, size_t size);
+int		*ft_lis(int *array, size_t size, size_t *size_lis);
 /*sort_easy.c*/
 void	sort_three(t_index *index);
 size_t	ft_minvalue_pos(int *array, size_t len);
 void	sort_easy(t_index *index);
-
+/*sort_complex.c*/
+void	sort_complex(t_index *index);
+void	ft_lis_stack(t_index *index);
+void	lis_comparepush(t_index *index);
 #endif
