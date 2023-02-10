@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/08 23:22:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:43:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_index
 	int		*array_b;
 	int		*array_tmp;
 	int		*lis;
+	int		coords[2];
 	size_t	arrlen;
 	size_t	size_a;
 	size_t	size_b;
@@ -63,6 +64,7 @@ void	muted_rotate_a(t_index *index);
 void	muted_revrot_a(t_index *index);
 int		ft_isinarray(int num, int *array, size_t size);
 int		ft_max_in_array(int *array, size_t size);
+size_t	ft_maxvalue_pos(int *array, size_t len);
 /*split_atoi.c*/
 int		ft_count_word(char const *s, char c);
 char	*ft_savewords(const char *s, unsigned int n);

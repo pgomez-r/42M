@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/08 23:25:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/10 06:04:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,89 @@ void	lis_comparepush(t_index *index)
 	}
 }
 
+int	calc_moves_in_a(t_index *index, int n)
+{
+	size_t	last;
+	size_t	i;
+	size_t	j;
+	int		a_coord;
+
+	last = index->size_a - 1;
+	a_coord = 0;
+	if (index->array_a[last] == n - 1 && index->array_a[0] == n + 1)
+		return (a_coord);
+	i = 0;
+	while (i < index->size_a / 2)
+	{
+		if (index->array_a[i] == n - 1 && index->array_a[i + 1] == n + 1)
+		{	
+			a_coord = i + 1;
+			return (a_coord);
+		}
+		i++;
+	}
+	j = last;
+	while (j > index->size_a / 2)
+	{
+		if (index->array_a[j] == n - 1 && index->array_a[j - 1] == n + 1)
+		{	
+			return (a_coord);
+		}
+		j++;
+	}
+	i = ft_maxvalue_pos(index->array_a, index->size_a);
+}
+//volver a teoria > && <, tengo que tener claro donde tiene que ir en a y como decidir
+//
+//comprobar bien si en este caso queremos que recorra hasta la mitad con <= o no
+
+size_t	best_pos_pusha(t_index *index)
+{
+	size_t	i;
+	size_t	b_index;
+	int		aux[2];
+
+	b_index = 0;
+	i = 0;
+	while (i < index->size_b)
+	{
+		if (i < index->size_b / 2)
+			aux[1] = i;
+		if (i > index->size_b / 2)
+			aux[1] = (index->size_b - i) * -1;
+		aux[0] = calc_moves_in_a(index, index->array_b[i]);
+		if ((unsigned int)index->coords[0] + (unsigned int)index->coords[1]
+			> (unsigned int)aux[0] + (unsigned int)aux[1])
+		{
+			index->coords[0] = aux[0];
+			index->coords[1] = aux[1];
+			b_index = i;
+		}
+		i++;
+	}
+	return (b_index);
+}
+
+/*best_pos_pusha me devuelve la pos de array_b a mover; luego hay que mover 
+el número que estés en esa posicion (array_b[b_index]) a array_b[0], 
+dejar en array_a[0] justo el nero que debe estár por debajo del que vamos 
+a mandar, y entonces hacer el push_a
+solo devuelve un número para ubicar la posicion en array_b...luego voy a 
+necesitar tambien el array con las "coordenadas"...tendría que meter ese array
+en index*/
+
 void	sort_complex(t_index *index)
 {
+	size_t	pa_index;
+
 	ft_lis_stack(index);
 	lis_comparepush(index);
+	index->coords[0] = 0;
+	index->coords[1] = 0;
+	while (index->size_b > 0)
+	{
+		pa_index = best_pos_pusha(index);
+	}
 }
 
 // int	get_mid_value(int *array, size_t len)

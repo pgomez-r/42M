@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:12:52 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/08 23:25:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:42:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,28 @@ int	ft_max_in_array(int *array, size_t size)
 		i++;
 	}
 	return (max);
+}
+
+size_t	ft_maxvalue_pos(int *array, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	size_t	flag;
+
+	i = 0;
+	while (i < len)
+	{
+		j = 0;
+		flag = 0;
+		while (j < len)
+		{
+			if (array[i] < array[j])
+				flag++;
+			j++;
+		}
+		if (flag == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
