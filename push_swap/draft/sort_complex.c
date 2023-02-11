@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/10 06:04:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:08:56 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,36 @@ int	calc_moves_in_a(t_index *index, int n)
 {
 	size_t	last;
 	size_t	i;
-	size_t	j;
 	int		a_coord;
 
 	last = index->size_a - 1;
 	a_coord = 0;
-	if (index->array_a[last] == n - 1 && index->array_a[0] == n + 1)
+	if (n > index->array_a[last] && n < index->array_a[0])
 		return (a_coord);
 	i = 0;
-	while (i < index->size_a / 2)
+	while (i < index->size_a)
 	{
-		if (index->array_a[i] == n - 1 && index->array_a[i + 1] == n + 1)
+		if (n > index->array_a[i] && n < index->array_a[i + 1])
+			return ((int)i + 1);
+		else if (n > index->array_a[last] && n < index->array_a[last - 1])
 		{	
-			a_coord = i + 1;
-			return (a_coord);
+			return (-((int)index->size_a - last + 2));
 		}
 		i++;
-	}
-	j = last;
-	while (j > index->size_a / 2)
-	{
-		if (index->array_a[j] == n - 1 && index->array_a[j - 1] == n + 1)
-		{	
-			return (a_coord);
-		}
-		j++;
+		last--;
 	}
 	i = ft_maxvalue_pos(index->array_a, index->size_a);
+	if (i == (int)index->size_a)
 }
-//volver a teoria > && <, tengo que tener claro donde tiene que ir en a y como decidir
-//
-//comprobar bien si en este caso queremos que recorra hasta la mitad con <= o no
+
+/* return size - last + 2 wWhy?
+	
+max_val_pos = max_val(a->t, a->size) + 1;
+	if (max_val_pos == a->size)
+		max_val_pos = 0;
+	if (max_val_pos > a->size - max_val_pos)
+		return (-(a->size - max_val_pos));
+	return (max_val_pos);*/
 
 size_t	best_pos_pusha(t_index *index)
 {
@@ -104,7 +103,7 @@ size_t	best_pos_pusha(t_index *index)
 		if (i < index->size_b / 2)
 			aux[1] = i;
 		if (i > index->size_b / 2)
-			aux[1] = (index->size_b - i) * -1;
+			aux[1] = -(index->size_b - i);
 		aux[0] = calc_moves_in_a(index, index->array_b[i]);
 		if ((unsigned int)index->coords[0] + (unsigned int)index->coords[1]
 			> (unsigned int)aux[0] + (unsigned int)aux[1])
