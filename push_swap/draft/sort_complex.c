@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/11 16:08:56 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/11 23:03:42 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,29 @@ int	calc_moves_in_a(t_index *index, int n)
 {
 	size_t	last;
 	size_t	i;
-	int		a_coord;
 
 	last = index->size_a - 1;
-	a_coord = 0;
-	if (n > index->array_a[last] && n < index->array_a[0])
-		return (a_coord);
 	i = 0;
+	if (n > index->array_a[last] && n < index->array_a[0])
+		return (i);
 	while (i < index->size_a)
 	{
 		if (n > index->array_a[i] && n < index->array_a[i + 1])
 			return ((int)i + 1);
-		else if (n > index->array_a[last] && n < index->array_a[last - 1])
+		else if (n > index->array_a[last - 1] && n < index->array_a[last])
 		{	
-			return (-((int)index->size_a - last + 2));
+			return (-((int)index->size_a - last + 1));
 		}
 		i++;
 		last--;
 	}
-	i = ft_maxvalue_pos(index->array_a, index->size_a);
+	i = ft_maxvalue_pos(index->array_a, index->size_a) + 1;
 	if (i == (int)index->size_a)
+		return (0);
+	if (i > index->size_a - i)
+		return (-(index->size_a - i));
+	return (i);
 }
-
-/* return size - last + 2 wWhy?
-	
-max_val_pos = max_val(a->t, a->size) + 1;
-	if (max_val_pos == a->size)
-		max_val_pos = 0;
-	if (max_val_pos > a->size - max_val_pos)
-		return (-(a->size - max_val_pos));
-	return (max_val_pos);*/
 
 size_t	best_pos_pusha(t_index *index)
 {
@@ -117,17 +110,66 @@ size_t	best_pos_pusha(t_index *index)
 	return (b_index);
 }
 
-/*best_pos_pusha me devuelve la pos de array_b a mover; luego hay que mover 
-el número que estés en esa posicion (array_b[b_index]) a array_b[0], 
-dejar en array_a[0] justo el nero que debe estár por debajo del que vamos 
-a mandar, y entonces hacer el push_a
-solo devuelve un número para ubicar la posicion en array_b...luego voy a 
-necesitar tambien el array con las "coordenadas"...tendría que meter ese array
-en index*/
+void	operation_maker(t_index *index, size_t b_index)
+{
+	int	x;
+	int	y;
+
+	x = index->coords[0];
+	y = index->coords[1];
+	if (x >= 0 && y >= 0)
+	{
+		if (x > y)
+		{
+			while (x - y > 0)
+			{	
+				rotate_a(index);
+				x--;
+			}
+			while (y-- > 0)
+				rotate_ab(index);
+		}
+		if (y > x)
+		{
+			while (y - x > 0)
+			{	
+				rotate_b(index);
+				y--;
+			}
+			while (x-- > 0)
+				rotate_ab(index);			
+		}
+	}
+	if (x < 0 && y < 0)
+	{
+		x = -x;
+		y = -y;
+		if (x > y)
+		{
+			while (x - y > 0)
+			{	
+				rotate_a(index);
+				x--;
+			}
+			while (y-- > 0)
+				rotate_ab(index);
+		}
+		if (y > x)
+		{
+			while (y - x > 0)
+			{	
+				rotate_b(index);
+				y--;
+			}
+			while (x-- > 0)
+				rotate_ab(index);			
+		}		
+	}	
+}
 
 void	sort_complex(t_index *index)
 {
-	size_t	pa_index;
+	size_t	b_index;
 
 	ft_lis_stack(index);
 	lis_comparepush(index);
@@ -135,7 +177,8 @@ void	sort_complex(t_index *index)
 	index->coords[1] = 0;
 	while (index->size_b > 0)
 	{
-		pa_index = best_pos_pusha(index);
+		b_index = best_pos_pusha(index);
+		operation_maker(index, b_index);
 	}
 }
 
