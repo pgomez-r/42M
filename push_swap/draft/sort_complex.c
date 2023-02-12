@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/11 23:03:42 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/12 13:22:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,24 @@ int	calc_moves_in_a(t_index *index, int n)
 		last--;
 	}
 	i = ft_maxvalue_pos(index->array_a, index->size_a) + 1;
-	if (i == (int)index->size_a)
+	if (i == index->size_a)
 		return (0);
 	if (i > index->size_a - i)
 		return (-(index->size_a - i));
 	return (i);
 }
 
-size_t	best_pos_pusha(t_index *index)
+void	best_pos_pusha(t_index *index)
 {
 	size_t	i;
-	size_t	b_index;
 	int		aux[2];
 
-	b_index = 0;
+	index->coords[0] = (int)index->size_a;
+	index->coords[1] = (int)index->size_b;
 	i = 0;
 	while (i < index->size_b)
 	{
-		if (i < index->size_b / 2)
+		if (i <= index->size_b / 2)
 			aux[1] = i;
 		if (i > index->size_b / 2)
 			aux[1] = -(index->size_b - i);
@@ -103,137 +103,25 @@ size_t	best_pos_pusha(t_index *index)
 		{
 			index->coords[0] = aux[0];
 			index->coords[1] = aux[1];
-			b_index = i;
 		}
 		i++;
 	}
-	return (b_index);
-}
-
-void	operation_maker(t_index *index, size_t b_index)
-{
-	int	x;
-	int	y;
-
-	x = index->coords[0];
-	y = index->coords[1];
-	if (x >= 0 && y >= 0)
-	{
-		if (x > y)
-		{
-			while (x - y > 0)
-			{	
-				rotate_a(index);
-				x--;
-			}
-			while (y-- > 0)
-				rotate_ab(index);
-		}
-		if (y > x)
-		{
-			while (y - x > 0)
-			{	
-				rotate_b(index);
-				y--;
-			}
-			while (x-- > 0)
-				rotate_ab(index);			
-		}
-	}
-	if (x < 0 && y < 0)
-	{
-		x = -x;
-		y = -y;
-		if (x > y)
-		{
-			while (x - y > 0)
-			{	
-				rotate_a(index);
-				x--;
-			}
-			while (y-- > 0)
-				rotate_ab(index);
-		}
-		if (y > x)
-		{
-			while (y - x > 0)
-			{	
-				rotate_b(index);
-				y--;
-			}
-			while (x-- > 0)
-				rotate_ab(index);			
-		}		
-	}	
 }
 
 void	sort_complex(t_index *index)
 {
-	size_t	b_index;
-
 	ft_lis_stack(index);
 	lis_comparepush(index);
+	printf("DESPUES DE LIS + PB\n");
+	ft_printarray(index);
 	index->coords[0] = 0;
 	index->coords[1] = 0;
 	while (index->size_b > 0)
 	{
-		b_index = best_pos_pusha(index);
-		operation_maker(index, b_index);
+		best_pos_pusha(index);
+		operation_maker(index);
+		printf("DESPUES DE PREPARAR A\n");
+		ft_printarray(index);
+		push_a(index);
 	}
 }
-
-// int	get_mid_value(int *array, size_t len)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	int		*array_aux;
-// 	int		aux;
-
-// 	array_aux = ft_duparray(array, len);
-// 	i = 1;
-// 	while (i < len)
-// 	{
-// 		j = i - 1;
-// 		while (array_aux[i] < array_aux[j] && j >= 0)
-// 		{
-// 			aux = array_aux[i];
-// 			array_aux[i] = array_aux[j];
-// 			array_aux[j] = aux;
-// 			j--;
-// 		}
-// 		i++;
-// 	}
-// 	aux = array_aux[len / 2];
-// 	free(array_aux);
-// 	return (aux);
-// }
-
-// void	mid_alg(int *array_a, int *array_b, size_t arrlen)
-// {
-// 	size_t	i;
-// 	int		mid_value;
-// 	int		max_reps;
-
-// 	i = 0;
-// 	max_reps = 0;
-// 	while (i < arrlen && max_reps < mid_value)
-// 	{
-// 		mid_value = get_mid_value(array_a, arrlen);
-// 		if (array_a[0] < mid_value)
-// 		{
-// 			push_b(array_a, array_b, arrlen);
-// 			max_reps++;
-// 		}
-// 		else if (array_a[arrlen] < mid_value)
-// 		{
-// 			revrot_a(array_a, arrlen);
-// 			push_b(array_a, array_b, arrlen);
-// 			max_reps++;
-// 		}
-// 		else
-// 			rotate_a(array_a, arrlen);
-// 		i++;
-// 	}
-// }
-
-/*ESTA FUNCION SE PUEDE ADAPTAR PARA LIS_CHECK*/

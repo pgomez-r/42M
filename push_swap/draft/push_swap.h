@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/10 05:43:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/12 10:26:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_lis_utils
 
 /*main.c*/
 void	ft_leaks(void);
+void	ft_printarray(t_index *index);
 /*libft_utils.c*/
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *s1, char *s2);
@@ -102,4 +103,11 @@ void	sort_easy(t_index *index);
 void	sort_complex(t_index *index);
 void	ft_lis_stack(t_index *index);
 void	lis_comparepush(t_index *index);
+void	best_pos_pusha(t_index *index);
+int		calc_moves_in_a(t_index *index, int n);
+/*operations_maker.c*/
+void	operation_maker(t_index *index);
+void	best_rotate_bot(t_index *index, int x, int y);
+void	best_rotate_top(t_index *index, int x, int y);
+
 #endif

@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/02/08 21:59:05 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/02/12 11:07:34 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ EXE    = push_swap
 LIB    = push_swap.h
 SRCS   = arg_check.c libft_utils.c main.c operations_db.c operations_ps.c \
 			operations_rot.c ps_utils.c split_atoi.c sort_easy.c lis_utils.c \
-			sort_complex.c ps_utils_b.c
+			sort_complex.c ps_utils_b.c operation_maker.c
+
 OBJS   = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
