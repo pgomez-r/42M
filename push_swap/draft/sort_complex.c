@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/12 13:22:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:36:07 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	best_pos_pusha(t_index *index)
 		if (i > index->size_b / 2)
 			aux[1] = -(index->size_b - i);
 		aux[0] = calc_moves_in_a(index, index->array_b[i]);
-		if ((unsigned int)index->coords[0] + (unsigned int)index->coords[1]
-			> (unsigned int)aux[0] + (unsigned int)aux[1])
+		if (((unsigned int)index->coords[0] + (unsigned int)index->coords[1])
+			> ((unsigned int)aux[0] + (unsigned int)aux[1]))
 		{
 			index->coords[0] = aux[0];
 			index->coords[1] = aux[1];
@@ -114,8 +114,6 @@ void	sort_complex(t_index *index)
 	lis_comparepush(index);
 	printf("DESPUES DE LIS + PB\n");
 	ft_printarray(index);
-	index->coords[0] = 0;
-	index->coords[1] = 0;
 	while (index->size_b > 0)
 	{
 		best_pos_pusha(index);
