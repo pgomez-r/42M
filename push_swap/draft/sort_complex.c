@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/13 12:11:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:59:31 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	calc_moves_in_a(t_index *index, int n)
 		i++;
 		last--;
 	}
-	i = ft_maxvalue_pos(index->array_a, index->size_a) + 1;
-	if (i == index->size_a)
-		i = 0;
-	if (i > index->size_a - i)
+	i = ft_maxvalue_pos(index->array_a, index->size_a);
+	if (i == index->size_a - 1)
+		return (0);
+	if (i > index->size_a / 2)
 		return (-(index->size_a - i));
 	return (i);
 }
@@ -112,6 +112,7 @@ void	sort_complex(t_index *index)
 
 	ft_lis_stack(index);
 	lis_comparepush(index);
+	ft_printarray(index);
 	while (index->size_b > 0)
 	{
 		best_pos_pusha(index);

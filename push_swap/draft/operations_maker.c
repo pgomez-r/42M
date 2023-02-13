@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_maker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:27:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/13 12:37:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:17:06 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,66 @@ void	best_rotate_top(t_index *index, int x, int y)
 {
 	if (x > y)
 	{
-		while ((x--) - y > 0)
+		x = x - y;
+		while (x > 0)
+		{	
 			rotate_a(index);
-		while ((y--) > 0)
+			x--;
+		}
+		while (y > 0)
+		{
 			rotate_ab(index);
+			y--;
+		}
 	}
-	while ((y--) - x > 0)
-		rotate_b(index);
-	while ((x--) > 0)
-		rotate_ab(index);
+	if (y > x)
+	{	
+		y = y - x;
+		while (y > 0)
+		{	
+			rotate_b(index);
+			y--;
+		}
+		while (x > 0)
+		{	
+			rotate_ab(index);
+			x--;
+		}
+	}
 }
 
 void	best_rotate_bot(t_index *index, int x, int y)
 {
+	x = -x;
+	y = -y;
 	if (x > y)
 	{
-		while ((x--) - y > 0)
+		x = x - y;
+		while (x > 0)
+		{	
 			revrot_a(index);
-		while ((y--) > 0)
+			x--;
+		}
+		while (y > 0)
+		{
 			revrot_ab(index);
+			y--;
+		}
 	}
-	while ((y--) - x > 0)
-		revrot_b(index);
-	while ((x--) > 0)
-		revrot_ab(index);
+	if (y > x)
+	{	
+		y = y - x;
+		while (y > 0)
+		{	
+			revrot_b(index);
+			y--;
+		}
+		while (x > 0)
+		{	
+			revrot_ab(index);
+			x--;
+		}
+	}
 }
 
 void	operation_maker(t_index *index)
@@ -60,22 +96,34 @@ void	operation_maker(t_index *index)
 	y = index->coords[1];
 	if (x == 0 && y == 0)
 		return ;
-	if (x >= 0 && y >= 0)
+	else if (x >= 0 && y >= 0)
 		best_rotate_top(index, x, y);
-	if (x < 0 && y < 0)
+	else if (x < 0 && y < 0)
 		best_rotate_bot(index, -x, -y);
-	if (x >= 0 && y < 0)
+	else if (x >= 0 && y < 0)
 	{
-		while (x-- > 0)
+		while (x > 0)
+		{	
 			rotate_a(index);
-		while (y++ < 0)
+			x--;
+		}
+		while (y < 0)
+		{	
 			revrot_b(index);
+			y++;
+		}
 	}
-	if (x < 0 && y > 0)
+	else if (x < 0 && y >= 0)
 	{
-		while (x++ < 0)
+		while (x < 0)
+		{	
 			revrot_a(index);
-		while (y-- > 0)
+			x++;
+		}
+		while (y > 0)
+		{	
 			rotate_b(index);
+			y--;
+		}
 	}
 }
