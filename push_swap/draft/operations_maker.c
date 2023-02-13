@@ -6,11 +6,20 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:27:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/12 10:00:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:37:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_abs_sum(int x, int y)
+{
+	if (x < 0)
+		x = x * (-1);
+	if (y < 0)
+		y = y * (-1);
+	return (x + y);
+}
 
 void	best_rotate_top(t_index *index, int x, int y)
 {
@@ -49,6 +58,8 @@ void	operation_maker(t_index *index)
 
 	x = index->coords[0];
 	y = index->coords[1];
+	if (x == 0 && y == 0)
+		return ;
 	if (x >= 0 && y >= 0)
 		best_rotate_top(index, x, y);
 	if (x < 0 && y < 0)

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/12 13:36:07 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:11:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,13 @@ int	calc_moves_in_a(t_index *index, int n)
 		if (n > index->array_a[i] && n < index->array_a[i + 1])
 			return ((int)i + 1);
 		else if (n > index->array_a[last - 1] && n < index->array_a[last])
-		{	
 			return (-((int)index->size_a - last + 1));
-		}
 		i++;
 		last--;
 	}
 	i = ft_maxvalue_pos(index->array_a, index->size_a) + 1;
 	if (i == index->size_a)
-		return (0);
+		i = 0;
 	if (i > index->size_a - i)
 		return (-(index->size_a - i));
 	return (i);
@@ -96,10 +94,10 @@ void	best_pos_pusha(t_index *index)
 		if (i <= index->size_b / 2)
 			aux[1] = i;
 		if (i > index->size_b / 2)
-			aux[1] = -(index->size_b - i);
+			aux[1] = (index->size_b - i) * (-1);
 		aux[0] = calc_moves_in_a(index, index->array_b[i]);
-		if (((unsigned int)index->coords[0] + (unsigned int)index->coords[1])
-			> ((unsigned int)aux[0] + (unsigned int)aux[1]))
+		if (ft_abs_sum(index->coords[0], index->coords[1])
+			> ft_abs_sum(aux[0], aux[1]))
 		{
 			index->coords[0] = aux[0];
 			index->coords[1] = aux[1];
@@ -110,16 +108,25 @@ void	best_pos_pusha(t_index *index)
 
 void	sort_complex(t_index *index)
 {
+	size_t	min_value_pos;
+
 	ft_lis_stack(index);
 	lis_comparepush(index);
-	printf("DESPUES DE LIS + PB\n");
-	ft_printarray(index);
 	while (index->size_b > 0)
 	{
 		best_pos_pusha(index);
 		operation_maker(index);
-		printf("DESPUES DE PREPARAR A\n");
-		ft_printarray(index);
 		push_a(index);
+	}
+	min_value_pos = ft_minvalue_pos(index->array_a, index->size_a);
+	if (min_value_pos <= index->size_a / 2)
+	{
+		while (min_value_pos-- > 0)
+			rotate_a(index);
+	}
+	if (min_value_pos > index->size_a / 2)
+	{
+		while (min_value_pos++ < index->size_a)
+			revrot_a(index);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/12 10:26:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:29:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ int		calc_moves_in_a(t_index *index, int n);
 void	operation_maker(t_index *index);
 void	best_rotate_bot(t_index *index, int x, int y);
 void	best_rotate_top(t_index *index, int x, int y);
+int		ft_abs_sum(int x, int y);
 
 #endif
