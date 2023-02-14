@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/14 09:47:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:50:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ int	calc_moves_in_a(t_index *index, int n)
 		if (n > index->array_a[i] && n < index->array_a[i + 1])
 			return ((int)i + 1);
 		else if (n > index->array_a[last - 1] && n < index->array_a[last])
-			return (-((int)index->size_a - last + 1));
+			return (-((int)index->size_a - last));
 		i++;
 		last--;
 	}
-	i = ft_maxvalue_pos(index->array_a, index->size_a);
-	if (i == index->size_a - 1)
+	i = ft_maxvalue_pos(index->array_a, index->size_a) + 1;
+	if (i == index->size_a)
 		return (0);
-	if (i > index->size_a / 2 - 1)
+	if (i > (index->size_a - i))
 		return (-(index->size_a - i));
 	return (i);
 }
@@ -118,8 +118,16 @@ void	sort_complex(t_index *index)
 		best_pos_pusha(index);
 		operation_maker(index);
 		push_a(index);
+		ft_printarray(index);
 	}
 	min_value_pos = ft_minvalue_pos(index->array_a, index->size_a);
+	// if (min_value_pos == 0)
+	// 	return ;
+	// if (min_value_pos == index->size_a - 1)
+	// {
+	// 	revrot_a(index);
+	// 	return ;
+	// }
 	if (min_value_pos <= index->size_a / 2)
 	{
 		while (min_value_pos-- > 0)
