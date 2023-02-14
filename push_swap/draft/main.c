@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/13 13:45:03 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:04:05 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int	main(int ac, char **av)
 	ft_getarrays(numbers, &index);
 	if (!ft_chksort(&index))
 		return (ft_totalfree(numbers), free(index.array_a), -1);
+	if (index.size_a == 2)
+	{
+		if (index.array_a[0] > index.array_a[1])
+			swap_a(&index);
+		return (0);
+	}
 	if (index.size_a <= 5)
 		sort_easy(&index);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/13 14:59:31 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:47:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	calc_moves_in_a(t_index *index, int n)
 	i = ft_maxvalue_pos(index->array_a, index->size_a);
 	if (i == index->size_a - 1)
 		return (0);
-	if (i > index->size_a / 2)
+	if (i > index->size_a / 2 - 1)
 		return (-(index->size_a - i));
 	return (i);
 }
