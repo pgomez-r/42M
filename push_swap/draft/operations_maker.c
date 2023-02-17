@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:27:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/17 14:59:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:27:50 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	best_rotate_top(t_index *index, int x, int y)
 
 void	best_rotate_bot(t_index *index, int x, int y)
 {
-	x = -x;
-	y = -y;
 	if (x == y)
 	{
 		while (x > 0)

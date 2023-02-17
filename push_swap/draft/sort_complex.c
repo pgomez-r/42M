@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/14 10:50:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:32:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ void	sort_complex(t_index *index)
 
 	ft_lis_stack(index);
 	lis_comparepush(index);
-	ft_printarray(index);
+	// ft_printarray(index);
 	while (index->size_b > 0)
 	{
 		best_pos_pusha(index);
 		operation_maker(index);
 		push_a(index);
-		ft_printarray(index);
+		// ft_printarray(index);
 	}
 	min_value_pos = ft_minvalue_pos(index->array_a, index->size_a);
 	// if (min_value_pos == 0)

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/14 09:04:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:36:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int ac, char **av)
 		sort_complex(&index);
 	}
 	ft_printarray(&index);
+	if (!ft_chksort(&index))
+		printf("\nORDENADOS (ole tu polla!)\n");
 	ft_totalfree(numbers);
 	free(index.array_a);
 	free(index.array_b);
