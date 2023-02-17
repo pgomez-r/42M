@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:27:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/17 17:27:50 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:10:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,24 @@ void	best_rotate_top(t_index *index, int x, int y)
 {
 	if (x == y)
 	{
-		while (x > 0)
-		{
+		while (x-- > 0)
 			rotate_ab(index);
-			x--;
-			y--;
-		}
 	}
-	if (x > y)
+	else if (x > y)
 	{
 		x = x - y;
-		while (x > 0)
-		{	
+		while (x-- > 0)
 			rotate_a(index);
-			x--;
-		}
-		while (y > 0)
-		{
+		while (y-- > 0)
 			rotate_ab(index);
-			y--;
-		}
 	}
-	if (y > x)
+	else if (y > x)
 	{	
 		y = y - x;
-		while (y > 0)
-		{	
+		while (y-- > 0)
 			rotate_b(index);
-			y--;
-		}
-		while (x > 0)
-		{	
+		while (x-- > 0)
 			rotate_ab(index);
-			x--;
-		}
 	}
 }
 
@@ -66,40 +50,24 @@ void	best_rotate_bot(t_index *index, int x, int y)
 {
 	if (x == y)
 	{
-		while (x > 0)
-		{
+		while (x-- > 0)
 			revrot_ab(index);
-			x--;
-			y--;
-		}
 	}
-	if (x > y)
+	else if (x > y)
 	{
 		x = x - y;
-		while (x > 0)
-		{	
+		while (x-- > 0)
 			revrot_a(index);
-			x--;
-		}
-		while (y > 0)
-		{
+		while (y-- > 0)
 			revrot_ab(index);
-			y--;
-		}
 	}
-	if (y > x)
+	else if (y > x)
 	{	
 		y = y - x;
-		while (y > 0)
-		{	
+		while (y-- > 0)
 			revrot_b(index);
-			y--;
-		}
-		while (x > 0)
-		{	
+		while (x-- > 0)
 			revrot_ab(index);
-			x--;
-		}
 	}
 }
 
@@ -118,28 +86,16 @@ void	operation_maker(t_index *index)
 		best_rotate_bot(index, -x, -y);
 	else if (x >= 0 && y < 0)
 	{
-		while (x > 0)
-		{	
+		while (x-- > 0)
 			rotate_a(index);
-			x--;
-		}
-		while (y < 0)
-		{	
+		while (y++ < 0)
 			revrot_b(index);
-			y++;
-		}
 	}
 	else if (x < 0 && y >= 0)
 	{
-		while (x < 0)
-		{	
+		while (x++ < 0)
 			revrot_a(index);
-			x++;
-		}
-		while (y > 0)
-		{	
+		while (y-- > 0)
 			rotate_b(index);
-			y--;
-		}
 	}
 }

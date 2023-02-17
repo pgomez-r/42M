@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/17 17:36:36 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:11:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	char	**numbers;
 	t_index	index;
 
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (write(2, "Error\n", 6), -1);
@@ -52,10 +52,7 @@ int	main(int ac, char **av)
 	if (index.size_a <= 5)
 		sort_easy(&index);
 	else
-	{
-		//ft_printarray(&index);
 		sort_complex(&index);
-	}
 	ft_printarray(&index);
 	if (!ft_chksort(&index))
 		printf("\nORDENADOS (ole tu polla!)\n");
