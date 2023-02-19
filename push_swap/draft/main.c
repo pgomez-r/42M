@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/18 13:44:05 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/19 12:13:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_leaks(void)
 {
-	system("leaks push_swap");
+	system("leaks -q push_swap");
 }
 
 void	ft_printarray(t_index *index)
@@ -31,13 +31,20 @@ void	ft_printarray(t_index *index)
 	printf ("\n^-ARRAY_B-^\n");
 }
 
-void	structs_free(t_index *index)
+void	complex_free(t_index *index, char **numbers)
 {
+	ft_totalfree(numbers);
 	free (index->array_a);
 	free (index->array_b);
-	free (index->array_tmp);
 	free (index->lis);
-	free (index->coords);
+	free (index->array_tmp);
+}
+
+void	easy_free(t_index *index, char **numbers)
+{
+	ft_totalfree(numbers);
+	free (index->array_a);
+	free (index->array_b);
 }
 
 int	main(int ac, char **av)
@@ -45,27 +52,24 @@ int	main(int ac, char **av)
 	char	**numbers;
 	t_index	index;
 
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (write(2, "Error\n", 6), -1);
+		return (-1);
 	ft_getarrays(numbers, &index);
 	if (!ft_chksort(&index))
-		return (ft_totalfree(numbers), free(index.array_a), -1);
+		return (easy_free(&index, numbers), -1);
 	if (index.size_a == 2)
 	{
 		if (index.array_a[0] > index.array_a[1])
 			swap_a(&index);
-		return (0);
+		return (easy_free(&index, numbers), 0);
 	}
-	if (index.size_a <= 5)
+	else if (index.size_a <= 5)
+	{	
 		sort_easy(&index);
+		return (easy_free(&index, numbers), 0);
+	}
 	else
-		sort_complex(&index);
-	ft_printarray(&index);
-	if (!ft_chksort(&index))
-		printf("\nORDENADOS =)\n");
-	ft_totalfree(numbers);
-	structs_free(&index);
-	return (0);
+		return (sort_complex(&index), complex_free(&index, numbers), 0);
 }

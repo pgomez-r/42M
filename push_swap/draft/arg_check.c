@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/17 17:37:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/19 09:51:47 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**ft_argtochar(int ac, char **av)
 		numbers[i] = NULL;
 	}
 	if (!ft_chkdigit(numbers) || !ft_chkdup(numbers) || !ft_chklimit(numbers))
-		return (ft_totalfree(numbers), NULL);
+		return (ft_totalfree(numbers), write(2, "Error\n", 6), NULL);
 	return (numbers);
 }
 

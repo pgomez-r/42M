@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/18 13:36:47 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/02/19 10:33:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct s_lis_utils
 /*main.c*/
 void	ft_leaks(void);
 void	ft_printarray(t_index *index);
-void	structs_free(t_index *index);
+void	complex_free(t_index *index, char **numbers);
+void	easy_free(t_index *index, char **numbers);
 /*libft_utils.c*/
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *s1, char *s2);

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:21:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/17 17:50:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/19 10:32:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_lis_stack(t_index *index)
 			muted_revrot_a(index);
 	}
 	index->lis = (ft_lis(index->array_tmp, index->size_a, &index->size_lis));
-	free(index->array_tmp);
 }
 
 void	lis_comparepush(t_index *index)
@@ -112,13 +111,11 @@ void	sort_complex(t_index *index)
 
 	ft_lis_stack(index);
 	lis_comparepush(index);
-	// ft_printarray(index);
 	while (index->size_b > 0)
 	{
 		best_pos_pusha(index);
 		operation_maker(index);
 		push_a(index);
-		// ft_printarray(index);
 	}
 	min_value_pos = ft_minvalue_pos(index->array_a, index->size_a);
 	if (min_value_pos <= index->size_a / 2)
