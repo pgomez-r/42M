@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:58:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/10 05:41:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:26:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	sort_easy(t_index *index)
 				rotate_a(index);
 			push_b(index);
 		}
-		if (min_pos > index->size_a / 2)
+		else if (min_pos > index->size_a / 2)
 		{
 			while (index->array_a[0] != target)
 				revrot_a(index);

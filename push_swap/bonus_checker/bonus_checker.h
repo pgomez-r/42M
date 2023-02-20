@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 12:18:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/20 09:48:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_leaks(void);
 void	easy_free(t_index *index, char **numbers);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		chose_op(t_index *index, char *ops);
+int		checker(t_index	*index);
 /*libft_utils.c*/
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *s1, char *s2);

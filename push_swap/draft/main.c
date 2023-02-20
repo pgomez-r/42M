@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 12:13:39 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:20:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,11 @@ int	main(int ac, char **av)
 		return (-1);
 	ft_getarrays(numbers, &index);
 	if (!ft_chksort(&index))
-		return (easy_free(&index, numbers), -1);
+		return (easy_free(&index, numbers), 1);
 	if (index.size_a == 2)
-	{
-		if (index.array_a[0] > index.array_a[1])
-			swap_a(&index);
-		return (easy_free(&index, numbers), 0);
-	}
+		return (swap_a(&index), easy_free(&index, numbers), 0);
 	else if (index.size_a <= 5)
-	{	
-		sort_easy(&index);
-		return (easy_free(&index, numbers), 0);
-	}
+		return (sort_easy(&index), easy_free(&index, numbers), 0);
 	else
 		return (sort_complex(&index), complex_free(&index, numbers), 0);
 }

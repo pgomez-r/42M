@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 12:20:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:05:38 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int ac, char **av)
 		if (flag == 1)
 			return (easy_free(&index, numbers), -1);
 	}
-	if (!ft_chksort(&index) && index.size_b == 0)
+	if (!ft_chksort(&index))
 		return (easy_free(&index, numbers), free(ops), write(1, "OK\n", 3), 0);
 	else
 		return (easy_free(&index, numbers), free(ops), write(1, "KO\n", 3), -1);
