@@ -6,16 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/20 10:05:38 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:36:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_checker.h"
-
-void	ft_leaks(void)
-{
-	system("leaks -q bonus_checker");
-}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {	
@@ -71,7 +66,6 @@ int	main(int ac, char **av)
 	t_index	index;
 	int		flag;
 
-	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (-1);
@@ -82,6 +76,7 @@ int	main(int ac, char **av)
 	while (ops)
 	{
 		flag = chose_op(&index, ops);
+		free (ops);
 		ops = get_next_line(0);
 		if (flag == 1)
 			return (easy_free(&index, numbers), -1);

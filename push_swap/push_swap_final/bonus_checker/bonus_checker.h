@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   bonus_checker.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:21:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 10:33:12 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:36:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef BONUS_CHECKER_H
+# define BONUS_CHECKER_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -37,19 +42,11 @@ typedef struct s_index
 	size_t	size_lis;
 }			t_index;
 
-typedef struct s_lis_utils
-{
-	int		*array_len;
-	int		*array_index;
-	int		*lis;
-	size_t	lis_len;
-}			t_lis_utils;
-
 /*main.c*/
-void	ft_leaks(void);
-void	ft_printarray(t_index *index);
-void	complex_free(t_index *index, char **numbers);
 void	easy_free(t_index *index, char **numbers);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		chose_op(t_index *index, char *ops);
+int		checker(t_index	*index);
 /*libft_utils.c*/
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *s1, char *s2);
@@ -62,12 +59,6 @@ void	ft_totalfree(char **numbers);
 void	ft_getarrays(char **numbers, t_index *index);
 int		*ft_simpler(t_index *index);
 int		*ft_duparray(int *array, size_t arrlen);
-/*ps_utils_b.c*/
-void	muted_rotate_a(t_index *index);
-void	muted_revrot_a(t_index *index);
-int		ft_isinarray(int num, int *array, size_t size);
-int		ft_max_in_array(int *array, size_t size);
-size_t	ft_maxvalue_pos(int *array, size_t len);
 /*split_atoi.c*/
 int		ft_count_word(char const *s, char c);
 char	*ft_savewords(const char *s, unsigned int n);
@@ -93,24 +84,13 @@ void	revrot_b(t_index *index);
 void	swap_ab(t_index *index);
 void	rotate_ab(t_index *index);
 void	revrot_ab(t_index *index);
-/*lis_utils.c*/
-void	lis_len_index(int *array, t_lis_utils *utils, size_t size);
-int		*generate_lis(int *array, t_lis_utils *utils, size_t size);
-int		*ft_lis(int *array, size_t size, size_t *size_lis);
-/*sort_easy.c*/
-void	sort_three(t_index *index);
-size_t	ft_minvalue_pos(int *array, size_t len);
-void	sort_easy(t_index *index);
-/*sort_complex.c*/
-void	sort_complex(t_index *index);
-void	ft_lis_stack(t_index *index);
-void	lis_comparepush(t_index *index);
-void	best_pos_pusha(t_index *index);
-int		calc_moves_in_a(t_index *index, int n);
-/*operations_maker.c*/
-void	operation_maker(t_index *index);
-void	best_rotate_bot(t_index *index, int x, int y);
-void	best_rotate_top(t_index *index, int x, int y);
-int		ft_abs_sum(int x, int y);
+/*get_next_line.c*/
+char	*create_line(char *stack);
+char	*update_stack(char *stack);
+char	*join_and_free(char *stack, char *tmp);
+char	*get_next_line(int fd);
+/*get_next_line_utils.c*/
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif

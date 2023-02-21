@@ -6,30 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/20 10:20:11 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:35:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_leaks(void)
-{
-	system("leaks -q push_swap");
-}
-
-void	ft_printarray(t_index *index)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < index->size_a)
-		printf ("%i ", index->array_a[i++]);
-	printf ("\n^-ARRAY_A-^\n");
-	i = 0;
-	while (i < index->size_b)
-		printf ("%i ", index->array_b[i++]);
-	printf ("\n^-ARRAY_B-^\n");
-}
 
 void	complex_free(t_index *index, char **numbers)
 {
@@ -52,7 +33,6 @@ int	main(int ac, char **av)
 	char	**numbers;
 	t_index	index;
 
-	atexit(ft_leaks);
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
 		return (-1);
