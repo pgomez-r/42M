@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:45:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 12:16:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/24 03:37:13 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_argtochar(int ac, char **av)
 		}
 		numbers[i] = NULL;
 	}
-	if (!ft_chkdigit(numbers) || !ft_chkdup(numbers) || !ft_chklimit(numbers))
+	if (!ft_chkdigit(numbers))
 		return (ft_totalfree(numbers), write(2, "Error\n", 6), NULL);
 	return (numbers);
 }
@@ -52,7 +52,7 @@ int	ft_chkdigit(char **str)
 		j = 0;
 		while (str[i][j] != '\0')
 		{
-			if (str[i][j] == '-')
+			if (str[i][j] == '-' || str[i][j] == '+')
 			{
 				if (str[i][j - 1] >= '0' && str[i][j - 1] <= '9')
 					return (0);
@@ -67,28 +67,24 @@ int	ft_chkdigit(char **str)
 	return (1);
 }
 
-int	ft_chkdup(char **str)
+int	ft_chkdup(t_index *index)
 {
 	size_t	i;
 	size_t	j;
-	int		ctr;
-	size_t	len;
+	int		flag;
 
-	if (!*str || !**str)
-		return (0);
-	len = ft_strdlen(str);
 	i = 0;
-	while (i < len)
+	while (i < index->size_a)
 	{
 		j = 0;
-		ctr = 0;
-		while (j < len)
-		{	
-			if (!ft_strcmp(str[i], str[j]))
-				ctr++;
+		flag = 0;
+		while (j < index->size_a)
+		{
+			if (index->array_a[i] == index->array_a[j])
+				flag++;
 			j++;
 		}
-		if (ctr > 1)
+		if (flag > 1)
 			return (0);
 		i++;
 	}
@@ -110,24 +106,3 @@ int	ft_chksort(t_index *index)
 	}
 	return (0);
 }
-
-int	ft_chklimit(char **str)
-{
-	size_t	i;
-	size_t	len;
-
-	if (!*str || !**str)
-		return (0);
-	len = ft_strdlen(str);
-	i = 0;
-	while (i < len)
-	{
-		if (ft_strlen(str[i]) >= 10 && ft_strcmp(str[i], "2147483647") > 0)
-			return (0);
-		if (ft_strlen(str[i]) >= 11 && ft_strcmp(str[i], "-2147483648") > 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
- 

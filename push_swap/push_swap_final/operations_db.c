@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:02:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/01/23 15:29:16 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/23 23:10:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	rotate_ab(t_index *index)
 	int		aux;
 	size_t	i;
 
+	if (index->size_a == 0 || index->size_b == 0)
+		return ;
 	aux = index->array_a[0];
 	i = 0;
 	while (i < index->size_a - 1)
@@ -56,6 +58,8 @@ void	revrot_ab(t_index *index)
 	int		aux;
 	size_t	i;
 
+	if (index->size_a == 0 || index->size_b == 0)
+		return ;
 	aux = index->array_a[index->size_a - 1];
 	i = index->size_a - 1;
 	while (i > 0)

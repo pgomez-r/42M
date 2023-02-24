@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:56:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/19 12:16:50 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:50:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	sig;
-	int	num;
+	long int	sig;
+	long int	num;
 
 	sig = 1;
 	num = 0;

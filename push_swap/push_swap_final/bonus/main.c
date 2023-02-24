@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/21 22:36:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/24 03:17:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	chose_op(t_index *index, char *ops)
 	else if (!ft_strncmp(ops, "rrr\n", 4))
 		return (revrot_ab(index), 0);
 	else
-		return (free(ops), write(2, "Error\n", 6), 1);
+		return (write(2, "Error\n", 6), 1);
 }
 
 int	main(int ac, char **av)
@@ -64,25 +64,26 @@ int	main(int ac, char **av)
 	char	**numbers;
 	char	*ops;
 	t_index	index;
-	int		flag;
 
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (-1);
-	ft_getarrays(numbers, &index);
+		return (1);
+	if (ft_getarrays(numbers, &index))
+		return (ft_totalfree(numbers), write(2, "Error\n", 6), 1);
+	if (!ft_chkdup(&index))
+		return (easy_free(&index, numbers), write(2, "Error\n", 6), 1);
 	if (!ft_chksort(&index))
-		return (easy_free(&index, numbers), -1);
+		return (easy_free(&index, numbers), 1);
 	ops = get_next_line(0);
 	while (ops)
 	{
-		flag = chose_op(&index, ops);
+		index.flag = chose_op(&index, ops);
 		free (ops);
+		if (index.flag == 1)
+			return (easy_free(&index, numbers), 1);
 		ops = get_next_line(0);
-		if (flag == 1)
-			return (easy_free(&index, numbers), -1);
 	}
-	if (!ft_chksort(&index))
+	if (!ft_chksort(&index) && index.size_b == 0)
 		return (easy_free(&index, numbers), free(ops), write(1, "OK\n", 3), 0);
-	else
-		return (easy_free(&index, numbers), free(ops), write(1, "KO\n", 3), -1);
+	return (easy_free(&index, numbers), free(ops), write(1, "KO\n", 3), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/21 22:35:21 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/02/24 03:01:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ int	main(int ac, char **av)
 
 	numbers = ft_argtochar(ac, av);
 	if (!numbers)
-		return (-1);
-	ft_getarrays(numbers, &index);
+		return (1);
+	if (ft_getarrays(numbers, &index))
+		return (ft_totalfree(numbers), write(2, "Error\n", 6), 1);
+	if (!ft_chkdup(&index))
+		return (easy_free(&index, numbers), write(2, "Error\n", 6), 1);
 	if (!ft_chksort(&index))
 		return (easy_free(&index, numbers), 1);
 	if (index.size_a == 2)
