@@ -6,7 +6,7 @@ De momento, la idea que tengo para el proyecto es hacerlo usando arrays y seguir
 
 1) Guardar todos los argumentos que le entran al main en una tabla de cadenas char, es decir, un doble puntero `char **argumentos`. Cada cadena sería, idealmente, un número de n dígitos (3, 4345, -24...).
 
-2) Comprobar la vlidaez de argumento, es decir de cada cadena dentor de **argumentos, con varias funciones para verificar si: son dígitos (contemplando que pueda ser número negativo '-'), no hay duplicados, no hay ningún número que salga de los límites de un INT (max y min).
+2) Comprobar la validaez de argumentos, es decir de cada cadena dentor de **argumentos, con varias funciones para verificar si: son dígitos (contemplando que pueda ser número negativo '-'), no hay duplicados, no hay ningún número que salga de los límites de un INT (max y min).
 
 3) Si todas las comprobaciones están OK, pasamos a guardar el contenido de **argumentos, que ya sabemos que son número válidos, en un array INT. Alojamos memoria suficiente y hacemos un bucle de atoi hasta que cada argumentos[i] quede guardado en array[i].
 
