@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/14 22:02:26 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/03/25 01:11:55 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <limits.h>
+# include <sys/wait.h>
+# include <string.h>
+# include <errno.h>
 
 /*structs*/
+typedef struct s_index
+{
+	char	**envp;
+}	t_index;
 
 /*main.c*/
 
