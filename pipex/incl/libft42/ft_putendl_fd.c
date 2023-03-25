@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 13:34:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:17:23 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/10/07 13:34:22 by pgomez-r          #+#    #+#             */
+/*   Updated: 2022/10/24 18:04:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	write (fd, &c, 1);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
 
-/*Igual que ft_putchar, pero el write que va a llamar, en lugar de (1, &c, 1),
-que solemos usar, a write le vamos a pasar como primer parámetro el valor de fd
-el 1 que usamos normalmente es para standar output, con fd no especificamos que 
-sea necesariamente ese output sino que puede variar segun el valor que le entre
-a la función*/
+/*la función putendl añade un salto de línea a una cadena char, en el caso de
+putendl_fd, además tiene en cuenta el filedescriptor para escribir tanto la
+cadena como el salto de linea
+para llevarla a cabo usamos putstr y putchar, ambos usando el file descriptor,
+es decir: "imprimir" cadena + "imprimir char" ambos usando fd*/

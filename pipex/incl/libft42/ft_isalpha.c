@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 13:34:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:17:23 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/10/05 13:14:16 by pgomez-r          #+#    #+#             */
+/*   Updated: 2022/10/24 16:28:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putchar_fd(char c, int fd)
+int	ft_isalpha(int c)
 {
-	write (fd, &c, 1);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }
 
-/*Igual que ft_putchar, pero el write que va a llamar, en lugar de (1, &c, 1),
-que solemos usar, a write le vamos a pasar como primer parámetro el valor de fd
-el 1 que usamos normalmente es para standar output, con fd no especificamos que 
-sea necesariamente ese output sino que puede variar segun el valor que le entre
-a la función*/
+/*comprueba si el valor de una variable tipo int es alfabético*/

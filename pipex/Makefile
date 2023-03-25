@@ -6,24 +6,32 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:02:29 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/03/14 22:04:20 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/03/25 23:23:28 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-EXE    = pipex
+CC       = gcc
+CFLAGS   = -Wall -Wextra -Werror
+EXE      = pipex
 
-SRCS   = main.c 
-			
-OBJS   = $(SRCS:.c=.o)
+SRC_PATH = src/
+OBJ_PATH = obj/
 
-CC     = gcc
+SRC      = main.c
+SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
+OBJ		 = $(SRC:.c=.o)
+OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
 
-CFLAGS = -Wall -Wextra -Werror
+RM       = rm -f
 
-RM     = rm -f
+INC		= -I ./incl/
 
 all:	${EXE}
 
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	
 $(EXE):	$(OBJS)
 	${CC} $(CFLAGS) $(OBJS) -o $(EXE)
 

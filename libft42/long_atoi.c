@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   long_atoi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 13:34:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:17:23 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/12/23 12:56:01 by pgomez-r          #+#    #+#             */
+/*   Updated: 2023/03/25 22:17:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+long int	ft_latoi(const char *str)
 {
-	write (fd, &c, 1);
-}
+	long int	sig;
+	long int	num;
 
-/*Igual que ft_putchar, pero el write que va a llamar, en lugar de (1, &c, 1),
-que solemos usar, a write le vamos a pasar como primer parámetro el valor de fd
-el 1 que usamos normalmente es para standar output, con fd no especificamos que 
-sea necesariamente ese output sino que puede variar segun el valor que le entre
-a la función*/
+	sig = 1;
+	num = 0;
+	while ((*str == ' ') || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sig = -1;
+		str++;
+	}
+	if (ft_isdigit((int) *str) == 0)
+		return (0);
+	while (*str >= '0' && *str <= '9')
+	{	
+		num = (*str - '0') + (num * 10);
+		str++;
+	}
+	return (num * sig);
+}

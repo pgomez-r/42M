@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 13:34:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:17:23 by pgomez-r         ###   ########.fr       */
+/*   Created: 2022/10/18 13:29:05 by pgomez-r          #+#    #+#             */
+/*   Updated: 2022/10/20 13:23:28 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_lstsize(t_list *lst)
 {
-	write (fd, &c, 1);
+	int	ctr;
+
+	ctr = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		ctr++;
+	}
+	return (ctr);
 }
 
-/*Igual que ft_putchar, pero el write que va a llamar, en lugar de (1, &c, 1),
-que solemos usar, a write le vamos a pasar como primer parámetro el valor de fd
-el 1 que usamos normalmente es para standar output, con fd no especificamos que 
-sea necesariamente ese output sino que puede variar segun el valor que le entre
-a la función*/
+/*Esta función devuelve el número de nodos que tiene una lista, hacemos un bucle
+para recorrer la lista, mientras el nodo (lst) no se nulo, lo vamos "moviendo"
+hacia adelante (lst = lst->next) y por cada vez que hagamos esto, aumentamos el
+contador, que es lo que devolvemos finalmente*/
