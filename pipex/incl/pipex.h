@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/26 21:01:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:53:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 typedef struct s_struct
 {
 	char	**paths;
+	char	*match_path;
+	char	*cmd;
 }	t_struct;
 
 /*main.c*/
-void		ft_paths(t_struct *tools, char **env);
+void		get_paths(t_struct *tools, char **env);
 int			is_path(char *str);
+void		find_path(t_struct *st);
 
 #endif
