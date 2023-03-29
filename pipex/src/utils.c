@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/29 22:57:35 by pgomez-r         ###   ########.fr       */
+/*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
+/*   Updated: 2023/03/29 23:01:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../incl/pipex.h"
 
-/*libft.h*/
-# include "./libft42/libft.h"
-
-/*structs*/
-typedef struct s_struct
+void	ft_leaks(void)
 {
-	char	**paths;
-	char	*match_path;
-	char	*cmd;
-}	t_struct;
+	system("leaks -q pipex");
+}
 
-/*main.c*/
-void		get_paths(t_struct *tools, char **env);
-int			find_path_index(t_struct *st);
+void	ft_print_dstr(char **dstr)
+{
+	size_t	i;
 
-/*utils.c*/
-void		ft_print_dstr(char **dstr);
-int			is_path(char *str);
-void		ft_leaks(void);
+	i = 0;
+	while (dstr[i] != NULL)
+	{
+		printf("%s\n", dstr[i]);
+		i++;
+	}
+}
 
-#endif
+int	is_path(char *str)
+{
+	if (str[0] == 'P' && str[1] == 'A' && str[2] == 'T'
+		&& str[3] == 'H' && str[4] == '=')
+		return (0);
+	return (1);
+}

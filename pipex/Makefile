@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:02:29 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/03/27 23:23:12 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/03/29 23:00:50 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ EXE      = pipex
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC      = main.c
+SRC      = main.c utils.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
