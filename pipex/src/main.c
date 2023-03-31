@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/29 23:07:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/01 00:56:26 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	main(int ac, char **av, char **env)
 	t_struct	st;
 	char *options[3] = {"ls", "-la", NULL};
 
+	st.pid = fork();
+	if(st.pid == -1)
+		return (1);
 	atexit(ft_leaks);
 	(void)ac;
 	(void)av;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/29 22:57:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/03/30 21:44:48 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_struct
 	char	**paths;
 	char	*match_path;
 	char	*cmd;
+	pid_t	pid;
 }	t_struct;
 
 /*main.c*/
