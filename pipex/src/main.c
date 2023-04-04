@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/01 00:56:26 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/04/04 13:51:38 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ int	main(int ac, char **av, char **env)
 	t_struct	st;
 	char *options[3] = {"ls", "-la", NULL};
 
+	atexit(ft_leaks);
+	printf("Vamos a hacer FORK...\n");
 	st.pid = fork();
 	if(st.pid == -1)
 		return (1);
-	atexit(ft_leaks);
+	printf("\nFork OK!\n");
+	if(st.pid == 0)
+		printf("Child: soy el hijo, mi pid es: %d\n", st.pid);
+	else if(st.pid > 0)
+		printf("Parent: Luke, yo soy tu padre (y el pid de Luke es: %d\n)", st.pid);
 	(void)ac;
 	(void)av;
 	get_paths(&st, env);
