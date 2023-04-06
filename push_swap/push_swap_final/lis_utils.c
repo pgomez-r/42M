@@ -6,19 +6,19 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:44:00 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/20 21:27:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/06 19:17:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-typedef struct s_lis_utils
-{
-	int		*array_len;
-	int		*array_index;
-	int		*lis;
-	size_t	lis_len;
-}			t_lis_utils;
+// typedef struct s_lis_utils
+// {
+// 	int		*array_len;
+// 	int		*array_index;
+// 	int		*lis;
+// 	size_t	lis_len;
+// }			t_lis_utils;
 
 void	lis_len_index(int *array, t_lis_utils *utils, size_t size)
 {

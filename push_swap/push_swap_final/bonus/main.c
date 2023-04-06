@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/02/24 03:17:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/06 19:31:15 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	main(int ac, char **av)
 		return (ft_totalfree(numbers), write(2, "Error\n", 6), 1);
 	if (!ft_chkdup(&index))
 		return (easy_free(&index, numbers), write(2, "Error\n", 6), 1);
-	if (!ft_chksort(&index))
-		return (easy_free(&index, numbers), 1);
 	ops = get_next_line(0);
 	while (ops)
 	{
