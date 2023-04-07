@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/29 23:01:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:55:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,38 @@ void	ft_print_dstr(char **dstr)
 	}
 }
 
-int	is_path(char *str)
+void	close_fds(t_struct *st)
 {
-	if (str[0] == 'P' && str[1] == 'A' && str[2] == 'T'
-		&& str[3] == 'H' && str[4] == '=')
-		return (0);
-	return (1);
+	if (st->fd_in != -1)
+		close(st->fd_in);
+	if (st->fd_out != -1)
+		close(st->fd_out);
+	close_pipes(st);
+}
+
+void	close_pipe(t_struct *st)
+{
+	close(st->pipe[0]);
+	close(st->pipe[1]);
+}
+
+/**
+ * TODO función que cierre fds, libere ints, char y doble char y EXIT
+ * ? imprimir en pantalla algún mensaje/código error ?
+ */
+void	exit_pipex(t_struct *st)
+{
+	if (st)
+	{
+		close_fds(st);
+		if (st->pipe != NULL)
+			free(st->pipe);
+		if (st->pids != NULL)
+			free(st->pids);
+		if (st->path_cmd != NULL)
+			ft_totalfree(st->path_cmd);
+		if (st->cmd_opt != NULL)
+			ft_totalfree(st->cmd_opt);
+	}
+	exit(printf("Algo ha fallado maki =/"));
 }
