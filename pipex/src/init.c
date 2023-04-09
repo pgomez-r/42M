@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/07 21:18:53 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:48:09 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_struct	init_struct(int ac, char **av, char **env)
 	st.av = av;
 	st.env = env;
 	get_paths(&st);
-	get_iofiles(&st);
+	commands_parser(&st);
 	return (st);
 }
 
@@ -47,7 +47,8 @@ t_struct	set_st_empty(void)
 	st.env = NULL;
 	st.paths = NULL;
 	st.path_cmd = NULL;
-	st.cmd = NULL;
+	st.cmd1 = NULL;
+	st.cmd2 = NULL;
 	st.cmd_opt = NULL;
 	st.fd_in = -1;
 	st.fd_out = -1;
@@ -62,6 +63,8 @@ t_struct	set_st_empty(void)
  */
 void	pipe_gen(t_struct *st)
 {
+	if (st->pipe == NULL)
+		st->pipe = malloc(sizeof(int) * 2);
 	if (pipe(st->pipe) == -1)
 		exit_pipex(st);
 }

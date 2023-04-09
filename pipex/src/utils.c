@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/07 20:55:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:06:28 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	close_fds(t_struct *st)
 		close(st->fd_in);
 	if (st->fd_out != -1)
 		close(st->fd_out);
-	close_pipes(st);
 }
 
 void	close_pipe(t_struct *st)
@@ -58,9 +57,9 @@ void	exit_pipex(t_struct *st)
 		if (st->pids != NULL)
 			free(st->pids);
 		if (st->path_cmd != NULL)
-			ft_totalfree(st->path_cmd);
+			ft_totalfree(st->cmd1);
 		if (st->cmd_opt != NULL)
-			ft_totalfree(st->cmd_opt);
+			ft_totalfree(st->cmd2);
 	}
 	exit(printf("Algo ha fallado maki =/"));
 }
