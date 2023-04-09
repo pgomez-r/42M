@@ -1,0 +1,2 @@
+Exit status: 2
+Expected: 0

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/08 17:48:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:09:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ t_struct	set_st_empty(void)
 	st.path_cmd = NULL;
 	st.cmd1 = NULL;
 	st.cmd2 = NULL;
-	st.cmd_opt = NULL;
 	st.fd_in = -1;
 	st.fd_out = -1;
 	st.pipe = NULL;
-	st.pids = NULL;
-	st.pid = -1;
+	st.pid_child = -1;
 	return (st);
 }
 

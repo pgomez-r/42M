@@ -1,0 +1,1 @@
+scripts/test_utils.sh: line 16: ../pipex/pipex: Not a directory

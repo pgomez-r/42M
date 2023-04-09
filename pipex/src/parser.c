@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/08 17:48:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:29:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	find_path_index(t_struct *st, char *cmd)
 	int	i;
 
 	if (!st->path_cmd)
+	{
+		st->path_cmd = malloc(sizeof(char) * 1);
 		st->path_cmd = NULL;
+	}
 	i = 0;
 	while (st->paths[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/08 17:06:28 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:08:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	close_pipe(t_struct *st)
 /**
  * TODO función que cierre fds, libere ints, char y doble char y EXIT
  * ? imprimir en pantalla algún mensaje/código error ?
+ * ! crear función que libere todos los **char
  */
 void	exit_pipex(t_struct *st)
 {
@@ -54,11 +55,9 @@ void	exit_pipex(t_struct *st)
 		close_fds(st);
 		if (st->pipe != NULL)
 			free(st->pipe);
-		if (st->pids != NULL)
-			free(st->pids);
-		if (st->path_cmd != NULL)
+		if (st->cmd1 != NULL)
 			ft_totalfree(st->cmd1);
-		if (st->cmd_opt != NULL)
+		if (st->cmd2 != NULL)
 			ft_totalfree(st->cmd2);
 	}
 	exit(printf("Algo ha fallado maki =/"));
