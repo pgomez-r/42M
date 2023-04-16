@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/09 18:09:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:33:04 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,20 @@ void	pipe_gen(t_struct *st)
 	if (st->pipe == NULL)
 		st->pipe = malloc(sizeof(int) * 2);
 	if (pipe(st->pipe) == -1)
-		exit_pipex(st);
+		exit_pipex(st, 1);
+}
+
+/**
+ * Función para comprobar si existe un archivo en un directorio
+ * Debería estar en utils pero ya tengo cinco funciones, tampoco sé
+ * si me terminará haciendo falta o no, es un poco chapuza
+ */
+int	ft_filedoexist(char *file_path)
+{
+	int	fd;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd > 0)
+		return (close(fd), 0);
+	return (1);
 }

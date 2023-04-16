@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/09 18:09:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:31:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		child_proc(t_struct	*st);
 t_struct	init_struct(int ac, char **av, char **env);
 t_struct	set_st_empty(void);
 void		pipe_gen(t_struct *st);
+int			ft_filedoexist(char *file_path);
 
 /*parser.c*/
 int			is_path(char *str);
@@ -53,7 +54,7 @@ void		commands_parser(t_struct *st);
 /*utils.c*/
 void		ft_print_dstr(char **dstr);
 void		ft_leaks(void);
-void		exit_pipex(t_struct *st);
+void		exit_pipex(t_struct *st, int error);
 void		close_pipe(t_struct *st);
 void		close_fds(t_struct *st);
 

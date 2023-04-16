@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/09 18:29:53 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:39:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	commands_parser(t_struct *st)
 {
 	st->cmd1 = ft_split(st->av[2], ' ');
 	if (!st->cmd1)
-		exit_pipex(st);
+		exit_pipex(st, 1);
 	st->cmd2 = ft_split(st->av[3], ' ');
 	if (!st->cmd2)
-		exit_pipex(st);
+		exit_pipex(st, 1);
 }
 
 /**
@@ -83,12 +83,14 @@ void	commands_parser(t_struct *st)
  */
 void	get_iofiles(t_struct *st)
 {
+	if (!ft_filedoexist("./outfile"))
+		system("rm infile outfile");
 	st->fd_in = open(st->av[1], O_RDONLY | O_CREAT, 644);
 	if (st->fd_in == -1)
-		exit_pipex(st);
+		exit_pipex(st, 1);
 	st->fd_out = open(st->av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (st->fd_out == -1)
-		exit_pipex(st);
+		exit_pipex(st, 1);
 }
 
 int	is_path(char *str)
