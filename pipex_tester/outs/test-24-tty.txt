@@ -1,0 +1,12 @@
+Command not found: No such file or directory
+Error
+You have access to multiple processes named pipex:
+    a) 67547 ../pipex/pipex
+    b) 67550 ../pipex/pipex
+
+leaks[67552]: leaks cannot find any existing process you have access to which has a name like 'pipex'; try running with `sudo`.
+leaks[67552]: [fatal] mach port for process 0 not valid
+leaks Report Version: 4.0
+Process 67547: 152 nodes malloced for 8 KB
+Process 67547: 0 leaks for 0 total leaked bytes.
+

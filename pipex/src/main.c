@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/16 21:51:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/17 22:21:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	child_proc(t_struct	*st)
 	find_path_index(st, st->cmd1[0]);
 	if (execve(st->path_cmd, st->cmd1, st->env))
 	{
-		perror("Command not found");
+		perror("pipex: command not found: ");
 		exit_pipex(st, 1);
 	}
 }
@@ -33,7 +33,7 @@ void	parent_proc(t_struct *st)
 	find_path_index(st, st->cmd2[0]);
 	if (execve(st->path_cmd, st->cmd2, st->env) == -1)
 	{
-		perror("Command not found");
+		perror("pipex: command not found: ");
 		exit_pipex(st, 1);
 	}
 }
@@ -49,14 +49,20 @@ void	ft_pipex(t_struct *st)
 	get_iofiles(st);
 	st->pid_child = fork();
 	if (st->pid_child == -1)
+	{	
+		perror("pipex: fork failed");
 		exit_pipex(st, 1);
+	}
 	else if (st->pid_child == 0)
 		child_proc(st);
 	else
 	{
 		st->pid_child = fork();
 		if (st->pid_child == -1)
+		{	
+			perror("pipex: fork failed");
 			exit_pipex(st, 1);
+		}
 		else if (st->pid_child == 0)
 			parent_proc(st);
 		else
@@ -78,9 +84,9 @@ int	main(int ac, char **av, char **env)
 
 	atexit(ft_leaks);
 	if (ac != 5)
-		return (perror("Error"), 1);
+		return (perror("pipex: parse error: "), 1);
 	if (!env || !*env)
-		return (perror("Error"), 1);
+		return (perror("pipex: no env"), 1);
 	st = init_struct(ac, av, env);
 	ft_pipex(&st);
 	exit_pipex(&st, 0);

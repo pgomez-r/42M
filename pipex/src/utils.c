@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/16 21:52:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/17 22:19:30 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	exit_pipex(t_struct *st, int error)
 		if (st->cmd2 != NULL)
 			ft_totalfree(st->cmd2);
 	}
-	if (error == 1)
+	if (error > 0)
 		exit(EXIT_FAILURE);
 }

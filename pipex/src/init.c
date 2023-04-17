@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/16 21:33:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/17 22:19:16 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	pipe_gen(t_struct *st)
 	if (st->pipe == NULL)
 		st->pipe = malloc(sizeof(int) * 2);
 	if (pipe(st->pipe) == -1)
+	{	
+		perror("Pipe failed");
 		exit_pipex(st, 1);
+	}
 }
 
 /**
