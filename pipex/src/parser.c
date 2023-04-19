@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/17 23:05:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/19 21:48:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	find_path_index(t_struct *st, char *cmd)
 		free(st->path_cmd);
 		i++;
 	}
-	return (1);
+	return (-1);
 }
 
 /**
@@ -86,7 +86,8 @@ void	commands_parser(t_struct *st)
 /**
  * Abrir/crear los archivos infile y outfile de pipex, que entran al programa
  * como av[1] y av[4]
- * TODO -> diferenciar error si es por que no existe archivo o por permisos
+ * usamos ft_print + strerror para poder incluir en el output del error el
+ * nombre del archivo que no se ha podido abrir/encontrar
  */
 void	get_iofiles(t_struct *st)
 {
@@ -94,17 +95,19 @@ void	get_iofiles(t_struct *st)
 	if (st->fd_in == -1)
 	{
 		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[1]);
-		//perror ("pipex: permission denied:");
 		exit_pipex(st, 1);
 	}
 	st->fd_out = open(st->av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (st->fd_out == -1)
 	{
-		perror ("pipex: permission denied:");
+		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[4]);
 		exit_pipex(st, 1);
 	}
 }
 
+/**
+ * keep it cutre =) 
+ */
 int	is_path(char *str)
 {
 	if (str[0] == 'P' && str[1] == 'A' && str[2] == 'T'
