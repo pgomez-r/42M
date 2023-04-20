@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/19 21:48:40 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:42:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,16 @@ void	commands_parser(t_struct *st)
 	st->cmd1 = ft_split(st->av[2], ' ');
 	if (!st->cmd1)
 	{	
+		st->error_code = 1;
 		perror ("pipex: parse error");
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 	st->cmd2 = ft_split(st->av[3], ' ');
 	if (!st->cmd2)
 	{
+		st->error_code = 1;
 		perror ("pipex: parse error");
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 }
 
@@ -94,14 +96,16 @@ void	get_iofiles(t_struct *st)
 	st->fd_in = open(st->av[1], O_RDONLY);
 	if (st->fd_in == -1)
 	{
+		st->error_code = 1;
 		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[1]);
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 	st->fd_out = open(st->av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (st->fd_out == -1)
 	{
+		st->error_code = 1;
 		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[4]);
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 }
 

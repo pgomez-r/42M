@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/26 22:37:16 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:10:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,15 @@ void		best_rotate_top(t_index *index, int x, int y);
 void		lis_len_index(int *array, t_lis_utils *utils, size_t size);
 int			*generate_lis(int *array, t_lis_utils *utils, size_t size);
 int			*ft_lis(int *array, size_t size, size_t *size_lis);
+
+/*ft_printf_error*/
+void		ft_putchari_error(int c, size_t *i);
+int			ft_printf_error(char const *str, ...);
+void		ft_checkprintformat_error(va_list arg, char *str, size_t *i);
+void		ft_putchari_error(int c, size_t *i);
+void		ft_putstri_error(char *str, size_t *i);
+void		ft_putnbri_error(int n, size_t *i);
+void		ft_putunsigi_error(unsigned int n, size_t *i);
+void		ft_puthexalli_error(unsigned long int n, char *base, size_t *i);
 
 #endif

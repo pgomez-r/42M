@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/19 22:57:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:40:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_struct
 	int		fd_out;
 	int		*pipe;
 	pid_t	pid_child;
+	int		error_code;
 }	t_struct;
 
 /*main.c*/
@@ -54,7 +55,7 @@ void		commands_parser(t_struct *st);
 /*utils.c*/
 void		ft_print_dstr(char **dstr);
 void		ft_leaks(void);
-void		exit_pipex(t_struct *st, int error);
+void		exit_pipex(t_struct *st);
 void		close_pipe(t_struct *st);
 void		close_fds(t_struct *st);
 

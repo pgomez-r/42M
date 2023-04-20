@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/17 22:19:16 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:41:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_struct	set_st_empty(void)
 	st.fd_out = -1;
 	st.pipe = NULL;
 	st.pid_child = -1;
+	st.error_code = 0;
 	return (st);
 }
 
@@ -65,8 +66,9 @@ void	pipe_gen(t_struct *st)
 		st->pipe = malloc(sizeof(int) * 2);
 	if (pipe(st->pipe) == -1)
 	{	
+		st->error_code = 1;
 		perror("Pipe failed");
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 }
 

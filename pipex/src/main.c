@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/19 23:00:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:05:32 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ void	child_proc(t_struct	*st)
 	close_pipe(st);
 	if (find_path_index(st, st->cmd1[0]) == -1)
 	{
-		perror("pipex");
-		ft_printf("pipex: command not found: %s\n", st->cmd1[0]);
-		exit_pipex(st, 1);
+		st->error_code = 2;
+		ft_printf_error("pipex: command not found: %s\n", st->cmd1[0]);
+		//exit_pipex(st, 1);
+		//return ;
 	}
 	if (execve(st->path_cmd, st->cmd1, st->env) == -1)
 	{
-		perror("pipex: command not found");
-		exit_pipex(st, 1);
+		st->error_code = 2;
+		//ft_printf("pipex: command not found: %s\n", st->cmd1[0]);
+		//exit_pipex(st, 1);
+		//return ;
 	}
 }
 
@@ -35,11 +38,19 @@ void	parent_proc(t_struct *st)
 	dup2(st->pipe[0], STDIN_FILENO);
 	dup2(st->fd_out, STDOUT_FILENO);
 	close_pipe(st);
-	find_path_index(st, st->cmd2[0]);
+	if (find_path_index(st, st->cmd2[0]) == -1)
+	{
+		st->error_code = 3;
+		//ft_printf("pipex: command not found: %s\n", st->cmd2[0]);
+		//exit_pipex(st, 1);
+		return ;
+	}
 	if (execve(st->path_cmd, st->cmd2, st->env) == -1)
 	{
-		ft_printf("pipex: %s: %s\n", strerror(errno), st->cmd2[0]);
-		exit_pipex(st, 1);
+		st->error_code = 3;
+		//ft_printf("pipex: command not found: %s\n", st->cmd2[0]);
+		//exit_pipex(st, 1);
+		return ;
 	}
 }
 
@@ -55,8 +66,9 @@ void	ft_pipex(t_struct *st)
 	st->pid_child = fork();
 	if (st->pid_child == -1)
 	{	
+		st->error_code = 1;
 		perror("pipex: fork failed");
-		exit_pipex(st, 1);
+		exit_pipex(st);
 	}
 	else if (st->pid_child == 0)
 		child_proc(st);
@@ -65,8 +77,9 @@ void	ft_pipex(t_struct *st)
 		st->pid_child = fork();
 		if (st->pid_child == -1)
 		{	
+			st->error_code = 1;
 			perror("pipex: fork failed");
-			exit_pipex(st, 1);
+			exit_pipex(st);
 		}
 		else if (st->pid_child == 0)
 			parent_proc(st);
@@ -96,6 +109,6 @@ int	main(int ac, char **av, char **env)
 	// if (find_path_index(&st, st.cmd1[0]) == -1)
 	// 	ft_printf("pipex: %s: %s\n", strerror(errno), st.cmd1[0]);
 	ft_pipex(&st);
-	exit_pipex(&st, 0);
+	exit_pipex(&st);
 	return (0);
 }
