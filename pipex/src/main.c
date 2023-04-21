@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/21 19:45:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:14:43 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 void	child_proc(t_struct	*st)
 {
+	st->fd_in = open(st->av[1], O_RDONLY);
+	if (st->fd_in == -1)
+	{
+		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[1]);
+		exit_pipex(st, 1);
+	}
 	dup2(st->fd_in, STDIN_FILENO);
 	dup2(st->pipe[1], STDOUT_FILENO);
 	close_pipe(st);
@@ -24,13 +30,19 @@ void	child_proc(t_struct	*st)
 	// }
 	if (execve(st->path_cmd, st->cmd1, st->env) == -1)
 	{
-		//ft_printf("pipex: command not found: %s\n", st->cmd1[0]);
+		ft_printf_error("pipex: command not found: %s\n", st->cmd1[0]);
 		exit_pipex(st, 1);
 	}
 }
 
 void	parent_proc(t_struct *st)
 {
+	st->fd_out = open(st->av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (st->fd_out == -1)
+	{
+		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[4]);
+		exit_pipex(st, 1);
+	}
 	dup2(st->pipe[0], STDIN_FILENO);
 	dup2(st->fd_out, STDOUT_FILENO);
 	close_pipe(st);
@@ -41,7 +53,7 @@ void	parent_proc(t_struct *st)
 	// }
 	if (execve(st->path_cmd, st->cmd2, st->env) == -1)
 	{
-		//ft_printf("pipex: command not found: %s\n", st->cmd2[0]);
+		ft_printf_error("pipex: command not found: %s\n", st->cmd2[0]);
 		exit_pipex(st, 1);
 	}
 }
@@ -54,7 +66,7 @@ void	parent_proc(t_struct *st)
 void	ft_pipex(t_struct *st)
 {
 	pipe_gen(st);
-	get_iofiles(st);
+	//get_iofiles(st);
 	st->pid_child = fork();
 	if (st->pid_child == -1)
 	{	
@@ -98,3 +110,5 @@ int	main(int ac, char **av, char **env)
 	exit_pipex(&st, 0);
 	return (0);
 }
+
+//Ahora mismo no se usa getfiles, se abre cada uno en su proceso

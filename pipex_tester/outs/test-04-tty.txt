@@ -1,5 +1,1 @@
-Error: Undefined error: 0
-leaks Report Version: 4.0
-Process 67324: 152 nodes malloced for 8 KB
-Process 67324: 0 leaks for 0 total leaked bytes.
-
+pipex: argv parse error: Undefined error: 0

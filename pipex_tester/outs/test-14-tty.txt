@@ -1,4 +1,0 @@
-leaks Report Version: 4.0
-Process 67415: 152 nodes malloced for 8 KB
-Process 67415: 0 leaks for 0 total leaked bytes.
-
