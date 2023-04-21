@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/20 19:41:03 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:28:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  * En nuestra struct @param st queremos almacenar todas las variables que vamos a
  * ir usando, incluso los argumentos del main ac, av, env...así será mucho más 
  * cómodo todo el proceso
- * TODO -> Función aux que ponga todos los valores a 0/NULL antes de nada
  */
 t_struct	init_struct(int ac, char **av, char **env)
 {
@@ -53,7 +52,7 @@ t_struct	set_st_empty(void)
 	st.fd_out = -1;
 	st.pipe = NULL;
 	st.pid_child = -1;
-	st.error_code = 0;
+	st.error_flag = 0;
 	return (st);
 }
 
@@ -66,23 +65,18 @@ void	pipe_gen(t_struct *st)
 		st->pipe = malloc(sizeof(int) * 2);
 	if (pipe(st->pipe) == -1)
 	{	
-		st->error_code = 1;
 		perror("Pipe failed");
-		exit_pipex(st);
+		exit_pipex(st, 1);
 	}
 }
 
-/**
- * Función para comprobar si existe un archivo en un directorio
- * Debería estar en utils pero ya tengo cinco funciones, tampoco sé
- * si me terminará haciendo falta o no, es un poco chapuza
- */
-int	ft_filedoexist(char *file_path)
+int	check_cmd(t_struct *st, char **command)
 {
-	int	fd;
-
-	fd = open(file_path, O_RDONLY);
-	if (fd > 0)
-		return (close(fd), 0);
-	return (1);
+	if (find_path_index(st, command[0]) == -1)
+	{
+		st->error_flag = 1;
+		ft_printf("pipex: command not found: %s\n", command[0]);
+		return (1);
+	}
+	return (0);
 }

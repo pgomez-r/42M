@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:01:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/20 19:40:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:00:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_struct
 	int		fd_out;
 	int		*pipe;
 	pid_t	pid_child;
-	int		error_code;
+	int		error_flag;
 }	t_struct;
 
 /*main.c*/
@@ -44,7 +44,7 @@ t_struct	init_struct(int ac, char **av, char **env);
 t_struct	set_st_empty(void);
 void		pipe_gen(t_struct *st);
 int			ft_filedoexist(char *file_path);
-
+int			check_cmd(t_struct *st, char **command);
 /*parser.c*/
 int			is_path(char *str);
 void		get_paths(t_struct *st);
@@ -55,7 +55,7 @@ void		commands_parser(t_struct *st);
 /*utils.c*/
 void		ft_print_dstr(char **dstr);
 void		ft_leaks(void);
-void		exit_pipex(t_struct *st);
+void		exit_pipex(t_struct *st, int error);
 void		close_pipe(t_struct *st);
 void		close_fds(t_struct *st);
 
