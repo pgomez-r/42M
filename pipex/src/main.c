@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/22 17:14:34 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/04/22 23:40:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,3 @@ int	main(int ac, char **av, char **env)
 	exit_pipex(&st, 0);
 	return (0);
 }
-
-//Ahora mismo no se usa getfiles, se abre cada uno en su proceso

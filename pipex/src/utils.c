@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/22 20:35:10 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/04/22 23:40:05 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,14 @@ void	exit_pipex(t_struct *st, int error)
 	if (st)
 	{
 		close_fds(st);
-		*st = set_st_empty();
-		// if (st->pipe != NULL)
-		// 	free(st->pipe);
-		// if (st->paths != NULL)
-		// 	ft_totalfree(st->paths);
-		// if (st->cmd1 != NULL)
-		// 	ft_totalfree(st->cmd1);
-		// if (st->cmd2 != NULL)
-		// 	ft_totalfree(st->cmd2);
-		// if (st->path_cmd != NULL)
-		// 	free(st->path_cmd);
+		if (st->pipe != NULL)
+			free(st->pipe);
+		if (st->paths != NULL)
+			ft_totalfree(st->paths);
+		if (st->cmd1 != NULL)
+			ft_totalfree(st->cmd1);
+		if (st->cmd2 != NULL)
+			ft_totalfree(st->cmd2);
 	}
 	if (error > 0)
 		exit(EXIT_FAILURE);

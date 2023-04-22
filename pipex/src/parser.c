@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/22 20:27:20 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/04/22 23:04:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	find_path_index(t_struct *st, char *cmd)
 		st->path_cmd = ft_strjoin(st->paths[i], cmd);
 		if (access(st->path_cmd, F_OK | X_OK) == 0)
 			return (0);
-		free(st->path_cmd);
+		if (st->path_cmd != NULL)
+			free(st->path_cmd);
 		i++;
 	}
 	return (-1);
