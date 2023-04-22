@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/21 19:06:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:27:20 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void	commands_parser(t_struct *st)
  * como av[1] y av[4]
  * usamos ft_print + strerror para poder incluir en el output del error el
  * nombre del archivo que no se ha podido abrir/encontrar
- * !PARCHE = para que muestre, si hay, error en ambos comandos -> compruba que
- * !files OK/NOK, si están bien comprueba también cmd, si está mal el primer IF
- * !no exit hasta que se compruebe también el segundo
+ * !no la uso actualmente, si el proyecto funciona bien -> BORRAR
  */
 void	get_iofiles(t_struct *st)
 {

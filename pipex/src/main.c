@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/21 21:14:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:14:34 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_struct	st;
 
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	if (ac != 5)
 		return (perror("pipex: argv parse error"), 1);
 	if (!env || !*env)
