@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:18:41 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/21 19:28:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:34:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 /**
  * Esta función guarda los datos que vamos a usar en pipex, desde ac, av,
- * env, etc - muchas lineas para hacerlo en main, así que lo hace esta y devuelve
- * un struct que se iguala a la declarada en main
- * En nuestra struct @param st queremos almacenar todas las variables que vamos a
- * ir usando, incluso los argumentos del main ac, av, env...así será mucho más 
- * cómodo todo el proceso
+ * env, etc - y devuelve un struct que se iguala a la declarada en main
+ * En @param st queremos almacenar todas las variables que vamos a usar después,
+ * así será mucho más cómodo todo el proceso y ahorraremos líneas por función
  */
 t_struct	init_struct(int ac, char **av, char **env)
 {
@@ -35,7 +33,10 @@ t_struct	init_struct(int ac, char **av, char **env)
 
 /**
  * Deja cada elemento de la estructura "vacío" antes de comenzar a darle valores
- * char = NULL, int = -1 -> (porque 0 podría ser un fd o PID válido) 
+ * char = NULL, int = -1 -> (porque 0 podría ser un fd o PID válido)
+ * Así también nos aseguramos de poder hacer todos los free en una sola función
+ * para gestionar la memoria, ya que en esa función solo liberamos lo que sea 
+ * diferente de NULL / -1
  */
 t_struct	set_st_empty(void)
 {
@@ -57,7 +58,10 @@ t_struct	set_st_empty(void)
 }
 
 /**
- * Crea un pipe (dos fd) para cada comando
+ * Genera un pipe con dos extremos o finales -> un array de dos elementos 
+ * -> dos fd que se relacionan o comunican entre ellos
+ * Como ya tenemos en nuestra struct @param pipe[2], hacemos pipe(st->pipe)
+ * y pipe[0] y pipe[1] se convierten en los dos extremos (fds) conectados
  */
 void	pipe_gen(t_struct *st)
 {
@@ -68,15 +72,4 @@ void	pipe_gen(t_struct *st)
 		perror("Pipe failed");
 		exit_pipex(st, 1);
 	}
-}
-
-int	check_cmd(t_struct *st, char **command)
-{
-	if (find_path_index(st, command[0]) == -1)
-	{
-		st->error_flag = 1;
-		ft_printf("pipex: command not found: %s\n", command[0]);
-		return (1);
-	}
-	return (0);
 }

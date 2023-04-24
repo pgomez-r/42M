@@ -6,29 +6,16 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:57:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/22 23:40:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:28:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/pipex.h"
 
-void	ft_leaks(void)
-{
-	system("leaks -q pipex");
-}
-
-void	ft_print_dstr(char **dstr)
-{
-	size_t	i;
-
-	i = 0;
-	while (dstr[i] != NULL)
-	{
-		printf("%s\n", dstr[i]);
-		i++;
-	}
-}
-
+/**
+ * Cierra los fd "creados" al hacer open del archivo de entrada y el de salida
+ * la usamos a la hora de terminar el programa para no dejar ningun fd en uso
+ */
 void	close_fds(t_struct *st)
 {
 	if (st->fd_in != -1)
@@ -37,6 +24,10 @@ void	close_fds(t_struct *st)
 		close(st->fd_out);
 }
 
+/**
+ * Cierra los dos extremos (fd's) del pipe que hemos generado anteriormente, hay 
+ * que cerrar el pipe en cada proceso para que no nos de fallo en parent/main
+ */
 void	close_pipe(t_struct *st)
 {
 	close(st->pipe[0]);
@@ -44,9 +35,12 @@ void	close_pipe(t_struct *st)
 }
 
 /**
- * Función para terminar el programa, comprueba si las variables de
- * la struct están inicializadas y si es así las libera
- * error = 2 -> command_not found
+ * Función para terminar el programa, comprueba variables de struct que pueden
+ * necesitar ser liberadas (strings y arrays), si están inicializadas las libera
+ * @param error = al llamar a la función le enviamos un 1 en caso de que estemos
+ * terminando el programa por haberse producido un error -> entonces la función 
+ * ejecuta exit con EXIT_FAILURE 
+ * Si recibe 0 no ejecuta exit, ya lo hará con normalidad nuestro main al final
  */
 void	exit_pipex(t_struct *st, int error)
 {

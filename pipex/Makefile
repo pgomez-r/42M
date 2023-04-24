@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:02:29 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/04/08 15:24:24 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/04/24 20:22:01 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 CC       = gcc
 CFLAGS   = -Wall -Wextra -Werror
-EXE      = pipex
+NAME      = pipex
 
 SRC_PATH = src/
 OBJ_PATH = obj/
@@ -28,18 +28,18 @@ OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
 
 RM       = rm -f
 
-all:	${EXE}
+all:	${NAME}
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@echo "\033[0;33mGenerando archivos objeto...\033[0m"
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[0;32mArchivos objeto generados!"
-$(EXE):	$(OBJS)
+$(NAME):	$(OBJS)
 	@echo "\033[0;33mCompilando libft42...\033[0m"
 	@${MAKE} -C ./incl/libft42
 	@echo "\033[0;32mLibft42 compilada!\033[0m"
-	@${CC} $(CFLAGS) $(OBJS) ./incl/libft42/libft.a -o $(EXE)
+	@${CC} $(CFLAGS) $(OBJS) ./incl/libft42/libft.a -o $(NAME)
 	@echo "\033[0;32mEjecutable creado!\033[0m"
 
 debug:
@@ -52,7 +52,7 @@ clean:
 		@echo "\033[0;32mLimpiados archivos objeto!\033[0m"
 
 fclean:	clean
-		@${RM} ${EXE}
+		@${RM} ${NAME}
 		@${MAKE} -C ./incl/libft42 fclean
 		@${RM} debug
 		@echo "\033[0;32mFclean completado!\033[0m"
