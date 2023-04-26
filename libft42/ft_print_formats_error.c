@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_formats_error.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:28:36 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/25 21:37:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:17:23 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ queremos que gestione negativos, necesitamos crear una función nueva que
 no compruebe el número min negativo ni imprima el signo negativo antes del
 resto de números, por lo demás, misma función*/
 
-void	ft_puthex_error(unsigned long int n, char *base, size_t *i)
+void	ft_puthexalli_error(unsigned long int n, char *base, size_t *i)
 {
 	char	c;
 
@@ -94,7 +94,7 @@ void	ft_puthex_error(unsigned long int n, char *base, size_t *i)
 	{
 		c = base [n % 16];
 		n = n / 16;
-		ft_puthex_error(n, base, i);
+		ft_puthexalli_error(n, base, i);
 		ft_putchari_error(c, i);
 	}
 }

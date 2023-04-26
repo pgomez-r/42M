@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/24 21:11:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/25 21:37:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void		ft_putchari_error(int c, size_t *i);
 void		ft_putstri_error(char *str, size_t *i);
 void		ft_putnbri_error(int n, size_t *i);
 void		ft_putunsigi_error(unsigned int n, size_t *i);
-void		ft_puthexalli_error(unsigned long int n, char *base, size_t *i);
+void		ft_puthex_error(unsigned long int n, char *base, size_t *i);
 
 /*GNL*/
 char		*get_next_line(int fd);

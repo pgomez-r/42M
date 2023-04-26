@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:02:29 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/04/24 20:22:01 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/04/26 12:18:16 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 CC       = gcc
 CFLAGS   = -Wall -Wextra -Werror
-NAME      = pipex
+NAME     = pipex
 
 SRC_PATH = src/
 OBJ_PATH = obj/

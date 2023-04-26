@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/24 23:41:22 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/26 09:39:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	child_proc(t_struct	*st)
 	if (st->fd_in == -1)
 	{
 		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[1]);
-		exit_pipex(st, 1);
+		exit(EXIT_FAILURE);
 	}
 	dup2(st->fd_in, STDIN_FILENO);
 	dup2(st->pipe[1], STDOUT_FILENO);
@@ -46,7 +46,7 @@ void	child_proc(t_struct	*st)
 	if (execve(st->path_cmd, st->cmd1, st->env) == -1)
 	{
 		ft_printf_error("pipex: command not found: %s\n", st->cmd1[0]);
-		exit_pipex(st, 1);
+		exit(127);
 	}
 }
 
@@ -61,12 +61,11 @@ void	child_proc(t_struct	*st)
  */
 void	parent_proc(t_struct *st)
 {
-	waitpid(st->pid_child, NULL, 0);
 	st->fd_out = open(st->av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (st->fd_out == -1)
 	{
 		ft_printf("pipex: %s: %s\n", strerror(errno), st->av[4]);
-		exit_pipex(st, 1);
+		exit(EXIT_FAILURE);
 	}
 	dup2(st->pipe[0], STDIN_FILENO);
 	dup2(st->fd_out, STDOUT_FILENO);
@@ -75,7 +74,7 @@ void	parent_proc(t_struct *st)
 	if (execve(st->path_cmd, st->cmd2, st->env) == -1)
 	{
 		ft_printf_error("pipex: command not found: %s\n", st->cmd2[0]);
-		exit_pipex(st, 1);
+		exit(127);
 	}
 }
 
@@ -131,12 +130,14 @@ int	main(int ac, char **av, char **env)
 {
 	t_struct	st;
 
+	//atexit(ft_leaks);
 	if (ac != 5)
 		return (perror("pipex: argv parse error"), 1);
 	if (!env || !*env)
 		return (perror("pipex: env parse error"), 1);
 	st = init_struct(ac, av, env);
 	ft_pipex(&st);
+	system("leaks -q pipex");
 	exit_pipex(&st, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:22:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:11:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # endif
 
 /*libs_estandar*/
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h> 
@@ -60,9 +61,27 @@ typedef struct s_lis_utils
 	size_t	lis_len;
 }			t_lis_utils;
 
-/*FUNCIONES PISCINERAS*/
+/*FUNCIONES ft_utils*/
+void		ft_leaks(void);
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strcpy(char *dest, char *src);
+size_t		ft_strdlen(char **str);
+void		ft_totalfree(char **numbers);
+int			ft_getarrays(char **numbers, t_index *index);
+int			*ft_simpler(t_index *index);
+int			*ft_duparray(int *array, size_t arrlen);
+int			ft_isinarray(int num, int *array, size_t size);
+int			ft_max_in_array(int *array, size_t size);
+size_t		ft_maxvalue_pos(int *array, size_t len);
+long int	ft_latoi(const char *str);
+char		**ft_argtochar(int ac, char **av);
+int			ft_chkdup(t_index *index);
+int			ft_chkdigit(char **str);
+int			ft_chksort(t_index *index);
+int			ft_chklimit(char **str);
+size_t		ft_minvalue_pos(int *array, size_t len);
+int			ft_abs_sum(int x, int y);
+void		ft_print_dstr(char **dstr);
 
 /*FUNCIONES DE LIBFT*/
 int			ft_atoi(const char *str);
@@ -118,31 +137,23 @@ void		ft_putnbri(int n, size_t *i);
 void		ft_putunsigi(unsigned int n, size_t *i);
 void		ft_puthexalli(unsigned long int n, char *base, size_t *i);
 
-/*FUNCIONES GNL*/
+/*ft_printf_error -> imprimir con ft_print por salida de errores (fd = 2)*/
+void		ft_putchari_error(int c, size_t *i);
+int			ft_printf_error(char const *str, ...);
+void		ft_checkprintformat_error(va_list arg, char *str, size_t *i);
+void		ft_putchari_error(int c, size_t *i);
+void		ft_putstri_error(char *str, size_t *i);
+void		ft_putnbri_error(int n, size_t *i);
+void		ft_putunsigi_error(unsigned int n, size_t *i);
+void		ft_puthexalli_error(unsigned long int n, char *base, size_t *i);
+
+/*GNL*/
 char		*get_next_line(int fd);
 char		*join_and_free(char *stack, char *tmp);
 char		*update_stack(char *stack);
 char		*create_line(char *stack);
 
-/*FUNCIONES FT_PUSH_SWAP*/
-size_t		ft_strdlen(char **str);
-void		ft_totalfree(char **numbers);
-int			ft_getarrays(char **numbers, t_index *index);
-int			*ft_simpler(t_index *index);
-int			*ft_duparray(int *array, size_t arrlen);
-int			ft_isinarray(int num, int *array, size_t size);
-int			ft_max_in_array(int *array, size_t size);
-size_t		ft_maxvalue_pos(int *array, size_t len);
-long int	ft_latoi(const char *str);
-char		**ft_argtochar(int ac, char **av);
-int			ft_chkdup(t_index *index);
-int			ft_chkdigit(char **str);
-int			ft_chksort(t_index *index);
-int			ft_chklimit(char **str);
-size_t		ft_minvalue_pos(int *array, size_t len);
-int			ft_abs_sum(int x, int y);
-
-/*FUNCIONES SOLO PUSH_SWAP*/
+/*PUSH_SWAP*/
 void		complex_free(t_index *index, char **numbers);
 void		easy_free(t_index *index, char **numbers);
 void		muted_rotate_a(t_index *index);
