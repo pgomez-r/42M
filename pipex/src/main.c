@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/26 09:39:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:29:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_struct	st;
 
-	//atexit(ft_leaks);
 	if (ac != 5)
 		return (perror("pipex: argv parse error"), 1);
 	if (!env || !*env)
@@ -141,9 +140,3 @@ int	main(int ac, char **av, char **env)
 	exit_pipex(&st, 0);
 	return (0);
 }
-
-//pendiente para 25-4-23 -> COMPROBAR CON WAITPID EN PARENT TODAS LAS PRUEBAS
-//CON FT_LEAKS -> si no, quitar y de nuevo todas las pruebas con LEAKS
-//Explicar bien el proceso, prototipo de waitpid?
-//Fix ft_print_error en inc/libft42 y 42M/libft42 para norminette
-//ultimo check PACO (makefile?) + cambiar make a EXE + make relink tester?

@@ -6,12 +6,12 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:51:47 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/02/24 02:33:24 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/05/04 21:15:52 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-EXE    = push_swap
-BEXE   = bonus_checker
+NAME    = push_swap
+BNAME   = bonus_checker
 
 SRCS   = arg_check.c libft_utils.c lis_utils.c main.c operations_db.c \
 			operations_maker.c operations_ps.c operations_rot.c ps_utils_b.c \
@@ -32,19 +32,19 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM     = rm -f
 
-all:	${EXE}
+all:	${NAME}
 
-$(EXE):	$(OBJS)
-	${CC} $(CFLAGS) $(OBJS) -o $(EXE)
+$(NAME):	$(OBJS)
+	${CC} $(CFLAGS) $(OBJS) -o $(NAME)
 
 bonus:	$(BOBJS)
-		${CC} $(CFLAGS) $(BOBJS) -o $(BEXE)
+		${CC} $(CFLAGS) $(BOBJS) -o $(BNAME)
 
 clean:
 		${RM} ${OBJS} ${BOBJS}
 
 fclean:	clean
-		${RM} ${EXE} ${BEXE}
+		${RM} ${NAME} ${BNAME}
 
 re:	fclean all bonus
 

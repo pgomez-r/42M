@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_formats_error.c                           :+:      :+:    :+:   */
+/*   ft_print_formats.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:28:36 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/25 21:37:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:02:31 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,42 @@ man de printf*/
 
 #include "libft.h"
 
-void	ft_putchari_error(int c, size_t *i)
+void	ft_putchari(int c, size_t *i)
 {
-	write(2, &c, 1);
+	write(1, &c, 1);
 	(*i)++;
 }
 
-void	ft_putstri_error(char *str, size_t *i)
+void	ft_putstri(char *str, size_t *i)
 {
 	if (!str)
 		str = "(null)";
 	while (*str)
 	{
-		ft_putchari_error(*str, i);
+		ft_putchari(*str, i);
 		str++;
 	}
 }
 
-void	ft_putnbri_error(int n, size_t *i)
+void	ft_putnbri(int n, size_t *i)
 {
 	if (n == -2147483648)
 	{
-		ft_putstri_error("-2147483648", i);
+		ft_putstri("-2147483648", i);
 		return ;
 	}
 	if (n < 0)
 	{
-		ft_putchari_error('-', i);
+		ft_putchari('-', i);
 		n = n * -1;
 	}
 	if (n >= 10)
 	{
-		ft_putnbri_error(n / 10, i);
-		ft_putchari_error(n % 10 + '0', i);
+		ft_putnbri(n / 10, i);
+		ft_putchari(n % 10 + '0', i);
 	}
 	else
-		ft_putchari_error(n + '0', i);
+		ft_putchari(n + '0', i);
 }
 
 /*ft_putnbr recibe un entero y lo representa en pantalla, es decir, lo imprime
@@ -63,17 +63,17 @@ termina de llamarse así misma, comienza a imprimir todos los restos (%10) de
 las divisiones, lo que será igual a cada último dígito del número entero 
 (ej. 14%10 = 4)*/
 
-void	ft_putunsigi_error(unsigned int n, size_t *i)
+void	ft_putunsigi(unsigned int n, size_t *i)
 {
 	if ((int)n < 0)
 		n = n * -1;
 	if (n >= 10)
 	{
-		ft_putunsigi_error(n / 10, i);
-		ft_putchari_error(n % 10 + '0', i);
+		ft_putunsigi(n / 10, i);
+		ft_putchari(n % 10 + '0', i);
 	}
 	else
-		ft_putchari_error(n + '0', i);
+		ft_putchari(n + '0', i);
 }
 
 /*En el caso de %u, para unisgned int, hacemos un putnbr, pero como no
@@ -81,21 +81,21 @@ queremos que gestione negativos, necesitamos crear una función nueva que
 no compruebe el número min negativo ni imprima el signo negativo antes del
 resto de números, por lo demás, misma función*/
 
-void	ft_puthex_error(unsigned long int n, char *base, size_t *i)
+void	ft_puthexalli(unsigned long int n, char *base, size_t *i)
 {
 	char	c;
 
 	if (n < 16)
 	{
 		c = base [n];
-		ft_putchari_error(c, i);
+		ft_putchari(c, i);
 	}
 	if (n >= 16)
 	{
 		c = base [n % 16];
 		n = n / 16;
-		ft_puthex_error(n, base, i);
-		ft_putchari_error(c, i);
+		ft_puthexalli(n, base, i);
+		ft_putchari(c, i);
 	}
 }
 

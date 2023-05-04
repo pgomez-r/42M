@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_error.c                                  :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/25 21:36:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:20:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ que aumente con cada char que se imprima, para el return final. */
 
 #include "libft.h"
 
-void	ft_checkprintformat_error(va_list args, char *str, size_t *i)
+void	ft_checkprintformat(va_list args, char *str, size_t *i)
 {
 	if (*str == 'c')
-		ft_putchari_error(va_arg(args, int), i);
+		ft_putchari(va_arg(args, int), i);
 	else if (*str == 's')
-		ft_putstri_error(va_arg(args, char *), i);
+		ft_putstri(va_arg(args, char *), i);
 	else if (*str == '%')
-		ft_putchari_error(*str, i);
+		ft_putchari(*str, i);
 	else if ((*str == 'd') || (*str == 'i'))
-		ft_putnbri_error(va_arg(args, int), i);
+		ft_putnbri(va_arg(args, int), i);
 	else if (*str == 'u')
-		ft_putunsigi_error(va_arg(args, unsigned int), i);
+		ft_putunsigi(va_arg(args, unsigned int), i);
 	else if (*str == 'x')
-		ft_puthex_error(va_arg(args, unsigned int), "0123456789abcdef", i);
+		ft_puthexalli(va_arg(args, unsigned int), "0123456789abcdef", i);
 	else if (*str == 'X')
-		ft_puthex_error(va_arg(args, unsigned int), "0123456789ABCDEF", i);
+		ft_puthexalli(va_arg(args, unsigned int), "0123456789ABCDEF", i);
 	else if (*str == 'p')
 	{
-		ft_putstri_error("0x", i);
-		ft_puthex_error(va_arg(args, unsigned long int), "0123456789abcdef", i);
+		ft_putstri("0x", i);
+		ft_puthexalli(va_arg(args, unsigned long int), "0123456789abcdef", i);
 	}
 }
 
@@ -51,7 +51,7 @@ void	ft_checkprintformat_error(va_list args, char *str, size_t *i)
 tiene un if con cada especificador de formato que pide el subject y en cada
 caso llama a una función para que lo imprima, enviando también el contador*/
 
-int	ft_printf_error(char const *str, ...)
+int	ft_printf(char const *str, ...)
 {
 	va_list	args;
 	size_t	i;
@@ -65,10 +65,10 @@ int	ft_printf_error(char const *str, ...)
 		if (*str == '%')
 		{
 			str++;
-			ft_checkprintformat_error(args, (char *)str, &i);
+			ft_checkprintformat(args, (char *)str, &i);
 		}
 		else
-			ft_putchari_error(*str, &i);
+			ft_putchari(*str, &i);
 		str++;
 	}
 	va_end(args);
