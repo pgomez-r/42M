@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/10 18:43:46 by pgomez-r         ###   ########.fr       */
+/*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
+/*   Updated: 2023/05/10 22:53:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../incl/so_long.h"
 
-/*libs*/
-# include "./libft42/libft.h"
-# include "./MLX42/include/MLX42/MLX42.h"
-# include "./MLX42/include/MLX42/MLX42_Input.h"
-/*structs*/
+int	main(void)
+{
+	mlx_t	*mlx;
 
-#endif
+	mlx = mlx_init(860, 640, "42", true);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	printf("Has cerrado la ventanada, shulo\n");
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:46:37 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/25 21:37:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:50:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <limits.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <stdbool.h>
 
 /*ESTRUCURAS*/
 /*listas libft*/

@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/05/03 21:58:02 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/05/10 22:01:16 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,18 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[0;32mArchivos objeto generados!"
 $(NAME):	$(OBJS)
-	@echo "\033[0;33mCompilando libft42...\033[0m"
+	@echo "\033[0;33mComprobando/compilando libft42...\033[0m"
 	@${MAKE} -C ./incl/libft42
-	@echo "\033[0;32mLibft42 compilada!\033[0m"
-	@${CC} $(CFLAGS) $(OBJS) ./incl/libft42/libft.a -o $(NAME)
+	@echo "\033[0;33mComprobando/compilando MLX42...\033[0m"
+	@${MAKE} -C ./incl/MLX42
+	@echo "\033[0;32mMLX42 compilada!\033[0m"
+	@${CC} $(CFLAGS) $(OBJS) ./incl/libft42/libft.a ./incl/MLX42/libmlx42.a \
+	-lglfw -L /Users/${USER}/.brew/opt/glfw/lib/ -o $(NAME)
 	@echo "\033[0;32mEjecutable creado!\033[0m"
 
-debug:
-		@gcc -Wall -Wextra -Werror -g ./src/*.c ./incl/libft42/libft.a -o debug
-		@echo "\033[0;32mArchivo debug generado"
+# debug:
+# 		@gcc -Wall -Wextra -Werror -g ./src/*.c ./incl/libft42/libft.a -o debug
+# 		@echo "\033[0;32mArchivo debug generado"
 
 clean:
 		@${RM} ${OBJS}
