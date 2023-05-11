@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/11 18:15:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:45:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ void	ft_hook(void *param)
 
 int	main(void)
 {
-	mlx_t					*mlx;
+	mlx_t			*mlx;
+	mlx_texture_t	*texture;
 
-	mlx = mlx_init(860, 640, "42", false);
-	g_image = mlx_new_image(mlx, 128, 128);
+	mlx = mlx_init(1024, 864, "42", false);
+	texture = mlx_load_png("hacker.png");
+	g_image = mlx_texture_to_image(mlx, texture);
+	//g_image = mlx_new_image(mlx, 128, 128);
 	mlx_image_to_window(mlx, g_image, 0, 0);
-	ft_paintsquare(0x006400fff);
+	//ft_paintsquare(0x800080ff);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
