@@ -6,63 +6,61 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/11 18:45:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/13 23:09:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-static mlx_image_t		*g_image;
-
-void	ft_paintsquare(uint32_t color)
+void	load_map(t_struct *st)
 {
-	int32_t		x;
-	int32_t		y;
+	mlx_texture_t	*way;
+	mlx_texture_t	*wall;
 
-	x = 0;
-	while (x < (int32_t)g_image->width)
+	way = mlx_load_png("./Sprites/grass.png");
+	st->way = mlx_texture_to_image(st->window, way);
+	wall = mlx_load_png("./Sprites/rock.png");
+	st->wall = mlx_texture_to_image(st->window, wall);
+}
+
+/**
+ * TODO -> función que recorra el mapa y ponga en cada 1 roca, lo demás grass
+ */
+
+void	read_map(t_struct *st, char *path)
+{
+	char	*line;
+	char	*map_str;
+	int		fd;
+
+	map_str = malloc(1 * 1);
+	line = malloc (1 * 1);
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		y = 0;
-		while (y < (int32_t)g_image->height)
-		{
-			mlx_put_pixel(g_image, x, y, color);
-			y++;
-		}
-		x++;
+		map_str = ft_strjoin(map_str, line);
+		free(line);
+		line = get_next_line(fd);
 	}
+	if (line != NULL)
+		free(line);
+	close(fd);
+	st->map = ft_split(map_str, '\n');
+	st->width = ft_strlen(st->map[0]);
+	st->height = ft_strdlen(st->map);
 }
 
-void	ft_hook(void *param)
+int	main(int ac, char **av)
 {
-	mlx_t	*mlx;
+	t_struct	st;
 
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		g_image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		g_image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		g_image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		g_image->instances[0].x += 5;
-}
-
-int	main(void)
-{
-	mlx_t			*mlx;
-	mlx_texture_t	*texture;
-
-	mlx = mlx_init(1024, 864, "42", false);
-	texture = mlx_load_png("hacker.png");
-	g_image = mlx_texture_to_image(mlx, texture);
-	//g_image = mlx_new_image(mlx, 128, 128);
-	mlx_image_to_window(mlx, g_image, 0, 0);
-	//ft_paintsquare(0x800080ff);
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	printf("Has cerrado la ventanada, shulo\n");
+	(void)ac;
+	read_map(&st, av[1]);
+	st.window = mlx_init(st.width, st.height, "so_long_42", false);
+	//load_map(&st);
+	ft_printf("El mapa, linea 1:\n%s\n", st.map_arr[0]);
+	ft_printf("El mapa completo:\n");
+	ft_print_dstr(st.map_arr);
 	return (0);
 }
