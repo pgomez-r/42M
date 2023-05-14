@@ -6,61 +6,42 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/13 23:09:52 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:51:26 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-void	load_map(t_struct *st)
+void	key_control(void *param)
 {
-	mlx_texture_t	*way;
-	mlx_texture_t	*wall;
+	t_struct	*st;
 
-	way = mlx_load_png("./Sprites/grass.png");
-	st->way = mlx_texture_to_image(st->window, way);
-	wall = mlx_load_png("./Sprites/rock.png");
-	st->wall = mlx_texture_to_image(st->window, wall);
-}
-
-/**
- * TODO -> función que recorra el mapa y ponga en cada 1 roca, lo demás grass
- */
-
-void	read_map(t_struct *st, char *path)
-{
-	char	*line;
-	char	*map_str;
-	int		fd;
-
-	map_str = malloc(1 * 1);
-	line = malloc (1 * 1);
-	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		map_str = ft_strjoin(map_str, line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (line != NULL)
-		free(line);
-	close(fd);
-	st->map = ft_split(map_str, '\n');
-	st->width = ft_strlen(st->map[0]);
-	st->height = ft_strdlen(st->map);
+	st = (t_struct *)param;
+	if (mlx_is_key_down(st->window, MLX_KEY_ESCAPE))
+		mlx_close_window(st->window);
+	if (mlx_is_key_down(st->window, MLX_KEY_UP))
+		st->player->instances[0].y -= 5;
+	if (mlx_is_key_down(st->window, MLX_KEY_DOWN))
+		st->player->instances[0].y += 5;
+	if (mlx_is_key_down(st->window, MLX_KEY_LEFT))
+		st->player->instances[0].x -= 5;
+	if (mlx_is_key_down(st->window, MLX_KEY_RIGHT))
+		st->player->instances[0].x += 5;
 }
 
 int	main(int ac, char **av)
 {
-	t_struct	st;
+	t_struct		st;
 
 	(void)ac;
+	st = set_empty();
 	read_map(&st, av[1]);
-	st.window = mlx_init(st.width, st.height, "so_long_42", false);
-	//load_map(&st);
-	ft_printf("El mapa, linea 1:\n%s\n", st.map_arr[0]);
-	ft_printf("El mapa completo:\n");
-	ft_print_dstr(st.map_arr);
+	st.window = mlx_init(st.width * PIX, st.height * PIX, "so_long_42", false);
+	load_images(&st);
+	load_map(&st);
+	mlx_loop_hook(st.window, key_control, &st);
+	mlx_loop(st.window);
+	mlx_terminate(st.window);
+	ft_printf("Taluego! Ya te queda menos...=)");
 	return (0);
 }

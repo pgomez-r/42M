@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/13 22:56:08 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:31:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "./MLX42/include/MLX42/MLX42.h"
 # include "./MLX42/include/MLX42/MLX42_Input.h"
 
-# define PIXELS 64
+# define PIX 64
 
 /*structs*/
 typedef struct s_struct
@@ -32,7 +32,7 @@ typedef struct s_struct
 	size_t		height;
 	size_t		collec_cnt;
 	size_t		step_cnt;
-	mlx_t		*game;
+	mlx_t		*window;
 	mlx_image_t	*wall;
 	mlx_image_t	*way;
 	mlx_image_t	*exit_o;
@@ -42,6 +42,15 @@ typedef struct s_struct
 	mlx_image_t	*collec;
 }	t_struct;
 
-/*temp_pruebas*/
+/*main.c*/
+
+/*init.c*/
+void				read_map(t_struct *st, char *path);
+void				load_images(t_struct *st);
+void				load_map(t_struct *st);
+
+/*utils.c*/
+t_struct			set_empty(void);
+void				error_exit(char *error);
 
 #endif
