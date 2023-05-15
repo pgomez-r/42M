@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/14 22:51:26 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/15 23:21:50 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,37 @@ void	key_control(void *param)
 	if (mlx_is_key_down(st->window, MLX_KEY_ESCAPE))
 		mlx_close_window(st->window);
 	if (mlx_is_key_down(st->window, MLX_KEY_UP))
-		st->player->instances[0].y -= 5;
+	{	
+		if (st->map[(st->player_y - 5) / PIX][st->player_x / PIX] != '1')
+		{	
+			st->player->instances[0].y -= 5;
+			st->player_y -= 5;
+		}
+	}
 	if (mlx_is_key_down(st->window, MLX_KEY_DOWN))
-		st->player->instances[0].y += 5;
+	{	
+		if (st->map[(st->player_y + 5) / PIX][st->player_x / PIX] != '1')
+		{	
+			st->player->instances[0].y += 5;
+			st->player_y += 5;
+		}
+	}
 	if (mlx_is_key_down(st->window, MLX_KEY_LEFT))
-		st->player->instances[0].x -= 5;
+	{	
+		if (st->map[st->player_y / PIX][(st->player_x - 5) / PIX] != '1')
+		{	
+			st->player->instances[0].x -= 5;
+			st->player_x -= 5;
+		}
+	}
 	if (mlx_is_key_down(st->window, MLX_KEY_RIGHT))
-		st->player->instances[0].x += 5;
+	{	
+		if (st->map[st->player_y / PIX][(st->player_x + 5) / PIX] != '1')
+		{	
+			st->player->instances[0].x += 5;
+			st->player_y += 5;
+		}
+	}
 }
 
 int	main(int ac, char **av)
@@ -39,6 +63,7 @@ int	main(int ac, char **av)
 	st.window = mlx_init(st.width * PIX, st.height * PIX, "so_long_42", false);
 	load_images(&st);
 	load_map(&st);
+	load_player_collect(&st);
 	mlx_loop_hook(st.window, key_control, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
