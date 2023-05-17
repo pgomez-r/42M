@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/16 22:01:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:41:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	key_control(void *param)
 		mlx_close_window(st->window);
 	if (mlx_is_key_down(st->window, MLX_KEY_UP))
 	{	
-		if (st->map[(st->player->instances[0].y - 5) / PIX][st->player->instances[0].x / PIX] != '1')
+		if (st->map[(int)(st->player->instances[0].y - 5) / PIX][(int)st->player->instances[0].x / PIX] != '1')
 			st->player->instances[0].y -= 5;
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_DOWN))
 	{	
-		if (st->map[(st->player->instances[0].y + 5) / PIX][st->player->instances[0].x / PIX] != '1')
+		if (st->map[(int)(st->player->instances[0].y + 5) / PIX][(int)st->player->instances[0].x / PIX] != '1')
 			st->player->instances[0].y += 5;
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_LEFT))
 	{	
-		if (st->map[st->player->instances[0].y / PIX][(st->player->instances[0].x - 5) / PIX] != '1')
+		if (st->map[(int)st->player->instances[0].y / PIX][((int)st->player->instances[0].x - 5) / PIX] != '1')
 			st->player->instances[0].x -= 5;
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_RIGHT))
 	{	
-		if (st->map[st->player->instances[0].y / PIX][(st->player->instances[0].x + 5) / PIX] != '1')
+		if (st->map[(int)st->player->instances[0].y / PIX][((int)st->player->instances[0].x + 5) / PIX] != '1')
 			st->player->instances[0].x += 5;
 	}
 }
