@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/19 14:50:10 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/19 21:47:54 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,3 +127,4 @@ void	load_player_collect(t_struct *st)
 		y++;
 	}
 }
+//por cada E meto las dos exits, primero con menos profundidad la abierta, cuando haya que abrirlas solo hay que cambiar las profundidades
