@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/15 23:15:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:50:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	load_map(t_struct *st)
 {
 	size_t	x;
 	size_t	y;
+	int		i;
+	int		j;
 
+	j = 0;
+	i = 0;
 	y = 0;
 	while (y < st->height)
 	{
@@ -69,9 +73,17 @@ void	load_map(t_struct *st)
 		while (x < st->width)
 		{
 			if (st->map[y][x] == '1')
+			{
 				mlx_image_to_window(st->window, st->wall, x * PIX, y * PIX);
+				st->wall->instances[i].z = 1;
+				i++;
+			}
 			else
+			{
 				mlx_image_to_window(st->window, st->way, x * PIX, y * PIX);
+				st->way->instances[j].z = 1;
+				j++;
+			}
 			x++;
 		}
 		y++;
@@ -82,8 +94,12 @@ void	load_player_collect(t_struct *st)
 {
 	size_t	x;
 	size_t	y;
+	int		i;
+	int		j;
 
+	j = 0;
 	y = 0;
+	i = 0;
 	while (y < st->height)
 	{
 		x = 0;
@@ -92,13 +108,20 @@ void	load_player_collect(t_struct *st)
 			if (st->map[y][x] == 'P')
 			{	
 				mlx_image_to_window(st->window, st->player, x * PIX, y * PIX);
-				st->player_x = x * PIX;
-				st->player_y = y * PIX;
+				st->player->instances[0].z = 10;
 			}
 			else if (st->map[y][x] == 'C')
+			{
 				mlx_image_to_window(st->window, st->collec, x * PIX, y * PIX);
+				st->collec->instances[i].z = 5;
+				i++;
+			}
 			else if (st->map[y][x] == 'E')
+			{
 				mlx_image_to_window(st->window, st->exit_c, x * PIX, y * PIX);
+				st->exit_c->instances[j].z = 8;
+				j++;
+			}
 			x++;
 		}
 		y++;
