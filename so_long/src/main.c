@@ -6,11 +6,61 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/19 14:38:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:20:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
+
+void	wall_animation(void *param)
+{
+	t_struct	*st;
+	size_t		i;
+
+	st = (t_struct *)param;
+	i = 0;
+	if (st->frame_delay == 20 && st->wall->instances[i].z > 0)
+	{	
+		while (i < st->walls)
+		{
+			st->wall->instances[i].z = -100;
+			st->wall1->instances[i].z = 30;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	else if (st->frame_delay == 20 && st->wall1->instances[i].z > 0)
+	{	
+		while (i < st->walls)
+		{
+			st->wall1->instances[i].z = -100;
+			st->wall2->instances[i].z = 30;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	else if (st->frame_delay == 20 && st->wall2->instances[i].z > 0)
+	{	
+		while (i < st->walls)
+		{
+			st->wall2->instances[i].z = -100;
+			st->wall3->instances[i].z = 30;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	else if (st->frame_delay == 20 && st->wall3->instances[i].z > 0)
+	{	
+		while (i < st->walls)
+		{
+			st->wall3->instances[i].z = -100;
+			st->wall->instances[i].z = 30;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	st->frame_delay++;
+}
 
 void	key_control(void *param)
 {
@@ -54,9 +104,11 @@ int	main(int ac, char **av)
 	read_map(&st, av[1]);
 	st.window = mlx_init(st.width * PIX, st.height * PIX, "so_long_42", false);
 	load_images(&st);
-	load_map(&st);
+	load_background(&st);
+	load_walls(&st);
 	load_player_collect(&st);
 	mlx_loop_hook(st.window, key_control, &st);
+	mlx_loop_hook(st.window, wall_animation, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
 	ft_printf("Taluego! Ya te queda menos...=)");

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/19 21:47:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:19:34 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,69 @@ void	load_images(t_struct *st)
 {
 	mlx_texture_t	*temp;
 
-	temp = mlx_load_png("./Sprites/way.png");
+	temp = mlx_load_png("./sprites/bg0.png");
 	st->way = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./Sprites/wall.png");
+	temp = mlx_load_png("./sprites/bg1.png");
+	st->way1 = mlx_texture_to_image(st->window, temp);
+	mlx_delete_texture(temp);
+	temp = mlx_load_png("./sprites/bg2.png");
+	st->way2 = mlx_texture_to_image(st->window, temp);
+	mlx_delete_texture(temp);
+	temp = mlx_load_png("./sprites/ast1.png");
 	st->wall = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./Sprites/player.png");
+	temp = mlx_load_png("./sprites/ast2.png");
+	st->wall1 = mlx_texture_to_image(st->window, temp);
+	mlx_delete_texture(temp);
+	temp = mlx_load_png("./sprites/ast3.png");
+	st->wall2 = mlx_texture_to_image(st->window, temp);
+	mlx_delete_texture(temp);
+	temp = mlx_load_png("./sprites/ast4.png");
+	st->wall3 = mlx_texture_to_image(st->window, temp);
+	mlx_delete_texture(temp);
+	temp = mlx_load_png("./sprites/X-Wing.png");
 	st->player = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./Sprites/collec.png");
+	temp = mlx_load_png("./sprites/tie_white.png");
 	st->collec = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./Sprites/exit_c.png");
+	temp = mlx_load_png("./sprites/exit_m.png");
 	st->exit_c = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
 }
 
-void	load_map(t_struct *st)
+void	load_background(t_struct *st)
 {
 	size_t	x;
 	size_t	y;
-	int		i;
-	int		j;
 
-	j = 0;
-	i = 0;
+	st->ways = 0;
+	y = 0;
+	while (y < st->height)
+	{
+		x = 0;
+		while (x < st->width)
+		{
+			mlx_image_to_window(st->window, st->way, x * PIX, y * PIX);
+			mlx_image_to_window(st->window, st->way1, x * PIX, y * PIX);
+			mlx_image_to_window(st->window, st->way2, x * PIX, y * PIX);
+			st->way->instances[st->ways].z = 10;
+			st->way1->instances[st->ways].z = -1000;
+			st->way2->instances[st->ways].z = -1000;
+			st->ways++;
+			x++;
+		}
+		y++;
+	}
+}
+
+void	load_walls(t_struct *st)
+{
+	size_t	x;
+	size_t	y;
+
+	st->walls = 0;
 	y = 0;
 	while (y < st->height)
 	{
@@ -75,14 +112,14 @@ void	load_map(t_struct *st)
 			if (st->map[y][x] == '1')
 			{
 				mlx_image_to_window(st->window, st->wall, x * PIX, y * PIX);
-				st->wall->instances[i].z = 1;
-				i++;
-			}
-			else
-			{
-				mlx_image_to_window(st->window, st->way, x * PIX, y * PIX);
-				st->way->instances[j].z = 1;
-				j++;
+				mlx_image_to_window(st->window, st->wall1, x * PIX, y * PIX);
+				mlx_image_to_window(st->window, st->wall2, x * PIX, y * PIX);
+				mlx_image_to_window(st->window, st->wall3, x * PIX, y * PIX);
+				st->wall->instances[st->walls].z = 30;
+				st->wall1->instances[st->walls].z = -100;
+				st->wall2->instances[st->walls].z = -100;
+				st->wall3->instances[st->walls].z = -100;
+				st->walls++;
 			}
 			x++;
 		}
@@ -108,18 +145,18 @@ void	load_player_collect(t_struct *st)
 			if (st->map[y][x] == 'P')
 			{	
 				mlx_image_to_window(st->window, st->player, x * PIX, y * PIX);
-				st->player->instances[0].z = 10;
+				st->player->instances[0].z = 100;
 			}
 			else if (st->map[y][x] == 'C')
 			{
 				mlx_image_to_window(st->window, st->collec, x * PIX, y * PIX);
-				st->collec->instances[i].z = 5;
+				st->collec->instances[i].z = 50;
 				i++;
 			}
 			else if (st->map[y][x] == 'E')
 			{
 				mlx_image_to_window(st->window, st->exit_c, x * PIX, y * PIX);
-				st->exit_c->instances[j].z = 8;
+				st->exit_c->instances[j].z = 50;
 				j++;
 			}
 			x++;

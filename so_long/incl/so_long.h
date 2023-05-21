@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/15 23:22:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:18:38 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,17 @@ typedef struct s_struct
 	size_t		step_cnt;
 	size_t		player_y;
 	size_t		player_x;
+	size_t		walls;
+	size_t		ways;
+	size_t		frame_delay;
 	mlx_t		*window;
 	mlx_image_t	*wall;
+	mlx_image_t	*wall1;
+	mlx_image_t	*wall2;
+	mlx_image_t	*wall3;
 	mlx_image_t	*way;
+	mlx_image_t	*way1;
+	mlx_image_t	*way2;
 	mlx_image_t	*exit_o;
 	mlx_image_t	*exit_c;
 	mlx_image_t	*player;
@@ -49,7 +57,8 @@ typedef struct s_struct
 /*init.c*/
 void				read_map(t_struct *st, char *path);
 void				load_images(t_struct *st);
-void				load_map(t_struct *st);
+void				load_background(t_struct *st);
+void				load_walls(t_struct *st);
 void				load_player_collect(t_struct *st);
 
 /*utils.c*/

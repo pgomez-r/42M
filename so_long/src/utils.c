@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/15 23:12:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/21 22:13:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,17 @@ t_struct	set_empty(void)
 	empty_st.step_cnt = 0;
 	empty_st.player_y = 0;
 	empty_st.player_x = 0;
+	empty_st.walls = 0;
+	empty_st.ways = 0;
+	empty_st.frame_delay = 0;
 	empty_st.window = NULL;
 	empty_st.wall = NULL;
+	empty_st.wall1 = NULL;
+	empty_st.wall2 = NULL;
+	empty_st.wall3 = NULL;
 	empty_st.way = NULL;
+	empty_st.way1 = NULL;
+	empty_st.way2 = NULL;
 	empty_st.exit_o = NULL;
 	empty_st.exit_c = NULL;
 	empty_st.player = NULL;
