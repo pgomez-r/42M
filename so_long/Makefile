@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/05/14 22:31:33 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/05/21 09:55:47 by pgruz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,12 @@ $(NAME):	$(OBJS)
 	@echo "\033[0;33mComprobando/compilando MLX42...\033[0m"
 	@${MAKE} -C ./incl/MLX42
 	@echo "\033[0;32mMLX42 compilada!\033[0m"
+### - COMPILACIÓN PARA 42 - ###
 	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a ./incl/MLX42/libmlx42.a \
 	-lglfw -L /Users/${USER}/.brew/opt/glfw/lib/ -o $(NAME)
+### - COMPILACIÓN PARA CASA - ###
+#	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a /home/pgruz/Escritorio/MLX42/linux_make/libmlx42.a \
+	-Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
 	@echo "\033[0;32mEjecutable creado!\033[0m"
 
 debug:
