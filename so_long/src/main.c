@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/22 15:39:27 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/22 16:27:03 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	background_animation(void *param)
 
 	st = (t_struct *)param;
 	i = 0;
-	if (st->frame_delay == 20 && st->way->instances[i].z > 0)
+	if (st->frame_delay == 100 && st->way->instances[i].z > 0)
 	{	
 		while (i < st->ways)
 		{
@@ -29,7 +29,7 @@ void	background_animation(void *param)
 		}
 		st->frame_delay = -1;
 	}
-	else if (st->frame_delay == 20 && st->way1->instances[i].z > 0)
+	else if (st->frame_delay == 100 && st->way1->instances[i].z > 0)
 	{	
 		while (i < st->ways)
 		{
@@ -39,7 +39,7 @@ void	background_animation(void *param)
 		}
 		st->frame_delay = -1;
 	}
-	else if (st->frame_delay == 20 && st->way2->instances[i].z > 0)
+	else if (st->frame_delay == 100 && st->way2->instances[i].z > 0)
 	{	
 		while (i < st->ways)
 		{
@@ -60,7 +60,7 @@ void	wall_animation(void *param)
 
 	st = (t_struct *)param;
 	i = 0;
-	if (st->frame_delay == 20 && st->wall->instances[i].z > 0)
+	if (st->frame_delay == 40 && st->wall->instances[i].z > 0)
 	{	
 		while (i < st->walls)
 		{
@@ -70,7 +70,7 @@ void	wall_animation(void *param)
 		}
 		st->frame_delay = -1;
 	}
-	else if (st->frame_delay == 20 && st->wall1->instances[i].z > 0)
+	else if (st->frame_delay == 40 && st->wall1->instances[i].z > 0)
 	{	
 		while (i < st->walls)
 		{
@@ -80,7 +80,7 @@ void	wall_animation(void *param)
 		}
 		st->frame_delay = -1;
 	}
-	else if (st->frame_delay == 20 && st->wall2->instances[i].z > 0)
+	else if (st->frame_delay == 40 && st->wall2->instances[i].z > 0)
 	{	
 		while (i < st->walls)
 		{
@@ -90,7 +90,7 @@ void	wall_animation(void *param)
 		}
 		st->frame_delay = -1;
 	}
-	else if (st->frame_delay == 20 && st->wall3->instances[i].z > 0)
+	else if (st->frame_delay == 40 && st->wall3->instances[i].z > 0)
 	{	
 		while (i < st->walls)
 		{
@@ -156,3 +156,6 @@ int	main(int ac, char **av)
 	ft_printf("Taluego! Ya te queda menos...=)");
 	return (0);
 }
+
+//animando back y wall - el fallo se da cuando hay rotación de wall sobre el primer background... 
+//mirar Zs cuando cargo de primeras y cuando esta bg0 "arriba"...

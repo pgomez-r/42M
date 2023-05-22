@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/22 15:38:28 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/22 16:19:05 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ void	load_images(t_struct *st)
 	temp = mlx_load_png("./sprites/bg2.png");
 	st->way2 = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./sprites/ast1.png");
+	temp = mlx_load_png("./sprites/frame_1.png");
 	st->wall = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./sprites/ast2.png");
+	temp = mlx_load_png("./sprites/frame_2.png");
 	st->wall1 = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./sprites/ast3.png");
+	temp = mlx_load_png("./sprites/frame_3.png");
 	st->wall2 = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
-	temp = mlx_load_png("./sprites/ast4.png");
+	temp = mlx_load_png("./sprites/frame_4.png");
 	st->wall3 = mlx_texture_to_image(st->window, temp);
 	mlx_delete_texture(temp);
 	temp = mlx_load_png("./sprites/X-Wing.png");
