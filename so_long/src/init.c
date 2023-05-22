@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/21 23:19:34 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:38:28 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ void	load_walls(t_struct *st)
 				mlx_image_to_window(st->window, st->wall2, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->wall3, x * PIX, y * PIX);
 				st->wall->instances[st->walls].z = 30;
-				st->wall1->instances[st->walls].z = -100;
-				st->wall2->instances[st->walls].z = -100;
-				st->wall3->instances[st->walls].z = -100;
+				st->wall1->instances[st->walls].z = -1000;
+				st->wall2->instances[st->walls].z = -1000;
+				st->wall3->instances[st->walls].z = -1000;
 				st->walls++;
 			}
 			x++;

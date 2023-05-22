@@ -3,14 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/21 23:20:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:39:27 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
+
+void	background_animation(void *param)
+{
+	t_struct	*st;
+	size_t		i;
+
+	st = (t_struct *)param;
+	i = 0;
+	if (st->frame_delay == 20 && st->way->instances[i].z > 0)
+	{	
+		while (i < st->ways)
+		{
+			st->way->instances[i].z = -1000;
+			st->way1->instances[i].z = 10;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	else if (st->frame_delay == 20 && st->way1->instances[i].z > 0)
+	{	
+		while (i < st->ways)
+		{
+			st->way1->instances[i].z = -1000;
+			st->way2->instances[i].z = 10;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	else if (st->frame_delay == 20 && st->way2->instances[i].z > 0)
+	{	
+		while (i < st->ways)
+		{
+			st->way2->instances[i].z = -1000;
+			st->way->instances[i].z = 10;
+			i++;
+		}
+		st->frame_delay = -1;
+	}
+	st->frame_delay++;
+}
+
 
 void	wall_animation(void *param)
 {
@@ -23,7 +64,7 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			st->wall->instances[i].z = -100;
+			st->wall->instances[i].z = -1000;
 			st->wall1->instances[i].z = 30;
 			i++;
 		}
@@ -33,7 +74,7 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			st->wall1->instances[i].z = -100;
+			st->wall1->instances[i].z = -1000;
 			st->wall2->instances[i].z = 30;
 			i++;
 		}
@@ -43,7 +84,7 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			st->wall2->instances[i].z = -100;
+			st->wall2->instances[i].z = -1000;
 			st->wall3->instances[i].z = 30;
 			i++;
 		}
@@ -53,7 +94,7 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			st->wall3->instances[i].z = -100;
+			st->wall3->instances[i].z = -1000;
 			st->wall->instances[i].z = 30;
 			i++;
 		}
@@ -108,6 +149,7 @@ int	main(int ac, char **av)
 	load_walls(&st);
 	load_player_collect(&st);
 	mlx_loop_hook(st.window, key_control, &st);
+	mlx_loop_hook(st.window, background_animation, &st);	
 	mlx_loop_hook(st.window, wall_animation, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
