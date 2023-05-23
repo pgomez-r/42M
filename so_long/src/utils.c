@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/21 22:13:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:00:13 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_struct	set_empty(void)
 	empty_st.walls = 0;
 	empty_st.ways = 0;
 	empty_st.frame_delay = 0;
+	empty_st.frame_bg = 0;
 	empty_st.window = NULL;
 	empty_st.wall = NULL;
 	empty_st.wall1 = NULL;
@@ -36,7 +37,10 @@ t_struct	set_empty(void)
 	empty_st.way2 = NULL;
 	empty_st.exit_o = NULL;
 	empty_st.exit_c = NULL;
-	empty_st.player = NULL;
+	empty_st.player_u = NULL;
+	empty_st.player_d = NULL;
+	empty_st.player_l = NULL;
+	empty_st.player_r = NULL;
 	empty_st.enemy = NULL;
 	empty_st.collec = NULL;
 	return (empty_st);

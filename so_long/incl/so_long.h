@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/21 23:18:38 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/23 23:11:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "./MLX42/include/MLX42/MLX42_Input.h"
 
 # define PIX 64
+# define NAME "So_(so)_LONG"
+# define MOV 4
 
 /*structs*/
 typedef struct s_struct
@@ -37,6 +39,7 @@ typedef struct s_struct
 	size_t		walls;
 	size_t		ways;
 	size_t		frame_delay;
+	size_t		frame_bg;
 	mlx_t		*window;
 	mlx_image_t	*wall;
 	mlx_image_t	*wall1;
@@ -47,7 +50,10 @@ typedef struct s_struct
 	mlx_image_t	*way2;
 	mlx_image_t	*exit_o;
 	mlx_image_t	*exit_c;
-	mlx_image_t	*player;
+	mlx_image_t	*player_u;
+	mlx_image_t	*player_d;
+	mlx_image_t	*player_l;
+	mlx_image_t	*player_r;
 	mlx_image_t	*enemy;	
 	mlx_image_t	*collec;
 }	t_struct;
