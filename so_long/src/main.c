@@ -6,11 +6,81 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/23 23:15:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:46:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
+
+void	col_animation(void *param)
+{
+	t_struct	*st;
+	size_t		i;
+
+	st = (t_struct *)param;
+	i = 0;
+	if (st->frame_col == 25 && st->col1->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col2->instances[i], 110);
+			mlx_set_instance_depth(&st->col1->instances[i], -110);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	else if (st->frame_col == 25 && st->col2->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col3->instances[i], 110);
+			mlx_set_instance_depth(&st->col2->instances[i], -120);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	else if (st->frame_col == 25 && st->col3->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col4->instances[i], 110);
+			mlx_set_instance_depth(&st->col3->instances[i], -130);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	else if (st->frame_col == 25 && st->col4->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col5->instances[i], 110);
+			mlx_set_instance_depth(&st->col4->instances[i], -140);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	else if (st->frame_col == 25 && st->col5->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col6->instances[i], 110);
+			mlx_set_instance_depth(&st->col5->instances[i], -150);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	else if (st->frame_col == 25 && st->col6->instances[i].z > 0)
+	{	
+		while (i < st->cols)
+		{
+			mlx_set_instance_depth(&st->col1->instances[i], 110);
+			mlx_set_instance_depth(&st->col6->instances[i], -160);
+			i++;
+		}
+		st->frame_col = -1;
+	}
+	st->frame_col++;
+}
 
 void	background_animation(void *param)
 {
@@ -23,8 +93,8 @@ void	background_animation(void *param)
 	{	
 		while (i < st->ways)
 		{
-			st->way1->instances[i].z = 10;
-			st->way->instances[i].z = -10;
+			mlx_set_instance_depth(&st->way1->instances[i], 10);
+			mlx_set_instance_depth(&st->way->instances[i], -10);
 			i++;
 		}
 		st->frame_bg = -1;
@@ -33,8 +103,8 @@ void	background_animation(void *param)
 	{	
 		while (i < st->ways)
 		{
-			st->way2->instances[i].z = 10;
-			st->way1->instances[i].z = -20;
+			mlx_set_instance_depth(&st->way2->instances[i], 10);
+			mlx_set_instance_depth(&st->way1->instances[i], -20);
 			i++;
 		}
 		st->frame_bg = -1;
@@ -43,8 +113,8 @@ void	background_animation(void *param)
 	{	
 		while (i < st->ways)
 		{
-			st->way->instances[i].z = 10;
-			st->way2->instances[i].z = -30;
+			mlx_set_instance_depth(&st->way->instances[i], 10);
+			mlx_set_instance_depth(&st->way2->instances[i], -30);
 			i++;
 		}
 		st->frame_bg = -1;
@@ -63,8 +133,8 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			mlx_set_instance_depth(&st->wall1->instances[i], 300);
-			mlx_set_instance_depth(&st->wall->instances[i], -300);
+			mlx_set_instance_depth(&st->wall1->instances[i], 110);
+			mlx_set_instance_depth(&st->wall->instances[i], -110);
 			i++;
 		}
 		st->frame_delay = -1;
@@ -73,8 +143,8 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			mlx_set_instance_depth(&st->wall2->instances[i], 300);
-			mlx_set_instance_depth(&st->wall1->instances[i], -400);
+			mlx_set_instance_depth(&st->wall2->instances[i], 110);
+			mlx_set_instance_depth(&st->wall1->instances[i], -120);
 			i++;
 		}
 		st->frame_delay = -1;
@@ -83,8 +153,8 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-				mlx_set_instance_depth(&st->wall3->instances[i], 300);
-				mlx_set_instance_depth(&st->wall2->instances[i], -500);
+			mlx_set_instance_depth(&st->wall3->instances[i], 110);
+			mlx_set_instance_depth(&st->wall2->instances[i], -130);
 			i++;
 		}
 		st->frame_delay = -1;
@@ -93,13 +163,80 @@ void	wall_animation(void *param)
 	{	
 		while (i < st->walls)
 		{
-			mlx_set_instance_depth(&st->wall->instances[i], 300);
-			mlx_set_instance_depth(&st->wall3->instances[i], -600);
+			mlx_set_instance_depth(&st->wall->instances[i], 110);
+			mlx_set_instance_depth(&st->wall3->instances[i], -140);
 			i++;
 		}
 		st->frame_delay = -1;
 	}
 	st->frame_delay++;
+}
+
+void	enemy_patrol(t_struct *st)
+{
+	if (mlx_is_key_down(st->window, MLX_KEY_UP))
+	{	
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], 310);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
+		if (st->map[((int)(st->player_d->instances[0].y + 4) - MOV) / PIX][(int)st->player_d->instances[0].x / PIX] != '1'
+			&& st->map[((int)(st->player_d->instances[0].y + 4) - MOV) / PIX][((int)st->player_d->instances[0].x + 60) / PIX] != '1')
+		{		
+			st->player_d->instances[0].y -= MOV;
+			st->player_u->instances[0].y -= MOV;
+			st->player_l->instances[0].y -= MOV;
+			st->player_r->instances[0].y -= MOV;
+		}
+	}
+	if (mlx_is_key_down(st->window, MLX_KEY_DOWN))
+	{	
+		mlx_set_instance_depth(&st->player_d->instances[0], 310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
+		if (st->map[((int)(st->player_d->instances[0].y + 60) + MOV) / PIX][((int)st->player_d->instances[0].x + 60) / PIX] != '1' 
+			&& st->map[((int)(st->player_d->instances[0].y + 60) + MOV) / PIX][((int)st->player_d->instances[0].x) / PIX] != '1')
+		{		
+			st->player_d->instances[0].y += MOV;
+			st->player_u->instances[0].y += MOV;
+			st->player_l->instances[0].y += MOV;
+			st->player_r->instances[0].y += MOV;
+		}
+	}
+	if (mlx_is_key_down(st->window, MLX_KEY_LEFT))
+	{	
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], 310);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
+		if (st->map[((int)st->player_d->instances[0].y + 4) / PIX][((int)st->player_d->instances[0].x - MOV) / PIX] != '1'
+			&& st->map[((int)st->player_d->instances[0].y + 60) / PIX][((int)st->player_d->instances[0].x - MOV) / PIX] != '1')
+		{	
+			st->player_d->instances[0].x -= MOV;
+			st->player_u->instances[0].x -= MOV;
+			st->player_l->instances[0].x -= MOV;
+			st->player_r->instances[0].x -= MOV;
+		}
+	}
+	if (mlx_is_key_down(st->window, MLX_KEY_RIGHT))
+	{	
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], 310);
+		if (st->map[((int)st->player_d->instances[0].y + 4) / PIX][(((int)st->player_d->instances[0].x + 60) + MOV) / PIX] != '1'
+			&& st->map[((int)st->player_d->instances[0].y + 60) / PIX][(((int)st->player_d->instances[0].x + 60) + MOV) / PIX] != '1')
+		{	
+			st->player_d->instances[0].x += MOV;
+			st->player_u->instances[0].x += MOV;
+			st->player_l->instances[0].x += MOV;
+			st->player_r->instances[0].x += MOV;
+		}
+	}
+	background_animation(st);
+	wall_animation(st);
+	col_animation(st);
 }
 
 void	key_control(void *param)
@@ -111,58 +248,67 @@ void	key_control(void *param)
 		mlx_close_window(st->window);
 	if (mlx_is_key_down(st->window, MLX_KEY_UP))
 	{	
-		// st->player_d->instances[0].z = -1000;
-		// st->player_u->instances[0].z = 500;
-		// st->player_l->instances[0].z = -2200;
-		// st->player_r->instances[0].z = -2300;
-		if (st->map[((int)(st->player_d->instances[0].y) - MOV) / PIX][(int)st->player_d->instances[0].x / PIX] != '1'
-			&& st->map[((int)(st->player_d->instances[0].y) - MOV) / PIX][((int)st->player_d->instances[0].x + 60) / PIX] != '1')
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], 310);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
+		if (st->map[((int)(st->player_d->instances[0].y + 4) - MOV) / PIX][(int)st->player_d->instances[0].x / PIX] != '1'
+			&& st->map[((int)(st->player_d->instances[0].y + 4) - MOV) / PIX][((int)st->player_d->instances[0].x + 60) / PIX] != '1')
+		{		
 			st->player_d->instances[0].y -= MOV;
 			st->player_u->instances[0].y -= MOV;
 			st->player_l->instances[0].y -= MOV;
 			st->player_r->instances[0].y -= MOV;
+		}
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_DOWN))
 	{	
-		// st->player_d->instances[0].z = 500;
-		// st->player_u->instances[0].z = -2100;
-		// st->player_l->instances[0].z = -2200;
-		// st->player_r->instances[0].z = -2300;
+		mlx_set_instance_depth(&st->player_d->instances[0], 310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
 		if (st->map[((int)(st->player_d->instances[0].y + 60) + MOV) / PIX][((int)st->player_d->instances[0].x + 60) / PIX] != '1' 
 			&& st->map[((int)(st->player_d->instances[0].y + 60) + MOV) / PIX][((int)st->player_d->instances[0].x) / PIX] != '1')
+		{		
 			st->player_d->instances[0].y += MOV;
 			st->player_u->instances[0].y += MOV;
 			st->player_l->instances[0].y += MOV;
 			st->player_r->instances[0].y += MOV;
+		}
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_LEFT))
 	{	
-		// st->player_d->instances[0].z = -1000;
-		// st->player_u->instances[0].z = -2100;
-		// st->player_l->instances[0].z = 500;
-		// st->player_r->instances[0].z = -2300;
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], 310);
+		mlx_set_instance_depth(&st->player_r->instances[0], -340);
 		if (st->map[((int)st->player_d->instances[0].y + 4) / PIX][((int)st->player_d->instances[0].x - MOV) / PIX] != '1'
 			&& st->map[((int)st->player_d->instances[0].y + 60) / PIX][((int)st->player_d->instances[0].x - MOV) / PIX] != '1')
+		{	
 			st->player_d->instances[0].x -= MOV;
 			st->player_u->instances[0].x -= MOV;
 			st->player_l->instances[0].x -= MOV;
 			st->player_r->instances[0].x -= MOV;
+		}
 	}
 	if (mlx_is_key_down(st->window, MLX_KEY_RIGHT))
 	{	
-		// st->player_d->instances[0].z = -1000;
-		// st->player_u->instances[0].z = -2100;
-		// st->player_l->instances[0].z = -2200;
-		// st->player_r->instances[0].z = 500;
+		mlx_set_instance_depth(&st->player_d->instances[0], -310);
+		mlx_set_instance_depth(&st->player_u->instances[0], -320);
+		mlx_set_instance_depth(&st->player_l->instances[0], -330);
+		mlx_set_instance_depth(&st->player_r->instances[0], 310);
 		if (st->map[((int)st->player_d->instances[0].y + 4) / PIX][(((int)st->player_d->instances[0].x + 60) + MOV) / PIX] != '1'
 			&& st->map[((int)st->player_d->instances[0].y + 60) / PIX][(((int)st->player_d->instances[0].x + 60) + MOV) / PIX] != '1')
+		{	
 			st->player_d->instances[0].x += MOV;
 			st->player_u->instances[0].x += MOV;
 			st->player_l->instances[0].x += MOV;
 			st->player_r->instances[0].x += MOV;
+		}
 	}
 	background_animation(st);
 	wall_animation(st);
+	col_animation(st);
 }
 
 int	main(int ac, char **av)
@@ -172,14 +318,12 @@ int	main(int ac, char **av)
 	(void)ac;
 	st = set_empty();
 	read_map(&st, av[1]);
-	st.window = mlx_init(st.width * PIX, st.height * PIX, "so_long_42", false);
+	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	load_background(&st);
 	load_walls(&st);
 	load_player_collect(&st);
 	mlx_loop_hook(st.window, key_control, &st);
-	// mlx_loop_hook(st.window, background_animation, &st);
-	// mlx_loop_hook(st.window, wall_animation, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
 	ft_printf("Taluego! Ya te queda menos...=)");
