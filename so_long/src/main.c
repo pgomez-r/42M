@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/24 22:46:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:55:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,6 +323,7 @@ int	main(int ac, char **av)
 	load_background(&st);
 	load_walls(&st);
 	load_player_collect(&st);
+	load_enemies(&st);
 	mlx_loop_hook(st.window, key_control, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
