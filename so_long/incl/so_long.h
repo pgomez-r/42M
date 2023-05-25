@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 22:30:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/25 23:23:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct s_struct
 	size_t			height;
 	size_t			collec_cnt;
 	size_t			step_cnt;
-	size_t			player_y;
-	size_t			player_x;
 	size_t			walls;
 	size_t			ways;
 	size_t			exits;
@@ -78,7 +76,9 @@ typedef struct s_struct
 void				read_map(t_struct *st, char *path);
 
 /*init_struct.c*/
-t_struct			set_empty(void);
+void				init_struct(t_struct *st);
+void				init_mlx(t_struct *st);
+void				init_params(t_struct *st);
 
 /*load_images.c*/
 void				load_images(t_struct *st);
