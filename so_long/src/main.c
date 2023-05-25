@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/24 22:55:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:35:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,10 +320,7 @@ int	main(int ac, char **av)
 	read_map(&st, av[1]);
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
-	load_background(&st);
-	load_walls(&st);
-	load_player_collect(&st);
-	load_enemies(&st);
+	render_images(&st);
 	mlx_loop_hook(st.window, key_control, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);
@@ -334,6 +331,9 @@ int	main(int ac, char **av)
 /**
  * @brief Lista tareas TO_DO
  * - Esquema capas -> HECHO
- * - 1 función por elemento para cargar todas sus imagenes + mlx_depth
- * - 1 función por animación de elemento sin mov (wall, back, coin)
+ * - Carga de imagenes -> una función que llame a varias funciones, una por tipo de img -> HECHO
+ * - Colocar + profundidad cada tipo de imagen -> una función + funcion por tipo(mlx_depth) -> HECHO
+ * - FUNCION AUX QUE CAMBIE LA Z DE CUALQUIER INSTANCIA? (meter las capas de imgen en array?)
+ * - Ordenar init struct, cambiar de t_struct a void y pasarle la original, luego partirla en
+ * 		funciones por grupos de elementos ->
  */

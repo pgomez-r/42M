@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/24 22:42:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:13:15 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_struct	set_empty(void)
 {
 	t_struct	empty_st;
 
+	empty_st.texture = NULL;
 	empty_st.map = NULL;
 	empty_st.width = 0;
 	empty_st.height = 0;
@@ -27,7 +28,7 @@ t_struct	set_empty(void)
 	empty_st.ways = 0;
 	empty_st.exits = 0;
 	empty_st.cols = 0;
-	empty_st.enemies = 0;
+	empty_st.enms = 0;
 	empty_st.frame_enemy = 0;
 	empty_st.frame_delay = 0;
 	empty_st.frame_bg = 0;
@@ -59,8 +60,3 @@ t_struct	set_empty(void)
 	return (empty_st);
 }
 
-void	error_exit(char *error)
-{
-	ft_printf_error("%s\n", error);
-	exit (EXIT_FAILURE);
-}
