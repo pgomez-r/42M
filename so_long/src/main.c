@@ -3,80 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 23:39:22 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:31:55 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-void	col_animation(void *param)
+void	swap_z(mlx_image_t *img2, mlx_image_t *img1, size_t total, int on, int under)
 {
-	t_struct	*st;
-	size_t		i;
+	size_t	i;
 
-	st = (t_struct *)param;
 	i = 0;
-	if (st->frame_col == 25 && st->col1->instances[i].z > 0)
+	while (i < total)
+	{
+		mlx_set_instance_depth(&img2->instances[i], on);
+		mlx_set_instance_depth(&img1->instances[i], under);
+		i++;
+	}
+}
+
+//Si le paso la struct a swap_z puedo hacer que deje el frame a 0 cada vez que se ejecute
+//también podría probar a usar +- para todos los valores, comprobar si no da fallo, asi paso
+//solo un valor y le puedo pasar el frame como quinto parámetro
+
+void	col_animation(t_struct *st)
+{
+	if (st->frame_col == 25 && st->col1->instances[0].z > 0)
 	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col2->instances[i], 110);
-			mlx_set_instance_depth(&st->col1->instances[i], -110);
-			i++;
-		}
+		swap_z(st->col2, st->col1, st->cols, 110, -110);
 		st->frame_col = -1;
 	}
-	else if (st->frame_col == 25 && st->col2->instances[i].z > 0)
+	else if (st->frame_col == 25 && st->col2->instances[0].z > 0)
 	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col3->instances[i], 110);
-			mlx_set_instance_depth(&st->col2->instances[i], -120);
-			i++;
-		}
+		swap_z(st->col3, st->col2, st->cols, 110, -120);
 		st->frame_col = -1;
 	}
-	else if (st->frame_col == 25 && st->col3->instances[i].z > 0)
+	else if (st->frame_col == 25 && st->col3->instances[0].z > 0)
 	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col4->instances[i], 110);
-			mlx_set_instance_depth(&st->col3->instances[i], -130);
-			i++;
-		}
+		swap_z(st->col4, st->col3, st->cols, 110, -130);
+		st->frame_col = -1;
+
+	}
+	else if (st->frame_col == 25 && st->col4->instances[0].z > 0)
+	{	
+		swap_z(st->col5, st->col4, st->cols, 110, -140);
 		st->frame_col = -1;
 	}
-	else if (st->frame_col == 25 && st->col4->instances[i].z > 0)
+	else if (st->frame_col == 25 && st->col5->instances[0].z > 0)
 	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col5->instances[i], 110);
-			mlx_set_instance_depth(&st->col4->instances[i], -140);
-			i++;
-		}
+		swap_z(st->col6, st->col5, st->cols, 110, -150);
 		st->frame_col = -1;
 	}
-	else if (st->frame_col == 25 && st->col5->instances[i].z > 0)
+	else if (st->frame_col == 25 && st->col6->instances[0].z > 0)
 	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col6->instances[i], 110);
-			mlx_set_instance_depth(&st->col5->instances[i], -150);
-			i++;
-		}
-		st->frame_col = -1;
-	}
-	else if (st->frame_col == 25 && st->col6->instances[i].z > 0)
-	{	
-		while (i < st->cols)
-		{
-			mlx_set_instance_depth(&st->col1->instances[i], 110);
-			mlx_set_instance_depth(&st->col6->instances[i], -160);
-			i++;
-		}
+		swap_z(st->col1, st->col6, st->cols, 110, -160);
 		st->frame_col = -1;
 	}
 	st->frame_col++;
