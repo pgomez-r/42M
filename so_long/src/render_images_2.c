@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 22:28:45 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:40:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,28 @@ void	collectables_depth(t_struct	*st)
 	mlx_set_instance_depth(&st->col4->instances[st->cols], -140);
 	mlx_set_instance_depth(&st->col5->instances[st->cols], -150);
 	mlx_set_instance_depth(&st->col6->instances[st->cols], -160);
+}
+
+void	remove_collectable(t_struct *st)
+{
+	int		y;
+	int		x;
+	size_t	i;
+
+	i = 0;
+	y = st->player_d->instances[0].y + 32;
+	x = st->player_d->instances[0].x + 32;
+	while (i < st->cols)
+	{
+		if (st->col1->instances[i].y == y && st->col1->instances[i].x == x)
+		{
+			st->col1->instances[i].enabled = false;
+			st->col2->instances[i].enabled = false;
+			st->col3->instances[i].enabled = false;
+			st->col4->instances[i].enabled = false;
+			st->col5->instances[i].enabled = false;
+			st->col6->instances[i].enabled = false;
+		}	
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/05/25 22:31:18 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/05/27 18:42:36 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME     = so_long
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC      = main.c init_struct.c init.c load_images.c render_images.c render_images_2.c
+SRC      = main.c init_struct.c init.c load_images.c render_images.c \
+			render_images_2.c animation.c key_control.c key_control_2.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))

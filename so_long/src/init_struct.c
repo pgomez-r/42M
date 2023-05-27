@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 23:20:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/27 11:41:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_params(t_struct *st)
 	st->cols = 0;
 	st->enms = 0;
 	st->frame_enemy = 0;
-	st->frame_delay = 0;
+	st->frame_wall = 0;
 	st->frame_bg = 0;
 	st->frame_col = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 23:23:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:12:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include "./MLX42/include/MLX42/MLX42.h"
 # include "./MLX42/include/MLX42/MLX42_Input.h"
 
-# define PIX 64
 # define NAME "So_(so)_LONG"
+# define PIX 64
 # define MOV 4
 
-/*structs*/
+/*structs - mega_struct*/
 typedef struct s_struct
 {
 	char			**map;
@@ -40,7 +40,7 @@ typedef struct s_struct
 	size_t			cols;
 	size_t			enms;
 	size_t			frame_enemy;
-	size_t			frame_delay;
+	size_t			frame_wall;
 	size_t			frame_bg;
 	size_t			frame_col;
 	mlx_t			*window;
@@ -98,5 +98,25 @@ void				render_enemies(t_struct *st);
 void				render_collectables(t_struct *st);
 void				render_exits(t_struct *st);
 void				collectables_depth(t_struct	*st);
+void				remove_collectable(t_struct *st);
+
+/*animation.c*/
+int					swap_z(mlx_image_t *img1, mlx_image_t *img2, size_t total);
+void				col_animation(t_struct *st, size_t timer);
+void				background_animation(t_struct *st, size_t timer);
+void				wall_animation(t_struct	*st, size_t timer);
+
+/*key_control.c*/
+void				move_up(t_struct *st);
+void				move_down(t_struct *st);
+void				move_left(t_struct *st);
+void				move_right(t_struct *st);
+void				key_control(t_struct *st);
+
+/*key_control_2.c*/
+void				player_face_y(t_struct *st, char c);
+void				player_face_x(t_struct *st, char c);
+void				player_move_y(t_struct *st, int direction);
+void				player_move_x(t_struct *st, int direction);
 
 #endif
