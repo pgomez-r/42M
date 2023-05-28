@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/27 18:49:47 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:52:42 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 {
 	t_struct		st;
 
-	(void)ac;
+	if (ac != 2)
+		return (-1);
 	init_struct(&st);
 	read_map(&st, av[1]);
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);

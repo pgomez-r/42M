@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_images_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/27 20:40:45 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/28 13:16:29 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	render_collectables(t_struct *st)
 				mlx_image_to_window(st->window, st->col6, x * PIX, y * PIX);
 				collectables_depth(st);
 				st->cols++;
+				st->collec_cnt++;
 			}
 			x++;
 		}
@@ -73,6 +74,10 @@ void	collectables_depth(t_struct	*st)
 	mlx_set_instance_depth(&st->col6->instances[st->cols], -160);
 }
 
+/*Este planteamiento me gusta pero no consigo que funcione bien...
+Ahora mismo tiene que ser centro con centro exacto para recogerlo, cuando
+pasa queda genial, pero con que entres un pixel fuera de rango no recoge
+y queda muy falso...*/
 void	remove_collectable(t_struct *st)
 {
 	int		y;
@@ -84,7 +89,8 @@ void	remove_collectable(t_struct *st)
 	x = st->player_d->instances[0].x + 32;
 	while (i < st->cols)
 	{
-		if (st->col1->instances[i].y == y && st->col1->instances[i].x == x)
+		if ((st->col1->instances[i].y + 32) == y
+			&& (st->col1->instances[i].x + 32) == x)
 		{
 			st->col1->instances[i].enabled = false;
 			st->col2->instances[i].enabled = false;
@@ -92,6 +98,39 @@ void	remove_collectable(t_struct *st)
 			st->col4->instances[i].enabled = false;
 			st->col5->instances[i].enabled = false;
 			st->col6->instances[i].enabled = false;
+			st->collec_cnt--;
+			return ;
+		}	
+		i++;
+	}
+}
+
+/*Ahora, voy a probar a cambiar el if que activa esta función, con un offset
+segun cada dirección, que se active más tarde para y solo busque la istancia
+a borra y fuera, quiza comparando dentro de map[][] en lugar de por pixeles*/
+
+void	remove_collectable(t_struct *st)
+{
+	int		y;
+	int		x;
+	size_t	i;
+
+	i = 0;
+	y = st->player_d->instances[0].y + 32;
+	x = st->player_d->instances[0].x + 32;
+	while (i < st->cols)
+	{
+		if ((st->col1->instances[i].y + 32) == y
+			&& (st->col1->instances[i].x + 32) == x)
+		{
+			st->col1->instances[i].enabled = false;
+			st->col2->instances[i].enabled = false;
+			st->col3->instances[i].enabled = false;
+			st->col4->instances[i].enabled = false;
+			st->col5->instances[i].enabled = false;
+			st->col6->instances[i].enabled = false;
+			st->collec_cnt--;
+			return ;
 		}	
 		i++;
 	}

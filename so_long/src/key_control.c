@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:39:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/27 20:12:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:26:56 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	move_up(t_struct *st)
 	if (st->map[((y + 4) - MOV) / PIX][x / PIX] != '1'
 		&& st->map[((y + 4) - MOV) / PIX][(x + 60) / PIX] != '1')
 		player_move_y(st, -1);
-	remove_collectable(st);
+	if (st->map[y / PIX][x / PIX] == 'C'
+		|| st->map[y / PIX][(x + 64) / PIX] == 'C')
+		remove_collectable(st);
 }
 
 void	move_down(t_struct *st)
@@ -37,7 +39,9 @@ void	move_down(t_struct *st)
 	if (st->map[((y + 60) + MOV) / PIX][(x + 60) / PIX] != '1'
 		&& st->map[((y + 60) + MOV) / PIX][x / PIX] != '1')
 		player_move_y(st, 1);
-	remove_collectable(st);
+	if (st->map[(y + 64) / PIX][x / PIX] == 'C'
+		|| st->map[(y + 64) / PIX][(x + 64) / PIX] == 'C')
+		remove_collectable(st);
 }
 
 void	move_left(t_struct *st)
@@ -51,7 +55,9 @@ void	move_left(t_struct *st)
 	if (st->map[(y + 4) / PIX][(x - MOV) / PIX] != '1'
 		&& st->map[(y + 60) / PIX][(x - MOV) / PIX] != '1')
 		player_move_x(st, -1);
-	remove_collectable(st);
+	if (st->map[y / PIX][x / PIX] == 'C'
+		|| st->map[(y + 64) / PIX][x / PIX] == 'C')
+		remove_collectable(st);
 }
 
 void	move_right(t_struct *st)
@@ -65,7 +71,9 @@ void	move_right(t_struct *st)
 	if (st->map[(y + 4) / PIX][((x + 60) + MOV) / PIX] != '1'
 		&& st->map[(y + 60) / PIX][((x + 60) + MOV) / PIX] != '1')
 		player_move_x(st, 1);
-	remove_collectable(st);
+	if (st->map[y / PIX][(x + 64) / PIX] == 'C'
+		|| st->map[(y + 64) / PIX][(x + 64) / PIX] == 'C')
+		remove_collectable(st);
 }
 
 void	key_control(t_struct *st)
