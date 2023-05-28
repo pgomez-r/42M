@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/27 20:12:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:52:07 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void				render_enemies(t_struct *st);
 void				render_collectables(t_struct *st);
 void				render_exits(t_struct *st);
 void				collectables_depth(t_struct	*st);
-void				remove_collectable(t_struct *st);
+void				remove_collectable(t_struct *st, int y, int x);
 
 /*animation.c*/
 int					swap_z(mlx_image_t *img1, mlx_image_t *img2, size_t total);
