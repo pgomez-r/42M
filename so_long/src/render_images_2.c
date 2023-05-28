@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/28 13:16:29 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/28 13:49:32 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,14 @@ void	remove_collectable(t_struct *st)
 	}
 }
 
-/*Ahora, voy a probar a cambiar el if que activa esta función, con un offset
-segun cada dirección, que se active más tarde para y solo busque la istancia
-a borra y fuera, quiza comparando dentro de map[][] en lugar de por pixeles*/
+/**
+ * @brief nuevo planteamito; ajustar todos los offset de player,
+ * 	las esquinas, para que el if de C salte cuando player esté
+ * 	más metido en C
+ * Cuando salte el remove_collect, solo encontrar instancia, 
+ * 	borrarla y contador
+ * HOWTO encontrar instancia -> map[][] compare con player y,x
+ */
 
 void	remove_collectable(t_struct *st)
 {
