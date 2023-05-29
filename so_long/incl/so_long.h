@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 12:15:42 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:19:16 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_struct
 	size_t			frame_bg;
 	size_t			frame_col;
 	int				flag;
+	int				*dirs;
 	mlx_t			*window;
 	mlx_texture_t	*texture;
 	mlx_image_t		*wall;

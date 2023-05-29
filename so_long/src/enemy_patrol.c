@@ -3,58 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_patrol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:34:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 12:57:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:13:01 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-void	enemy_patrol(t_struct *st)
+/*Vamos a controlar el mov de enemigos, lo enfocamos como en player, con extras
+	-Elegir direccion - calcular cual es mejor -> esto lo hacemos en estático,
+		antes de game_hook, puede ser al cargar/render img o a parte
+		Guardamos en un array la dir, por cada estancia
+*/
+
+void get_dirs(t_struct *st)
+{
+	int	i;
+
+	st->dirs = malloc(sizeof(int) * st->enms);
+	i = 0;
+	while (i < st->enms)
+	{
+		st->dirs[i] = calculate_axis(st, i);
+		i++;
+	}
+}
+
+int	calculate_axis(t_struct *st, int e)
 {
 	int		movs[4];
 	int		y;
 	int		x;
 	int		i;
-	int		dir;
+
+	y = st->enemy_u->instances[e].y;
+	x = st->enemy_u->instances[e].x;
+	i = 0;
+	while (st->map[(y - ((i++) * PIX)) / PIX][x / PIX] != '1')
+		movs[0]++;
+	i = 0;
+	while (st->map[(y + ((i++) * PIX)) / PIX][x / PIX] != '1')
+		movs[1]++;
+	i = 0;
+	while (st->map[y / PIX][(x - ((i++) * PIX)) / PIX] != '1')
+		movs[2]++;
+	i = 0;
+	while (st->map[y / PIX][(x + ((i++) * PIX)) / PIX] != '1')
+		movs[3]++;
+	e = ft_maxvalue_pos(movs, 4);
+	if (e < 2)
+		return (free(movs), 0);
+	else
+		return (free(movs), 1);
+}
+
+void	enemy_patrol(t_struct *st)
+{
+	int		y;
+	int		x;
+	int		i;
 
 	y = st->enemy_u->instances[0].y;
 	x = st->enemy_u->instances[0].x;
-	movs[0] = 0;
-	movs[1] = 0;
-	movs[2] = 0;
-	movs[3] = 0;
-	i = 1;
-	while (st->map[(y - (i * PIX)) / PIX][x / PIX] != '1'
-		&& st->map[(y - (i * PIX)) / PIX][x / PIX] != 'X')
-	{	
-		movs[0]++;
+	i = 0;
+	while (i < st->enms)
+	{
+		if (st->dirs[i] == 0)
+		{
+			patrol_y(st, i);
+		}
+		else if (st->dirs[i] == 1)
+		{
+			patrol_x(st, i); //le pasamos i para la instancia correcta, luego hay que conseguir el truco flag de abajo
+		}
 		i++;
 	}
-	i = 1;
-	while (st->map[(y + (i * PIX)) / PIX][x / PIX] != '1'
-		&& st->map[(y + (i * PIX)) / PIX][x / PIX] != 'X')
-	{	
-		movs[1]++;
-		i++;
-	}
-	i = 1;
-	while (st->map[y / PIX][(x - (i * PIX)) / PIX] != '1'
-		&& st->map[y / PIX][(x - (i * PIX)) / PIX] != 'X')
-	{	
-		movs[2]++;
-		i++;
-	}
-	i = 1;
-	while (st->map[y / PIX][(x + (i * PIX)) / PIX] != '1'
-		&& st->map[y / PIX][(x + (i * PIX)) / PIX] != 'X')
-	{	
-		movs[3]++;
-		i++;
-	}
-	dir = ft_maxvalue_pos(movs, 4);
 	if (dir == 0)
 	{
 		if (st->flag == 0 && st->map[(st->enemy_d->instances[0].y - 2) / PIX][x / PIX] != '1'
