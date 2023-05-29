@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:53:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/25 22:30:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:22:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	render_player(t_struct *st)
 				mlx_image_to_window(st->window, st->player_u, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_l, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_r, x * PIX, y * PIX);
-				mlx_set_instance_depth(&st->player_d->instances[0], 310);
-				mlx_set_instance_depth(&st->player_u->instances[0], -320);
-				mlx_set_instance_depth(&st->player_l->instances[0], -330);
-				mlx_set_instance_depth(&st->player_r->instances[0], -340);
+				mlx_set_instance_depth(&st->player_d->instances[0], 810);
+				mlx_set_instance_depth(&st->player_u->instances[0], -820);
+				mlx_set_instance_depth(&st->player_l->instances[0], -830);
+				mlx_set_instance_depth(&st->player_r->instances[0], -840);
 			}
 			x++;
 		}

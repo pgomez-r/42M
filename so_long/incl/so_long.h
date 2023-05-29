@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/28 22:52:07 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/29 12:15:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_struct
 	size_t			frame_wall;
 	size_t			frame_bg;
 	size_t			frame_col;
+	int				flag;
 	mlx_t			*window;
 	mlx_texture_t	*texture;
 	mlx_image_t		*wall;
@@ -119,4 +120,6 @@ void				player_face_x(t_struct *st, char c);
 void				player_move_y(t_struct *st, int direction);
 void				player_move_x(t_struct *st, int direction);
 
+/*enemy_patrol*/
+void				enemy_patrol(t_struct *st);
 #endif
