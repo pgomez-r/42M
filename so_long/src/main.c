@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 11:08:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:17:56 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	render_images(&st);
+	get_patrol_dirs(&st);
 	mlx_loop_hook(st.window, game_hook, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);

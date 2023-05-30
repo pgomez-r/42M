@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_patrol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:34:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 23:13:01 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:27:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@
 		Guardamos en un array la dir, por cada estancia
 */
 
-void get_dirs(t_struct *st)
+void	get_patrol_dirs(t_struct *st)
 {
-	int	i;
+	size_t	i;
 
 	st->dirs = malloc(sizeof(int) * st->enms);
+	st->flags = malloc(sizeof(int) * st->enms);
 	i = 0;
 	while (i < st->enms)
 	{
-		st->dirs[i] = calculate_axis(st, i);
+		st->dirs[i] = calculate_axis(st, (int)i);
+		st->flags[i] = 0;
 		i++;
 	}
 }
@@ -38,98 +40,88 @@ int	calculate_axis(t_struct *st, int e)
 	int		x;
 	int		i;
 
-	y = st->enemy_u->instances[e].y;
-	x = st->enemy_u->instances[e].x;
-	i = 0;
-	while (st->map[(y - ((i++) * PIX)) / PIX][x / PIX] != '1')
+	y = st->enemy_d->instances[e].y;
+	x = st->enemy_d->instances[e].x;
+	i = -1;
+	while (++i < 4)
+		movs[i] = 0;
+	i = 1;
+	while (st->map[(y - (i * PIX)) / PIX][x / PIX] != '1')
+	{
 		movs[0]++;
-	i = 0;
-	while (st->map[(y + ((i++) * PIX)) / PIX][x / PIX] != '1')
+		i++;
+	}
+	i = 1;
+	while (st->map[(y + (i * PIX)) / PIX][x / PIX] != '1')
+	{
 		movs[1]++;
-	i = 0;
-	while (st->map[y / PIX][(x - ((i++) * PIX)) / PIX] != '1')
+		i++;
+	}
+	i = 1;
+	while (st->map[y / PIX][(x - (i * PIX)) / PIX] != '1')
+	{
 		movs[2]++;
-	i = 0;
-	while (st->map[y / PIX][(x + ((i++) * PIX)) / PIX] != '1')
+		i++;
+	}
+	i = 1;
+	while (st->map[y / PIX][(x + (i * PIX)) / PIX] != '1')
+	{
 		movs[3]++;
-	e = ft_maxvalue_pos(movs, 4);
+		i++;
+	}
+	e = (int)ft_maxvalue_pos(movs, 4);
+	printf("Valor e: %d\n", movs[0]);
 	if (e < 2)
-		return (free(movs), 0);
+		return (0);
 	else
-		return (free(movs), 1);
+		return (1);
+}
+
+void	patrol_y(t_struct *st, size_t i)
+{
+	int	y;
+	int	x;
+
+	y = st->enemy_d->instances[i].y;
+	x = st->enemy_d->instances[i].x;
+	if (st->flags[i] == 0 && st->map[(y - 2) / PIX][x / PIX] != '1')
+		st->enemy_d->instances[i].y -= 2;
+	else
+		st->flags[i] = 1;
+	if (st->flags[i] == 1 && st->map[(y + 66) / PIX][x / PIX] != '1')
+		st->enemy_d->instances[i].y += 2;
+	else
+		st->flags[i] = 0;
+}
+
+void	patrol_x(t_struct *st, size_t i)
+{
+	int	y;
+	int	x;
+
+	y = st->enemy_d->instances[i].y;
+	x = st->enemy_d->instances[i].x;
+	if (st->flags[i] == 0 && st->map[y / PIX][(x - 2) / PIX] != '1')
+		st->enemy_d->instances[i].x -= 2;
+	else
+		st->flags[i] = 1;
+	if (st->flags[i] == 1 && st->map[y / PIX][(x + 66) / PIX] != '1')
+		st->enemy_d->instances[i].x += 2;
+	else
+		st->flags[i] = 0;
 }
 
 void	enemy_patrol(t_struct *st)
 {
-	int		y;
-	int		x;
-	int		i;
+	size_t	i;
 
-	y = st->enemy_u->instances[0].y;
-	x = st->enemy_u->instances[0].x;
 	i = 0;
 	while (i < st->enms)
 	{
 		if (st->dirs[i] == 0)
-		{
 			patrol_y(st, i);
-		}
-		else if (st->dirs[i] == 1)
-		{
-			patrol_x(st, i); //le pasamos i para la instancia correcta, luego hay que conseguir el truco flag de abajo
-		}
+		else
+			patrol_x(st, i);
 		i++;
-	}
-	if (dir == 0)
-	{
-		if (st->flag == 0 && st->map[(st->enemy_d->instances[0].y - 2) / PIX][x / PIX] != '1'
-			&& st->map[(st->enemy_d->instances[0].y - 2) / PIX][x / PIX] != 'X')
-			st->enemy_d->instances[0].y -= 2;
-		else
-			st->flag = 1;
-		if (st->flag == 1 && st->map[(st->enemy_d->instances[0].y + 66) / PIX][x / PIX] != '1'
-			&& st->map[(st->enemy_d->instances[0].y + 66) / PIX][x / PIX] != 'X')
-			st->enemy_d->instances[0].y += 2;
-		else
-			st->flag = 0;
-	}
-	else if (dir == 1)
-	{
-		if (st->flag == 0 && st->map[(st->enemy_d->instances[0].y + 66) / PIX][x / PIX] != '1'
-			&& st->map[(st->enemy_d->instances[0].y + 66) / PIX][x / PIX] != 'X')
-			st->enemy_d->instances[0].y += 2;
-		else
-			st->flag = 1;
-		if (st->flag == 1 && st->map[(st->enemy_d->instances[0].y - 2) / PIX][x / PIX] != '1'
-			&& st->map[(st->enemy_d->instances[0].y - 2) / PIX][x / PIX] != 'X')
-			st->enemy_d->instances[0].y -= 2;
-		else
-			st->flag = 0;
-	}
-	else if (dir == 2)
-	{
-		if (st->flag == 0 && st->map[y / PIX][(st->enemy_d->instances[0].x - 2) / PIX] != '1'
-			&& st->map[y / PIX][(st->enemy_d->instances[0].x - 2) / PIX] != 'X')
-			st->enemy_d->instances[0].x -= 2;
-		else
-			st->flag = 1;
-		if (st->flag == 1 && st->map[y / PIX][(st->enemy_d->instances[0].x + 66) / PIX] != '1'
-			&& st->map[y / PIX][(st->enemy_d->instances[0].x + 66) / PIX] != 'X')
-			st->enemy_d->instances[0].x += 2;
-		else
-			st->flag = 0;
-	}
-	else if (dir == 3)
-	{
-		if (st->flag == 0 && st->map[y / PIX][(st->enemy_d->instances[0].x + 66) / PIX] != '1'
-			&& st->map[y / PIX][(st->enemy_d->instances[0].x + 66) / PIX] != 'X')
-			st->enemy_d->instances[0].x += 2;
-		else
-			st->flag = 1;
-		if (st->flag == 1 && st->map[y / PIX][(st->enemy_d->instances[0].x - 2) / PIX] != '1'
-			&& st->map[y / PIX][(st->enemy_d->instances[0].x - 2) / PIX] != 'X')
-			st->enemy_d->instances[0].x -= 2;
-		else
-			st->flag = 0;
 	}
 }

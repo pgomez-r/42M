@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 14:19:44 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/30 08:43:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	init_params(t_struct *st)
 	st->frame_wall = 0;
 	st->frame_bg = 0;
 	st->frame_col = 0;
-	st->flag = 0;
 	st->dirs = NULL;
+	st->flags = NULL;
 }
 
 void	init_mlx(t_struct *st)

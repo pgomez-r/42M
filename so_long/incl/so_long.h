@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 14:19:16 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/05/30 09:15:07 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_struct
 	size_t			frame_wall;
 	size_t			frame_bg;
 	size_t			frame_col;
-	int				flag;
 	int				*dirs;
+	int				*flags;
 	mlx_t			*window;
 	mlx_texture_t	*texture;
 	mlx_image_t		*wall;
@@ -123,4 +123,9 @@ void				player_move_x(t_struct *st, int direction);
 
 /*enemy_patrol*/
 void				enemy_patrol(t_struct *st);
+void				get_patrol_dirs(t_struct *st);
+int					calculate_axis(t_struct *st, int e);
+void				patrol_y(t_struct *st, size_t i);
+void				patrol_x(t_struct *st, size_t i);
+
 #endif
