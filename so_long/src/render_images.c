@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:53:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/30 10:16:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:07:25 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,5 @@ void	render_images(t_struct *st)
 	render_enemies(st);
 	render_collectables(st);
 	render_exits(st);
+	get_patrol_dirs(st);
 }
