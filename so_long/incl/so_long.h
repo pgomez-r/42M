@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/31 22:11:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:53:35 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define PIX 64
 # define MOV 4
 
-/*structs - mega_struct*/
+/*mega_struct!*/
 typedef struct s_struct
 {
 	char			**map;
@@ -77,8 +77,6 @@ typedef struct s_struct
 
 /*init.c*/
 void				read_map(t_struct *st, char *path);
-void				enemy_patrol(t_struct *st);
-void				get_patrol_dirs(t_struct *st);
 
 /*init_struct.c*/
 void				init_struct(t_struct *st);
@@ -124,9 +122,16 @@ void				player_face_x(t_struct *st, char c);
 void				player_move_y(t_struct *st, int direction);
 void				player_move_x(t_struct *st, int direction);
 
-/*enemy_patrol*/
-int					calculate_axis(t_struct *st, int e);
+/*enemy_patrol.c*/
+void				enemy_patrol(t_struct *st);
 void				patrol_y(t_struct *st, size_t i);
 void				patrol_x(t_struct *st, size_t i);
+void				enemy_move_y(t_struct *st, int i, int mov);
+void				enemy_move_x(t_struct *st, int i, int mov);
+
+/*enemy_patrol_2.c*/
+void				get_patrol_dirs(t_struct *st);
+int					calculate_axis(t_struct *st, int e);
+int					check_traffic(t_struct *st, int mov_y, int mov_x, int i);
 
 #endif

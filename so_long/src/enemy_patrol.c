@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_patrol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:34:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/31 22:32:11 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:59:11 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,6 @@ void	enemy_patrol(t_struct *st)
 	}
 }
 
-int	check_traffic(t_struct *st, int mov_y, int mov_x, int i)
-{
-	int		y;
-	int		x;
-	size_t	j;
-	int		yy;
-	int		xx;
-
-	y = (st->enemy_d->instances[i].y + mov_y) / PIX;
-	x = (st->enemy_d->instances[i].x + mov_x) / PIX;
-	j = -1;
-	while (++j < st->enms)
-	{
-		if (j == (size_t)i)
-			j++;
-		yy = st->enemy_d->instances[j].y / PIX;
-		xx = st->enemy_d->instances[j].x / PIX;
-		if (yy == y && xx == x)
-			return (-1);
-	}
-	return (1);
-}
-
 void	patrol_y(t_struct *st, size_t i)
 {
 	int	y;
@@ -58,13 +35,13 @@ void	patrol_y(t_struct *st, size_t i)
 	y = st->enemy_d->instances[i].y;
 	x = st->enemy_d->instances[i].x;
 	if (st->flags[i] == 0 && st->map[(y - 2) / PIX][x / PIX] != '1'
-		&& check_traffic(st, -2, 0, i))
-		st->enemy_d->instances[i].y -= 2;
+		&& (check_traffic(st, -34, 0, i) == 0))
+		enemy_move_y(st, i, -2);
 	else
 		st->flags[i] = 1;
 	if (st->flags[i] == 1 && st->map[(y + 66) / PIX][x / PIX] != '1'
-		&& check_traffic(st, 66, 0, i))
-		st->enemy_d->instances[i].y += 2;
+		&& (check_traffic(st, 34, 0, i) == 0))
+		enemy_move_y(st, i, 2);
 	else
 		st->flags[i] = 0;
 }
@@ -77,13 +54,57 @@ void	patrol_x(t_struct *st, size_t i)
 	y = st->enemy_d->instances[i].y;
 	x = st->enemy_d->instances[i].x;
 	if (st->flags[i] == 0 && st->map[y / PIX][(x - 2) / PIX] != '1'
-		&& check_traffic(st, 0, -2, i))
-		st->enemy_d->instances[i].x -= 2;
+		&& (check_traffic(st, 0, -34, i) == 0))
+		enemy_move_x(st, i, -2);
 	else
 		st->flags[i] = 1;
 	if (st->flags[i] == 1 && st->map[y / PIX][(x + 66) / PIX] != '1'
-		&& check_traffic(st, 0, 666, i))
-		st->enemy_d->instances[i].x += 2;
+		&& (check_traffic(st, 0, 34, i) == 0))
+		enemy_move_x(st, i, 2);
 	else
 		st->flags[i] = 0;
+}
+
+void	enemy_move_y(t_struct *st, int i, int mov)
+{
+	if (st->flags[i] == 0)
+	{
+		mlx_set_instance_depth(&st->enemy_d->instances[i], -210);
+		mlx_set_instance_depth(&st->enemy_u->instances[i], 220);
+		mlx_set_instance_depth(&st->enemy_l->instances[i], -230);
+		mlx_set_instance_depth(&st->enemy_r->instances[i], -240);
+	}
+	else
+	{
+		mlx_set_instance_depth(&st->enemy_d->instances[i], 210);
+		mlx_set_instance_depth(&st->enemy_u->instances[i], -220);
+		mlx_set_instance_depth(&st->enemy_l->instances[i], -230);
+		mlx_set_instance_depth(&st->enemy_r->instances[i], -240);
+	}
+	st->enemy_d->instances[i].y += mov;
+	st->enemy_u->instances[i].y += mov;
+	st->enemy_l->instances[i].y += mov;
+	st->enemy_r->instances[i].y += mov;
+}
+
+void	enemy_move_x(t_struct *st, int i, int mov)
+{
+	if (st->flags[i] == 0)
+	{
+		mlx_set_instance_depth(&st->enemy_d->instances[i], -210);
+		mlx_set_instance_depth(&st->enemy_u->instances[i], -220);
+		mlx_set_instance_depth(&st->enemy_l->instances[i], 230);
+		mlx_set_instance_depth(&st->enemy_r->instances[i], -240);
+	}
+	else
+	{
+		mlx_set_instance_depth(&st->enemy_d->instances[i], -210);
+		mlx_set_instance_depth(&st->enemy_u->instances[i], -220);
+		mlx_set_instance_depth(&st->enemy_l->instances[i], -230);
+		mlx_set_instance_depth(&st->enemy_r->instances[i], 240);
+	}
+	st->enemy_d->instances[i].x += mov;
+	st->enemy_u->instances[i].x += mov;
+	st->enemy_l->instances[i].x += mov;
+	st->enemy_r->instances[i].x += mov;
 }
