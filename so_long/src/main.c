@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/31 22:10:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:58:09 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	game_hook(void *param)
 	t_struct	*st;
 
 	st = (t_struct *)param;
+	check_kill(st);
 	key_control(st);
 	background_animation(st, 100);
 	wall_animation(st, 30);

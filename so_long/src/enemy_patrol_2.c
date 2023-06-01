@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:42:48 by pgruz             #+#    #+#             */
-/*   Updated: 2023/06/01 13:43:46 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/01 19:20:55 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,35 @@ int	check_traffic(t_struct *st, int mov_y, int mov_x, int i)
 			return (-1);
 	}
 	return (0);
+}
+
+void	check_kill(t_struct	*st)
+{
+	size_t	i;
+	int		p_y;
+	int		p_x;
+	int		e_y;
+	int		e_x;
+
+	p_y = st->player_d->instances[0].y + 32;
+	p_x = st->player_d->instances[0].x + 32;
+	i = 0;
+	while (i < st->enms)
+	{
+		e_y = st->enemy_d->instances[i].y + 32;
+		e_x = st->enemy_d->instances[i].x + 32;
+		if (ft_distance(p_y, e_y) < 56 && ft_distance(p_x, e_x) < 56)
+			mlx_close_window(st->window);
+		i++;
+	}
+}
+
+int	ft_distance(int point_a, int point_b)
+{
+	int	distance;
+
+	distance = point_a - point_b;
+	if (distance < 0)
+		return (-(distance));
+	return (distance);
 }

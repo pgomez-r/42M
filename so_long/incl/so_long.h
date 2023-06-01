@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/01 13:53:35 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/01 19:19:06 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,7 @@ void				enemy_move_x(t_struct *st, int i, int mov);
 void				get_patrol_dirs(t_struct *st);
 int					calculate_axis(t_struct *st, int e);
 int					check_traffic(t_struct *st, int mov_y, int mov_x, int i);
+void				check_kill(t_struct	*st);
+int					ft_distance(int point_a, int point_b);
 
 #endif
