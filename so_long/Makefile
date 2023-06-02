@@ -6,7 +6,7 @@
 #    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/06/01 13:56:28 by pgruz            ###   ########.fr        #
+#    Updated: 2023/06/02 09:24:34 by pgruz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,10 @@ $(NAME):	$(OBJS)
 	@${MAKE} -C ./incl/MLX42
 	@echo "\033[0;32mMLX42 compilada!\033[0m"
 ### - COMPILACIÓN PARA 42 - ###
-#	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a ./incl/MLX42/libmlx42.a \
+	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a ./incl/MLX42/libmlx42.a \
 	-lglfw -L /Users/${USER}/.brew/opt/glfw/lib/ -o $(NAME)
 ### - COMPILACIÓN PARA CASA - ###
-	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a /home/pgruz/Escritorio/MLX42/linux_make/libmlx42.a \
+#	@${CC} $(CFLAGS) $(OBJS) ./incl/libft/libft.a /home/pgruz/Escritorio/MLX42/linux_make/libmlx42.a \
 	-Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
 	@echo "\033[0;32mEjecutable creado!\033[0m"
 

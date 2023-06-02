@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:44:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/27 11:45:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/02 09:07:16 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,13 @@ void	wall_animation(t_struct	*st, size_t timer)
 	else if (st->frame_wall == timer && st->wall3->instances[0].z > 0)
 		st->frame_wall = swap_z(st->wall3, st->wall, st->walls);
 	st->frame_wall++;
+}
+
+void	open_exit(t_struct *st)
+{
+	size_t	timer;
+
+	timer = 0;
+	timer = swap_z(st->exit_c, st->exit_o, st->exits);
+	(void)timer;
 }

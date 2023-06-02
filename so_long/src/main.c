@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/01 17:58:09 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 09:21:38 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	render_images(&st);
+	printf("coins = %d\n", (int)st.collec_cnt);
 	mlx_loop_hook(st.window, game_hook, &st);
 	mlx_loop(st.window);
 	mlx_terminate(st.window);

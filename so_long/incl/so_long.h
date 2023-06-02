@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/01 19:19:06 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 09:04:12 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int					swap_z(mlx_image_t *img1, mlx_image_t *img2, size_t total);
 void				col_animation(t_struct *st, size_t timer);
 void				background_animation(t_struct *st, size_t timer);
 void				wall_animation(t_struct	*st, size_t timer);
+void				open_exit(t_struct *st);
 
 /*key_control.c*/
 void				move_up(t_struct *st);
