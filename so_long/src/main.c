@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 09:21:38 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:45:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	render_images(&st);
+	init_collect_stat(&st);
 	printf("coins = %d\n", (int)st.collec_cnt);
 	mlx_loop_hook(st.window, game_hook, &st);
 	mlx_loop(st.window);

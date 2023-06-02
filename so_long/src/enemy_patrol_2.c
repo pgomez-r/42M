@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_patrol_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:42:48 by pgruz             #+#    #+#             */
-/*   Updated: 2023/06/01 19:20:55 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 17:00:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	check_kill(t_struct	*st)
 	{
 		e_y = st->enemy_d->instances[i].y + 32;
 		e_x = st->enemy_d->instances[i].x + 32;
-		if (ft_distance(p_y, e_y) < 56 && ft_distance(p_x, e_x) < 56)
+		if (ft_distance(p_y, e_y) < 54 && ft_distance(p_x, e_x) < 54)
 			mlx_close_window(st->window);
 		i++;
 	}

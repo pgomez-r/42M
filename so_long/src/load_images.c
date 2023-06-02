@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:33:42 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 09:14:58 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 20:32:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	enemy_exit_imgs(t_struct *st)
 	st->texture = mlx_load_png("./sprites/tie_r.png");
 	st->enemy_r = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/exit_m.png");
+	st->texture = mlx_load_png("./sprites/exit_c.png");
 	st->exit_c = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
 	st->texture = mlx_load_png("./sprites/exit_o.png");

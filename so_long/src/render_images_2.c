@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_images_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 09:17:43 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:42:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,15 @@ void	collectables_depth(t_struct	*st)
 
 void	remove_collectable(t_struct *st, int y, int x)
 {
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	while (i < st->cols)
 	{
-		if ((st->col1->instances[i].y / PIX) == y / PIX
+		if (st->stat_col[i] == 0 && (st->col1->instances[i].y / PIX) == y / PIX
 			&& (st->col1->instances[i].x / PIX) == x / PIX)
 		{
+			st->stat_col[i] = 1;
 			st->col1->instances[i].enabled = false;
 			st->col2->instances[i].enabled = false;
 			st->col3->instances[i].enabled = false;

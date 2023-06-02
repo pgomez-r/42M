@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/01 13:43:21 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:45:30 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,14 @@ void	read_map(t_struct *st, char *path)
 	st->map = ft_split(map_str, '\n');
 	st->width = ft_strlen(st->map[0]);
 	st->height = ft_strdlen(st->map);
+}
+
+void	init_collect_stat(t_struct *st)
+{	
+	size_t	x;
+
+	x = -1;
+	st->stat_col = malloc(sizeof(int) * st->cols);
+	while (++x < st->cols)
+		st->stat_col[x] = 0;
 }

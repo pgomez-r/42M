@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 09:04:12 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:45:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_struct
 	int				*dirs;
 	int				*flags;
 	int				movs[4];
+	int				*stat_col;
 	mlx_t			*window;
 	mlx_texture_t	*texture;
 	mlx_image_t		*wall;
@@ -77,6 +78,7 @@ typedef struct s_struct
 
 /*init.c*/
 void				read_map(t_struct *st, char *path);
+void				init_collect_stat(t_struct *st);
 
 /*init_struct.c*/
 void				init_struct(t_struct *st);
