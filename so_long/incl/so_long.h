@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 16:45:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:47:15 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_struct
 	size_t			frame_wall;
 	size_t			frame_bg;
 	size_t			frame_col;
+	size_t			frame_exit;
 	int				*dirs;
 	int				*flags;
 	int				movs[4];
@@ -57,6 +58,8 @@ typedef struct s_struct
 	mlx_image_t		*way1;
 	mlx_image_t		*way2;
 	mlx_image_t		*exit_o;
+	mlx_image_t		*exit_1;
+	mlx_image_t		*exit_2;
 	mlx_image_t		*exit_c;
 	mlx_image_t		*player_u;
 	mlx_image_t		*player_d;
@@ -110,7 +113,7 @@ int					swap_z(mlx_image_t *img1, mlx_image_t *img2, size_t total);
 void				col_animation(t_struct *st, size_t timer);
 void				background_animation(t_struct *st, size_t timer);
 void				wall_animation(t_struct	*st, size_t timer);
-void				open_exit(t_struct *st);
+void				open_exit(t_struct *st, size_t timer);
 
 /*key_control.c*/
 void				move_up(t_struct *st);

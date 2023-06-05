@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 13:45:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:43:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_params(t_struct *st)
 	st->frame_wall = 0;
 	st->frame_bg = 0;
 	st->frame_col = 0;
+	st->frame_exit = 0;
 	st->dirs = NULL;
 	st->flags = NULL;
 }
@@ -43,6 +44,8 @@ void	init_mlx(t_struct *st)
 	st->way1 = NULL;
 	st->way2 = NULL;
 	st->exit_o = NULL;
+	st->exit_1 = NULL;
+	st->exit_2 = NULL;
 	st->exit_c = NULL;
 	st->player_u = NULL;
 	st->player_d = NULL;

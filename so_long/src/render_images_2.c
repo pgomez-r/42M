@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 13:42:22 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:47:59 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ void	render_exits(t_struct *st)
 			if (st->map[y][x] == 'E')
 			{
 				mlx_image_to_window(st->window, st->exit_c, x * PIX, y * PIX);
+				mlx_image_to_window(st->window, st->exit_1, x * PIX, y * PIX);
+				mlx_image_to_window(st->window, st->exit_2, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->exit_o, x * PIX, y * PIX);
 				mlx_set_instance_depth(&st->exit_c->instances[st->exits], 110);
-				mlx_set_instance_depth(&st->exit_o->instances[st->exits], -120);
+				mlx_set_instance_depth(&st->exit_1->instances[st->exits], -120);
+				mlx_set_instance_depth(&st->exit_2->instances[st->exits], -130);
+				mlx_set_instance_depth(&st->exit_o->instances[st->exits], -140);
 				st->exits++;
 			}
 			x++;
@@ -94,8 +98,6 @@ void	remove_collectable(t_struct *st, int y, int x)
 			st->col5->instances[i].enabled = false;
 			st->col6->instances[i].enabled = false;
 			st->collec_cnt--;
-			if (st->collec_cnt == 0)
-				open_exit(st);
 			return ;
 		}	
 		i++;

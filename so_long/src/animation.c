@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:44:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 09:07:16 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:50:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,16 @@ void	wall_animation(t_struct	*st, size_t timer)
 	st->frame_wall++;
 }
 
-void	open_exit(t_struct *st)
+void	open_exit(t_struct *st, size_t timer)
 {
-	size_t	timer;
-
-	timer = 0;
-	timer = swap_z(st->exit_c, st->exit_o, st->exits);
-	(void)timer;
+	if (st->frame_exit == timer && st->exit_c->instances[0].z > 0)
+		st->frame_exit = swap_z(st->exit_c, st->exit_1, st->exits);
+	if (st->frame_exit == timer && st->exit_1->instances[0].z > 0)
+		st->frame_exit = swap_z(st->exit_1, st->exit_2, st->exits);
+	if (st->frame_exit == timer && st->exit_2->instances[0].z > 0)
+	{	
+		st->frame_exit = swap_z(st->exit_2, st->exit_o, st->exits);
+		st->frame_exit = 200;
+	}
+	st->frame_exit++;
 }
