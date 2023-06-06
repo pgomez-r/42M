@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/05 19:47:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:15:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,14 @@ void	remove_collectable(t_struct *st, int y, int x)
 		}	
 		i++;
 	}
+}
+
+void	walls_depth(t_struct *st)
+{
+	mlx_set_instance_depth(&st->wall->instances[st->walls], 300);
+	mlx_set_instance_depth(&st->wall1->instances[st->walls], -400);
+	mlx_set_instance_depth(&st->wall2->instances[st->walls], -500);
+	mlx_set_instance_depth(&st->wall3->instances[st->walls], -600);
+	mlx_set_instance_depth(&st->wall4->instances[st->walls], -700);
+	mlx_set_instance_depth(&st->wall5->instances[st->walls], -800);
 }

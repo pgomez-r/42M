@@ -6,39 +6,26 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:33:42 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/05 19:39:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 22:16:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-void	map_imgs(t_struct *st)
+void	bg_player_imgs(t_struct *st)
 {
-	st->texture = mlx_load_png("./sprites/bg0.png");
+	st->texture = mlx_load_png("./sprites/bg1.png");
 	st->way = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/bg1.png");
+	st->texture = mlx_load_png("./sprites/bg2.png");
 	st->way1 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/bg2.png");
+	st->texture = mlx_load_png("./sprites/bg3.png");
 	st->way2 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/ast5.png");
-	st->wall = mlx_texture_to_image(st->window, st->texture);
+	st->texture = mlx_load_png("./sprites/bg4.png");
+	st->way3 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/ast2.png");
-	st->wall1 = mlx_texture_to_image(st->window, st->texture);
-	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/ast3.png");
-	st->wall2 = mlx_texture_to_image(st->window, st->texture);
-	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/ast4.png");
-	st->wall3 = mlx_texture_to_image(st->window, st->texture);
-	mlx_delete_texture(st->texture);
-}
-
-void	player_imgs(t_struct *st)
-{
 	st->texture = mlx_load_png("./sprites/xwing_u.png");
 	st->player_u = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
@@ -50,6 +37,28 @@ void	player_imgs(t_struct *st)
 	mlx_delete_texture(st->texture);
 	st->texture = mlx_load_png("./sprites/xwing_r.png");
 	st->player_r = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+}
+
+void	walls_imgs(t_struct *st)
+{
+	st->texture = mlx_load_png("./sprites/ast1.png");
+	st->wall = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+	st->texture = mlx_load_png("./sprites/ast2.png");
+	st->wall1 = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+	st->texture = mlx_load_png("./sprites/ast3.png");
+	st->wall2 = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+	st->texture = mlx_load_png("./sprites/ast4.png");
+	st->wall3 = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+	st->texture = mlx_load_png("./sprites/ast5.png");
+	st->wall4 = mlx_texture_to_image(st->window, st->texture);
+	mlx_delete_texture(st->texture);
+	st->texture = mlx_load_png("./sprites/ast6.png");
+	st->wall5 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
 }
 
@@ -105,8 +114,9 @@ void	enemy_exit_imgs(t_struct *st)
 
 void	load_images(t_struct *st)
 {
-	map_imgs(st);
-	player_imgs(st);
+	bg_player_imgs(st);
+	walls_imgs(st);
 	cols_imgs(st);
 	enemy_exit_imgs(st);
+	explosion_imgs(st);
 }

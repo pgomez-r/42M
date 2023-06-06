@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:44:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/05 19:50:11 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:20:47 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	background_animation(t_struct *st, size_t timer)
 	else if (st->frame_bg == timer && st->way1->instances[0].z > 0)
 		st->frame_bg = swap_z(st->way1, st->way2, st->ways);
 	else if (st->frame_bg == timer && st->way2->instances[0].z > 0)
-		st->frame_bg = swap_z(st->way2, st->way, st->ways);
+		st->frame_bg = swap_z(st->way2, st->way3, st->ways);
+	else if (st->frame_bg == timer && st->way3->instances[0].z > 0)
+		st->frame_bg = swap_z(st->way3, st->way, st->ways);
 	st->frame_bg++;
 }
 
@@ -67,7 +69,11 @@ void	wall_animation(t_struct	*st, size_t timer)
 	else if (st->frame_wall == timer && st->wall2->instances[0].z > 0)
 		st->frame_wall = swap_z(st->wall2, st->wall3, st->walls);
 	else if (st->frame_wall == timer && st->wall3->instances[0].z > 0)
-		st->frame_wall = swap_z(st->wall3, st->wall, st->walls);
+		st->frame_wall = swap_z(st->wall3, st->wall4, st->walls);
+	else if (st->frame_wall == timer && st->wall4->instances[0].z > 0)
+		st->frame_wall = swap_z(st->wall4, st->wall5, st->walls);
+	else if (st->frame_wall == timer && st->wall5->instances[0].z > 0)
+		st->frame_wall = swap_z(st->wall5, st->wall, st->walls);
 	st->frame_wall++;
 }
 

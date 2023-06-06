@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:39:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 18:28:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 22:34:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	move_right(t_struct *st)
 void	key_control(t_struct *st)
 {
 	if (mlx_is_key_down(st->window, MLX_KEY_ESCAPE))
+	{	
+		st->exit_stat = -1;
 		mlx_close_window(st->window);
+	}
 	if (mlx_is_key_down(st->window, MLX_KEY_UP)
 		|| mlx_is_key_down(st->window, MLX_KEY_W))
 		move_up(st);

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:42:48 by pgruz             #+#    #+#             */
-/*   Updated: 2023/06/02 17:00:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 22:57:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,22 @@ void	check_kill(t_struct	*st)
 	p_y = st->player_d->instances[0].y + 32;
 	p_x = st->player_d->instances[0].x + 32;
 	i = 0;
-	while (i < st->enms)
+	while (i < st->enms && st->exit_stat == 0)
 	{
 		e_y = st->enemy_d->instances[i].y + 32;
 		e_x = st->enemy_d->instances[i].x + 32;
 		if (ft_distance(p_y, e_y) < 54 && ft_distance(p_x, e_x) < 54)
-			mlx_close_window(st->window);
+		{
+			st->exit_stat = 1;
+			place_exp(st, (p_x - 32), (p_y - 32));
+			return ;
+		}
 		i++;
 	}
+	if (st->exit_stat == 1 && st->frame_exp < 150)
+		exp_animation(st, 20);
+	else if (st->exit_stat == 1 && st->frame_exp > 150)
+		mlx_close_window(st->window);
 }
 
 int	ft_distance(int point_a, int point_b)

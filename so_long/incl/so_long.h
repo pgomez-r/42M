@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/05 19:47:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 22:29:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,24 @@ typedef struct s_struct
 	size_t			frame_bg;
 	size_t			frame_col;
 	size_t			frame_exit;
+	size_t			frame_exp;
 	int				*dirs;
 	int				*flags;
 	int				movs[4];
 	int				*stat_col;
+	int				exit_stat;
 	mlx_t			*window;
 	mlx_texture_t	*texture;
 	mlx_image_t		*wall;
 	mlx_image_t		*wall1;
 	mlx_image_t		*wall2;
 	mlx_image_t		*wall3;
+	mlx_image_t		*wall4;
+	mlx_image_t		*wall5;
 	mlx_image_t		*way;
 	mlx_image_t		*way1;
 	mlx_image_t		*way2;
+	mlx_image_t		*way3;
 	mlx_image_t		*exit_o;
 	mlx_image_t		*exit_1;
 	mlx_image_t		*exit_2;
@@ -75,9 +80,15 @@ typedef struct s_struct
 	mlx_image_t		*col4;
 	mlx_image_t		*col5;
 	mlx_image_t		*col6;
+	mlx_image_t		*exp1;
+	mlx_image_t		*exp2;
+	mlx_image_t		*exp3;
+	mlx_image_t		*exp4;
 }	t_struct;
 
 /*main.c*/
+void				game_hook(void *param);
+void				end_game(t_struct *st);
 
 /*init.c*/
 void				read_map(t_struct *st, char *path);
@@ -85,13 +96,14 @@ void				init_collect_stat(t_struct *st);
 
 /*init_struct.c*/
 void				init_struct(t_struct *st);
-void				init_mlx(t_struct *st);
+void				init_imgs_bg(t_struct *st);
+void				init_imgs_env(t_struct *st);
 void				init_params(t_struct *st);
 
 /*load_images.c*/
 void				load_images(t_struct *st);
-void				map_imgs(t_struct *st);
-void				player_imgs(t_struct *st);
+void				bg_player_imgs(t_struct *st);
+void				walls_imgs(t_struct *st);
 void				cols_imgs(t_struct *st);
 void				enemy_exit_imgs(t_struct *st);
 
@@ -106,6 +118,7 @@ void				render_enemies(t_struct *st);
 void				render_collectables(t_struct *st);
 void				render_exits(t_struct *st);
 void				collectables_depth(t_struct	*st);
+void				walls_depth(t_struct *st);
 void				remove_collectable(t_struct *st, int y, int x);
 
 /*animation.c*/
@@ -114,6 +127,11 @@ void				col_animation(t_struct *st, size_t timer);
 void				background_animation(t_struct *st, size_t timer);
 void				wall_animation(t_struct	*st, size_t timer);
 void				open_exit(t_struct *st, size_t timer);
+
+/*animation_2.c*/
+void				exp_animation(t_struct *st, size_t timer);
+void				explosion_imgs(t_struct *st);
+void				place_exp(t_struct *st, size_t x, size_t y);
 
 /*key_control.c*/
 void				move_up(t_struct *st);

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/05 19:43:11 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:59:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,32 @@ void	init_params(t_struct *st)
 	st->frame_bg = 0;
 	st->frame_col = 0;
 	st->frame_exit = 0;
+	st->frame_exp = 0;
+	st->exit_stat = 0;
 	st->dirs = NULL;
 	st->flags = NULL;
 }
 
-void	init_mlx(t_struct *st)
+void	init_imgs_bg(t_struct *st)
 {
 	st->wall = NULL;
 	st->wall1 = NULL;
 	st->wall2 = NULL;
 	st->wall3 = NULL;
+	st->wall4 = NULL;
+	st->wall5 = NULL;
 	st->way = NULL;
 	st->way1 = NULL;
 	st->way2 = NULL;
+	st->way3 = NULL;
 	st->exit_o = NULL;
 	st->exit_1 = NULL;
 	st->exit_2 = NULL;
 	st->exit_c = NULL;
+}
+
+void	init_imgs_env(t_struct *st)
+{
 	st->player_u = NULL;
 	st->player_d = NULL;
 	st->player_l = NULL;
@@ -61,10 +70,15 @@ void	init_mlx(t_struct *st)
 	st->col4 = NULL;
 	st->col5 = NULL;
 	st->col6 = NULL;
+	st->exp1 = NULL;
+	st->exp2 = NULL;
+	st->exp3 = NULL;
+	st->exp4 = NULL;
 }
 
 void	init_struct(t_struct *st)
 {
 	init_params(st);
-	init_mlx(st);
+	init_imgs_bg(st);
+	init_imgs_env(st);
 }
