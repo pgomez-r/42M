@@ -3,6 +3,5 @@
 objs/
 libft.a
 *.swp
-.gitignore
 *.dSYM
 *.dSYM/
