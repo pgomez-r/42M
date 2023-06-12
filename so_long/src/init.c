@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/02 16:45:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:00:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,22 @@ void	read_map(t_struct *st, char *path)
 
 void	init_collect_stat(t_struct *st)
 {	
-	size_t	x;
+	size_t	y;
 
-	x = -1;
+	y = -1;
 	st->stat_col = malloc(sizeof(int) * st->cols);
-	while (++x < st->cols)
-		st->stat_col[x] = 0;
+	while (++y < st->cols)
+		st->stat_col[y] = 0;
+	if (st->width > 4)
+	{	
+		y = st->height * PIX;
+		st->moves_str = mlx_put_string(st->window, st->moves, 6, y - 42);
+		st->moves_num = mlx_put_string(st->window, st->moves_cnt, 70, y - 42);
+		mlx_image_to_window(st->window, st->col4, 132, y - 64);
+		st->col_aux = st->collec_cnt;
+		st->orbs_left = ft_itoa(st->collec_cnt);
+		st->cols_left = mlx_put_string(st->window, st->orbs_left, 196, y - 42);
+	}
+	ft_printf("MOVES: %d\r", (int)st->step_cnt);
 }
+	

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:41:10 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/29 09:22:39 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:44:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	player_move_y(t_struct *st, int direction)
 		st->player_l->instances[0].y += MOV;
 		st->player_r->instances[0].y += MOV;
 	}
+	st->step_pix += MOV;
 }
 
 void	player_move_x(t_struct *st, int direction)
@@ -82,4 +83,5 @@ void	player_move_x(t_struct *st, int direction)
 		st->player_l->instances[0].x += MOV;
 		st->player_r->instances[0].x += MOV;
 	}
+	st->step_pix += MOV;
 }

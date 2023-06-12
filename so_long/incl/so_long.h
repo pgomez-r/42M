@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/06 22:29:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:36:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,15 @@
 typedef struct s_struct
 {
 	char			**map;
+	char			*moves;
+	char			*moves_cnt;
+	char			*orbs_left;
 	size_t			width;
 	size_t			height;
 	size_t			collec_cnt;
+	size_t			col_aux;
 	size_t			step_cnt;
+	size_t			step_pix;
 	size_t			walls;
 	size_t			ways;
 	size_t			exits;
@@ -84,6 +89,9 @@ typedef struct s_struct
 	mlx_image_t		*exp2;
 	mlx_image_t		*exp3;
 	mlx_image_t		*exp4;
+	mlx_image_t		*moves_str;
+	mlx_image_t		*moves_num;
+	mlx_image_t		*cols_left;
 }	t_struct;
 
 /*main.c*/
@@ -159,5 +167,9 @@ int					calculate_axis(t_struct *st, int e);
 int					check_traffic(t_struct *st, int mov_y, int mov_x, int i);
 void				check_kill(t_struct	*st);
 int					ft_distance(int point_a, int point_b);
+
+/*game_status.c*/
+void				game_status(t_struct *st);
+void				string_check(t_struct *st);
 
 #endif

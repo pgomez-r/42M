@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/06 22:42:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:20:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	game_hook(void *param)
 	st = (t_struct *)param;
 	if (st->collec_cnt == 0 && st->frame_exit < 100)
 		open_exit(st, 8);
-	check_kill(st);
+	game_status(st);
 	if (st->exit_stat == 0)
 	{	
 		key_control(st);
