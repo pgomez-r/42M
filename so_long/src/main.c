@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/13 03:00:40 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/13 16:01:34 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,20 @@ void	game_hook(void *param)
 void	end_game(t_struct *st)
 {
 	if (st->exit_stat == -1)
+	{	
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
 		print_screen("./textures/escape.txt");
+	}
 	else if (st->exit_stat == 0)
+	{	
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
 		print_screen("./textures/win.txt");
+	}
 	else if (st->exit_stat == 1)
+	{		
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
 		print_screen("./textures/gameover.txt");
+	}
 }
 
 int	main(int ac, char **av)
