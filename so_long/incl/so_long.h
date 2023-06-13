@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 19:36:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:50:20 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,6 @@ int					ft_distance(int point_a, int point_b);
 /*game_status.c*/
 void				game_status(t_struct *st);
 void				string_check(t_struct *st);
+void				print_screen(char *path);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 18:20:46 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/13 03:00:40 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	game_hook(void *param)
 void	end_game(t_struct *st)
 {
 	if (st->exit_stat == -1)
-		ft_printf("Taluego!\n");
+		print_screen("./textures/escape.txt");
 	else if (st->exit_stat == 0)
-		ft_printf("YOU WIN!!\n");
+		print_screen("./textures/win.txt");
 	else if (st->exit_stat == 1)
-		ft_printf("GAME OVER\nTry again...\n");
+		print_screen("./textures/gameover.txt");
 }
 
 int	main(int ac, char **av)
@@ -48,6 +48,7 @@ int	main(int ac, char **av)
 		return (-1);
 	init_struct(&st);
 	read_map(&st, av[1]);
+	print_screen("./textures/welcome.txt");
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	render_images(&st);
