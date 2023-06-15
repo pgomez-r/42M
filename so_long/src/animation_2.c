@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 22:00:52 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/06 22:55:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:10:41 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	exp_animation(t_struct *st, size_t timer)
 
 void	explosion_imgs(t_struct *st)
 {
-	st->texture = mlx_load_png("./sprites/e1.png");
+	st->texture = mlx_load_png("./textures/e1.png");
 	st->exp1 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/e2.png");
+	st->texture = mlx_load_png("./textures/e2.png");
 	st->exp2 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/e3.png");
+	st->texture = mlx_load_png("./textures/e3.png");
 	st->exp3 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
-	st->texture = mlx_load_png("./sprites/e4.png");
+	st->texture = mlx_load_png("./textures/e4.png");
 	st->exp4 = mlx_texture_to_image(st->window, st->texture);
 	mlx_delete_texture(st->texture);
 }

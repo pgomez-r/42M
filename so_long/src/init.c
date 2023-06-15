@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:32:11 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 20:00:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:21:45 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	read_map(t_struct *st, char *path)
 	st->height = ft_strdlen(st->map);
 }
 
+/*Esta la puedo mover a game_status y seguir con
+pareseo y checkeo aquí*/
+
 void	init_collect_stat(t_struct *st)
 {	
 	size_t	y;
@@ -56,4 +59,3 @@ void	init_collect_stat(t_struct *st)
 	}
 	ft_printf("MOVES: %d\r", (int)st->step_cnt);
 }
-	

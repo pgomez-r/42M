@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/15 18:40:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:56:05 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,6 @@ int					ft_distance(int point_a, int point_b);
 /*game_status.c*/
 void				game_status(t_struct *st);
 void				string_check(t_struct *st);
+void				print_screen(char *path);
 
 #endif

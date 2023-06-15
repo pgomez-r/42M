@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/15 18:43:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:55:32 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ void	game_hook(void *param)
 void	end_game(t_struct *st)
 {
 	if (st->exit_stat == -1)
-		ft_printf("Taluego!\n");
+	{	
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
+		print_screen("./textures/escape.txt");
+	}
 	else if (st->exit_stat == 0)
-		ft_printf("YOU WIN!!\n");
+	{	
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
+		print_screen("./textures/win.txt");
+	}
 	else if (st->exit_stat == 1)
 		ft_printf("GAME OVER\nTry again...\n");
 	//función_liberar_memoria(se ejecuta siempre, da igual exit_stat)

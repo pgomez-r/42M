@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 20:00:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:03:56 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,28 @@ void	string_check(t_struct *st)
 		mlx_delete_image(st->window, st->cols_left);
 		st->cols_left = mlx_put_string(st->window, st->orbs_left, 196, y - 42);
 	}
+}
+
+void	print_screen(char *path)
+{
+	char	*line;
+	char	*strscreen;
+	char	**screen;	
+	int		fd;
+
+	line = malloc(1 * 1);
+	strscreen = malloc(1 * 1);
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		strscreen = ft_strjoin(strscreen, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (line != NULL)
+		free(line);
+	close(fd);
+	screen = ft_split(strscreen, '\n');
+	ft_print_dstr(screen);
 }
