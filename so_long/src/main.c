@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 18:20:46 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:43:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	end_game(t_struct *st)
 		ft_printf("YOU WIN!!\n");
 	else if (st->exit_stat == 1)
 		ft_printf("GAME OVER\nTry again...\n");
+	//función_liberar_memoria(se ejecuta siempre, da igual exit_stat)
 }
 
 int	main(int ac, char **av)
@@ -48,6 +49,9 @@ int	main(int ac, char **av)
 		return (-1);
 	init_struct(&st);
 	read_map(&st, av[1]);
+	//map_validate(todas las checks del mapa y camino válido);
+	//if (st.exit_stat == -2)
+	//	end_game(&st);
 	st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);
 	load_images(&st);
 	render_images(&st);
