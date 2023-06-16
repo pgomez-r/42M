@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/15 18:55:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:23:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	end_game(t_struct *st)
 		print_screen("./textures/win.txt");
 	}
 	else if (st->exit_stat == 1)
-		ft_printf("GAME OVER\nTry again...\n");
+	{	
+		ft_printf("MOVES: %d\n", (int)st->step_cnt);
+		print_screen("./textures/gameover.txt");
+	}
 	//función_liberar_memoria(se ejecuta siempre, da igual exit_stat)
 }
 
