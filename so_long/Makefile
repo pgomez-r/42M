@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/06/13 16:32:41 by pgruz            ###   ########.fr        #
+#    Updated: 2023/06/19 22:39:35 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME     = so_long
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC      = main.c init_struct.c init.c load_images.c render_images.c \
+SRC      = main.c map_validate.c init.c load_images.c render_images.c \
 			render_images_2.c animation.c animation_2.c key_control.c \
 			key_control_2.c enemy_patrol.c enemy_patrol_2.c game_status.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))

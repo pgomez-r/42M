@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/15 18:56:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/19 23:04:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,19 @@ typedef struct s_struct
 void				game_hook(void *param);
 void				end_game(t_struct *st);
 
-/*init.c*/
+/*map_validate.c*/
 void				read_map(t_struct *st, char *path);
-void				init_collect_stat(t_struct *st);
+int					check_elements(char *map);
+int					check_format(char *path);
+int					check_shape(t_struct *st);
+int					check_wayout(t_struct *st);
 
-/*init_struct.c*/
+/*init.c*/
 void				init_struct(t_struct *st);
 void				init_imgs_bg(t_struct *st);
 void				init_imgs_env(t_struct *st);
 void				init_params(t_struct *st);
+void				init_collect_stat(t_struct *st);
 
 /*load_images.c*/
 void				load_images(t_struct *st);
