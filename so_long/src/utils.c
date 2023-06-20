@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 09:56:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:50:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	player_coordinates(t_struct *st)
 	int	j;
 
 	i = -1;
-	while (i++ < st->height)
+	while (++i < (int)st->height)
 	{
 		j = -1;
-		while (j++ < st->width)
+		while (++j < (int)st->width)
 		{
 			if (st->map[i][j] == 'P')
 			{

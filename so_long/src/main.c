@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 09:53:37 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:58:11 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_printf("Error\nSo_long only works with two arguments!\n"), -1);
-	if (!check_format(av[1]))
+	if (check_format(av[1]))
 		return (-1);
 	init_struct(&st);
 	read_map(&st, av[1]);

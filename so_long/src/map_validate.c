@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 10:23:13 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:10:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	check_format(char *path)
 	int	i;
 
 	i = -1;
-	while (i++ < (len - 5))
+	len = ft_strlen(path);
+	while (++i < (len - 4))
 		path++;
-	if (!ft_strcmp(path, ".brew"))
-		return (ft_printf("Error\nWrong map file format (not .brew)\n"), -1);
-	return (1);
+	if (ft_strcmp(path, ".ber") != 0)
+		return (ft_printf("Error\nWrong map file format (not .ber)\n"), -1);
+	return (0);
 }
 
 void	read_map(t_struct *st, char *path)
@@ -55,15 +56,20 @@ void	read_map(t_struct *st, char *path)
 	if (line != NULL)
 		free(line);
 	close(fd);
+	if (!map_str || map_str[0] == '\0' || map_str[0] == '\n')
+	{	
+		st->exit_stat = -2;
+		return ;
+	}
 	st->map = ft_split(map_str, '\n');
 	st->cmap = ft_split(map_str, '\n');
 	st->width = ft_strlen(st->map[0]);
 	st->height = ft_strdlen(st->map);
-	if (!check_elements(map_str) || !check_shape(st) || !check_wayout(st))
+	if (check_elements(map_str) || check_shape(st) || check_wayout(st))
 		st->exit_stat = -2;
 }
 
-/*Check .brew y que solo haya chars permitidos y un solo P y E*/
+/*Check .ber y que solo haya chars permitidos y un solo P y E*/
 int	check_elements(char *map)
 {
 	int		i;
@@ -77,7 +83,7 @@ int	check_elements(char *map)
 	{
 		if (map[i] == '0' || map[i] == '1' || map[i] == 'X' || map[i] == 'C')
 			i++;
-		else if (map[i] == 'P' || map[i] == 'E')
+		else if (map[i] == 'P' || map[i] == 'E' || map[i] == '\n')
 		{
 			if (map[i] == 'P')
 				flag_p++;
@@ -86,38 +92,37 @@ int	check_elements(char *map)
 			i++;
 		}
 		else
-			return (ft_print("Error\nWrong characters in map.brew\n"), -1);
+			return (ft_printf("Error\nWrong characters in map.ber\n"), -1);
 	}
 	if (flag_p > 1 || flag_e > 1)
 		return (ft_printf("Error\nMore than one PLAYER or EXIT\n"), -1);
-	return (1);
+	return (0);
 }
 
 /*Check si rectangular y si está rodeado de 1*/
 int	check_shape(t_struct *st)
 {
 	int	i;
-	int	j;
 
 	if (st->height >= st->width)
 		return (ft_printf("Error\nMap is not rectangular\n"), -1);
 	i = -1;
-	while (i++ < (int)st->width)
+	while (++i < (int)st->width)
 	{
 		if (st->map[0][i] != '1')
 			return (ft_printf("Error\nMap is not surrounded by walls\n"), -1);
-		if (st->map[st->height][i] != '1')
+		if (st->map[st->height - 1][i] != '1')
 			return (ft_printf("Error\nMap is not surrounded by walls\n"), -1);
 	}
 	i = -1;
-	while (i++ < (int)st->height)
+	while (++i < (int)st->height)
 	{
 		if (st->map[i][0] != '1')
 			return (ft_printf("Error\nMap is not surrounded by walls\n"), -1);
-		if (st->map[i][st->width] != '1')
+		if (st->map[i][st->width - 1] != '1')
 			return (ft_printf("Error\nMap is not surrounded by walls\n"), -1);
 	}
-	return (1);
+	return (0);
 }
 
 /*Ubicar las coords de player, hacer el famoso floodfill, luego check si hay E*/
@@ -129,14 +134,14 @@ int	check_wayout(t_struct *st)
 	player_coordinates(st);
 	sl_floodfill(st, st->player_y, st->player_x);
 	i = -1;
-	while (i++ < st->height)
+	while (++i < (int)st->height)
 	{
 		j = -1;
-		while (j++ < st->width)
+		while (++j < (int)st->width)
 		{
-			if (st->cmap[i][j] == 'E')
+			if (st->cmap[i][j] == 'E' || st->cmap[i][j] == 'C')
 				return (ft_printf("Error\nNo valid path in the map\n"), -1);
 		}
 	}
-	return (1);
+	return (0);
 }
