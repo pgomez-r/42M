@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/19 22:39:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:46:29 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_params(t_struct *st)
 {
 	st->map = NULL;
+	st->cmap = NULL;
 	st->window = NULL;
 	st->width = 0;
 	st->height = 0;
@@ -36,6 +37,8 @@ void	init_params(t_struct *st)
 	st->exit_stat = 0;
 	st->dirs = NULL;
 	st->flags = NULL;
+	st->player_x = 0;
+	st->player_y = 0;
 }
 
 void	init_imgs_bg(t_struct *st)

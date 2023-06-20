@@ -6,49 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/19 22:34:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:53:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
-
-void	game_hook(void *param)
-{
-	t_struct	*st;
-
-	st = (t_struct *)param;
-	if (st->collec_cnt == 0 && st->frame_exit < 100)
-		open_exit(st, 8);
-	game_status(st);
-	if (st->exit_stat == 0)
-	{	
-		key_control(st);
-		background_animation(st, 100);
-		wall_animation(st, 40);
-		col_animation(st, 6);
-		enemy_patrol(st);
-	}
-}
-
-void	end_game(t_struct *st)
-{
-	if (st->exit_stat == -1)
-	{	
-		ft_printf("MOVES: %d\n", (int)st->step_cnt);
-		print_screen("./textures/escape.txt");
-	}
-	else if (st->exit_stat == 0)
-	{	
-		ft_printf("MOVES: %d\n", (int)st->step_cnt);
-		print_screen("./textures/win.txt");
-	}
-	else if (st->exit_stat == 1)
-	{	
-		ft_printf("MOVES: %d\n", (int)st->step_cnt);
-		print_screen("./textures/gameover.txt");
-	}
-	//función_liberar_memoria(se ejecuta siempre, da igual exit_stat)
-}
 
 int	main(int ac, char **av)
 {
@@ -56,9 +18,10 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_printf("Error\nSo_long only works with two arguments!\n"), -1);
+	if (!check_format(av[1]))
+		return (-1);
 	init_struct(&st);
 	read_map(&st, av[1]);
-	//map_validate(todas las checks del mapa y camino válido);
 	if (st.exit_stat == 0)
 	{
 		st.window = mlx_init(st.width * PIX, st.height * PIX, NAME, false);

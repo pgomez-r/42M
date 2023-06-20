@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/06/19 22:39:35 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/06/20 09:38:46 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_PATH = obj/
 
 SRC      = main.c map_validate.c init.c load_images.c render_images.c \
 			render_images_2.c animation.c animation_2.c key_control.c \
-			key_control_2.c enemy_patrol.c enemy_patrol_2.c game_status.c
+			key_control_2.c enemy_patrol.c enemy_patrol_2.c utils.c game_utils.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))

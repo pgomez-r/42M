@@ -6,11 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/19 23:19:21 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:23:13 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../incl/so_long.h"
 
 /**
  * @brief Lista de comproboaciones según subject.pdf
@@ -21,6 +21,20 @@
  * - Mapa rodeado de '1'
  * - Camino válido (floodfill)
  */
+
+/*Check .brew en path*/
+int	check_format(char *path)
+{
+	int	len;
+	int	i;
+
+	i = -1;
+	while (i++ < (len - 5))
+		path++;
+	if (!ft_strcmp(path, ".brew"))
+		return (ft_printf("Error\nWrong map file format (not .brew)\n"), -1);
+	return (1);
+}
 
 void	read_map(t_struct *st, char *path)
 {
@@ -42,11 +56,11 @@ void	read_map(t_struct *st, char *path)
 		free(line);
 	close(fd);
 	st->map = ft_split(map_str, '\n');
+	st->cmap = ft_split(map_str, '\n');
 	st->width = ft_strlen(st->map[0]);
 	st->height = ft_strdlen(st->map);
-	if (!check_format(path) || !check_elements(map_str)
-		|| !check_shape(st) || !check_wayout(st))
-		st.exit_stat = -2;
+	if (!check_elements(map_str) || !check_shape(st) || !check_wayout(st))
+		st->exit_stat = -2;
 }
 
 /*Check .brew y que solo haya chars permitidos y un solo P y E*/
@@ -79,20 +93,6 @@ int	check_elements(char *map)
 	return (1);
 }
 
-/*Check .brew en path*/
-int	check_format(char *path)
-{
-	int	len;
-	int	i;
-
-	i = -1;
-	while (i++ < (len - 5))
-		path++;
-	if (!ft_strcmp(path, ".brew"))
-		return (ft_printf("Error\nWrong map file format (not .brew)\n"), -1);
-	return (1);
-}
-
 /*Check si rectangular y si está rodeado de 1*/
 int	check_shape(t_struct *st)
 {
@@ -120,8 +120,23 @@ int	check_shape(t_struct *st)
 	return (1);
 }
 
-/*El famoso floodfill o floorfill cabessa*/
+/*Ubicar las coords de player, hacer el famoso floodfill, luego check si hay E*/
 int	check_wayout(t_struct *st)
 {
-	
+	int	i;
+	int	j;
+
+	player_coordinates(st);
+	sl_floodfill(st, st->player_y, st->player_x);
+	i = -1;
+	while (i++ < st->height)
+	{
+		j = -1;
+		while (j++ < st->width)
+		{
+			if (st->cmap[i][j] == 'E')
+				return (ft_printf("Error\nNo valid path in the map\n"), -1);
+		}
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/19 23:04:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/20 09:46:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@
 typedef struct s_struct
 {
 	char			**map;
+	char			**cmap;
 	char			*moves;
 	char			*moves_cnt;
 	char			*orbs_left;
+	int				player_y;
+	int				player_x;
 	size_t			width;
 	size_t			height;
 	size_t			collec_cnt;
@@ -93,10 +96,6 @@ typedef struct s_struct
 	mlx_image_t		*moves_num;
 	mlx_image_t		*cols_left;
 }	t_struct;
-
-/*main.c*/
-void				game_hook(void *param);
-void				end_game(t_struct *st);
 
 /*map_validate.c*/
 void				read_map(t_struct *st, char *path);
@@ -172,9 +171,15 @@ int					check_traffic(t_struct *st, int mov_y, int mov_x, int i);
 void				check_kill(t_struct	*st);
 int					ft_distance(int point_a, int point_b);
 
-/*game_status.c*/
-void				game_status(t_struct *st);
+/*utils.c*/
 void				string_check(t_struct *st);
 void				print_screen(char *path);
+void				player_coordinates(t_struct *st);
+void				sl_floodfill(t_struct *st, int y, int x);
+
+/*game_utils.c*/
+void				game_status(t_struct *st);
+void				game_hook(void *param);
+void				end_game(t_struct *st);
 
 #endif

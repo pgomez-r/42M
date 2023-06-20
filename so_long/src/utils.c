@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_status.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/13 16:03:56 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:56:15 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
-
-void	game_status(t_struct *st)
-{
-	check_kill(st);
-	string_check(st);
-}
 
 void	string_check(t_struct *st)
 {
@@ -63,4 +57,43 @@ void	print_screen(char *path)
 	close(fd);
 	screen = ft_split(strscreen, '\n');
 	ft_print_dstr(screen);
+}
+
+void	player_coordinates(t_struct *st)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (i++ < st->height)
+	{
+		j = -1;
+		while (j++ < st->width)
+		{
+			if (st->map[i][j] == 'P')
+			{
+				st->player_y = i;
+				st->player_x = j;
+				return ;
+			}
+		}
+	}
+}
+
+void	sl_floodfill(t_struct *st, int y, int x)
+{
+	int	h;
+	int	w;
+
+	h = st->height;
+	w = st->width;
+	if (y < 0 || x < 0 || y > h || x > w || st->cmap[y][x] == 'F'
+		|| st->cmap[y][x] == '1' || st->cmap[y][x] == 'X')
+		return ;
+	if (st->cmap[y][x] == '0' || st->cmap[y][x] == 'C' || st->cmap[y][x] == 'E')
+		st->cmap[y][x] = 'F';
+	sl_floodfill(st, y - 1, x);
+	sl_floodfill(st, y + 1, x);
+	sl_floodfill(st, y, x - 1);
+	sl_floodfill(st, y, x + 1);
 }
