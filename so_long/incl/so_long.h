@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 09:46:21 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:26:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void				string_check(t_struct *st);
 void				print_screen(char *path);
 void				player_coordinates(t_struct *st);
 void				sl_floodfill(t_struct *st, int y, int x);
+int					check_mapstr(t_struct *st, char *map_str);
 
 /*game_utils.c*/
 void				game_status(t_struct *st);

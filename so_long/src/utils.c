@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 11:50:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:37:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,28 @@ void	player_coordinates(t_struct *st)
 			}
 		}
 	}
+}
+
+int	check_mapstr(t_struct *st, char *map_str)
+{
+	size_t	i;
+
+	if (!map_str || map_str[0] == '\0' || map_str[0] == '\n')
+	{	
+		st->exit_stat = -2;
+		return (ft_printf("Error\nMap is empty or missing first line\n"), -1);
+	}
+	i = 0;
+	while (map_str[i] != '\0')
+	{
+		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
+		{
+			st->exit_stat = -2;
+			return (ft_printf("Error\nMap has empty lines\n"), -1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	sl_floodfill(t_struct *st, int y, int x)

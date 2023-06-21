@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 12:10:37 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:25:25 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ void	read_map(t_struct *st, char *path)
 	if (line != NULL)
 		free(line);
 	close(fd);
-	if (!map_str || map_str[0] == '\0' || map_str[0] == '\n')
-	{	
-		st->exit_stat = -2;
+	if (check_mapstr(st, map_str))
 		return ;
-	}
 	st->map = ft_split(map_str, '\n');
 	st->cmap = ft_split(map_str, '\n');
 	st->width = ft_strlen(st->map[0]);
@@ -94,8 +91,8 @@ int	check_elements(char *map)
 		else
 			return (ft_printf("Error\nWrong characters in map.ber\n"), -1);
 	}
-	if (flag_p > 1 || flag_e > 1)
-		return (ft_printf("Error\nMore than one PLAYER or EXIT\n"), -1);
+	if (flag_p != 1 || flag_e != 1)
+		return (ft_printf("Error\nInvalid number of PLAYER/EXIT\n"), -1);
 	return (0);
 }
 
