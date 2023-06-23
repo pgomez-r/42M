@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/21 23:25:25 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:11:25 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,64 +40,56 @@ int	check_format(char *path)
 void	read_map(t_struct *st, char *path)
 {
 	char	*line;
-	char	*map_str;
 	int		fd;
 
-	map_str = malloc(1 * 1);
 	line = malloc (1 * 1);
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		map_str = ft_strjoin(map_str, line);
+		st->map_str = join_and_free(st->map_str, line);
 		free(line);
 		line = get_next_line(fd);
 	}
 	if (line != NULL)
 		free(line);
 	close(fd);
-	if (check_mapstr(st, map_str))
+	if (check_mapstr(st, st->map_str))
 		return ;
-	st->map = ft_split(map_str, '\n');
-	st->cmap = ft_split(map_str, '\n');
+	st->map = ft_split(st->map_str, '\n');
+	st->cmap = ft_split(st->map_str, '\n');
 	st->width = ft_strlen(st->map[0]);
 	st->height = ft_strdlen(st->map);
-	if (check_elements(map_str) || check_shape(st) || check_wayout(st))
+	if (chk_char(st->map_str) || chk_pec(st->map_str) || chk_shape(st)
+		|| chk_way(st))
 		st->exit_stat = -2;
 }
 
 /*Check .ber y que solo haya chars permitidos y un solo P y E*/
-int	check_elements(char *map)
+int	chk_char(char *map)
 {
 	int		i;
-	int		flag_p;
-	int		flag_e;
+	int		nplayer;
+	int		nexit;
+	int		ncollec;
 
-	flag_p = 0;
-	flag_e = 0;
+	nplayer = 0;
+	nexit = 0;
+	ncollec = 0;
 	i = 0;
 	while (map[i] != '\0')
 	{
-		if (map[i] == '0' || map[i] == '1' || map[i] == 'X' || map[i] == 'C')
+		if (map[i] == '0' || map[i] == '1' || map[i] == 'X' || map[i] == '\n'
+			|| map[i] == 'P' || map[i] == 'E' || map[i] == 'C')
 			i++;
-		else if (map[i] == 'P' || map[i] == 'E' || map[i] == '\n')
-		{
-			if (map[i] == 'P')
-				flag_p++;
-			if (map[i] == 'E')
-				flag_e++;
-			i++;
-		}
 		else
 			return (ft_printf("Error\nWrong characters in map.ber\n"), -1);
 	}
-	if (flag_p != 1 || flag_e != 1)
-		return (ft_printf("Error\nInvalid number of PLAYER/EXIT\n"), -1);
 	return (0);
 }
 
 /*Check si rectangular y si está rodeado de 1*/
-int	check_shape(t_struct *st)
+int	chk_shape(t_struct *st)
 {
 	int	i;
 
@@ -123,7 +115,7 @@ int	check_shape(t_struct *st)
 }
 
 /*Ubicar las coords de player, hacer el famoso floodfill, luego check si hay E*/
-int	check_wayout(t_struct *st)
+int	chk_way(t_struct *st)
 {
 	int	i;
 	int	j;

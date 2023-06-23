@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:37:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 10:26:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:18:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,54 @@ void	end_game(t_struct *st)
 		ft_printf("MOVES: %d\n", (int)st->step_cnt);
 		print_screen("./textures/gameover.txt");
 	}
+	clean_exit(st);
 }
 
-/*Falta función para liberar memoria, que se ejecute siempre en end_game, sea
-cual sea la exit_stat, y compruebe si cada variable que necesite liberarse
-!= NULL -> free (importante comprobar que esa variable viene de un malloc)
-Hay que mirar también que variables mlx necesitan liberarse y cuales basta con
-funciones del tipo delete_img...*/
+void	clean_exit(t_struct *st)
+{
+	if (st->map_str != NULL)
+		free(st->map_str);
+	if (st->map != NULL)
+		ft_totalfree(st->map);
+	if (st->cmap != NULL)
+		ft_totalfree(st->cmap);
+	if (st->stat_col != NULL)
+		free(st->stat_col);
+	if (st->dirs != NULL)
+		free(st->dirs);
+	if (st->flags != NULL)
+		free(st->flags);
+	if (st->moves_cnt != NULL)
+		free(st->moves_cnt);
+	if (st->orbs_left != NULL)
+		free(st->orbs_left);
+}
+
+int	chk_pec(char *map)
+{
+	int		i;
+	int		nplayer;
+	int		nexit;
+	int		ncollect;
+
+	nplayer = 0;
+	nexit = 0;
+	ncollect = 0;
+	i = -1;
+	while (map[++i] != '\0')
+	{
+		if (map[i] == 'P')
+			nplayer++;
+		if (map[i] == 'E')
+			nexit++;
+		if (map[i] == 'C')
+			ncollect++;
+	}
+	if (nplayer != 1)
+		return (ft_printf("Error\nInvalid number of players\n"), -1);
+	if (nexit != 1)
+		return (ft_printf("Error\nInvalid number of exits\n"), -1);
+	if (ncollect == 0)
+		return (ft_printf("Error\nThere is no collectibles!\n"), -1);
+	return (0);
+}

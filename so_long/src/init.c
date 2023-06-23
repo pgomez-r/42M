@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 22:28:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/20 09:46:29 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:26:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_params(t_struct *st)
 
 void	init_imgs_bg(t_struct *st)
 {
+	st->map_str = NULL;
 	st->moves = "MOVES";
 	st->moves_cnt = (ft_itoa(st->step_cnt));
 	st->orbs_left = NULL;
@@ -60,6 +61,7 @@ void	init_imgs_bg(t_struct *st)
 	st->exit_1 = NULL;
 	st->exit_2 = NULL;
 	st->exit_c = NULL;
+	st->stat_col = NULL;
 }
 
 void	init_imgs_env(t_struct *st)

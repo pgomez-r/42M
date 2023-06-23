@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:53:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/12 19:09:05 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:48:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	render_background(t_struct *st)
 			mlx_image_to_window(st->window, st->way2, x * PIX, y * PIX);
 			mlx_image_to_window(st->window, st->way3, x * PIX, y * PIX);
 			mlx_set_instance_depth(&st->way->instances[st->ways], 10);
-			mlx_set_instance_depth(&st->way1->instances[st->ways], -20);
-			mlx_set_instance_depth(&st->way2->instances[st->ways], -30);
-			mlx_set_instance_depth(&st->way3->instances[st->ways], -40);
+			mlx_set_instance_depth(&st->way1->instances[st->ways], -15);
+			mlx_set_instance_depth(&st->way2->instances[st->ways], -20);
+			mlx_set_instance_depth(&st->way3->instances[st->ways], -25);
 			st->ways++;
 			x++;
 		}
@@ -83,10 +83,10 @@ void	render_player(t_struct *st)
 				mlx_image_to_window(st->window, st->player_u, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_l, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_r, x * PIX, y * PIX);
-				mlx_set_instance_depth(&st->player_d->instances[0], 510);
-				mlx_set_instance_depth(&st->player_u->instances[0], -520);
-				mlx_set_instance_depth(&st->player_l->instances[0], -530);
-				mlx_set_instance_depth(&st->player_r->instances[0], -540);
+				mlx_set_instance_depth(&st->player_d->instances[0], 80);
+				mlx_set_instance_depth(&st->player_u->instances[0], -85);
+				mlx_set_instance_depth(&st->player_l->instances[0], -90);
+				mlx_set_instance_depth(&st->player_r->instances[0], -95);
 			}
 			x++;
 		}

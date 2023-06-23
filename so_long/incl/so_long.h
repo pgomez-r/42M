@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/21 23:26:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:03:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_struct
 {
 	char			**map;
 	char			**cmap;
+	char			*map_str;
 	char			*moves;
 	char			*moves_cnt;
 	char			*orbs_left;
@@ -99,10 +100,10 @@ typedef struct s_struct
 
 /*map_validate.c*/
 void				read_map(t_struct *st, char *path);
-int					check_elements(char *map);
+int					chk_char(char *map);
 int					check_format(char *path);
-int					check_shape(t_struct *st);
-int					check_wayout(t_struct *st);
+int					chk_shape(t_struct *st);
+int					chk_way(t_struct *st);
 
 /*init.c*/
 void				init_struct(t_struct *st);
@@ -182,5 +183,7 @@ int					check_mapstr(t_struct *st, char *map_str);
 void				game_status(t_struct *st);
 void				game_hook(void *param);
 void				end_game(t_struct *st);
+int					chk_pec(char *map);
+void				clean_exit(t_struct *st);
 
 #endif

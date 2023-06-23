@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:19:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/06 20:15:51 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:47:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	render_exits(t_struct *st)
 				mlx_image_to_window(st->window, st->exit_1, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->exit_2, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->exit_o, x * PIX, y * PIX);
-				mlx_set_instance_depth(&st->exit_c->instances[st->exits], 110);
-				mlx_set_instance_depth(&st->exit_1->instances[st->exits], -120);
-				mlx_set_instance_depth(&st->exit_2->instances[st->exits], -130);
-				mlx_set_instance_depth(&st->exit_o->instances[st->exits], -140);
+				mlx_set_instance_depth(&st->exit_c->instances[st->exits], 50);
+				mlx_set_instance_depth(&st->exit_1->instances[st->exits], -55);
+				mlx_set_instance_depth(&st->exit_2->instances[st->exits], -60);
+				mlx_set_instance_depth(&st->exit_o->instances[st->exits], -65);
 				st->exits++;
 			}
 			x++;
@@ -72,12 +72,12 @@ void	render_collectables(t_struct *st)
 
 void	collectables_depth(t_struct	*st)
 {
-	mlx_set_instance_depth(&st->col1->instances[st->cols], 110);
-	mlx_set_instance_depth(&st->col2->instances[st->cols], -120);
-	mlx_set_instance_depth(&st->col3->instances[st->cols], -130);
-	mlx_set_instance_depth(&st->col4->instances[st->cols], -140);
-	mlx_set_instance_depth(&st->col5->instances[st->cols], -150);
-	mlx_set_instance_depth(&st->col6->instances[st->cols], -160);
+	mlx_set_instance_depth(&st->col1->instances[st->cols], 50);
+	mlx_set_instance_depth(&st->col2->instances[st->cols], -55);
+	mlx_set_instance_depth(&st->col3->instances[st->cols], -60);
+	mlx_set_instance_depth(&st->col4->instances[st->cols], -65);
+	mlx_set_instance_depth(&st->col5->instances[st->cols], -70);
+	mlx_set_instance_depth(&st->col6->instances[st->cols], -75);
 }
 
 void	remove_collectable(t_struct *st, int y, int x)
@@ -106,10 +106,10 @@ void	remove_collectable(t_struct *st, int y, int x)
 
 void	walls_depth(t_struct *st)
 {
-	mlx_set_instance_depth(&st->wall->instances[st->walls], 300);
-	mlx_set_instance_depth(&st->wall1->instances[st->walls], -400);
-	mlx_set_instance_depth(&st->wall2->instances[st->walls], -500);
-	mlx_set_instance_depth(&st->wall3->instances[st->walls], -600);
-	mlx_set_instance_depth(&st->wall4->instances[st->walls], -700);
-	mlx_set_instance_depth(&st->wall5->instances[st->walls], -800);
+	mlx_set_instance_depth(&st->wall->instances[st->walls], 50);
+	mlx_set_instance_depth(&st->wall1->instances[st->walls], -55);
+	mlx_set_instance_depth(&st->wall2->instances[st->walls], -60);
+	mlx_set_instance_depth(&st->wall3->instances[st->walls], -65);
+	mlx_set_instance_depth(&st->wall4->instances[st->walls], -70);
+	mlx_set_instance_depth(&st->wall5->instances[st->walls], -75);
 }
