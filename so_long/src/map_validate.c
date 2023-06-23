@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 19:11:25 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:47:55 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	read_map(t_struct *st, char *path)
 	char	*line;
 	int		fd;
 
-	line = malloc (1 * 1);
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)

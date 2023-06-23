@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 19:25:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:51:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	print_screen(char *path)
 	char	**screen;	
 	int		fd;
 
-	line = malloc(1 * 1);
 	strscreen = malloc(1 * 1);
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
