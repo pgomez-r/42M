@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:37:02 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 19:18:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:41:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	chk_pec(char *map)
 			ncollect++;
 	}
 	if (nplayer != 1)
-		return (ft_printf("Error\nInvalid number of players\n"), -1);
+		return (ft_printf_error("Error\nInvalid number of players\n"), -1);
 	if (nexit != 1)
-		return (ft_printf("Error\nInvalid number of exits\n"), -1);
+		return (ft_printf_error("Error\nInvalid number of exits\n"), -1);
 	if (ncollect == 0)
-		return (ft_printf("Error\nThere is no collectibles!\n"), -1);
+		return (ft_printf_error("Error\nThere is no collectibles!\n"), -1);
 	return (0);
 }

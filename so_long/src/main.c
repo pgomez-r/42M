@@ -6,24 +6,18 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 18:39:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:41:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long.h"
 
-void	ft_leaks(void)
-{
-	system("leaks -q so_long");
-}
-
 int	main(int ac, char **av)
 {
 	t_struct		st;
 
-	atexit(ft_leaks);
 	if (ac != 2)
-		return (ft_printf("Error\nSo_long only works with two arguments!\n"), -1);
+		return (ft_printf_error("Error\nWrong number of arguments!\n"), -1);
 	if (check_format(av[1]))
 		return (-1);
 	init_struct(&st);

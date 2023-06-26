@@ -3,27 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:36:09 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/25 16:40:02 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/06/25 22:54:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/so_long_bonus.h"
 
-void	ft_leaks(void)
-{
-	system("leaks -q so_long");
-}
-
 int	main(int ac, char **av)
 {
 	t_struct		st;
 
-	atexit(ft_leaks);
 	if (ac != 2)
-		return (ft_printf("Error\nSo_long only works with two arguments!\n"), -1);
+		return (ft_printf_error("Error\nWrong number arguments!\n"), -1);
 	if (check_format(av[1]))
 		return (-1);
 	init_struct(&st);

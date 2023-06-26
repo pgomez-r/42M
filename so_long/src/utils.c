@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:49:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 19:51:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:44:08 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_mapstr(t_struct *st, char *map_str)
 	if (!map_str || map_str[0] == '\0' || map_str[0] == '\n')
 	{	
 		st->exit_stat = -2;
-		return (ft_printf("Error\nMap is empty or missing first line\n"), -1);
+		return (ft_printf_error("Error\nEmpty map or missing first line\n"), -1);
 	}
 	i = 0;
 	while (map_str[i] != '\0')
@@ -98,7 +98,7 @@ int	check_mapstr(t_struct *st, char *map_str)
 		if (map_str[i] == '\n' && map_str[i + 1] == '\n')
 		{
 			st->exit_stat = -2;
-			return (ft_printf("Error\nMap has  empty lines\n"), -1);
+			return (ft_printf_error("Error\nMap has  empty lines\n"), -1);
 		}
 		i++;
 	}
