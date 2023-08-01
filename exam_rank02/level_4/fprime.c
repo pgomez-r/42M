@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:11:04 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/07/13 20:59:04 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/07/21 18:12:07 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("\n"), 0);
 	num = atoi(av[1]);
+	if (num == 1)
+		return (printf("%d\n", num));
 	flag = 0;
 	i = 1;
 	while (++i <= num)
@@ -46,13 +48,11 @@ int	main(int ac, char **av)
 		while (num % i == 0 && !ft_isprime(i))
 		{	
 			if (!flag)
-			{
 				printf("%d", i);
-				flag++;
-			}
 			else
 				printf("*%d", i);
 			num = num / i;
+			flag++;
 		}
 	}
 	return (printf("\n"), 0);
@@ -65,7 +65,10 @@ argumento, en ese caso imprimimos salto de línea*/
 
 /*Ejemplo) La factorización prima de 96 (2 • 2 • 2 • 2 • 2 • 3)*/
 
-/**
- * TODO -> Me falla el ejemplo 9539 (no saca salto de linea) y el 1 no imprime
- * 
- */
+/*Primero hacemos una función auxiliar que devuelva si un número es primo
+o no, luego empezamos un contador i en 2 (no queremos tener en cuenta el 1
+porque no es ni primo ni par, y lo vamos aumentando de uno en uno hasta que
+sea igual que el número que le entra al programa
+Cada vez que lo aumentamos comprobamos si el número dividido por el contador
+da resto 0, si es así significa que el número actual del contador es factor
+de num, si además de eso resulta que ese número es primo, lo imprimimos*/
