@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:06 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/20 20:08:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:04:09 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	ft_checkprintformat(va_list args, char *str, size_t *i)
 	else if (*str == 'u')
 		ft_putunsigi_error(va_arg(args, unsigned int), i);
 	else if (*str == 'x')
-		ft_puthexalli_error(va_arg(args, unsigned int), "0123456789abcdef", i);
+		ft_puthex_error(va_arg(args, unsigned int), "0123456789abcdef", i);
 	else if (*str == 'X')
-		ft_puthexalli_error(va_arg(args, unsigned int), "0123456789ABCDEF", i);
+		ft_puthex_error(va_arg(args, unsigned int), "0123456789ABCDEF", i);
 	else if (*str == 'p')
 	{
 		ft_putstri_error("0x", i);
-		ft_puthexalli_error(va_arg(args, unsigned long int), "0123456789abcdef", i);
+		ft_puthex_error(va_arg(args, unsigned long int), "0123456789abcdef", i);
 	}
 }
 

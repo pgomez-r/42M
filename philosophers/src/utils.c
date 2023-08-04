@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 13:05:26 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/24 16:14:24 by pgomez-r         ###   ########.fr       */
+/*   Created: 2023/08/04 13:43:02 by pgruz             #+#    #+#             */
+/*   Updated: 2023/08/04 14:19:00 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/philo.h"
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_putstr_fd(char const *s, int fd)
+{
+	write (fd, s, ft_strlen(s));
+}
 
 int	ft_atoi(const char *str)
 {
@@ -37,8 +52,9 @@ int	ft_atoi(const char *str)
 	return (num * sig);
 }
 
-/*La función recibe como parámetro una cadena char que se supone que va a 
-contener números y devuelve estos numeros representados en una variable de 
-tipo int
-Es igual que el atoi de la piscina, pero solo admite un signo -/+ antes de
-que comiencen los números, es decir ++-+43 devolvería NULL */
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
