@@ -4,6 +4,6 @@ Repositorio público de `pgomez-r`, estudiante de 42 Málaga.
 
 Trabajo en curso y desarrollado por un noob en programación :raised_hand:, por lo que aviso que algún proyecto puede no estar finalizado o no funcionar correctamente todavía, igualmente comparto por si puede ayudar a otr@s compañer@s; siéntete libre de consultar, descargar y/o compartir con quien quieras.
 
-[![pgomez-r 's 42 stats](https://badge.mediaplus.ma/levi/pgomez-r)](https://github.com/oakoudad/badge42)
+[![pgomez-r 's 42 stats](https://badge.mediaplus.ma/black/pgomez-r)](https://github.com/oakoudad/badge42)
 
 Suerte y ánimo con 42, hacker! 
