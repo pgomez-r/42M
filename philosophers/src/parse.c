@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
+/*   Updated: 2023/08/23 14:08:17 by pgruz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../incl/philo.h"
+
+t_env	parse_params(char **av)
+{
+	t_env	d;
+	int		i;
+
+	d.num_ph = ft_atoi(av[1]);
+	d.num_fks = d.num_ph;
+	d.philos = malloc(sizeof(t_ph) * d.num_ph);
+	d.forks = malloc(sizeof(int) * d.num_fks);
+	d.fork_mutex = malloc(sizeof(pthread_mutex_t) * d.num_fks);
+	i = -1;
+	while (++i < d.num_fks)
+	{	
+		d.forks[i] = 0;
+		pthread_mutex_init(&d.fork_mutex[i], NULL);
+	}
+	d.time_die = ft_atoi(av[2]);
+	d.time_eat = ft_atoi(av[3]);
+	d.time_sleep = ft_atoi(av[4]);
+	if (av[5] != NULL)
+		d.rounds = ft_atoi(av[5]);
+	else
+		d.rounds = -1;
+	return (d);
+}
+
+int	ft_args_digit(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i] != NULL)
+	{
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			if (!ft_isdigit(av[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}

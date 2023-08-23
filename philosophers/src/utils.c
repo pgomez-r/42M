@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:43:02 by pgruz             #+#    #+#             */
-/*   Updated: 2023/08/04 14:19:00 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:04:25 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,8 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
+/**
+ * TODO -> Function to improve usleep so it works more accuratly
+ * 
+ */

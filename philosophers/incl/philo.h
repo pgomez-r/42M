@@ -6,7 +6,7 @@
 /*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/08/04 19:16:07 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:09:56 by pgruz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct s_env
 }	t_env;
 
 /*main.c*/
+void				check_action(t_env *d);
+void				gen_philos(t_env *d);
+
+/*parse.c*/
 t_env				parse_params(char **av);
 int					ft_args_digit(char **av);
 
