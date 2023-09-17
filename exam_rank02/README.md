@@ -1,3 +1,7 @@
+### Repositorio donde iré preparando mis soluciones para las diferentes funciones del exam_rank02
+
+### [En proceso] No está terminado y seguramente no me de tiempo a completarlas todas
+
 # From 42-School-Exam-Rank-02 by pasqualerossi - Thanks a lot!
 
 https://github.com/pasqualerossi/42-School-Exam-Rank-02/tree/main
