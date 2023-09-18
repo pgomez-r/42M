@@ -6,15 +6,16 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:42:38 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/09/14 07:49:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:24:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*La función asigna memoria y devuelve una array de strings terminados en '\0'
 que se genera a partir de una string que recibe como parámetro
 Esa cadena origen la queremos separar en otras cadenas (palabras), split tiene
-que econtrar y separar cada palabra, dejando de lado el caracter dado por 
-el parámetro char c*/
+que econtrar y separar cada palabra
+Palabra = "una parte de la cadena delimitada por ESPACIO, TAB, '\' o por el
+principio o final de cadena"*/
 
 #include "libft.h"
 
@@ -32,20 +33,20 @@ char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 	return (dest);
 }
 
-int	ft_count_word(char const *s, char c)
+int	ft_count_word(char *s, char c)
 {
-	unsigned int	i;
-	int				count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c)
+		while (s[i] == ' ' || s[i] == '	' || s[i] == '\n')
 			i++;
 		if (s[i] != '\0')
 			count++;
-		while ((s[i] != '\0') && (s[i] != c))
+		while ((s[i] != '\0') && (s[i] != ' ' && s[i] != '	' && s[i] != '\n'))
 			i++;
 	}
 	return (count);
@@ -77,7 +78,7 @@ Usa strncpy para copiar la cadena que llega desde ft_split hasta la posicion n
 y así crea la nueva, solo con las posiciones de la original que nos interesa
 Cómo = fr_split usa 3 contadores que nos dicen en que posicion de la original, 
 hasta que posicion copiar y en que posicion de la tabla nueva colocar esto*/
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *str)
 {
 	int				i;
 	int				j;
