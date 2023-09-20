@@ -6,33 +6,12 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:42:38 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/09/19 19:27:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:44:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*La función asigna memoria y devuelve una array de strings terminados en '\0'
-que se genera a partir de una string que recibe como parámetro
-Esa cadena origen la queremos separar en otras cadenas (palabras), split tiene
-que econtrar y separar cada palabra
-Palabra = "una parte de la cadena delimitada por ESPACIO, TAB, '\' o por el
-principio o final de cadena"*/
-
-/*Qué hace count_word = un ciclo con tres "checks" dentro:
-while(recorrer toda la cadena original *s)
-	while(si lo que hay en cada posicion de str == c, seguimos i++)
-	if(terminado el while de arriba, porque str != c, aumentamos cntr+ 1 vez)
-	while(si no ha terminado str y s[i] es distinto a c, seguimos i++)
-Así ya tenemos el número de strings que va a tener nuestra tabla resultado*/
-
-/*Qué hace saveword = guardar como char* cada palabra que ft_split "encuentra"
-Asigna memoria para el nuevo string con malloc y tamaño de n, que también ha 
-calculado y enviado ft_split
-Usa strncpy para copiar la cadena que llega desde ft_split hasta la posicion n
-y así crea la nueva, solo con las posiciones de la original que nos interesa
-Cómo = fr_split usa 3 contadores que nos dicen en que posicion de la original, 
-hasta que posicion copiar y en que posicion de la tabla nueva colocar esto*/
 char	**ft_split(char *str)
 {
 	int				i = 0;
@@ -80,5 +59,31 @@ char	**ft_split(char *str)
 	return (tab);
 }
 
-/*Why tab[k] = NULL y no '\0'?? porque la posicion de tab no es un char, 
-sino otra cadena de chars, así que cerramos la cadena de cadena con NULL*/
+/*La función asigna memoria y devuelve una array de strings terminados en '\0'
+que se genera a partir de una string que recibe como parámetro
+Esa cadena origen la queremos separar en otras cadenas (palabras), split tiene
+que econtrar y separar cada palabra
+Palabra = "una parte de la cadena delimitada por espacios o por el principio
+o final de cadena"
+	"espacios" == ' ', '\t', '\n'*/
+
+/*Primero hay que calcular cuantas cadenas (palabras) vamos guardar en la matriz
+de cadenas, lo hacemos con un bucle con tres "checks" dentro:
+while(recorrer toda la cadena original *str)
+	while(si lo que hay en cada posicion de str == espacios, seguimos i++)
+	if(terminado el while de arriba, porque str != espacios, aumentamos len 1 vez
+		porque sabemos que ya hemos encontrado una palabra)
+	while(si no ha terminado str (fin de cadena) y s[i] es distinto a "espacios", 
+		seguimos i++, para seguir hasta "salir" de la palabra y volver a saltar
+		espacios hasta la siguiente o fin de cadena)
+Así ya tenemos el número de strings que va a tener nuestra tabla resultado*/
+
+/*Repetimos un bucle muy parecido al de contar las palabras, pero en este cuando
+encontramos una palabra (str[i] != espacios) fijamos un indice j en ese punto
+Luego continuamos desplazando i hasta salir de la palabra y en ese momento 
+tenemos la longitud de la cadena que va a guardar esa palabra (sizeof i - j + 1)
+Alojamos memoria y guardamos en la matriz tab[k][len] cada caracter moviendonos
+con otro iterador (yo reciclo len que usamos antes) tantas veces como i-j; 
+luego cerramos la ultima posicion de tab[k][len] con fin de cadena '\0', 
+aumentamos el iterador de posicion de tab[k] y repetimos hasta se termine str
+Por último, cerrar la matriz de cadenas con tab[k] == NULL y return (tab)*/
