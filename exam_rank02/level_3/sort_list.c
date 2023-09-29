@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 08:42:17 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/09/17 23:41:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:36:59 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 	int		aux;
 
 	lst_start = lst;
-	while (lst)
+	while (lst->next != NULL)
 	{	
 		if (cmp(lst->data, lst->next->data) == 0)
 		{
