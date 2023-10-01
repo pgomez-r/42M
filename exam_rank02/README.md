@@ -1,6 +1,6 @@
 ### Repositorio donde iré preparando mis soluciones para las diferentes funciones del exam_rank02
 
-### [En proceso] No está terminado y seguramente no me de tiempo a completarlas todas
+### [En proceso] No está terminado y seguramente no me de tiempo a completarlas todas (29/10/2023 -> Están todas las funciones de level_03 hechas y comprobadas + algunas del level_2)
 
 # From 42-School-Exam-Rank-02 by pasqualerossi - Thanks a lot!
 
