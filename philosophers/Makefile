@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 21:59:35 by pgruz             #+#    #+#              #
-#    Updated: 2023/08/23 14:08:51 by pgruz            ###   ########.fr        #
+#    Updated: 2023/10/02 21:11:26 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 # B_PATH	 = bonus/
 
-SRC      = main.c utils.c parse.c
+SRC      = main.c utils.c utils_2.c parse.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))

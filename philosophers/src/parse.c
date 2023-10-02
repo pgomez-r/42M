@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/08/23 14:08:17 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/10/02 21:31:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ t_env	parse_params(char **av)
 	int		i;
 
 	d.num_ph = ft_atoi(av[1]);
-	d.num_fks = d.num_ph;
 	d.philos = malloc(sizeof(t_ph) * d.num_ph);
-	d.forks = malloc(sizeof(int) * d.num_fks);
-	d.fork_mutex = malloc(sizeof(pthread_mutex_t) * d.num_fks);
+	d.forks = malloc(sizeof(int) * d.num_ph);
+	d.fork_mutex = malloc(sizeof(pthread_mutex_t) * d.num_ph);
 	i = -1;
-	while (++i < d.num_fks)
+	while (++i < d.num_ph)
 	{	
 		d.forks[i] = 0;
 		pthread_mutex_init(&d.fork_mutex[i], NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/08/23 17:20:20 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/10/02 21:43:58 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ int	main(int ac, char **av)
 	t_env	d;
 
 	if (ac < 5 || ac > 6)
-		return (ft_putstr_fd("Wrong number of arguments\n", 2), 1);
+		return (ft_error("Wrong number of arguments\n", 0, &d), 1);
 	if (!ft_args_digit(av))
-		return (ft_putstr_fd("Some/all arguments are not digits\n", 2), 1);
+		return (ft_error("Some/all arguments are not digits\n", 0, &d), 1);
 	d = parse_params(av);
-	if (d.num_fks < 1 || d.time_die < 1 || d.time_eat < 1 || d.time_sleep < 1)
+	if (d.num_ph < 1 || d.time_die < 1 || d.time_eat < 1 || d.time_sleep < 1)
 		return (1);
 	gen_philos(&d);
-	printf("Valor final:%d\n", d.rounds);
 	return (0);
 }

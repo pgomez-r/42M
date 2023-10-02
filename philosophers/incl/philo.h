@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/08/23 14:09:56 by pgruz            ###   ########.fr       */
+/*   Updated: 2023/10/02 21:39:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,28 @@
 # include <sys/uio.h>
 # include <sys/wait.h>
 
-typedef struct s_ph
-{
-	pthread_t	tid;
-	int			ph_id;
-}	t_ph;
-
 typedef struct s_env
 {
 	int				num_ph;
-	int				num_fks;
-	int				time_eat;
-	int				time_die;
-	int				time_sleep;
+	u_int64_t		time_die;
+	u_int64_t		time_eat;
+	u_int64_t		time_sleep;
 	int				rounds;
+	int				ko;
+	int				full;
 	t_ph			*philos;
 	int				*forks;
 	pthread_mutex_t	*fork_mutex;
 }	t_env;
+
+typedef struct s_ph
+{
+	struct s_env	*d;
+	pthread_t		tid;
+	int				num;
+	int				round;
+	int				stat;
+}	t_ph;
 
 /*main.c*/
 void				check_action(t_env *d);
@@ -60,5 +64,11 @@ size_t				ft_strlen(const char *str);
 void				ft_putstr_fd(char const *s, int fd);
 int					ft_atoi(const char *str);
 int					ft_isdigit(int c);
+void				ft_error(char *msg, int code, t_env *d);
+
+/*utils_2.c*/
+u_int64_t			get_time(void);
+int					ft_usleep(useconds_t time);
+void				ft_free_env(t_env *d);
 
 #endif
