@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/02 21:43:58 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:56:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	print_values(t_env *d)
 
 void	routine(t_ph *ph)
 {
-	if (ph->ph_id % 2 != 0)
-		usleep(1000);
+	printf("Philo %d is thinking.\n");
+	
 }
 
 void	gen_philos(t_env *d)
@@ -36,8 +36,8 @@ void	gen_philos(t_env *d)
 	i = -1;
 	while (++i < d->num_ph)
 	{
-		d->philos[i].ph_id = i + 1;
-		pthread_create(&d->philos[i].tid, NULL, (void *)routine, &d->philos[i]);
+		d->philos[i].num = i + 1;
+		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
 	}
 }
 
@@ -55,3 +55,5 @@ int	main(int ac, char **av)
 	gen_philos(&d);
 	return (0);
 }
+
+/*Añadir, después de lanzar los hilos, una función monitoring*/
