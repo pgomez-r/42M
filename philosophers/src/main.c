@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/03 19:56:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:59:56 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,52 @@ void	print_values(t_env *d)
 }
 */
 
+/*
+void	op_selector(t_ph *ph)
+{
+	pick_forks();
+	if (ph->stat == 0 && ph->flag == 0)
+	{
+		printf("Philo %d is thinking.\n");
+		ph->flag = 1;
+	}
+	
+}
+*/
+
 void	routine(t_ph *ph)
 {
+	// while (1) -> toda la rutina en bucle, activamos unas u otras funciones
+	//					segun flags/estados/mutex_locks
 	printf("Philo %d is thinking.\n");
-	
+	if (ph->num == 1)
+	{
+		pthread_mutex_lock(&ph->d->fork_mutex[ph->d->num_ph - 1]);
+		ph->d->forks[ph->d->num_ph - 1] = 1;
+		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 1;
+		printf("Philo %d is eating.\n");
+		ft_usleep((useconds_t)ph->d->time_eat);
+		pthread_mutex_unlock(&ph->d->fork_mutex[ph->d->num_ph - 1]);
+		ph->d->forks[ph->d->num_ph - 1] = 0;
+		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 0;
+	}
+	else
+	{
+		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 2]);
+		ph->d->forks[ph->num - 2] = 1;
+		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 1;
+		printf("Philo %d is eating.\n");
+		ft_usleep((useconds_t)ph->d->time_eat);
+		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 2]);
+		ph->d->forks[ph->num - 2] = 0;
+		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 0;
+	}
+	printf("Philo %d is sleeping.\n");
+	ft_usleep((useconds_t)ph->d->time_eat);
 }
 
 void	gen_philos(t_env *d)

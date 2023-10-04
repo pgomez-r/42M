@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/02 21:39:48 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:56:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_ph
 	int				num;
 	int				round;
 	int				stat;
+	int				print;
 }	t_ph;
 
 /*main.c*/
