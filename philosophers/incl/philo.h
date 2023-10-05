@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/04 21:56:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:29:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_env
 {
 	int				num_ph;
+	u_int64_t		start_time;
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
@@ -40,25 +41,33 @@ typedef struct s_env
 	t_ph			*philos;
 	int				*forks;
 	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	print;
 }	t_env;
 
 typedef struct s_ph
 {
-	struct s_env	*d;
-	pthread_t		tid;
-	int				num;
-	int				round;
-	int				stat;
-	int				print;
+	struct s_env		*d;
+	pthread_t			tid;
+	u_int64_t			fed_time;
+	int					num;
+	int					round;
+	int					ko;
 }	t_ph;
 
 /*main.c*/
-void				check_action(t_env *d);
-void				gen_philos(t_env *d);
+void				routine(t_ph *ph);
+void				ft_monitor(t_env *d);
 
-/*parse.c*/
+/*init.c*/
+void				gen_philos(t_env *d);
 t_env				parse_params(char **av);
 int					ft_args_digit(char **av);
+
+/*actions.c*/
+void				pick_forks(t_ph *ph);
+void				drop_forks(t_ph *ph);
+void				philo_eat(t_ph	*ph);
+void				philo_sleep(t_ph *ph);
 
 /*utils.c*/
 size_t				ft_strlen(const char *str);
@@ -71,5 +80,7 @@ void				ft_error(char *msg, int code, t_env *d);
 u_int64_t			get_time(void);
 int					ft_usleep(useconds_t time);
 void				ft_free_env(t_env *d);
+void				ft_log(t_ph *ph, char *msg);
+void				close_threads(t_env *d);
 
 #endif

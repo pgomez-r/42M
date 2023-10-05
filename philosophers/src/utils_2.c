@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:09:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/02 21:26:02 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:31:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,19 @@ void	ft_free_env(t_env *d)
 		free (d->forks);
 	if (d->fork_mutex)
 		free (d->fork_mutex);
+}
+
+void	ft_log(t_ph *ph, char *msg)
+{
+	u_int64_t	time;
+
+	pthread_mutex_lock(&ph->d->print);
+	time = ph->d->start_time - (ft_get_time());
+	printf("[%ld]--philo[%d]--%s\n", time, ph->num, msg);
+	pthread_mutex_unlock(&ph->d->print);
+}
+
+void	close_threads(t_env *d)
+{
+		
 }

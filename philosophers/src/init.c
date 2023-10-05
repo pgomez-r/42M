@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/02 21:31:45 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:11:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,22 @@ t_env	parse_params(char **av)
 		d.rounds = ft_atoi(av[5]);
 	else
 		d.rounds = -1;
+	d.ko = 0;
 	return (d);
+}
+
+void	gen_philos(t_env *d)
+{
+	int	i;
+
+	d->start_time = get_time();
+	i = -1;
+	while (++i < d->num_ph)
+	{
+		d->philos[i].num = i + 1;
+		d->philos[i].ko = 0;
+		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
+	}
 }
 
 int	ft_args_digit(char **av)
