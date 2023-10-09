@@ -9,8 +9,8 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "${workspaceFolder}/exam_rank02/level_3/ft_split",
-			"args": ["   hola	42  mundo "],
+			"program": "${workspaceFolder}/philosophers/debug",
+			"args": ["5", "800", "200", "200", "7"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

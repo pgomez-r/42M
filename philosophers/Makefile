@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 21:59:35 by pgruz             #+#    #+#              #
-#    Updated: 2023/10/05 15:33:02 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/10/09 22:34:18 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,16 +57,16 @@ norm:
 
 debug:
 		@gcc -Wall -Wextra -Werror -pthread -fsanitize=thread -g ./src/*.c -o debug 
-		@echo "\033[0;32mDebug file successfully generated\033[0m"
+		@echo "\033[0;32m\n	##### Debug file successfully generated #####\n\033[0m"
 
 clean:
 		@${RM} ${OBJS} ${BOBJS}
-		@echo "\033[0;32mObject files have been removed\033[0m"
+		@echo "\033[0;32m\n	##### Object files have been removed #####\n\033[0m"
 
 fclean:	clean
 		@${RM} ${NAME}
 		@${RM} ${BNAME} debug
-		@echo "\033[0;32mFCLEAN done!\033[0m"
+		@echo "\033[0;32m\n	##### FCLEAN done! #####\n\033[0m"
 
 re:	fclean all
 

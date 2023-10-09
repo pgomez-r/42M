@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/05 17:10:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:06:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ void	ft_monitor(t_env *d)
 	{
 		if (d->philos[i].ko == 1)
 		{	
-			d->ko = 1;
+			d->finish = 1;
 			return ;
 		}
 		if (d->philos[i].round == d->rounds)
 			finished++;
 	}
 	if (finished == d->rounds)
-		d->ko == 2;
+		d->finish = 2;
 }
 
-void	routine(t_ph *ph)
+void	*routine(void *param)
 {
-	ph->fed_time = get_time();
+	t_ph	*ph;
+
+	ph = (t_ph *)param;
+	ph->fed_time = ft_get_time();
 	if (ph->num % 2 != 0)
 		ft_usleep(10);
 	while (1)
@@ -44,8 +47,9 @@ void	routine(t_ph *ph)
 		philo_eat(ph);
 		drop_forks(ph);
 		philo_sleep(ph);
-		printf("Philo %d is thinking.\n");
+		ft_log(ph, "is thinking.");
 	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -58,12 +62,13 @@ int	main(int ac, char **av)
 		return (ft_error("Some/all arguments are not digits\n", 0, &d), 1);
 	d = parse_params(av);
 	if (d.num_ph < 1 || d.time_die < 1 || d.time_eat < 1 || d.time_sleep < 1)
-		return (1);
+		return (ft_error("Negative or zero values\n", 0, &d), 1);
 	gen_philos(&d);
-	while (d.ko == 0)
+	while (d.finish == 0)
 		ft_monitor(&d);
-	ft_free_env(&d);
 	close_threads(&d);
+	ft_destroy_mutex(&d);
+	ft_free_env(&d);
 	return (0);
 }
 
