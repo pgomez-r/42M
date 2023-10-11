@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/09 23:06:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:28:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*routine(void *param)
 	ph->fed_time = ft_get_time();
 	if (ph->num % 2 != 0)
 		ft_usleep(10);
-	while (1)
+	while (ph->d->finish == 0)
 	{		
 		pick_forks(ph);
 		philo_eat(ph);
