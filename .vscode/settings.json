@@ -32,6 +32,7 @@
 		"bonus_checker.h": "c",
 		"push_swap.h": "c",
 		"pipex.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"stdlib.h": "c"
 	}
 }

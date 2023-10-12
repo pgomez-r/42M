@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:43:02 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/02 21:27:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:19:30 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,4 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (num * sig);
-}
-
-/*SIN TERMINAR -> Idea: cuando hay error, llamar a esta función, 
-pasarle el mensaje a imprimir, la struct general y un código de ejecución
-Cod 0 = nada que liberar
-Cod 1 = liberar los parámetros de la struct general
-Cod 2 = llamar a función para destruir/liberar mutex + struct general*/
-
-void	ft_error(char *msg, int code, t_env *d)
-{
-	ft_putstr_fd(msg, 2);
-	if (code == 0)
-		return ;
-	if (code == 1)
-		ft_free_env(d);
 }

@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 21:59:35 by pgruz             #+#    #+#              #
-#    Updated: 2023/10/09 22:34:18 by pgomez-r         ###   ########.fr        #
+#    Updated: 2023/10/12 18:17:29 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 # B_PATH	 = bonus/
 
-SRC      = main.c utils.c utils_2.c init.c actions.c
+SRC      = main.c utils.c utils_2.c init.c actions.c exit.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))

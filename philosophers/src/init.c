@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/11 22:23:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:40:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_env	parse_params(char **av)
 		d.rounds = -1;
 	d.start_time = 0;
 	d.finish = 0;
+	pthread_mutex_init(&d.print, NULL);
 	return (d);
 }
 
@@ -50,6 +51,8 @@ void	gen_philos(t_env *d)
 		d->philos[i].num = i + 1;
 		d->philos[i].ko = 0;
 		d->philos[i].d = d;
+		pthread_mutex_init(&d->philos[i].time_mtx, NULL);
+		pthread_mutex_init(&d->philos[i].round_mtx, NULL);
 		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
 	}
 }
@@ -72,13 +75,4 @@ int	ft_args_digit(char **av)
 		i++;
 	}
 	return (1);
-}
-
-void	close_threads(t_env *d)
-{
-	int	i;
-
-	i = -1;
-	while (++i < d->num_ph)
-		pthread_join(&d->philos->tid[i], NULL);
 }
