@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/12 18:19:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:09:43 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	close_threads(t_env *d)
 
 	i = -1;
 	while (++i < d->num_ph)
-		pthread_join(&d->philos->tid[i], NULL);
+		pthread_join(d->philos[i].tid, NULL);
 }
 
 void	ft_destroy_mutex(t_env *d)
@@ -27,7 +27,13 @@ void	ft_destroy_mutex(t_env *d)
 
 	i = -1;
 	while (++i < d->num_ph)
+	{
 		pthread_mutex_destroy(&d->fork_mutex[i]);
+		pthread_mutex_destroy(&d->philos[i].time_mtx);
+		pthread_mutex_destroy(&d->philos[i].round_mtx);
+	}
+	pthread_mutex_destroy(&d->print);
+	pthread_mutex_destroy(&d->finish_mtx);
 }
 
 void	ft_free_env(t_env *d)

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/12 20:39:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:53:23 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_env
 	time_t			time_sleep;
 	int				rounds;
 	int				finish;
+	pthread_mutex_t	finish_mtx;
 	t_ph			*philos;
 	int				*forks;
 	pthread_mutex_t	*fork_mutex;
@@ -94,7 +95,7 @@ int					ft_isdigit(int c);
 
 /*utils_2.c*/
 time_t				ft_get_time(void);
-int					ft_usleep(useconds_t time);
+int					ft_usleep(time_t time);
 void				ft_log(t_ph *ph, char *msg, char *color);
 int					check_ko(t_env *d, t_ph *ph);
 

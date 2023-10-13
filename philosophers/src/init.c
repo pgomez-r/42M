@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/12 20:40:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:36:28 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_env	parse_params(char **av)
 	d.start_time = 0;
 	d.finish = 0;
 	pthread_mutex_init(&d.print, NULL);
+	pthread_mutex_init(&d.finish_mtx, NULL);
 	return (d);
 }
 
