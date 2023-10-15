@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/15 22:39:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:04:57 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	gen_philos(t_env *d)
 		pthread_mutex_init(&d->philos[i].time_mtx, NULL);
 		pthread_mutex_init(&d->philos[i].full_mtx, NULL);
 		pthread_mutex_lock(&d->philos[i].time_mtx);
-		d->philos[i].fed_time = ft_get_time();
+		d->philos[i].fed_time = d->start_time;
 		pthread_mutex_unlock(&d->philos[i].time_mtx);
 		if (d->num_ph == 1)
 		{		

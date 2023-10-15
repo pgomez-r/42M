@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/15 22:56:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:05:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	*routine(void *param)
 	t_ph	*ph;
 
 	ph = (t_ph *)param;
-	pthread_mutex_lock(&ph->time_mtx);
-	ph->fed_time = ft_get_time();
-	pthread_mutex_unlock(&ph->time_mtx);
 	if (ph->num % 2 != 0)
 		ft_usleep(10);
 	pthread_mutex_lock(&ph->d->finish_mtx);
