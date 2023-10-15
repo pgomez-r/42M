@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/13 15:53:23 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:49:06 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_ph
 	pthread_mutex_t		time_mtx;
 	int					num;
 	int					round;
-	pthread_mutex_t		round_mtx;
-	int					ko;
+	pthread_mutex_t		full_mtx;
+	int					full;
 }	t_ph;
 
 typedef struct s_env
@@ -74,8 +74,7 @@ typedef struct s_env
 
 /*main.c*/
 void				*routine(void *param);
-void				ft_monitor(t_env *d);
-
+void				*one_philo(void *param);
 /*init.c*/
 void				gen_philos(t_env *d);
 t_env				parse_params(char **av);
@@ -86,6 +85,7 @@ void				pick_forks(t_ph *ph);
 void				drop_forks(t_ph *ph);
 void				philo_eat(t_ph	*ph);
 void				philo_sleep(t_ph *ph);
+void				ft_monitor(t_env *d);
 
 /*utils.c*/
 size_t				ft_strlen(const char *str);
@@ -98,11 +98,13 @@ time_t				ft_get_time(void);
 int					ft_usleep(time_t time);
 void				ft_log(t_ph *ph, char *msg, char *color);
 int					check_ko(t_env *d, t_ph *ph);
+int					check_meals(t_env *d);
 
 /*exit.c*/
 void				ft_destroy_mutex(t_env *d);
 void				close_threads(t_env *d);
 void				ft_error(char *msg, int code, t_env *d);
 void				ft_free_env(t_env *d);
+void				ft_exit(t_env *d);
 
 #endif

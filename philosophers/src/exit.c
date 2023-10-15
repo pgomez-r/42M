@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/13 13:09:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:49:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_destroy_mutex(t_env *d)
 	{
 		pthread_mutex_destroy(&d->fork_mutex[i]);
 		pthread_mutex_destroy(&d->philos[i].time_mtx);
-		pthread_mutex_destroy(&d->philos[i].round_mtx);
+		pthread_mutex_destroy(&d->philos[i].full_mtx);
 	}
 	pthread_mutex_destroy(&d->print);
 	pthread_mutex_destroy(&d->finish_mtx);
@@ -58,4 +58,13 @@ void	ft_error(char *msg, int code, t_env *d)
 		return ;
 	if (code == 1)
 		ft_free_env(d);
+}
+
+void	ft_exit(t_env *d)
+{
+	close_threads(d);
+	ft_destroy_mutex(d);
+	if (d->finish == 2)
+		printf("%sAll philosophers are fed and happy =)\n\033[0m", GRN);
+	ft_free_env(d);
 }

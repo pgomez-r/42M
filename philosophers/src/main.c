@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/13 15:37:25 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:56:04 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,27 @@ void	ft_leaks(void)
 	system("leaks -q philo");
 }
 
-void	ft_monitor(t_env *d)
+void	*one_philo(void *param)
 {
-	int	i;
-	int	aux;
+	t_ph	*ph;
 
-	i = -1;
-	aux = 0;
-	while (++i < d->num_ph)
-	{
-		if (check_ko(d, &d->philos[i]) == 1)
-		{	
-			pthread_mutex_lock(&d->finish_mtx);
-			d->finish = 1;
-			pthread_mutex_unlock(&d->finish_mtx);
-			return ;
-		}
-		pthread_mutex_lock(&d->philos[i].round_mtx);
-		if (d->philos[i].round == d->rounds)
-			aux++;
-		pthread_mutex_unlock(&d->philos[i].round_mtx);
+	ph = (t_ph *)param;
+	pthread_mutex_lock(&ph->time_mtx);
+	ph->fed_time = ft_get_time();
+	pthread_mutex_unlock(&ph->time_mtx);
+	pthread_mutex_lock(&ph->d->finish_mtx);
+	while (ph->d->finish == 0)
+	{		
+		pthread_mutex_unlock(&ph->d->finish_mtx);
+		pthread_mutex_lock(&ph->d->fork_mutex[0]);
+		ft_log(ph, "has taken a fork.", YELLOW);
+		return (0);
 	}
-	if (aux == d->rounds)
-	{
-		pthread_mutex_lock(&d->finish_mtx);
-		d->finish = 2;
-		pthread_mutex_unlock(&d->finish_mtx);
-	}
+	if (ph->d->finish != 0)
+		pthread_mutex_unlock(&ph->d->finish_mtx);
+	return (0);
 }
 
-/*Cambiar fed_time = ft_get_time por -- fed_time = start_time?
-Cambiar while a (1) y pasar el if flag_finish a cada action?*/
 void	*routine(void *param)
 {
 	t_ph	*ph;
@@ -93,12 +83,5 @@ int	main(int ac, char **av)
 		pthread_mutex_unlock(&d.finish_mtx);
 		ft_monitor(&d);
 	}
-	close_threads(&d);
-	ft_destroy_mutex(&d);
-	if (d.finish == 2)
-		printf("%sAll philosophers are fed and happy =)\n\033[0m", GRN);
-	ft_free_env(&d);
-	return (0);
+	return (ft_exit(&d), 0);
 }
-
-/*Añadir, después de lanzar los hilos, una función monitoring*/

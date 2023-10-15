@@ -6,11 +6,37 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/13 16:36:28 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:39:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
+
+void	gen_philos(t_env *d)
+{
+	int	i;
+
+	d->start_time = ft_get_time();
+	i = -1;
+	while (++i < d->num_ph)
+	{
+		d->philos[i].num = i + 1;
+		d->philos[i].full = 0;
+		d->philos[i].round = 0;
+		d->philos[i].d = d;
+		pthread_mutex_init(&d->philos[i].time_mtx, NULL);
+		pthread_mutex_init(&d->philos[i].full_mtx, NULL);
+		pthread_mutex_lock(&d->philos[i].time_mtx);
+		d->philos[i].fed_time = ft_get_time();
+		pthread_mutex_unlock(&d->philos[i].time_mtx);
+		if (d->num_ph == 1)
+		{		
+			pthread_create(&d->philos[i].tid, NULL, &one_philo, &d->philos[i]);
+			return ;
+		}
+		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
+	}
+}
 
 t_env	parse_params(char **av)
 {
@@ -39,23 +65,6 @@ t_env	parse_params(char **av)
 	pthread_mutex_init(&d.print, NULL);
 	pthread_mutex_init(&d.finish_mtx, NULL);
 	return (d);
-}
-
-void	gen_philos(t_env *d)
-{
-	int	i;
-
-	d->start_time = ft_get_time();
-	i = -1;
-	while (++i < d->num_ph)
-	{
-		d->philos[i].num = i + 1;
-		d->philos[i].ko = 0;
-		d->philos[i].d = d;
-		pthread_mutex_init(&d->philos[i].time_mtx, NULL);
-		pthread_mutex_init(&d->philos[i].round_mtx, NULL);
-		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
-	}
 }
 
 int	ft_args_digit(char **av)

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:09:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/13 16:19:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:47:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,19 @@ int	check_ko(t_env *d, t_ph *ph)
 		return (pthread_mutex_unlock(&ph->time_mtx), 1);
 	}
 	return (pthread_mutex_unlock(&ph->time_mtx), 0);
+}
+
+int	check_meals(t_env *d)
+{
+	int	i;
+
+	i = -1;
+	while (++i < d->num_ph)
+	{
+		pthread_mutex_lock(&d->philos[i].full_mtx);
+		if (d->philos[i].full == 0)
+			return (pthread_mutex_unlock(&d->philos[i].full_mtx), 0);
+		pthread_mutex_unlock(&d->philos[i].full_mtx);
+	}
+	return (1);
 }
