@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/16 19:15:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:17:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	*routine(void *param)
 
 	ph = (t_ph *)param;
 	if (ph->num % 2 != 0)
-		ft_usleep(10);
+		ft_usleep(2);
 	pthread_mutex_lock(&ph->d->finish_mtx);
 	while (ph->d->finish == 0)
 	{		
 		pthread_mutex_unlock(&ph->d->finish_mtx);
-		pick_forks(ph);
-		philo_eat(ph);
-		drop_forks(ph);
-		philo_sleep(ph);
-		ft_log(ph, "is thinking.", MAG);
+		if (ph->stat == 0)
+			pick_forks(ph);
+		if (ph->stat == 1)
+			philo_eat(ph);
+		if (ph->stat == 2)
+			drop_forks(ph);
 	}
 	if (ph->d->finish != 0)
 		pthread_mutex_unlock(&ph->d->finish_mtx);
