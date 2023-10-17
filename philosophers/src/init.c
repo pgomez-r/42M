@@ -6,11 +6,21 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/15 23:04:57 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:30:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
+
+void	init_env_struct(t_env *d)
+{
+	d->start_time = 0;
+	d->finish = 0;
+	d->ko = 0;
+	pthread_mutex_init(&d->print, NULL);
+	pthread_mutex_init(&d->finish_mtx, NULL);
+	pthread_mutex_init(&d->ko_mtx, NULL);
+}
 
 void	gen_philos(t_env *d)
 {
@@ -60,10 +70,7 @@ t_env	parse_params(char **av)
 		d.rounds = ft_atoi(av[5]);
 	else
 		d.rounds = -1;
-	d.start_time = 0;
-	d.finish = 0;
-	pthread_mutex_init(&d.print, NULL);
-	pthread_mutex_init(&d.finish_mtx, NULL);
+	init_env_struct(&d);
 	return (d);
 }
 

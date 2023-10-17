@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/15 22:49:06 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:35:25 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,19 @@ typedef struct s_env
 	int				*forks;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	print;
+	int				ko;
+	pthread_mutex_t	ko_mtx;
 }	t_env;
 
 /*main.c*/
 void				*routine(void *param);
 void				*one_philo(void *param);
+
 /*init.c*/
 void				gen_philos(t_env *d);
 t_env				parse_params(char **av);
 int					ft_args_digit(char **av);
+void				init_env_struct(t_env *d);
 
 /*actions.c*/
 void				pick_forks(t_ph *ph);

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:26:58 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/16 19:15:10 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:34:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,17 @@ void	ft_monitor(t_env *d)
 			pthread_mutex_lock(&d->finish_mtx);
 			d->finish = 1;
 			pthread_mutex_unlock(&d->finish_mtx);
+			pthread_mutex_lock(&d->ko_mtx);
+			d->ko = 1;
+			pthread_mutex_unlock(&d->ko_mtx);
 			return ;
 		}
 	}
 	if (check_meals(d))
 	{
+		pthread_mutex_lock(&d->finish_mtx);
 		d->finish = 2;
+		pthread_mutex_unlock(&d->finish_mtx);
 		return ;
 	}
 }

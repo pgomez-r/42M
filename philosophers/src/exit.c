@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/15 22:49:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:30:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_destroy_mutex(t_env *d)
 	}
 	pthread_mutex_destroy(&d->print);
 	pthread_mutex_destroy(&d->finish_mtx);
+	pthread_mutex_destroy(&d->ko_mtx);
 }
 
 void	ft_free_env(t_env *d)
