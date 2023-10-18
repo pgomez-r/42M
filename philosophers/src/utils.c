@@ -34,10 +34,10 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int		sig;
-	int		num;
+	long int	sig;
+	long int	num;
 
 	sig = 1;
 	num = 0;

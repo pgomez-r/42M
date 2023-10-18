@@ -94,7 +94,7 @@ void				ft_monitor(t_env *d);
 /*utils.c*/
 size_t				ft_strlen(const char *str);
 void				ft_putstr_fd(char const *s, int fd);
-int					ft_atoi(const char *str);
+long int			ft_atoi(const char *str);
 int					ft_isdigit(int c);
 
 /*utils_2.c*/

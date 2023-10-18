@@ -85,6 +85,9 @@ int	ft_args_digit(char **av)
 		j = 0;
 		while (av[i][j] != '\0')
 		{
+			if ((av[i][j] == '+' || av[i][j] == '-')
+				&& ft_isdigit(av[i][j + 1]))
+				j++;
 			if (!ft_isdigit(av[i][j]))
 				return (0);
 			j++;

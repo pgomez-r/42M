@@ -69,8 +69,10 @@ int	main(int ac, char **av)
 	if (!ft_args_digit(av))
 		return (ft_error("Some/all arguments are not digits\n", 0, &d), 1);
 	d = parse_params(av);
-	if (d.num_ph < 1 || d.time_die < 1 || d.time_eat < 1 || d.time_sleep < 1)
-		return (ft_error("Negative or zero values\n", 0, &d), 1);
+	if (d.num_ph < 1 || d.time_die < 60 || d.time_eat < 60 || d.time_sleep < 60)
+		return (ft_error("Negative or less than minimum values\n", 0, &d), 1);
+	if (d.time_die > INT_MAX || d.time_eat > INT_MAX || d.time_sleep > INT_MAX)
+		return (ft_error("Time values exceed INT_MAX\n", 0, &d), 1);
 	if (d.num_ph > 200)
 		return (ft_error("Too many philosophers on the table!\n", 0, &d), 1);
 	gen_philos(&d);
