@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:09:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/17 22:34:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/18 21:31:34 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	check_ko(t_env *d, t_ph *ph)
 	if ((time - ph->fed_time) >= d->time_die)
 	{
 		ft_log(ph, "had died.", RED);
+		pthread_mutex_lock(&d->ko_mtx);
+		d->ko = 1;
+		pthread_mutex_unlock(&d->ko_mtx);
 		return (pthread_mutex_unlock(&ph->time_mtx), 1);
 	}
 	return (pthread_mutex_unlock(&ph->time_mtx), 0);
@@ -71,5 +74,8 @@ int	check_meals(t_env *d)
 			return (pthread_mutex_unlock(&d->philos[i].full_mtx), 0);
 		pthread_mutex_unlock(&d->philos[i].full_mtx);
 	}
+	pthread_mutex_lock(&d->ko_mtx);
+	d->ko = 1;
+	pthread_mutex_unlock(&d->ko_mtx);
 	return (1);
 }

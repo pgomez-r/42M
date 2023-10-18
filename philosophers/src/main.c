@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/16 19:15:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/18 22:12:47 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,18 @@ int	main(int ac, char **av)
 	t_env	d;
 
 	if (ac < 5 || ac > 6)
-		return (ft_error("Wrong number of arguments\n", 0, &d), 1);
+		return (ft_error("wrong number of arguments\n", 0, &d), 1);
 	if (!ft_args_digit(av))
-		return (ft_error("Some/all arguments are not digits\n", 0, &d), 1);
+		return (ft_error("some arguments are not digits\n", 0, &d), 1);
 	d = parse_params(av);
-	if (d.num_ph < 1 || d.time_die < 60 || d.time_eat < 60 || d.time_sleep < 60)
-		return (ft_error("Negative or less than minimum values\n", 0, &d), 1);
-	if (d.time_die > INT_MAX || d.time_eat > INT_MAX || d.time_sleep > INT_MAX)
-		return (ft_error("Time values exceed INT_MAX\n", 0, &d), 1);
 	if (d.num_ph > 200)
-		return (ft_error("Too many philosophers on the table!\n", 0, &d), 1);
+		return (ft_error("too many philosophers on the table!\n", 1, &d), 1);
+	if (d.num_ph < 1 || d.time_die < 60 || d.time_eat < 60 || d.time_sleep < 60)
+		return (ft_error("values don't meet minimum required\n", 1, &d), 1);
+	if (av[5] != NULL && d.rounds < 0)
+		return (ft_error("num of times to eat can't be negative!\n", 1, &d), 1);
+	if (d.time_die > INT_MAX || d.time_eat > INT_MAX || d.time_sleep > INT_MAX)
+		return (ft_error("times values exceed INT_MAX\n", 1, &d), 1);
 	gen_philos(&d);
 	pthread_mutex_lock(&d.finish_mtx);
 	while (d.finish == 0)

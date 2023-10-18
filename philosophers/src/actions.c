@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:26:58 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/17 22:34:53 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/18 22:19:44 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ void	pick_forks(t_ph *ph)
 	if (ph->num == 1)
 	{
 		pthread_mutex_lock(&ph->d->fork_mutex[ph->d->num_ph - 1]);
+		ph->d->forks[ph->d->num_ph - 1] = 1;
 		ft_log(ph, "has taken a fork.", YELLOW);
 		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 1;
 		ft_log(ph, "has taken a fork.", YELLOW);
 	}
 	else
 	{
 		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 2]);
+		ph->d->forks[ph->num - 2] = 1;
 		ft_log(ph, "has taken a fork.", YELLOW);
 		pthread_mutex_lock(&ph->d->fork_mutex[ph->num - 1]);
+		ph->d->forks[ph->num - 1] = 1;
 		ft_log(ph, "has taken a fork.", YELLOW);
 	}
 }
@@ -34,15 +38,19 @@ void	drop_forks(t_ph *ph)
 {
 	if (ph->num == 1)
 	{
+		ph->d->forks[ph->d->num_ph - 1] = 0;
 		pthread_mutex_unlock(&ph->d->fork_mutex[ph->d->num_ph - 1]);
 		ft_log(ph, "has left a fork.", ORANGE);
+		ph->d->forks[ph->num - 1] = 0;
 		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 1]);
 		ft_log(ph, "has left a fork.", ORANGE);
 	}
 	else
 	{
+		ph->d->forks[ph->num - 2] = 0;
 		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 2]);
 		ft_log(ph, "has left a fork.", ORANGE);
+		ph->d->forks[ph->num - 1] = 0;
 		pthread_mutex_unlock(&ph->d->fork_mutex[ph->num - 1]);
 		ft_log(ph, "has left a fork.", ORANGE);
 	}
@@ -54,19 +62,19 @@ void	philo_eat(t_ph	*ph)
 	pthread_mutex_lock(&ph->time_mtx);
 	ph->fed_time = ft_get_time();
 	pthread_mutex_unlock(&ph->time_mtx);
+	ph->round++;
+	if (ph->round == ph->d->rounds)
+	{	
+		pthread_mutex_lock(&ph->full_mtx);
+		ph->full = 1;
+		pthread_mutex_unlock(&ph->full_mtx);
+	}
 	while (1)
 	{
 		pthread_mutex_lock(&ph->time_mtx);
 		if ((ft_get_time() - ph->fed_time) >= ph->d->time_eat)
 		{
 			pthread_mutex_unlock(&ph->time_mtx);
-			ph->round++;
-			if (ph->round == ph->d->rounds)
-			{	
-				pthread_mutex_lock(&ph->full_mtx);
-				ph->full = 1;
-				pthread_mutex_unlock(&ph->full_mtx);
-			}
 			return ;
 		}
 		pthread_mutex_unlock(&ph->time_mtx);
@@ -98,9 +106,6 @@ void	ft_monitor(t_env *d)
 			pthread_mutex_lock(&d->finish_mtx);
 			d->finish = 1;
 			pthread_mutex_unlock(&d->finish_mtx);
-			pthread_mutex_lock(&d->ko_mtx);
-			d->ko = 1;
-			pthread_mutex_unlock(&d->ko_mtx);
 			return ;
 		}
 	}

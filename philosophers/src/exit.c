@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/17 22:30:01 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/18 21:47:17 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ Cod 1 = liberar los parámetros de la struct general
 Cod 2 = llamar a función para destruir/liberar mutex + struct general*/
 void	ft_error(char *msg, int code, t_env *d)
 {
+	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(msg, 2);
 	if (code == 0)
 		return ;
@@ -63,9 +64,12 @@ void	ft_error(char *msg, int code, t_env *d)
 
 void	ft_exit(t_env *d)
 {
+	time_t	t;
+
+	t = ft_get_time() - d->start_time;
+	if (d->finish == 2)
+		printf("%s[%ld]--ALL PHILOSOPHERS HAD THEIR SPAGHETTI!\n\033[0m", GRN, t);
 	close_threads(d);
 	ft_destroy_mutex(d);
-	if (d->finish == 2)
-		printf("%sAll philosophers are fed and happy =)\n\033[0m", GRN);
 	ft_free_env(d);
 }
