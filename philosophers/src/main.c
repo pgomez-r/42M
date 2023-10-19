@@ -6,16 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/18 22:12:47 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:38:14 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
-
-void	ft_leaks(void)
-{
-	system("leaks -q philo");
-}
 
 void	*one_philo(void *param)
 {
