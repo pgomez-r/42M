@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/19 20:38:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:10:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,31 @@ void	*one_philo(void *param)
 void	*routine(void *param)
 {
 	t_ph	*ph;
+	int	stat = 0;
 
 	ph = (t_ph *)param;
 	if (ph->num % 2 != 0)
 		ft_usleep(10);
-	pthread_mutex_lock(&ph->d->finish_mtx);
-	while (ph->d->finish == 0)
+	while (stat == 0)
 	{		
-		pthread_mutex_unlock(&ph->d->finish_mtx);
 		pick_forks(ph);
 		philo_eat(ph);
 		drop_forks(ph);
 		philo_sleep(ph);
 		ft_log(ph, "is thinking.", MAG);
-	}
-	if (ph->d->finish != 0)
+		pthread_mutex_lock(&ph->d->finish_mtx);
+		stat = ph->d->finish;
 		pthread_mutex_unlock(&ph->d->finish_mtx);
+	}
+	// if (ph->d->finish != 0)
+	// 	pthread_mutex_unlock(&ph->d->finish_mtx);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	t_env	d;
+	int		stat = 0;
 
 	if (ac < 5 || ac > 6)
 		return (ft_error("wrong number of arguments\n", 0, &d), 1);
@@ -73,11 +76,12 @@ int	main(int ac, char **av)
 	if (d.time_die > INT_MAX || d.time_eat > INT_MAX || d.time_sleep > INT_MAX)
 		return (ft_error("times values exceed INT_MAX\n", 1, &d), 1);
 	gen_philos(&d);
-	pthread_mutex_lock(&d.finish_mtx);
-	while (d.finish == 0)
+	while (stat == 0)
 	{	
-		pthread_mutex_unlock(&d.finish_mtx);
 		ft_monitor(&d);
+		pthread_mutex_lock(&d.finish_mtx);
+		stat = d.finish;
+		pthread_mutex_unlock(&d.finish_mtx);
 	}
 	return (ft_exit(&d), 0);
 }

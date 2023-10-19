@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/18 21:47:17 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:11:08 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_destroy_mutex(t_env *d)
 }
 
 void	ft_free_env(t_env *d)
-{
+{	
 	if (d->philos)
 		free (d->philos);
 	if (d->forks)
