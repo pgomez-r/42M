@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/18 20:37:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:24:00 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	gen_philos(t_env *d)
 			return ;
 		}
 		pthread_create(&d->philos[i].tid, NULL, &routine, &d->philos[i]);
+		usleep(1000);
 	}
 }
 
