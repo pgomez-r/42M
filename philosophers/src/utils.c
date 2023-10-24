@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:43:02 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/12 18:19:30 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:11:07 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,11 @@ long int	ft_atoi(const char *str)
 		str++;
 	}
 	return (num * sig);
+}
+
+void	update_stat(int *stat, t_env *d)
+{
+	pthread_mutex_lock(&d->finish_mtx);
+	(*stat) = d->finish;
+	pthread_mutex_unlock(&d->finish_mtx);
 }

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:14:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/19 21:11:08 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:21:32 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	ft_exit(t_env *d)
 	time_t	t;
 
 	t = ft_get_time() - d->start_time;
-	if (d->finish == 2)
-		printf("%s[%ld]--ALL PHILOSOPHERS HAD THEIR SPAGHETTI!\n\033[0m", GRN, t);
 	close_threads(d);
 	ft_destroy_mutex(d);
 	ft_free_env(d);
