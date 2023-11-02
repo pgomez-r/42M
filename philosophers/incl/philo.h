@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:58:34 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/19 20:37:31 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:04:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void				gen_philos(t_env *d);
 t_env				parse_params(char **av);
 int					ft_args_digit(char **av);
 void				init_env_struct(t_env *d);
+int					check_argv(char **args, t_env *d);
 
 /*actions.c*/
 void				pick_forks(t_ph *ph);
@@ -96,6 +97,7 @@ size_t				ft_strlen(const char *str);
 void				ft_putstr_fd(char const *s, int fd);
 long int			ft_atoi(const char *str);
 int					ft_isdigit(int c);
+void				update_stat(int *stat, t_env *d);
 
 /*utils_2.c*/
 time_t				ft_get_time(void);

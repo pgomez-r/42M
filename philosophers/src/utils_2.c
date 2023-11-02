@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:09:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/18 21:31:34 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:19:26 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_log(t_ph *ph, char *msg, char *color)
 	time = ft_get_time() - ph->d->start_time;
 	pthread_mutex_lock(&ph->d->ko_mtx);
 	if (ph->d->ko == 0)
-		printf("%s[%ld]--philo[%d]--%s\n\033[0m", color, time, ph->num, msg);
+		printf("%s%ld %d %s\n\033[0m", color, time, ph->num, msg);
 	pthread_mutex_unlock(&ph->d->ko_mtx);
 	pthread_mutex_unlock(&ph->d->print);
 }

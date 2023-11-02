@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/23 18:24:00 by pgruz11          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:50:17 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,19 @@ int	ft_args_digit(char **av)
 		i++;
 	}
 	return (1);
+}
+
+int	check_argv(char **args, t_env *d)
+{
+	if (d->num_ph > 200)
+		return (ft_error("too many philosophers on the table!\n", 1, d), 1);
+	if (d->num_ph < 1 || d->time_die < 60 || d->time_eat < 60
+		|| d->time_sleep < 60)
+		return (ft_error("values don't meet minimum required\n", 1, d), 1);
+	if (args[5] != NULL && d->rounds < 0)
+		return (ft_error("num of times to eat can't be negative!\n", 1, d), 1);
+	if (d->time_die > INT_MAX || d->time_eat > INT_MAX
+		|| d->time_sleep > INT_MAX)
+		return (ft_error("times values exceed INT_MAX\n", 1, d), 1);
+	return (0);
 }
