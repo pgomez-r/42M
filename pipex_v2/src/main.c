@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:00:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/11/16 18:52:09 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:55:29 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,26 +117,36 @@ void	ft_pipex(t_struct *st)
 	waitpid(st->pid_child, NULL, 0);
 }
 
-/**
- *@param env = puntero a la variables de entorno del sistema, matriz de strings
- *en cada string de env está cada línea del entorno -> (comando 'env' en consola)
- *declaramos la struct que ya tenemos definida en pipex.h, comprobamos los 
- *posibles errores de argumentos e inicializamos la estructura
- *llamamos a ft_pipex que ejecuta el programa en si y terminamos con una función
- *que libera las variables que lo necesiten y cierra el programa
- *return (0); creo que no sería necesario, lo he dejado por "protocolo"
- */
+void	ft_openfiles(int *fd, char **av, int i)
+{
+	fd[0] = open(av[1], O_RDONLY);
+	if (fd[0] == -1)
+	{
+		ft_printf("pipex: %s: %s\n", strerror(errno), av[1]);
+		exit(EXIT_FAILURE);
+	}
+	fd[1] = open(av[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd[1] == -1)
+	{
+		ft_printf("pipex: %s: %s\n", strerror(errno), av[i]);
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
-	t_struct	st;
+	int	fd[2];
+	int	cmd_n;
 
-	if (ac != 5)
-		return (perror("pipex: argv parse error"), 1);
+	cmd_n = 3;
+	if (ac < 5)
+		return (perror("Error: wrong number of arguments\n"), 1);
 	if (!env || !*env)
 		return (perror("pipex: env parse error"), 1);
-	st = init_struct(ac, av, env);
-	ft_pipex(&st);
+	ft_openfiles(fd, av, ac - 1);
+	ft_pipex(av[2], env, fd[0]); //cambiar prototipo para que reciba sin struct;
+	while (cmd_n < ac - 2)
+		ft_pipex(av[cmd_n++], env, 1);
 	system("leaks -q pipex");
-	exit_pipex(&st, 0);
 	return (0);
 }
