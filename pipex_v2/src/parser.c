@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:16:45 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/11/16 18:52:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:29:00 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 Vamos a sacar de @param env la línea PATH y guardar todas sus direcciones
 en nuestra variable @param	paths
 */
-void	get_paths(t_struct *st)
+void	get_paths(t_command *st, char **env)
 {
 	size_t	i;
 	char	*path_fix;
 
 	i = 0;
 	path_fix = NULL;
-	while (st->env[i] && is_path(st->env[i]))
+	while (env[i] && is_path(env[i]))
 		i++;
-	st->paths = ft_split(st->env[i], ':');
+	st->paths = ft_split(env[i], ':');
 	path_fix = ft_strcpy(path_fix, st->paths[0] + 5);
 	free(st->paths[0]);
 	st->paths[0] = ft_strcpy(st->paths[0], path_fix);
@@ -40,7 +40,7 @@ void	get_paths(t_struct *st)
 
 /*Ya tenemos los paths de env en una variable, esta función tiene que
 encontrar el MATCH entre el comando a ejecutar y su correspondiente path*/
-int	find_path_index(t_struct *st, char *cmd)
+int	find_path_index(t_command *st, char *cmd)
 {
 	int	i;
 
@@ -68,20 +68,11 @@ int	find_path_index(t_struct *st, char *cmd)
  * ls como cmd1[0] -la como cmd1[1], ya que execve necesita que el comando entre
  * como una matriz de cadenas *av[]
  */
-void	commands_parser(t_struct *st)
+void	split_cmd(t_command *st, char *cmdstr)
 {
-	st->cmd1 = ft_split(st->av[2], ' ');
-	if (!st->cmd1)
-	{
+	st->cmd = ft_split(cmdstr, ' ');
+	if (!st->cmd)
 		perror ("pipex: parse error");
-		exit_pipex(st, 1);
-	}
-	st->cmd2 = ft_split(st->av[3], ' ');
-	if (!st->cmd2)
-	{
-		perror ("pipex: parse error");
-		exit_pipex(st, 1);
-	}
 }
 
 /**
