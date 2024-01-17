@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:42:38 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/09/28 12:49:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/12/22 16:38:35 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**ft_split(char *str)
 		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
 		if (i > j)
-		{	
+		{
 			len = i - j;
 			tab[k] = malloc(sizeof(char) * (len + 1));
 			if (tab[k] == NULL)
