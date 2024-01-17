@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 21:48:21 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/01/15 18:40:28 by pgomez-r         ###   ########.fr        #
+#    Updated: 2024/01/17 17:38:27 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ_PATH = obj/
 
 SRC      = main.c init.c free.c builts_0.c lexer.c lexer_utils.c redir_files.c \
 			builts_1.c builts_utils.c arr_tools_0.c arr_tools_1.c cmd_maker.c \
-			exegguttor.c exegguttor_utils.c cmd_maker_utils.c heredoc.c debug.c
+			exegguttor.c exegguttor_utils.c cmd_maker_utils.c heredoc.c debug.c a_temp.c
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
