@@ -6,14 +6,14 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:23:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/04/06 19:31:15 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:41:33 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_checker.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{	
+{
 	size_t	i;
 
 	i = 0;
