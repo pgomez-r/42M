@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:41:14 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/03/08 11:42:40 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/03/08 20:37:48 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_nl(char *s)
 	return (0);
 }
 
-void	ft_strfree(char *s)
+void	ft_sfree(char *s)
 {
 	if (s != NULL)
 	{
@@ -93,8 +93,11 @@ char	*ft_line(char *s)
 	line = malloc(sizeof(char) * (i + 1));
 	j = 0;
 	while (j < i)
-		line[j] = s[j++];
-	line[j];
+	{
+		line[j] = s[j];
+		j++;
+	}
+	line[j] = '\0';
 	return (line);
 }
 
@@ -115,7 +118,7 @@ char	*ft_stack(char *s)
 	j = 0;
 	while (s[i])
 		stack[j++] = s[i++];
-	stack[j];
+	stack[j] = '\0';
 	return (stack);
 }
 
