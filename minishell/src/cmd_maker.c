@@ -3,35 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_maker.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 04:19:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/01/17 18:24:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/29 09:08:08 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_get_cmdline(t_input *in, t_command *cmds)
+int	ft_check_empty(t_command *cmd)
 {
-	int	i;
-	int	j;
+	int		i;
+	char	t;
 
 	i = -1;
-	while (++i < in->cmd_n)
+	while (++i < cmd->size)
 	{
-		cmds[i].cmd_line = malloc(sizeof(char) * 1);
-		cmds[i].cmd_line[0] = '\0';
-		j = -1;
-		while (++j < cmds[i].size)
+		t = cmd->tokens[i].type;
+		if (t != 'h' && t != 'E' && t != 'e')
+			return (1);
+	}
+	return (0);
+}
+
+void	ft_get_cmdline(t_command *cmd)
+{
+	int	i;
+
+	cmd->cmd_line = ft_malloc(sizeof(char) * 1);
+	cmd->cmd_line[0] = '\0';
+	i = -1;
+	while (++i < cmd->size)
+	{
+		if (cmd->tokens[i].type == '0' || cmd->tokens[i].type == '\''
+			|| cmd->tokens[i].type == '\"')
 		{
-			if (cmds[i].tokens[j].type == '0')
-			{
-				if (cmds[i].cmd_line[0] != '\0')
-					cmds[i].cmd_line = ft_addspace(cmds[i].cmd_line);
-				cmds[i].cmd_line
-					= ft_strjoint(cmds[i].cmd_line, cmds[i].tokens[j].data);
-			}
+			if (cmd->cmd_line[0] != '\0')
+				cmd->cmd_line = ft_addspace(cmd->cmd_line);
+			cmd->cmd_line = ft_strjoint(cmd->cmd_line, cmd->tokens[i].data);
 		}
 	}
 }
@@ -44,43 +54,37 @@ void	ft_init_cmd(t_input *in)
 	int	curr;
 
 	in->cmd_n = ft_element_cnt(in, '|') + 1;
-	in->cmds = malloc(sizeof(t_command) * in->cmd_n);
+	in->cmds = ft_malloc(sizeof(t_command) * in->cmd_n);
 	i = 0;
 	curr = 0;
 	while (i < in->cmd_n)
 	{
 		start = curr;
-		in->cmds[i].paths = NULL;
-		in->cmds[i].path_cmd = NULL;
-		in->cmds[i].cmd_tab = NULL;
-		in->cmds[i].cmd_line = NULL;
+		in->cmds[i].dataptr = in->dptr;
+		ft_init_files(&in->cmds[i]);
 		in->cmds[i].size = ft_cmd_size(in, &curr);
 		curr++;
-		in->cmds[i].tokens = malloc(sizeof(t_element) * in->cmds[i].size);
+		in->cmds[i].tokens = ft_malloc(sizeof(t_element) * in->cmds[i].size);
 		j = -1;
 		while (++j < in->cmds[i].size)
-			in->cmds[i].tokens[j] = in->elements[start++];
+		{
+			in->cmds[i].tokens[j].data = ft_strdup(in->elements[start].data);
+			in->cmds[i].tokens[j].type = in->elements[start++].type;
+		}
 		i++;
 	}
 }
 
-void	ft_cmd_maker(t_input *in)
+void	ft_format_cmd(t_command *cmd, t_data *d)
 {
-	int	i;
-
-	ft_init_cmd(in);
-	ft_init_pipes(in);
-	i = -1;
-	while (++i < in->cmd_n)
-		ft_init_files(&in->cmds[i]);
-	ft_get_cmdline(in, in->cmds);
-	i = -1;
-	while (++i < in->cmd_n)
-		split_cmd(&in->cmds[i], in->cmds[i].cmd_line);
-	ft_tag_builts(in->cmds, in->cmd_n);
+	ft_get_cmdline(cmd);
+	ft_split_cmd(cmd, d);
+	if (ft_is_built(cmd->cmd_tab[0]))
+		cmd->built = 1;
 }
 
-/*Estoy planteando el movimiento de fds-archivos antes de exegguttor,
-pero creo que tendría que cambiarlo y meterlo dentro, justo antes de
-ejecutar cada comando, para modificar los archivos encadenados si es
-necesario*/
+void	ft_cmd_maker(t_input *in)
+{
+	ft_init_cmd(in);
+	ft_init_pipes(in);
+}

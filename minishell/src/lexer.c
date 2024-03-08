@@ -3,40 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:40:28 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/01/14 18:17:48 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:49:13 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/*Función para catalogar los archivos IN/OUT, solo cataloga, luego veremos como
-gestionar los fds para redireccionar stdin/stdout*/
-void	ft_token_files(t_input *in)
+void	ft_token_spchars(t_input *in)
+{
+	int		i;
+	int		j;
+	char	*set;
+
+	set = "|;\\()\0";
+	j = -1;
+	while (set[++j] != '\0')
+	{
+		i = -1;
+		while (++i < in->n_elements)
+		{
+			if (in->elements[i].type == '0'
+				&& ft_strchr(in->elements[i].data, set[j]))
+			{
+				if (ft_strlen(in->elements[i].data) > 1)
+					in->elements = ft_arr_update(in, i, set[j]);
+				else
+					in->elements[i].type = set[j];
+			}
+		}
+	}
+}
+
+void	ft_token_and(t_input *in)
 {
 	int	i;
+	int	and;
 
 	i = -1;
 	while (++i < in->n_elements)
 	{
-		if (in->elements[i].type == '<' && in->elements[i + 1].type == '0'
-			&& i + 1 < in->n_elements)
-			in->elements[i + 1].type = 'i';
-		else if (in->elements[i].type == 'h' && i + 1 < in->n_elements)
+		and = ft_char_pos(in->elements[i].data, '&');
+		if (in->elements[i].type == '0' && and >= 0)
 		{
-			if (in->elements[i + 1].type == '0'
-				|| in->elements[i + 1].type == '\"')
+			if (in->elements[i].data[and] == in->elements[i].data[and + 1]
+				&& in->elements[i].data[and] != in->elements[i].data[and + 2])
+				in->elements = ft_db_redirs(in, i, in->elements[i].data[and]);
+		}
+	}
+}
+
+void	ft_token_files(t_input *in)
+{
+	int		i;
+	char	ct;
+	char	nt;
+
+	i = -1;
+	while (++i < in->n_elements && (i + 1 < in->n_elements))
+	{
+		ct = in->elements[i].type;
+		nt = in->elements[i + 1].type;
+		if (ct == '<' && (nt == '0' || nt == '\'' || nt == '\"'))
+			in->elements[i + 1].type = 'i';
+		else if (ct == 'h')
+		{
+			if (nt == '0' || nt == '\"')
 				in->elements[i + 1].type = 'E';
-			else if (in->elements[i + 1].type == '\'')
+			else if (nt == '\'')
 				in->elements[i + 1].type = 'e';
 		}
-		else if (in->elements[i].type == '>' && in->elements[i + 1].type == '0'
-			&& i + 1 < in->n_elements)
+		else if (ct == '>' && (nt == '0' || nt == '\'' || nt == '\"'))
 			in->elements[i + 1].type = 'o';
-		else if (in->elements[i].type == 'a' && in->elements[i + 1].type == '0'
-			&& i + 1 < in->n_elements)
+		else if (ct == 'a' && (nt == '0' || nt == '\'' || nt == '\"'))
 			in->elements[i + 1].type = 'O';
 	}
 }
@@ -63,61 +104,12 @@ void	ft_token_redirs(t_input *in)
 	}
 }
 
-void	ft_token_pipes(t_input *in)
+int	ft_lexer(t_data *d)
 {
-	int	i;
-
-	i = -1;
-	while (++i < in->n_elements)
-	{
-		if (in->elements[i].type == '0' && ft_strchr(in->elements[i].data, '|'))
-		{
-			if (ft_strlen(in->elements[i].data) > 1)
-				in->elements = ft_arr_update(in, i, '|');
-			else
-				in->elements[i].type = '|';
-		}
-	}
-}
-
-/*Comprueba si hay dos elementos del mismo tipo "especial" (redirecciones y 
-pipes) seguidas, si es así envía error de syntax por consola*/
-int	ft_syntax_check(t_input *in)
-{
-	int		i;
-	int		j;
-	char	*set;
-
-	set = "|<>ha";
-	i = -1;
-	while (set[++i] != '\0')
-	{
-		j = -1;
-		while (++j < in->n_elements)
-		{
-			if (in->elements[j].type == set[i]
-				&& in->elements[j + 1].type == set[i])
-				return (ft_syntax_error(in, j), 1);
-		}
-	}
-	if (ft_eof_check(in))
+	if (ft_manage_input(d))
 		return (1);
-	return (0);
-}
-/**
- * TODO: plantear cómo encontrar syntax error con elementos de diferente tipo >|
- * TODO: con >> o <<, cuando imprimir error near `>' o near `>>'
- */
-
-/*Proceso de lexer/token; fill_input será sustituido por la ft que separe por 
-primera vez el input en elementos teniendo en cuenta el tema de las comillas,
-despues de eso la idea es ir enocontrando, separando (si están pegados sin 
-espacios) y catalogando otros tipos de elementos (pipes, redirs)
-*/
-int	ft_lexer(t_data *d, char *str_in)
-{
-	ft_fill_input(&d->in, str_in);
-	ft_token_pipes(&d->in);
+	ft_token_spchars(&d->in);
+	ft_token_and(&d->in);
 	ft_token_redirs(&d->in);
 	ft_token_files(&d->in);
 	if (ft_syntax_check(&d->in))

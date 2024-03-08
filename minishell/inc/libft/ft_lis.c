@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:44:00 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/26 22:00:44 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:32:42 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lis_len_index(int *array, t_lis_utils *utils, size_t size)
 		{
 			if (array[j] < array[i] && utils->array_len[j] + 1
 				>= utils->array_len[i])
-			{	
+			{
 				utils->array_len[i] = utils->array_len[j] + 1;
 				utils->array_index[i] = j;
 			}
@@ -56,7 +56,7 @@ int	*generate_lis(int *array, t_lis_utils *utils, size_t size)
 		i--;
 	j = utils->lis_len - 1;
 	while (j >= 0)
-	{	
+	{
 		utils->lis[j] = array[i];
 		i = utils->array_index[i];
 		j--;

@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:29:35 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/12/14 13:38:43 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:39:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_totalfree(char **numbers)
 	while (numbers[i])
 	{
 		free(numbers[i]);
+		numbers[i] = NULL;
 		i++;
 	}
 	free(numbers);

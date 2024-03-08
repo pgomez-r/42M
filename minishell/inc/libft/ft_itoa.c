@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:44:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/24 16:49:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:32:22 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,3 @@ char	*ft_itoa(int n)
 	ft_write_str(str, size, num);
 	return (str);
 }
-
-/*Con las dos funciones auxiliares operativas, qué hace la función principal: 
-	1. Declarar y dar valor al tamaño que tendrá la cadena char final, esto 
-	lo hacemos llamando a la funcion contador.
-	2. Crear una cadena char vacía, reservando memoria con calloc (malloc puede
-	que funcione también, no estoy seguro) de size + 1 para luego cerrarla con '0'
-	3. Pasamos el número que le entra a la función como int n a un long int para
-	proteger el supuesto de que entre un número demasiado grande, lo hacemos creando
-	una variable long int y asignandole valor de n casteado (long int)n
-	4. Llamar a la función que "escribe" el número, con todos pasandole todos los 
-	parámetros anteriores
-	5. Devolvemos la cadena y le preguntanmos a Paco a ver cómo lo ve
-	*/

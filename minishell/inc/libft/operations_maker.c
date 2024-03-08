@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_maker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:27:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/03/25 22:18:11 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:34:11 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	best_rotate_top(t_index *index, int x, int y)
 			rotate_ab(index);
 	}
 	else if (y > x)
-	{	
+	{
 		y = y - x;
 		while (y-- > 0)
 			rotate_b(index);
@@ -62,7 +62,7 @@ void	best_rotate_bot(t_index *index, int x, int y)
 			revrot_ab(index);
 	}
 	else if (y > x)
-	{	
+	{
 		y = y - x;
 		while (y-- > 0)
 			revrot_b(index);

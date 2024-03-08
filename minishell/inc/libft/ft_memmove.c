@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:45:53 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/24 17:50:00 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:33:17 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memmove(void *dest, const void *src, size_t count)
 		{
 			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 			i++;
-		}	
+		}
 	}
 	else
 	{
@@ -34,7 +34,7 @@ void	*ft_memmove(void *dest, const void *src, size_t count)
 		{
 			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 			i--;
-		}	
+		}
 	}
 	return (dest);
 }

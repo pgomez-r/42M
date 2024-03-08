@@ -1,1 +1,0 @@
-Este libft.h es el archivo de mi propia libreria y contiene todas las funciones creadas para cada proyecto, por lo que estará en constante desarollo.

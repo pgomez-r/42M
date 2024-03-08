@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:02:20 by pgomez-r          #+#    #+#             */
-/*   Updated: 2022/10/25 08:48:08 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:37:38 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 		*(dest + cont) = *src;
 		cont++;
 		src++;
-	}	
+	}
 	*(dest + cont) = '\0';
 	return (len_dst + len_src);
 }
