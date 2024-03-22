@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   microshell_commented.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:54:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/03/21 12:55:51 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/03/22 10:37:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h> 
 #include <sys/wait.h> //man waitpid
 
-/*Función para imprimir errores, write con fd2 (stderr) y añade \n siempre
+/*Función para imprimir errores, write con fd2 (stderr)
 Siempre devuelve 1 porque la llamamos cuando detectamos un error, va en cadena:
 ej. ft_cd si hay error hace return(ft_error), termina devolviendo 1, que se
 iguala en main a stat, que es la variable devuelve siempre el programa*/
@@ -22,7 +22,6 @@ int	ft_err(char *str)
 {
 	while (*str)
 		write(2, str++, 1);
-	write(2, "\n", 1);
 	return (1);
 }
 
@@ -40,9 +39,9 @@ int	ft_err(char *str)
 int	ft_cd(char **av, int i)
 {
 	if (i != 2)
-		return (ft_err("error: cd: bad arguments"));
+		return (ft_err("error: cd: bad arguments\n"));
 	else if (chdir(av[1]) == -1) //solo se ejecuta si sabemos que hay 2 argumentos, el [0] es "cd", asi que chdir al [1]
-		return (ft_err("error: cd: cannot change directory to "), ft_err(av[1]));
+		return (ft_err("error: cd: cannot change directory to "), ft_err(av[1]), ft_err("\n"));
 	return (0);
 }
 
@@ -80,24 +79,24 @@ int	ft_exe(char **av, char **env, int i)
 	if (av[i] && !strcmp(av[i], "|")) //si hay pipe, flag en 1 (proteger primero que av[i] exista!)
 		is_pipe = 1;
 	if (is_pipe && pipe(fd) == -1) //si hay pipe, inicializamos nuestro pipe + protección
-		return (ft_err("error: fatal"));
+		return (ft_err("error: fatal\n"));
 	pid = fork(); //hacemos fork + protección
 	if (pid < 0)
-		return (ft_err("error: fatal"));
+		return (ft_err("error: fatal\n"));
 	else if (pid == 0) //CHILD
 	{
 		av[i] = NULL; //i marca el final de bloque de comando, como puede haber otro comando después, lo dejamos a NULL para "cortar"
 		if (is_pipe && (dup2(fd[1], 1) == -1 || close(fd[0]) == -1 //si hay pipe, intercambio de fds + protección
 				|| close(fd[1]) == -1))								//el hijo intercambia la escritura - fd[1] y STDOUT(1)
-			return (ft_err("error: fatal"));
+			return (ft_err("error: fatal\n"));
 		execve(*av, av, env);
-		return (ft_err("error: cannot execute "), ft_err(*av));
+		return (ft_err("error: cannot execute "), ft_err(*av), ft_err("\n"));
 	}
 	//FATHER - de aqui al final solo ejecuta el padre, no hace falta else if(pid > 0)...
 	waitpid(pid, &stat, 0);
 	if (is_pipe && (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 //si hay pipe, intercambio de fds + protección
 			|| close(fd[1]) == -1))							//el padre intercambia la lectura - fd[0] y STDIN(0)
-		return (ft_err("error: fatal"));
+		return (ft_err("error: fatal\n"));
 	return (WEXITSTATUS(stat));
 }
 
@@ -139,7 +138,7 @@ int	main(int ac, char **av, char **env)
 			//aquí ya sabemos cuandos elementos hay, ahora analizamos la primera cadena del bloque actual, usando el puntero *av (le habiamos sumado +=i para situarlo en el primer elemento)
 			if (!strcmp(*av, "cd"))
 				stat = ft_cd(av, i);
-			else if (i)
+			else if (i) //en lugar de solo "else" para proteger el caso en que i quede en cero
 				stat = ft_exe(av, env, i);
 		}
 	}
