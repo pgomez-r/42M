@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:06:58 by pgruz             #+#    #+#             */
-/*   Updated: 2023/11/02 17:50:17 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/04/04 18:10:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	gen_philos(t_env *d)
 		d->philos[i].fed_time = d->start_time;
 		pthread_mutex_unlock(&d->philos[i].time_mtx);
 		if (d->num_ph == 1)
-		{		
+		{
 			pthread_create(&d->philos[i].tid, NULL, &one_philo, &d->philos[i]);
 			return ;
 		}
@@ -60,7 +60,7 @@ t_env	parse_params(char **av)
 	d.fork_mutex = malloc(sizeof(pthread_mutex_t) * d.num_ph);
 	i = -1;
 	while (++i < d.num_ph)
-	{	
+	{
 		d.forks[i] = 0;
 		pthread_mutex_init(&d.fork_mutex[i], NULL);
 	}

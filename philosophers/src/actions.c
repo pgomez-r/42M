@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:26:58 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/10/20 11:22:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:08:09 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	philo_eat(t_ph	*ph)
 	pthread_mutex_unlock(&ph->time_mtx);
 	ph->round++;
 	if (ph->round == ph->d->rounds)
-	{	
+	{
 		pthread_mutex_lock(&ph->full_mtx);
 		ph->full = 1;
 		pthread_mutex_unlock(&ph->full_mtx);
@@ -98,7 +98,7 @@ void	ft_monitor(t_env *d)
 	while (++i < d->num_ph)
 	{
 		if (check_ko(d, &d->philos[i]) == 1)
-		{	
+		{
 			pthread_mutex_lock(&d->finish_mtx);
 			d->finish = 1;
 			pthread_mutex_unlock(&d->finish_mtx);

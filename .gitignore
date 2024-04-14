@@ -1,9 +1,5 @@
 ### Minishell ###
 # Cuando estemos listos para entregar, descomentar esta sección
-# *.md
-# *.pdf
-# docs/
-a_*/
 minishell
 minishell_tester/
 

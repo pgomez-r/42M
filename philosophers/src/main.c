@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 21:59:47 by pgruz             #+#    #+#             */
-/*   Updated: 2023/10/20 16:33:52 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:07:03 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*one_philo(void *param)
 	ph->fed_time = ft_get_time();
 	pthread_mutex_unlock(&ph->time_mtx);
 	while (stat == 0)
-	{		
+	{
 		pthread_mutex_lock(&ph->d->fork_mutex[0]);
 		ft_log(ph, "has taken a fork", YELLOW);
 		update_stat(&stat, ph->d);
@@ -42,7 +42,7 @@ void	*routine(void *param)
 	if (ph->num % 2 != 0)
 		ft_usleep(10);
 	while (stat == 0)
-	{		
+	{
 		pick_forks(ph);
 		philo_eat(ph);
 		drop_forks(ph);
@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 		return (1);
 	gen_philos(&d);
 	while (stat == 0)
-	{	
+	{
 		ft_monitor(&d);
 		update_stat(&stat, &d);
 	}
