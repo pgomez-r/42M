@@ -6,16 +6,16 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 16:21:04 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/04/15 19:21:44 by pgomez-r         ###   ########.fr        #
+#    Updated: 2024/04/15 20:07:15 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = phonebook
 
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRC = megaphone.cpp
+SRC = phonebook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
