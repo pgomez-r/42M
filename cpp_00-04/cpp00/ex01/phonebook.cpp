@@ -5,19 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 20:07:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/16 21:11:49 by pgomez-r         ###   ########.fr       */
+/*   Created: 2024/04/19 11:59:13 by pgomez-r          #+#    #+#             */
+/*   Updated: 2024/04/19 16:08:26 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cctype>
+#include "phonebook.hpp"
 
-int	main(int ac, char **av)
+PhoneBook::PhoneBook(void)
 {
-	if (ac > 1)
-		std::cout << "Usage error" << std::endl;
-	
+	std::cout << "PhoneBook constructor called" << std::endl;
+	max = 0;
+	return ;
+}
 
-	return (0);
+PhoneBook::~PhoneBook(void)
+{
+	std::cout << "PhoneBook destructor called" << std::endl;
+	return ;
+}
+
+void	PhoneBook::prompt(void)
+{
+	std::cout << "This is your phonebook, enter your command:" << std::endl;
+	return ;
+}
+
+void	PhoneBook::add(void)
+{
+	int	i;
+
+	i = max;
+	if (max > 7)
+	{
+		i = oldest;
+		oldest++;
+		if (oldest > 7)
+			oldest = 0;
+	}
+	contact[i].fill_info();
+	max++;
+	return ;
 }
