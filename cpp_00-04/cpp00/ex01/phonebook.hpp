@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include "Contact.hpp"
+#include "contact.hpp"
 
 class	PhoneBook
 {

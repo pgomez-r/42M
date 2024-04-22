@@ -15,7 +15,7 @@
 #include "contact.hpp"
 #include "phonebook.hpp"
 
-int	ft_action(std::string input, PhoneBook agenda)
+int	ft_action(std::string input, PhoneBook &agenda)
 {
 	if (input == "ADD")
 		agenda.add();

@@ -66,8 +66,11 @@ int	PhoneBook::search(void)
 		contact[i].preview();
 	std::cout << "Please, select contact index to display:" << std::endl;
 	std::getline(std::cin, str);
-	if	(str.length() > 1 || !std::all_of(str.begin(), str.end(), ::isdigit))
-		return (std::cout << "Error: wrong input for SEARCH command" << std::endl, 1);
+	for (i = 0; i < str.length(); i++)
+	{
+		if (!isdigit(str[i]))
+			return (std::cout << "Error: wrong input for SEARCH command" << std::endl, 1);
+	}
 	//change stoi for ft_atoi or a different allowed function/method
 	i = std::stoi(str);
 	if (i > 7)
