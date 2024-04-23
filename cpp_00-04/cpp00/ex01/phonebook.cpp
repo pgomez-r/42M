@@ -14,7 +14,7 @@
 
 PhoneBook::PhoneBook(void)
 {
-	std::cout << "PhoneBook constructor called" << std::endl;
+	std::cout << "(PhoneBook constructor called)" << std::endl;
 	max = 0;
 	oldest = 0;
 	return ;
@@ -22,7 +22,7 @@ PhoneBook::PhoneBook(void)
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "PhoneBook destructor called" << std::endl;
+	std::cout << "(PhoneBook destructor called)" << std::endl;
 	return ;
 }
 
@@ -49,31 +49,27 @@ void	PhoneBook::add(void)
 	return ;
 }
 
-//Display all contacts with info-> index, first name, last name, nickname
-//Column must be MAX 10 chars,  ’|’ separates them 
-//Text must be right-aligned. If text is longer than the column, it must be truncated 
-//and the last displayable character must be replaced by a dot (’.’).
-
-//Prompt user for index of the entry to display. If the index is out of range or wrong, 
-//define a relevant behavior. Otherwise, display (ALL?) contact information, one field per line.
 int	PhoneBook::search(void)
 {
 	int			i;
 	std::string	str;
 
 	i = -1;
+	std::cout << std::setw(10) << std::right << "INDEX" << " | ";
+	std::cout << std::setw(10) << std::right << "NAME" << " | ";
+	std::cout << std::setw(10) << std::right << "LASTNAME" << " | ";
+	std::cout << std::setw(10) << std::right << "NICKNAME" << std::endl;
 	while (++i < 8)
 		contact[i].preview();
-	std::cout << "Please, select contact index to display:" << std::endl;
-	std::getline(std::cin, str);
-	for (i = 0; i < str.length(); i++)
+	std::cout << "Please, enter contact index to display:" << std::endl;
+	std::cin >> i;
+	if (std::cin.fail())
 	{
-		if (!isdigit(str[i]))
-			return (std::cout << "Error: wrong input for SEARCH command" << std::endl, 1);
+		std::cin.clear();
+		//std::cin.ignore(std::numeric_limits<std::streamsize>std::max(), '\n');
+		return (std::cout << "Error: invalid input for index search" << std::endl, 1);
 	}
-	//change stoi for ft_atoi or a different allowed function/method
-	i = std::stoi(str);
-	if (i > 7)
+	if (i < 0 || i > 7)
 		return (std::cout << "Error: index out of range" << std::endl, 1);
 	contact[i].display_all();
 	return (0);

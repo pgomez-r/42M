@@ -15,29 +15,45 @@
 
 Contact::Contact(void)
 {
-	std::cout << "Contact constructor called" << std::endl;
+	std::cout << "(Contact constructor called)" << std::endl;
 	this->index = -1;
 	return ;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact destructor called" << std::endl;
+	std::cout << "(Contact destructor called)" << std::endl;
 	return ;
+}
+
+int	ft_setIndent(std::string str)
+{
+	int	i;
+	int	set;
+
+	set = 10;
+	i = 0;
+	while (str[i] && i < 10)
+	{
+		if (static_cast<unsigned char>(str[i]) > 127)
+			set++;
+		i++;
+	}
+	return (set);
 }
 
 void	Contact::fill_info(int i)
 {
-	std::cout << "Enter the information of the new contact" << std::endl;
-	std::cout << "First name:" << std::endl;
+	std::cout << "Enter the information of the new contact..." << std::endl;
+	std::cout << "First name: ";
 	std::getline(std::cin, this->name);
-	std::cout << "Last name:" << std::endl;
+	std::cout << "Last name: ";
 	std::getline(std::cin, this->lastName);
-	std::cout << "Nickname:" << std::endl;
+	std::cout << "Nickname: ";
 	std::getline(std::cin, this->nickname);
-	std::cout << "Phone number:" << std::endl;
+	std::cout << "Phone number: ";
 	std::getline(std::cin, this->phoneNumber);
-	std::cout << "Darkest secret:" << std::endl;
+	std::cout << "Darkest secret: ";
 	std::getline(std::cin, this->darkestSecret);
 	this->index = i;
 	std::cout << "Contact info added" << std::endl;
@@ -47,10 +63,10 @@ void	Contact::preview(void)
 {
 	if (this->index != -1)
 	{
-		std::cout << this->index << "| ";
-		std::cout << this->name << "| ";
-		std::cout << this->lastName << "| ";
-		std::cout << this->nickname << "|" << std::endl;
+		std::cout << std::setw(10) << std::right << this->index << " | ";
+		std::cout << std::setw(ft_setIndent(this->name)) << std::right << this->name << " | ";
+		std::cout << std::setw(ft_setIndent(this->lastName)) << std::right << this->lastName << " | ";
+		std::cout << std::setw(ft_setIndent(this->nickname)) << std::right << this->nickname << std::endl;
 	}
 	return ;
 }
@@ -59,10 +75,10 @@ int	Contact::display_all(void)
 {
 	if (this->index == -1)
 		return (std::cout << "No contact in this index" << std::endl, 1);
-	std::cout << this->name << std::endl;
-	std::cout << this->lastName << std::endl;
-	std::cout << this->nickname << std::endl;
-	std::cout << this->phoneNumber << std::endl;
-	std::cout << this->darkestSecret << std::endl;
+	std::cout << "Name: " << this->name << std::endl;
+	std::cout << "Lastname: " << this->lastName << std::endl;
+	std::cout << "Nickname: " << this->nickname << std::endl;
+	std::cout << "Phonenumber: " << this->phoneNumber << std::endl;
+	std::cout << "Darkest secret: " << this->darkestSecret << std::endl;
 	return (0);
 }

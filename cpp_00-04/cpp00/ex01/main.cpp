@@ -22,7 +22,7 @@ int	ft_action(std::string input, PhoneBook &agenda)
 	else if (input == "SEARCH")
 		agenda.search();
 	else if (input == "EXIT")
-		return (1);
+		return (std::cout << "Goodbye, happy coding!" << std::endl, 1);
 	else
 		std::cout << "Error: Command not found" << std::endl;
 	return (0);
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	flag = 0;
 	if (ac > 1)
 		return (std::cout << "Usage error" << std::endl, 1);
-	std::cout << "Welcome to your phonebook" << std::endl;
+	std::cout << "Welcome to your phonebook!" << std::endl;
 	while (!flag)
 	{
 		agenda.prompt();
@@ -46,3 +46,13 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
+
+/**
+TODO:
+- Protect only digits in phone number
+- Ñ FIX?
+- Contact indexes from 1 to 8
+- "Error:command not found" after SEARCH - uncomment cin.ignore
+- Protect empty fields when fill_info
+- Short with '.' when longer than 10 for preview
+*/
