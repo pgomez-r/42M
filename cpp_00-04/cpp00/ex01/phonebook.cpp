@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:59:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/21 23:44:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:59:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	PhoneBook::search(void)
 	if (std::cin.fail())
 	{
 		std::cin.clear();
-		//std::cin.ignore(std::numeric_limits<std::streamsize>std::max(), '\n');
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return (std::cout << "Error: invalid input for index search" << std::endl, 1);
 	}
 	if (i < 0 || i > 7)

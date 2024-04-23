@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 20:07:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/21 21:58:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 21:02:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 
 /**
 TODO:
+- Add welcome message
 - Protect only digits in phone number
 - Ñ FIX?
 - Contact indexes from 1 to 8
