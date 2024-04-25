@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 20:07:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/23 21:02:01 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:50:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ int	main(int ac, char **av)
 
 	flag = 0;
 	if (ac > 1)
-		return (std::cout << "Usage error" << std::endl, 1);
+		return (std::cout << "Usage error, no arguments allowed!" << std::endl, 1);
 	std::cout << "Welcome to your phonebook!" << std::endl;
 	while (!flag)
 	{
 		agenda.prompt();
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input) && std::cin.eof())
+			return (std::cout << "Goodbye!" << std::endl, 1);
+		if (input.empty())
+			continue ;
 		flag = ft_action(input, agenda);
 	}
 	return (0);
@@ -49,11 +52,9 @@ int	main(int ac, char **av)
 
 /**
 TODO:
-- Add welcome message
 - Protect only digits in phone number
-- Ñ FIX?
-- Contact indexes from 1 to 8
-- "Error:command not found" after SEARCH - uncomment cin.ignore
 - Protect empty fields when fill_info
 - Short with '.' when longer than 10 for preview
+- Contact indexes from 1 to 8
+- "Error:command not found" after SEARCH - uncomment cin.ignore
 */

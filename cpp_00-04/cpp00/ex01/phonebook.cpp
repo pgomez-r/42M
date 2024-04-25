@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:59:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/23 19:59:45 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:51:02 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 PhoneBook::PhoneBook(void)
 {
-	std::cout << "(PhoneBook constructor called)" << std::endl;
 	max = 0;
 	oldest = 0;
 	return ;
@@ -22,13 +21,12 @@ PhoneBook::PhoneBook(void)
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "(PhoneBook destructor called)" << std::endl;
-	return ;
 }
 
 void	PhoneBook::prompt(void)
 {
-	std::cout << "Enter your command:" << std::endl;
+	std::cout << "|| ADD || SEARCH || EXIT ||" << std::endl;
+	std::cout << "|| Type your command...  ||" << std::endl;
 	return ;
 }
 

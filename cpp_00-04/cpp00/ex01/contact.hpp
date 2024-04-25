@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:46:54 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/21 23:45:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:33:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ class	Contact
 		void	preview(void);
 		int		display_all(void);
 };
+
+int	ft_readInput(std::string *input);
 
 #endif

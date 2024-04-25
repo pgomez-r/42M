@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:58:59 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/21 23:47:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:41:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,47 @@
 
 Contact::Contact(void)
 {
-	std::cout << "(Contact constructor called)" << std::endl;
 	this->index = -1;
 	return ;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "(Contact destructor called)" << std::endl;
-	return ;
 }
 
-int	ft_setIndent(std::string str)
+int	ft_allDigit(std::string str)
 {
 	int	i;
-	int	set;
 
-	set = 10;
-	i = 0;
-	while (str[i] && i < 10)
+	i = -1;
+	while (++i < str.length())
 	{
-		if (static_cast<unsigned char>(str[i]) > 127)
-			set++;
-		i++;
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
 	}
-	return (set);
+	return (1);
+}
+
+int	ft_readInput(std::string *dst, int mode)
+{
+	while (!dst->empty())
+	{
+		std::getline(std::cin, *dst);
+		if (std::cin.eof())
+			return (std::cout << "Goodbye!" << std::endl, 1);
+		else if (dst->empty())
+			std::cout << "Empty field, please insert value" << std::endl;
+		else if (mode == 1 && !ft_allDigit(*dst))
+			std::cout << "Phone number must contain only number, please try again" << std::endl;
+	}
+	return (0);
 }
 
 void	Contact::fill_info(int i)
 {
 	std::cout << "Enter the information of the new contact..." << std::endl;
 	std::cout << "First name: ";
-	std::getline(std::cin, this->name);
+	std::getline(std::cin, this->name);;
 	std::cout << "Last name: ";
 	std::getline(std::cin, this->lastName);
 	std::cout << "Nickname: ";
@@ -56,7 +65,7 @@ void	Contact::fill_info(int i)
 	std::cout << "Darkest secret: ";
 	std::getline(std::cin, this->darkestSecret);
 	this->index = i;
-	std::cout << "Contact info added" << std::endl;
+	std::cout << "Contact info added!" << std::endl;
 }
 
 void	Contact::preview(void)
@@ -64,9 +73,9 @@ void	Contact::preview(void)
 	if (this->index != -1)
 	{
 		std::cout << std::setw(10) << std::right << this->index << " | ";
-		std::cout << std::setw(ft_setIndent(this->name)) << std::right << this->name << " | ";
-		std::cout << std::setw(ft_setIndent(this->lastName)) << std::right << this->lastName << " | ";
-		std::cout << std::setw(ft_setIndent(this->nickname)) << std::right << this->nickname << std::endl;
+		std::cout << std::setw(10) << std::right << this->name << " | ";
+		std::cout << std::setw(10) << std::right << this->lastName << " | ";
+		std::cout << std::setw(10) << std::right << this->nickname << std::endl;
 	}
 	return ;
 }
