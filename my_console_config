@@ -1,0 +1,25 @@
+#Configuración archivo .zshrc con alias para consola
+
+#the following aliases need previous installation of its scripts/programs!
+alias francinette=/Users/pgomez-r/francinette/tester.sh
+alias paco=/Users/pgomez-r/francinette/tester.sh
+alias file_manager="ncdu /Users/pgomez-r"
+alias val="valgrind --leak-check=full --track-origins=yes"
+
+alias comp="gcc -Wall -Wextra -Werror"
+alias leaks="leaks -q --atExit --"
+alias tree="git log --graph --decorate --all --oneline"
+
+export PATH="$HOME/.brew/bin:$PATH"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" 
+# Load Homebrew config script
+source $HOME/.brewconfig.zsh
+
+export PATH=$HOME/.brew/bin:$PATH
+
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/zash.omp.json)"
+
+# oh_my_posh THEMES (to insert into ".../themes/[here].omp.json")
+# zash
+# half-life
+# huvix
