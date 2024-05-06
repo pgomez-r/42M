@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 20:23:43 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/02 20:24:44 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/06 21:34:04 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 Zombie	*newZombie(std::string name)
 {
-	Zombie	*walker;
+	Zombie	*walkz;
 
-	return (walker);	
+	walkz = new Zombie(name);
+	return(walkz);	
 }

@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:34:46 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/02 20:21:46 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/06 22:00:59 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Zombie.hpp"
 
-Zombie::Zombie()
+Zombie::Zombie(std::string name)
 {
+	this->name = name;
 	return ;
 }
 
 Zombie::~Zombie()
 {
-	std::cout << "Zombie destructor called" << std::endl;
+	std::cout << "Destructor for zombie " << this->name << " called" << std::endl;
 	return ;
 }
 

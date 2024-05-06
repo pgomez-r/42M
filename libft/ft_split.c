@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 13:34:13 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/09/14 07:27:59 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:11:43 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**ft_split(char const *s, char c)
 		while (s[i] && s[i] != c)
 			i++;
 		if (i > j)
-		{	
+		{
 			tab[k] = ft_savewords(s + j, i - j);
 			k++;
 		}
