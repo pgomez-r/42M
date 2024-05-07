@@ -72,5 +72,6 @@
 		"unordered_map": "cpp",
 		"utility": "cpp",
 		"iomanip": "cpp"
-	}
+	},
+	"todo-tree.tree.scanMode": "workspace"
 }
