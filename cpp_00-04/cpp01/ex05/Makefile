@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zombies
+NAME = 
 
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
@@ -18,7 +18,7 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC = main.cpp Zombie.cpp zombieHorde.cpp
+SRC = main.cpp 
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.cpp=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))

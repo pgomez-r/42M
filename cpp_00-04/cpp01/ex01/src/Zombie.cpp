@@ -10,3 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/Zombie.hpp"
+
+Zombie::Zombie()
+{
+	return ;
+}
+
+Zombie::~Zombie()
+{
+	std::cout << "Destructor for zombie " << this->name << " called" << std::endl;
+	return ;
+}
+
+void    Zombie::announce(void)
+{
+	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	return;
+}
+
+void    Zombie::nameSetter(std::string name)
+{
+    this->name = name;
+    return ;
+}
