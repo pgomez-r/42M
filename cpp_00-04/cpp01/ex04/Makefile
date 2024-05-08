@@ -6,11 +6,11 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 16:21:04 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/05/07 04:30:05 by codespace        ###   ########.fr        #
+#    Updated: 2024/05/07 23:32:10 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = replace
+NAME = ft_replace
 
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror

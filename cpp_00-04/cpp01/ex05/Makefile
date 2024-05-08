@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 16:21:04 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/05/06 22:09:33 by pgomez-r         ###   ########.fr        #
+#    Updated: 2024/05/08 03:31:37 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = harl
 
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
@@ -18,7 +18,7 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC = main.cpp 
+SRC = main.cpp Harl.cpp
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.cpp=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
