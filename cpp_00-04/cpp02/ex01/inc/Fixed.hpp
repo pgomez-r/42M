@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:17 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/14 04:09:59 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/15 02:04:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ class	Fixed
 {
 	private:
 		int					_fpValue;
-		static const int	_fractBits;
+		static const int	_fractBits = 8;
 	public:
 		Fixed();
+		Fixed(Fixed &src);
 		Fixed(const int n);
 		Fixed(const float n);
-		Fixed(Fixed &src);
 		~Fixed();
 		Fixed	&operator=(Fixed const &rhs);
 
