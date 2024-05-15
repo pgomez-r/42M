@@ -6,16 +6,15 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:17 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/15 02:04:25 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/15 03:29:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO - "const" at the end of functions, why? necesary/important?
 
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
 #include <iostream>
+#include <cmath>
 
 class	Fixed
 {
@@ -32,8 +31,10 @@ class	Fixed
 
 		int		getRawBits(void);
 		void	setRawBits(int const raw);
-		float	toFloat();
-		int		toInt();
+		float	toFloat(void) const;
+		int		toInt(void) const;
 };
+
+std::ostream	&operator<<(std::ostream &output, Fixed const &fpNum);
 
 #endif

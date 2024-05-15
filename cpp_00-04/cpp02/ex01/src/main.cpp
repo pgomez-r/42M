@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/14 04:06:21 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/15 03:43:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 int	main(void)
 {
-	std::cout << "DECLARING INSTANCE #1 OF CLASS WITH DEFAULT CONSTRUCTOR..." << std::endl;
-	Fixed a;
-	std::cout << std::endl;
-	std::cout << "DECLARING INSTANCE #2 OF CLASS USING COPY OF #1 CONSTRUCTOR..." << std::endl;
-	Fixed b(a);
-	std::cout << std::endl;
-	std::cout << "DECLARING INSTANCE #3 OF CLASS USING DEFAULT CONSTRUCTOR AGAIN..." << std::endl;
-	Fixed c;
-	std::cout << std::endl;
-	std::cout << "GIVING INSTANCE #3 SAME VALUE OF #2 (c = b)..." << std::endl;
-	c = b;
-	std::cout << std::endl;
+	std::cout << "DECLARING 4 INSTANCES OF FIXED CLASS(a, b, c, d)" << std::endl;
+	std::cout << "For instance 'a': ";
+	Fixed		a;
+	std::cout << "For instance 'b': ";
+	Fixed const	b(11);
+	std::cout << "For instance 'c': ";
+	Fixed const	c(42.42f);
+	std::cout << "For instance 'd': ";
+	Fixed const	d(b);
+	std::cout << "Now we give vaule to instance 'a' in this manner: ";
+	a = Fixed(1992.1103f);
+	
+	std::cout << "LET'S SEE THE VALUE OF OR FIXED-POINT OBJECTS..." << std::endl;
+	std::cout << "a is " << a << std::endl;
+	std::cout << "b is " << b << std::endl;
+	std::cout << "c is " << c << std::endl;
+	std::cout << "d is " << d << std::endl;
 
-	std::cout << "CHECKING VALUES OF EACH INSTANCE..." << std::endl;
-	std::cout << a.getRawBits() << " is the value of instance #1" << std::endl; 
-	std::cout << b.getRawBits() << " is the value of instance #2" << std::endl;
-	std::cout << c.getRawBits() << " is the value of instance #3" << std::endl;
+	std::cout << "AND NOW, LET'S PRINT THEM AS INTEGERS..." << std::endl;
+	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 	return (0);
 }
