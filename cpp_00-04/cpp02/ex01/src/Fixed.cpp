@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:25 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/15 03:29:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/16 13:27:25 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called" << std::endl;
+	this->_fpValue = 0;
 }
 
 Fixed::Fixed(const int n)
@@ -29,7 +30,7 @@ Fixed::Fixed(const float n)
 	this->_fpValue = std::roundf(n * (1 << _fractBits));
 }
 
-Fixed::Fixed(Fixed &src)
+Fixed::Fixed(const Fixed &src)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
@@ -40,16 +41,15 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed	&operator=(Fixed const &rhs)
+Fixed	&Fixed::operator=(Fixed const &rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fpValue = rhs.getRawBits();
 	return (*this);
 }
 
-int		Fixed::getRawBits(void)
+int		Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits method called" << std::endl;
 	return (this->_fpValue);
 }
 
@@ -58,12 +58,12 @@ void	Fixed::setRawBits(int const raw)
 	this->_fpValue = raw;
 }
 
-float	Fixed::toFloat(void)
+float	Fixed::toFloat(void) const
 {
-	return (static_cast<float>(this->getRawBits() / (1 << _fractBits)));
+	return ((static_cast<float>(this->getRawBits()) / (1 << _fractBits)));
 }
 
-int		Fixed::toInt(void)
+int		Fixed::toInt(void) const
 {
 	return (this->_fpValue >> _fractBits);
 }

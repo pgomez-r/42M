@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:17 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/15 02:03:54 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/16 13:07:53 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class	Fixed
 		static const int	_fractBits = 8;
 	public:
 		Fixed();
-		Fixed(Fixed &src);
+		Fixed(const Fixed &src);
 		~Fixed();
 		Fixed	&operator=(Fixed const &rhs);
-		int		getRawBits(void);
+		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };
 

@@ -71,7 +71,15 @@
 		"typeinfo": "cpp",
 		"unordered_map": "cpp",
 		"utility": "cpp",
-		"iomanip": "cpp"
+		"iomanip": "cpp",
+		"__bits": "cpp",
+		"clocale": "cpp",
+		"compare": "cpp",
+		"concepts": "cpp",
+		"deque": "cpp",
+		"fstream": "cpp",
+		"stack": "cpp",
+		"variant": "cpp"
 	},
 	"todo-tree.tree.scanMode": "workspace"
 }

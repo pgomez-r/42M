@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:25 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/14 03:56:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/16 13:08:00 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Fixed::Fixed()
 	this->_fpValue = 0;
 }
 
-Fixed::Fixed(Fixed &src)
+Fixed::Fixed(const Fixed &src)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
@@ -29,7 +29,7 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed	&operator=(Fixed const &rhs)
+Fixed	&Fixed::operator=(Fixed const &rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
@@ -37,7 +37,7 @@ Fixed	&operator=(Fixed const &rhs)
 	return (*this);
 }
 
-int		Fixed::getRawBits(void)
+int		Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits method called" << std::endl;
 	return (this->_fpValue);
