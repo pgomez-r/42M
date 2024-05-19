@@ -6,11 +6,10 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/16 13:32:37 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/18 22:52:20 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO - Comment constructor and method cout? TMI...
 // TODO - Check test outputs, << may not be working (getting rawBits now!)
 
 #include "../inc/Fixed.hpp"
