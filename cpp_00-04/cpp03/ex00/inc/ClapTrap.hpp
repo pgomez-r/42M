@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 23:04:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/21 04:36:52 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/24 12:40:45 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,23 @@
 class   ClapTrap{
 	private:
 		std::string	_name;
-		int			_hitPts;
-		int			_energyPts;
-		int			_attackDmg;
+		unsigned int			_hitPts;
+		unsigned int			_energyPts;
+		unsigned int			_attackDmg;
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
 		ClapTrap(const ClapTrap &src);
-    	ClapTrap &operator=(const ClapTrap &rhs);
+		ClapTrap &operator=(const ClapTrap &rhs);
 
 		void	attack(const std::string &target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
+
+		unsigned int		getHitPts(void);
+		unsigned int		getEnergyPts(void);
+		unsigned int		getAttackDmg(void);
 };
 
 #endif
