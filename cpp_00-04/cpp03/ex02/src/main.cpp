@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 23:04:51 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/24 12:54:10 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/29 03:54:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// TODO - Check ALL classes from ex00 to ex02 and see if they are ALL chanonical!!
 
 #include "../inc/FragTrap.hpp"
 
