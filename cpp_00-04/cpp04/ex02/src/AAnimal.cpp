@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,36 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Animal.hpp"
+#include "../inc/AAnimal.hpp"
 
-Animal::Animal(void){
+AAnimal::AAnimal(void){
 	this->type = "Animal";
 	std::cout << "Animal default constructor called" << std::endl;
 }
 
-Animal::Animal(std::string type){
+AAnimal::AAnimal(std::string type){
 	this->type = type;
 	std::cout << "Animal constructor called with type: " << type << std::endl;
 }
 
-Animal::Animal(const Animal &src){
+AAnimal::AAnimal(const AAnimal &src){
 	*this = src;
 	std::cout << "Animal copy constructor called" << std::endl;
 }
 
-Animal::~Animal(void){
+AAnimal::~AAnimal(void){
 	std::cout << "Animal destructor called" << std::endl;
 }
 
-Animal &Animal::operator=(const Animal &rhs){
+AAnimal &AAnimal::operator=(const AAnimal &rhs){
 	this->type = rhs.type;
 	return (*this);
 }
 
-void		Animal::makeSound(void) const{
+void		AAnimal::makeSound(void) const{
 	std::cout << "Hoo hoo! Hoot hoot! Whooo!..." << std::endl;
 }
 
-std::string	Animal::getType(void) const{
+std::string	AAnimal::getType(void) const{
 	return (this->type);
 }

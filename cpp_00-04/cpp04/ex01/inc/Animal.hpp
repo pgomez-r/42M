@@ -6,17 +6,15 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 03:01:06 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:31 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/30 00:09:23 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO - virtual destructor? virtual ~Animal();
-// TODO - const methods? void makeSound(void) const;
 
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
 #include <iostream>
+#include "Brain.hpp"
 
 class	Animal
 {

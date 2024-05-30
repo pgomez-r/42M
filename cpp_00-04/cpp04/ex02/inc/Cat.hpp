@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 03:01:06 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:31 by pgruz11          ###   ########.fr       */
+/*   Created: 2024/05/29 03:01:08 by codespace         #+#    #+#             */
+/*   Updated: 2024/05/30 08:59:25 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO - virtual destructor? virtual ~Animal();
-// TODO - const methods? void makeSound(void) const;
+#ifndef	CAT_HPP
+#define	CAT_HPP
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#include "AAnimal.hpp"
 
-#include <iostream>
-
-class	Animal
+class Cat : public AAnimal
 {
-	protected:
-		std::string	type;
+	private:
+		Brain	*_brain;
 	public:
-		Animal(void);
-		Animal(std::string type);
-		Animal(const Animal &src);
-		virtual ~Animal(void);
-
-		Animal &operator=(const Animal &rhs);
-		
-		virtual void	makeSound(void) const;
-		std::string		getType(void) const;
+		Cat(void);
+		Cat(const Cat &src);
+		~Cat(void);
+	
+		Cat	&operator=(const Cat &rhs);
+	
+		void	makeSound(void) const;
 };
 
 #endif
