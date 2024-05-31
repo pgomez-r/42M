@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 03:47:45 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/08 04:12:14 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 12:12:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO: break and compilation?!
 
 #include "../inc/Harl.hpp"
 
@@ -21,7 +19,7 @@ int main(int ac, char **av)
 
     if (ac != 2)
     {
-        return (std::cout << "Error: usage: only one argument allowed" << std::endl, 1);
+        return (std::cout << "Error: usage: exactly just one argument needed" << std::endl, 1);
     }
     input = av[1];
     rick.complain(input);

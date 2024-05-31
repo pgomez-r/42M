@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:25 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/16 13:27:25 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/30 11:33:35 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Fixed::Fixed(const int n)
 Fixed::Fixed(const float n)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_fpValue = std::roundf(n * (1 << _fractBits));
+	this->_fpValue = roundf(n * (1 << _fractBits));
 }
 
 Fixed::Fixed(const Fixed &src)

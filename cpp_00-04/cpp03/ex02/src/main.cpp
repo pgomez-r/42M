@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 23:04:51 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/29 03:54:08 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/31 11:53:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO - Check ALL classes from ex00 to ex02 and see if they are ALL chanonical!!
 
 #include "../inc/FragTrap.hpp"
 
@@ -38,6 +36,9 @@ int main()
 		<< npc.getHitPts() << " hit points" << std::endl;
 	std::cout << "Pickle Rick has " << frag.getEnergyPts() << " energy points left and "
 		<< frag.getHitPts() << " hit points" << std::endl;
+	std::cout << std::endl;
+
+	frag.highFivesGuys();
 	std::cout << std::endl;
 	return (0);
 }

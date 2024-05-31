@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 03:01:06 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:31 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 11:55:21 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO - virtual destructor? virtual ~Animal();
-// TODO - const methods? void makeSound(void) const;
 
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP

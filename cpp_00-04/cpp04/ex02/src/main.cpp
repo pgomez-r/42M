@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 03:01:17 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/30 10:56:24 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/30 11:40:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	main(void)
 {
+
 	std::cout << "[ --- STACK ALLOCATION TEST --- ]" << std::endl;
 	std::cout << "--- CAT & DOG DEFAULT & COPY CONSTRUCTION ---" << std::endl;
 

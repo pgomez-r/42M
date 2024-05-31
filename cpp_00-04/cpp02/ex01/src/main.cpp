@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/15 03:43:04 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/31 10:57:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	Fixed const	c(42.42f);
 	std::cout << "For instance 'd': ";
 	Fixed const	d(b);
-	std::cout << "Now we give vaule to instance 'a' in this manner: ";
+	std::cout << "Now we give vaule to instance 'a' in this manner: "<< std::endl;
 	a = Fixed(1992.1103f);
 	
 	std::cout << "LET'S SEE THE VALUE OF OR FIXED-POINT OBJECTS..." << std::endl;

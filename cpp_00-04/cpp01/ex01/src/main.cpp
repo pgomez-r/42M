@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:17:50 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/05/07 04:10:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 11:43:46 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO : Add ft_leaks commented!
 
 #include "../inc/Zombie.hpp"
 

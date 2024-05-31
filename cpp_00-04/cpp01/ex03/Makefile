@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 16:21:04 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/05/07 02:59:45 by codespace        ###   ########.fr        #
+#    Updated: 2024/05/30 11:12:30 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = humans
 
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror

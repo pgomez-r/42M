@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:08:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/07 04:25:51 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 12:59:45 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/HumanB.hpp"
 
-HumanB::HumanB(std::string name, Weapon &weapon)
+HumanB::HumanB(std::string name)
 {
     this->name = name;
     this->weapon = NULL;
@@ -25,10 +25,12 @@ HumanB::~HumanB()
 
 void    HumanB::attack(void)
 {
-    if (this->_weapon != NULL && this->weapon.getType() != "")
-        std::cout << this->name << " attacks with their " << this->weapon.getType() << std::endl;
-    else
+    if (this->weapon == NULL)
         std::cout << this->name << " has no weapon to attack with!" << std::endl;
+    else if (this->weapon->getType() == "")
+        std::cout << this->name << " attacks with their imagination! (empty " " weapon provided...)" << std::endl;
+    else
+        std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
 }
 
 void    HumanB::setWeapon(Weapon &weapon)

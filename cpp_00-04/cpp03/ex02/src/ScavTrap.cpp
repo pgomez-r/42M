@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:16:28 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/24 12:49:31 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 11:45:10 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ ScavTrap::ScavTrap(const ScavTrap &src){
 
 ScavTrap::~ScavTrap(){
 	std::cout << "[ ScavTrap ] " << this->_name << " destructor called" << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &rhs){
+	this->_name = rhs._name;
+	this->_hitPts = rhs._hitPts;
+	this->_energyPts = rhs._energyPts;
+	this->_attackDmg = rhs._attackDmg;
+	return (*this);
 }
 
 void	ScavTrap::attack(const std::string &target){

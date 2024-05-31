@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:17 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/16 13:07:53 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 10:52:26 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class	Fixed
 		Fixed(const Fixed &src);
 		~Fixed();
 		Fixed	&operator=(Fixed const &rhs);
+
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 23:04:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/24 12:40:45 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 11:38:20 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class   ClapTrap{
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
-		~ClapTrap();
 		ClapTrap(const ClapTrap &src);
+		~ClapTrap();
 		ClapTrap &operator=(const ClapTrap &rhs);
 
 		void	attack(const std::string &target);

@@ -79,7 +79,14 @@
 		"deque": "cpp",
 		"fstream": "cpp",
 		"stack": "cpp",
-		"variant": "cpp"
+		"variant": "cpp",
+		"*.tcc": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"numbers": "cpp",
+		"ranges": "cpp",
+		"span": "cpp",
+		"cinttypes": "cpp"
 	},
 	"todo-tree.tree.scanMode": "workspace"
 }

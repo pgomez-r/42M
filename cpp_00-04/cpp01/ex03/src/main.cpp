@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:52:46 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/07 04:17:56 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 13:01:24 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO: Check compilation and use
-// TODO: When ptr/ref and why?
-
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "../inc/HumanA.hpp"
+#include "../inc/HumanB.hpp"
 
 int main(void)
 {
-    Weapon  club("crude spike club");
+    Weapon  club("crude spiked club");
     HumanA  paco("Paco", club);
     HumanB  joaquin("Joaquin");
 
@@ -27,7 +24,7 @@ int main(void)
     joaquin.attack();
     
     std::cout << "--- TEST [2] --- HumanB equipped Weapon ---" << std::endl;
-    joaquin.setWeapon(&club);
+    joaquin.setWeapon(club);
     joaquin.attack();
     
     std::cout << "--- TEST [3] --- WeaponType changed ---" << std::endl;

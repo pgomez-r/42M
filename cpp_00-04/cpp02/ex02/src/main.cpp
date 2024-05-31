@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/18 22:52:20 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 11:03:04 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO - Check test outputs, << may not be working (getting rawBits now!)
 
 #include "../inc/Fixed.hpp"
 
@@ -41,25 +39,24 @@ int main(void)
 	std::cout << "A = " << a << std::endl;
 	std::cout << "B = " << b << std::endl;
 	
-	std::cout << "Test operator [++] (prefix) on A: " << ++a << std::endl; // Expected output: 1
-	std::cout << "Test operator [++] (postfix) on A: " << a++ << std::endl; // Expected output: 1
-	std::cout << "Test value of A after [++] postfix: " << a << std::endl; // Expected output: 2
+	std::cout << "Test operator [++] (prefix) on A: " << ++a << std::endl;
+	std::cout << "Test operator [++] (postfix) on A: " << a++ << std::endl;
+	std::cout << "Test value of A after [++] postfix: " << a << std::endl;
 
-	std::cout << "Test operator [+] (a + b) = " << (a + b) << std::endl; // Expected output: 468.62
-	std::cout << "Test operator [-] (a - b) = " << (a - b) << std::endl; // Expected output: 464.62
-	std::cout << "Test operator [*] (a * b): " << (a * b) << std::endl; // Expected output: 933.24
-	std::cout << "Test operator [/] (a / b): " << (a / b) << std::endl; // Expected output: 0.00428
+	std::cout << "Test operator [+] (a + b) = " << (a + b) << std::endl;
+	std::cout << "Test operator [-] (a - b) = " << (a - b) << std::endl;
+	std::cout << "Test operator [*] (a * b): " << (a * b) << std::endl;
+	std::cout << "Test operator [/] (a / b): " << (a / b) << std::endl;
 
-	std::cout << "Test operator [>] (a > b) = " << (a > b) << std::endl; // Expected output: 0
-	std::cout << "Test operator [<] (a < b) = " << (a < b) << std::endl; // Expected output: 1
-	std::cout << "Test operator [>=] (a >= b) = " << (a >= b) << std::endl; // Expected output: 0
-	std::cout << "Test operator [<=] (a <= b) = " << (a <= b) << std::endl; // Expected output: 1
-	std::cout << "Test operator [==] (a == b) = " << (a == b) << std::endl; // Expected output: 0
-	std::cout << "Test operator [!=] (a != b) = " << (a != b) << std::endl; // Expected output: 1
+	std::cout << "Test operator [>] (a > b) = " << (a > b) << std::endl;
+	std::cout << "Test operator [<] (a < b) = " << (a < b) << std::endl;
+	std::cout << "Test operator [>=] (a >= b) = " << (a >= b) << std::endl;
+	std::cout << "Test operator [<=] (a <= b) = " << (a <= b) << std::endl;
+	std::cout << "Test operator [==] (a == b) = " << (a == b) << std::endl;
+	std::cout << "Test operator [!=] (a != b) = " << (a != b) << std::endl;
 
-	// Test max and min functions
-	std::cout << "Test [max] function (max(a, b)) = " << Fixed::max(a, b) << std::endl; // Expected output: 466.62
-	std::cout << "Test [min] function (min(a, b)) = " << Fixed::min(a, b) << std::endl; // Expected output: 2
+	std::cout << "Test [max] function (max(a, b)) = " << Fixed::max(a, b) << std::endl;
+	std::cout << "Test [min] function (min(a, b)) = " << Fixed::min(a, b) << std::endl;
 
 	return (0);
 }

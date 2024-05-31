@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:11:43 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/24 12:49:37 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/05/31 11:45:37 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ FragTrap::FragTrap(const FragTrap &src){
 
 FragTrap::~FragTrap(){
 	std::cout << "{ FragTrap } " << this->_name << " destructor called" << std::endl;
+}
+
+FragTrap &FragTrap::operator=(const FragTrap &rhs){
+	this->_name = rhs._name;
+	this->_hitPts = rhs._hitPts;
+	this->_energyPts = rhs._energyPts;
+	this->_attackDmg = rhs._attackDmg;
+	return (*this);
 }
 
 void	FragTrap::highFivesGuys(void){
