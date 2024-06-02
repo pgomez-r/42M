@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:28:36 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/05/16 20:12:41 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/06/02 23:38:05 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ las divisiones, lo que será igual a cada último dígito del número entero
 
 void	ft_putunsigi(unsigned int n, size_t *i)
 {
-	if (n < 0)
+	if ((int)n < 0)
 		n = n * -1;
 	if (n >= 10)
 	{

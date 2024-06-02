@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mlx_init.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 00:24:30 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/08/10 13:00:53 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2023/06/08 18:16:19 by XEDGit        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static bool mlx_create_buffers(mlx_t* mlx)
 }
 
 /**
- * Compiles the given shader source code, of a given shader type.
+ * Compiles the given shader source code of a given shader type.
  * Returns shader object via param.
  * 
  * @param code The shader source code.
@@ -92,6 +92,7 @@ static uint32_t mlx_compile_shader(const char* code, int32_t type)
 	{
 		glGetShaderInfoLog(shader, sizeof(infolog), NULL, infolog);
 		fprintf(stderr, "%s", infolog);
+		glDeleteShader(shader);
 		return (0);
 	}
 	return (shader);
@@ -112,16 +113,25 @@ static bool mlx_init_render(mlx_t* mlx)
 	// Load all OpenGL function pointers
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		return (mlx_error(MLX_GLADFAIL));
-	
+
 	if (!(vshader = mlx_compile_shader(vert_shader, GL_VERTEX_SHADER)))
 		return (mlx_error(MLX_VERTFAIL));
 	if (!(fshader = mlx_compile_shader(frag_shader, GL_FRAGMENT_SHADER)))
 		return (mlx_error(MLX_FRAGFAIL));
 	if (!(mlxctx->shaderprogram = glCreateProgram()))
+	{
+		glDeleteShader(fshader);
+		glDeleteShader(vshader);
 		return (mlx_error(MLX_SHDRFAIL));
+	}
 	glAttachShader(mlxctx->shaderprogram, vshader);
 	glAttachShader(mlxctx->shaderprogram, fshader);
 	glLinkProgram(mlxctx->shaderprogram);
+
+	glDeleteShader(vshader);
+	glDeleteShader(fshader);
+	glDetachShader(mlxctx->shaderprogram, vshader);
+	glDetachShader(mlxctx->shaderprogram, fshader);
 
 	int32_t success;
 	glGetProgramiv(mlxctx->shaderprogram, GL_LINK_STATUS, &success);
@@ -131,8 +141,6 @@ static bool mlx_init_render(mlx_t* mlx)
 		fprintf(stderr, "%s", infolog);
 		return (mlx_error(MLX_SHDRFAIL));
 	}
-	glDeleteShader(vshader);
-	glDeleteShader(fshader);
 	glUseProgram(mlxctx->shaderprogram);
 
 	for (size_t i = 0; i < 16; i++)
@@ -152,9 +160,9 @@ bool sort_queue = false;
 
 mlx_t* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
 {
+	MLX_NONNULL(title);
 	MLX_ASSERT(width > 0, "Window width must be positive");
 	MLX_ASSERT(height > 0, "Window height must be positive");
-	MLX_ASSERT(title, "Window title can't be null");
 
 	bool init;
 	mlx_t* mlx;

@@ -12,8 +12,8 @@ Colors are commonly represented as `4-byte` integers. This 4-byte integer is a g
 Channel | Description   | RGBA representation
 :------:|:-------------:|:-------------------:
 `R`     | Red Channel   | `0xFF000000`
-`G`     | Blue Channel  | `0x00FF0000`
-`B`     | Green Channel | `0x0000FF00`
+`G`     | Green Channel | `0x00FF0000`
+`B`     | Blue Channel  | `0x0000FF00`
 `A`     | Alpha Channel | `0x000000FF`
 
 Combining these four channel values into one will result in a non-transparent, white color.
@@ -32,7 +32,7 @@ int get_rgba(int r, int g, int b, int a)
 }
 ```
 
-We can also do the reverse to retrieve each individual byte again:
+We can also do this in reverse to retrieve each individual byte again:
 
 ```c
 // Get the red channel.
@@ -70,6 +70,8 @@ In this small example we will create a white image:
 
 ```c
 #include "MLX42/MLX42.h"
+#include <stdlib.h>
+#include <string.h>
 
 // Bytes Per Pixel. Since each pixel is represented as an integer, it will be four bytes for four channels.
 #define BPP sizeof(int32_t)

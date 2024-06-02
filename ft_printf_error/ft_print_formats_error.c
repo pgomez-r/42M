@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_formats_error.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz <pgruz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:28:36 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/08/04 15:04:32 by pgruz            ###   ########.fr       */
+/*   Updated: 2024/06/02 23:38:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ las divisiones, lo que será igual a cada último dígito del número entero
 
 void	ft_putunsigi_error(unsigned int n, size_t *i)
 {
-	if (n < 0)
+	if ((int)n < 0)
 		n = n * -1;
 	if (n >= 10)
 	{

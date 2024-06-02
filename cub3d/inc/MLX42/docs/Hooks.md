@@ -6,9 +6,9 @@ See copyright and license notice in the root project for more information.
 # Hooks in MLX42
 
 Hooks allow you to add your own functions to the main loop execution of the program, aka these functions get executed every frame.
-They also serve to intercept certain key presses such as scrolling or pressing enter.
+They also serve to intercept certain keypresses such as scrolling or pressing enter.
 
-Only one hook can be set at a time! You cannot attach/have multiple hooks for specialized hooks.
+Only one hook can be set at a time! You cannot attach/have multiple specialized hooks.
 You can however have multiple generic hooks.
 
 ## Specialized Hooks
@@ -21,7 +21,7 @@ You can however have multiple generic hooks.
  * 
  * @param[in] x The mouse x delta.
  * @param[in] y The mouse y delta.
- * @param[in] param Additional parameter to pass onto the function.
+ * @param[in] param Additional parameter to pass to the function.
  */
 typedef void (*mlx_scrollfunc)(double xdelta, double ydelta, void* param);
 
@@ -44,7 +44,7 @@ void mlx_scroll_hook(mlx_t* mlx, mlx_scrollfunc func, void* param);
  * Callback function used to handle window closing which is called when the user attempts 
  * to close the window, for example by clicking the close widget in the title bar.
  * 
- * @param[in] param Additional parameter to pass onto the function.
+ * @param[in] param Additional parameter to pass to the function.
  */
 typedef void (*mlx_closefunc)(void* param);
 
@@ -68,7 +68,7 @@ void mlx_close_hook(mlx_t* mlx, mlx_closefunc func, void* param);
  * 
  * @param[in] width The new width of the window.
  * @param[in] height The new height of the window. 
- * @param[in] param Additional parameter to pass onto the function.
+ * @param[in] param Additional parameter to pass to the function.
  */
 typedef void (*mlx_resizefunc)(int32_t width, int32_t height, void* param);
 
@@ -85,13 +85,13 @@ void mlx_resize_hook(mlx_t* mlx, mlx_resizefunc func, void* param);
 
 ### Key hook
 
-Use a key hook if you want single key press detection or more precision as to how a key is pressed, such as checking for modifier keys or getting the raw os keycode.
+Use a key hook if you want single keypress detection or more precision as to how a key is pressed, such as checking for modifier keys or getting the raw os keycode.
 
 ```c
 
 /**
  * Key function callback data.
- * Data related the mlx_key_hook function
+ * Data related to the mlx_key_hook function
  * 
  * @param key The key that was pressed.
  * @param action The action that was done with the key.
@@ -110,10 +110,10 @@ typedef struct mlx_key_data
 
 
 /**
- * Callback function used to handle key presses.
+ * Callback function used to handle keypresses.
  * 
  * @param[in] keydata The callback data, contains info on key, action, ...
- * @param[in] param Additional parameter to pass onto the function.
+ * @param[in] param Additional parameter to pass to the function.
  */
 typedef void (*mlx_keyfunc)(mlx_key_data_t keydata, void* param);
 
@@ -140,7 +140,7 @@ Generic hooks execute each frame and are useful for stuff that needs to be updat
  * @param[in] mlx The MLX instance handle.
  * @param[in] f The function.
  * @param[in] param The parameter to pass onto the function.
- * @returns Wether the hook was added successfuly. 
+ * @returns Wether the hook was added successfully. 
  */
 bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param);
 ```
@@ -207,7 +207,7 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	else if (ydelta < 0)
 		puts("Down!");
 	
-	// Can also detect a mousewheel that go along the X (e.g: MX Master 3)
+	// Can also detect a mousewheel that goes along the X (e.g: MX Master 3)
 	if (xdelta < 0)
 		puts("Sliiiide to the left!");
 	else if (xdelta > 0)

@@ -3,7 +3,7 @@
 /*                                                        ::::::::            */
 /*   MLX42_Int.h                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/27 23:55:34 by W2Wizard      #+#    #+#                 */
 /*   Updated: 2022/07/21 10:46:43 by sbos          ########   odam.nl         */
@@ -29,11 +29,6 @@
 # else
 #  include <limits.h>
 # endif
-# if defined(_WIN32)
-#  include <windows.h>
-# else
-#  include <err.h>
-# endif
 # include <ctype.h> /* isspace, isprint, ... */
 # include <string.h> /* strlen, memmove, ... */
 # include <stdarg.h> /* va_arg, va_end, ... */
@@ -52,7 +47,7 @@
 
 /**
  * The shader code is extracted from the shader files
- * and converted into a .c file as a single string at
+ * and converted to a .c file as a single string at
  * compile time. This keeps shader files external but
  * still integrated into the program letting you use
  * the executable anywhere without having to take the
@@ -98,7 +93,7 @@ typedef struct mlx_list
 /**
  * There are 2 types of hooks, special and generics.
  *
- * Specials: Are specific callback functions to a specific action
+ * Specials: Specials are specific callback functions to a specific action
  * such as window resizing or key presses. These are attached to the
  * callbacks of glfw. In case MLX itself needs the callback we call
  * the specials in that callback since there can only ever be a single
@@ -106,13 +101,13 @@ typedef struct mlx_list
  *
  * Generics: Generics are MLX42 specific hooks and can have multiple
  * hooks at the same time, these are executed every frame and can be
- * used as an alternative for key presses or animations for instance.
+ * used as an alternative for keypresses or animations for instance.
  *
  * NOTE: Hooks could be achieved with va_args to have any amount
  * of args sized functor but we can't/don't want to let the user
  * deal with va_args and having to look up what args are what, etc...
  *
- * We want to keep it straight forward with functors already describing
+ * We want to keep it straightforward with functors already describing
  * what params they have.
  */
 
@@ -160,13 +155,13 @@ typedef struct mlx_hook
 
 //= Rendering =//
 /**
- * For rendering we need to store most of OpenGLs stuff
+ * For rendering we need to store most of OpenGL's stuff
  * such as the vertex array object, vertex buffer object &
- * the shader program. As well as hooks and the zdepth level.
+ * the shader program as well as hooks and the zdepth level.
  *
  * Additionally we represent draw calls with a linked list
- * queue that point to the image and the index of which instance.
- * Again, instances only carry xyz data, so coupled with the image it
+ * queue that points to the image and the index of its instance.
+ * Again, instances only carry XYZ data, so coupled with the image it
  * lets us know where to draw a copy of the image.
  *
  * Texture contexts are kept in a struct alongside the capacity
@@ -180,8 +175,8 @@ typedef struct mlx_ctx
 	GLuint			vbo;
 	GLuint			shaderprogram;
 
-	uint32_t		initialWidth;
-	uint32_t		initialHeight;
+	int32_t			initialWidth;
+	int32_t			initialHeight;
 
 	mlx_list_t*		hooks;
 	mlx_list_t*		images;
@@ -244,7 +239,7 @@ bool mlx_freen(int32_t count, ...);
 
 //= OpenGL Functions =//
 
-void mlx_update_matrix(const mlx_t* mlx, int32_t width, int32_t height);
+void mlx_update_matrix(const mlx_t* mlx);
 void mlx_draw_instance(mlx_ctx_t* mlx, mlx_image_t* img, mlx_instance_t* instance);
 void mlx_flush_batch(mlx_ctx_t* mlx);
 
