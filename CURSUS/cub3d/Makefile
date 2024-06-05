@@ -3,12 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/06/02 00:11:45 by codespace        ###   ########.fr        #
+#    Updated: 2024/06/05 02:27:43 by pgruz11          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+UNAME := $(shell uname)
+
+# macOS (12.0) - With GLFW installed with homebrew
+ifeq ($(UNAME), Darwin)
+CMAKE_CMD = cmake -B ./inc/MLX42/build ./inc/MLX42 -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0
+GLFW_LINK = -lglfw -Iinclude -L/Users/${USER}/.brew/opt/glfw/lib
+# Ubuntu (22.04) - With GLFW core installed (not homebrew)
+else ifeq ($(UNAME), Linux)
+CMAKE_CMD = cmake -B ./inc/MLX42/build ./inc/MLX42
+GLFW_LINK = -Iinclude -ldl -lglfw -pthread -lm
+endif
 
 NAME     = cub3d
 
@@ -41,13 +53,11 @@ $(NAME):	$(OBJS)
 	@echo "\033[0;33m\n	 ##### Checking/compiling Libft_42 library #####\n\033[0m"
 	@${MAKE} -C ./inc/libft
 	@echo "\033[0;33m\n	 ##### Checking/compiling MLX42 library #####\n\033[0m"
-	@${MAKE} -C ./inc/MLX42
-### - COMPILACIÓN PARA 42 - ###
-	@${CC} $(CFLAGS) $(OBJS) ./inc/libft/libft.a ./inc/MLX42/libmlx42.a \
-	-lglfw -L /Users/${USER}/.brew/opt/glfw/lib/ -o $(NAME)
-### - COMPILACIÓN PARA CASA - ###
-#	@${CC} $(CFLAGS) $(OBJS) ./inc/libft/libft.a /home/pgruz/Escritorio/MLX42/linux_make/libmlx42.a \
-	-Iincude -ldl -lglfw -pthread -lm -o $(NAME)
+	@${CMAKE_CMD}
+	@make -C ./inc/MLX42/build -j4
+	@echo "\033[0;33m\n	 ##### Checking/compiling CVB3D #####\n\033[0m"
+	@${CC} $(CFLAGS) $(OBJS) ./inc/libft/libft.a ./inc/MLX42/build/libmlx42.a \
+	${GLFW_LINK} -o $(NAME)
 	@echo "\033[0;32m\n	 ##### Game is ready, let's play! #####\n\033[0m"
 
 # bonus: ${BNAME}
@@ -68,24 +78,25 @@ norm:
 		@norminette src/
 		@norminette bonus/
 		@norminette inc/libft
-		@norminette inc/so_long.h
-		@norminette inc/so_long_bonus.h	
+		@norminette inc/cub3d.h
+		@norminette inc/cub3d_bonus.h	
 
 debug:
 		@gcc -Wall -Wextra -Werror -g ./src/*.c ./inc/libft/libft.a \
-		./inc/MLX42/libmlx42.a -lglfw -L /Users/${USER}/.brew/opt/glfw/lib/ -o debug 
+		./inc/MLX42/build/libmlx42.a ${GLFW_LINK} -o debug 
 		@echo "\033[0;32mDebug file successfully generated\033[0m"
 
 clean:
 		@${RM} ${OBJS} ${BOBJS}
+		@rmdir -p $(OBJ_PATH) 2>/dev/null || true
 		@${MAKE} -C ./inc/libft clean
 		@echo "\033[0;32mObject files have been removed\033[0m"
 
 fclean:	clean
-		@${RM} ${NAME}
+		@${RM} ${NAME} ${BNAME}
 		@${MAKE} -C ./inc/libft fclean
-		@${MAKE} -C ./inc/MLX42 fclean
-		@${RM} debug so_long_bonus
+		@${MAKE} -C ./inc/MLX42/build clean
+		@${RM} debug
 		@echo "\033[0;32mFCLEAN done!\033[0m"
 
 re:	fclean all
