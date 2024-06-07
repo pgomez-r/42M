@@ -43,9 +43,9 @@ void	create_minipmap(t_mlx_st *st)
 	w = (st->d->width * PIX) / 4;
 	h = (st->d->height * PIX) / 4;
 	st->gfx.minimap = mlx_new_image(st->game, w, h);
+	paint_map(st, w, h);
 	mlx_image_to_window(st->game, st->gfx.minimap, 0, 0);
 	mlx_set_instance_depth(&st->gfx.minimap->instances[0], 25);
-	paint_map(st, w, h);
 }
 
 void	paint_square(mlx_image_t *square, int size, int color)
