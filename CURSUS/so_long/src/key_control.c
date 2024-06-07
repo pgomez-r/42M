@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:39:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/06 22:34:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:08:37 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	move_right(t_struct *st)
 void	key_control(t_struct *st)
 {
 	if (mlx_is_key_down(st->window, MLX_KEY_ESCAPE))
-	{	
+	{
 		st->exit_stat = -1;
 		mlx_close_window(st->window);
 	}

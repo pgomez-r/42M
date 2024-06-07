@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:53:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/23 17:48:24 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:16:57 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	render_player(t_struct *st)
 		while (x < st->width)
 		{
 			if (st->map[y][x] == 'P')
-			{	
+			{
 				mlx_image_to_window(st->window, st->player_d, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_u, x * PIX, y * PIX);
 				mlx_image_to_window(st->window, st->player_l, x * PIX, y * PIX);

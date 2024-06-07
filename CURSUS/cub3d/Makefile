@@ -6,7 +6,7 @@
 #    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/06/05 02:27:43 by pgruz11          ###   ########.fr        #
+#    Updated: 2024/06/06 16:20:23 by pgruz11          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,15 @@ endif
 NAME     = cub3d
 
 CC       = gcc
-CFLAGS   = -Wall -Wextra -Werror
+CFLAGS   = -Wall -Wextra -Werror -I./inc
 # BNAME    = 
 
 SRC_PATH = src/
 OBJ_PATH = obj/
 # B_PATH	 = bonus/
 
-SRC      = main.c
+SRC      = main.c graphics.c gameplay.c
+
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)
 OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
