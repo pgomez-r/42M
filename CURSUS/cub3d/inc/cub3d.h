@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:13:53 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/06 16:20:09 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/08 00:22:35 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_graphic
 	mlx_image_t	*player;
 	mlx_image_t	*wall;
 	mlx_image_t	*ground;
+	mlx_image_t	*minimap;
 }	t_graphic;
 
 typedef struct s_mlx_st

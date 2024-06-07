@@ -12,6 +12,42 @@
 
 #include "cub3d.h"
 
+void	paint_map(t_mlx_st *st, size_t w, size_t h)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (y < h)
+	{
+		x = 0;
+		while (x < w)
+		{
+			if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '0')
+				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
+			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
+				mlx_put_pixel(st->gfx.minimap, x, y, 0x000000FF);
+			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == 'P')
+				mlx_put_pixel(st->gfx.minimap, x, y, 0xFF0000FF);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	create_minipmap(t_mlx_st *st)
+{
+	size_t	w;
+	size_t	h;
+
+	w = (st->d->width * PIX) / 4;
+	h = (st->d->height * PIX) / 4;
+	st->gfx.minimap = mlx_new_image(st->game, w, h);
+	mlx_image_to_window(st->game, st->gfx.minimap, 0, 0);
+	mlx_set_instance_depth(&st->gfx.minimap->instances[0], 25);
+	paint_map(st, w, h);
+}
+
 void	paint_square(mlx_image_t *square, int size, int color)
 {
 	int			y;
@@ -73,4 +109,5 @@ void	load_images(t_mlx_st *st)
 	paint_square(st->gfx.ground, PIX, 0xFFFFFFFF);
 	st->gfx.player = mlx_new_image(st->game, PIX / 4, PIX / 4);
 	paint_square(st->gfx.player, PIX / 4, 0xFF0000FF);
+	create_minipmap(st);
 }
