@@ -6,11 +6,59 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/06 16:18:57 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/08 15:11:17 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	paint_miniplayer(mlx_image_t *mini, size_t *x, size_t *y)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			mlx_put_pixel(mini, *x + j, *y + i, 0xFF0000FF);
+			j++;
+		}
+		i++;
+	}
+	*(x) += 4;
+	*(y) += 4;
+}
+
+void	update_minimap(t_mlx_st *st)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (y < st->d->mini_h)
+	{
+		x = 0;
+		while (x < st->d->mini_w)
+		{
+			if (st->gfx.player->instances[0].y / 4 == (int)y
+				&& st->gfx.player->instances[0].x / 4 == (int)x)
+			{
+				paint_miniplayer(st->gfx.minimap, &x, &y);
+				break ;
+				//mlx_put_pixel(st->gfx.minimap, x, y, 0xFF0000FF);
+			}
+			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
+				mlx_put_pixel(st->gfx.minimap, x, y, 0x000000FF);
+			else
+				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	game_hook(void *param)
 {
@@ -20,6 +68,7 @@ void	game_hook(void *param)
 	if (st->d->exit_code == 0)
 	{
 		key_control(st);
+		update_minimap(st);
 	}
 }
 

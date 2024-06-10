@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:13:53 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/08 00:22:35 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/08 14:32:03 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_struct	t_struct;
-typedef struct s_mlx_st	t_mlx_st;
+typedef struct s_struct		t_struct;
+typedef struct s_mlx_st		t_mlx_st;
 typedef struct s_graphic	t_graphic;
 
 typedef struct s_struct
@@ -34,6 +34,8 @@ typedef struct s_struct
 	char	*map[8];
 	size_t	height;
 	size_t	width;
+	size_t	mini_h;
+	size_t	mini_w;
 }	t_struct;
 
 typedef struct s_graphic

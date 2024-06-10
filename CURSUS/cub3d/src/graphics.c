@@ -23,12 +23,10 @@ void	paint_map(t_mlx_st *st, size_t w, size_t h)
 		x = 0;
 		while (x < w)
 		{
-			if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '0')
-				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
-			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
+			if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
 				mlx_put_pixel(st->gfx.minimap, x, y, 0x000000FF);
-			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == 'P')
-				mlx_put_pixel(st->gfx.minimap, x, y, 0xFF0000FF);
+			else
+				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
 			x++;
 		}
 		y++;
@@ -37,13 +35,10 @@ void	paint_map(t_mlx_st *st, size_t w, size_t h)
 
 void	create_minipmap(t_mlx_st *st)
 {
-	size_t	w;
-	size_t	h;
-
-	w = (st->d->width * PIX) / 4;
-	h = (st->d->height * PIX) / 4;
-	st->gfx.minimap = mlx_new_image(st->game, w, h);
-	paint_map(st, w, h);
+	st->d->mini_w = (st->d->width * PIX) / 4;
+	st->d->mini_h = (st->d->height * PIX) / 4;
+	st->gfx.minimap = mlx_new_image(st->game, st->d->mini_w, st->d->mini_h);
+	paint_map(st, st->d->mini_w, st->d->mini_h);
 	mlx_image_to_window(st->game, st->gfx.minimap, 0, 0);
 	mlx_set_instance_depth(&st->gfx.minimap->instances[0], 25);
 }
