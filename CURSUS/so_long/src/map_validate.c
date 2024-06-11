@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:23:33 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/25 22:52:10 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/06/11 06:09:42 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,7 @@ void	read_map(t_struct *st, char *path)
 int	chk_char(char *map)
 {
 	int		i;
-	int		nplayer;
-	int		nexit;
-	int		ncollec;
 
-	nplayer = 0;
-	nexit = 0;
-	ncollec = 0;
 	i = 0;
 	while (map[i] != '\0')
 	{

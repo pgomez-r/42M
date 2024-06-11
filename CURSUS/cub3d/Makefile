@@ -6,7 +6,7 @@
 #    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/06/06 16:20:23 by pgruz11          ###   ########.fr        #
+#    Updated: 2024/06/11 06:02:05 by pgruz11          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ clean:
 fclean:	clean
 		@${RM} ${NAME} ${BNAME}
 		@${MAKE} -C ./inc/libft fclean
-		@${MAKE} -C ./inc/MLX42/build clean
+		@if [ -d "./inc/MLX42/build" ]; then ${MAKE} -C ./inc/MLX42/build clean; fi
 		@${RM} debug
 		@echo "\033[0;32mFCLEAN done!\033[0m"
 

@@ -1,7 +1,7 @@
 /*
-LodePNG version 20220717
+LodePNG version 20230410
 
-Copyright (c) 2005-2022 Lode Vandevenne
+Copyright (c) 2005-2023 Lode Vandevenne
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -92,7 +92,10 @@ or comment out LODEPNG_COMPILE_ALLOCATORS below*/
 #endif
 
 /*Disable built-in CRC function, in that case a custom implementation of
-lodepng_crc32 must be defined externally so that it can be linked in.*/
+lodepng_crc32 must be defined externally so that it can be linked in.
+The default built-in CRC code comes with 8KB of lookup tables, so for memory constrained environment you may want it
+disabled and provide a much smaller implementation externally as said above. You can find such an example implementation
+in a comment in the lodepng.c(pp) file in the 'else' case of the searchable LODEPNG_COMPILE_CRC section.*/
 #ifndef LODEPNG_NO_COMPILE_CRC
 /*pass -DLODEPNG_NO_COMPILE_CRC to the compiler to disable the built-in one,
 or comment out LODEPNG_COMPILE_CRC below*/
@@ -764,7 +767,7 @@ void lodepng_decoder_settings_init(LodePNGDecoderSettings* settings);
 typedef enum LodePNGFilterStrategy {
   /*every filter at zero*/
   LFS_ZERO = 0,
-  /*every filter at 1, 2, 3 or 4 (paeth), unlike LFS_ZERO not a good choice, but for testing*/
+  /*every filter at 1, 2, 3 or 4 (path), unlike LFS_ZERO not a good choice, but for testing*/
   LFS_ONE = 1,
   LFS_TWO = 2,
   LFS_THREE = 3,
@@ -832,7 +835,7 @@ typedef struct LodePNGEncoderSettings {
   const unsigned char* predefined_filters;
 
   /*force creating a PLTE chunk if colortype is 2 or 6 (= a suggested palette).
-  If colortype is 3, PLTE is always created. If color type is explicitely set
+  If colortype is 3, PLTE is always created. If color type is explicitly set
   to a grayscale type (1 or 4), this is not done and is ignored. If enabling this,
   a palette must be present in the info_png.
   NOTE: enabling this may worsen compression if auto_convert is used to choose
@@ -1871,7 +1874,7 @@ state.decoder.remember_unknown_chunks: whether to read in unknown chunks
 state.info_raw.colortype: desired color type for decoded image
 state.info_raw.bitdepth: desired bit depth for decoded image
 state.info_raw....: more color settings, see struct LodePNGColorMode
-state.info_png....: no settings for decoder but ouput, see struct LodePNGInfo
+state.info_png....: no settings for decoder but output, see struct LodePNGInfo
 
 For encoding:
 
@@ -1909,6 +1912,7 @@ symbol.
 Not all changes are listed here, the commit history in github lists more:
 https://github.com/lvandeve/lodepng
 
+*) 10 apr 2023: faster CRC32 implementation, but with larger lookup table.
 *) 13 jun 2022: added support for the sBIT chunk.
 *) 09 jan 2022: minor decoder speed improvements.
 *) 27 jun 2021: added warnings that file reading/writing functions don't support

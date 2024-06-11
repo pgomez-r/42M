@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mlx_loop.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 01:24:36 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/06/27 18:07:04 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2023/03/28 16:34:17 by W2Wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ static void mlx_render_images(mlx_t* mlx)
 	while (imglst)
 	{
 		mlx_image_t* image;
-		if (!(image = imglst->content))
-			return ((void)mlx_error(MLX_INVIMG));
+		if (!(image = imglst->content)) {
+			mlx_error(MLX_INVIMG);
+			return;
+		}
+
 		glBindTexture(GL_TEXTURE_2D, ((mlx_image_ctx_t*)image->context)->texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
 		imglst = imglst->next;
@@ -66,8 +69,8 @@ static void mlx_render_images(mlx_t* mlx)
 
 bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 {
-	MLX_ASSERT(mlx, "Parameter can't be null");
-	MLX_ASSERT(f, "Parameter can't be null");
+	MLX_NONNULL(mlx);
+	MLX_NONNULL(f);
 
 	mlx_hook_t* hook;
 	if (!(hook = malloc(sizeof(mlx_hook_t))))
@@ -89,7 +92,7 @@ bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 void mlx_loop(mlx_t* mlx)
 {
-	MLX_ASSERT(mlx, "Parameter can't be null");
+	MLX_NONNULL(mlx);
 
 	double start, oldstart = 0;
 	while (!glfwWindowShouldClose(mlx->window))
@@ -103,7 +106,7 @@ void mlx_loop(mlx_t* mlx)
 		glfwGetWindowSize(mlx->window, &(mlx->width), &(mlx->height));
 
 		if ((mlx->width > 1 || mlx->height > 1))
-			mlx_update_matrix(mlx, mlx->width, mlx->height);
+			mlx_update_matrix(mlx);
 
 		mlx_exec_loop_hooks(mlx);
 		mlx_render_images(mlx);

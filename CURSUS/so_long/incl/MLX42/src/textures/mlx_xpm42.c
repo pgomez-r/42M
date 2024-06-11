@@ -3,7 +3,7 @@
 /*                                                        ::::::::            */
 /*   mlx_xpm42.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 03:42:29 by W2Wizard      #+#    #+#                 */
 /*   Updated: 2022/06/27 19:58:33 by lde-la-h      ########   odam.nl         */
@@ -14,7 +14,7 @@
 
 /**
  * XPM is an obscure image format which can't seem to make up its mind
- * wether it wants to be written in C code or not.
+ * whether it wants to be written in C code or not.
  * 
  * https://en.wikipedia.org/wiki/X_PixMap
  * 
@@ -30,11 +30,11 @@
  * as to what does what.
  * 
  * Additionally with the C style format, the idea is that you simply include
- * it directly into the compilation of the program (since its just c).
+ * it directly into the compilation of the program (since it's just C).
  * 
  * As convenient as this is, I just find it hideous especially the XPM3 variant.
  * By sticking to the XPM style format, conversion should be very easy and 
- * straight forward to this format however.
+ * straightforward to this format however.
  */
 
 //= Private =//
@@ -59,13 +59,13 @@ static uint8_t mlx_parse_hex_channel(char* channel)
  * @param line The line to parse.
  * @param ctable The color hash table.
  * @param s Size of the hash table
- * @return True or false depending on if it sucessfully parsed the line.
+ * @return True or false depending on if it successfully parsed the line.
  */
 static bool mlx_insert_xpm_entry(xpm_t* xpm, char* line, uint32_t* ctable, size_t s)
 {
 	// NOTE: uintptr because windows likes to complain...
 	// Verify the length of the Pixel string by checking backwards for the first
-	// occurence of a space and then check the distance by comparing with cpp.
+	// occurrence of a space and then check the distance by comparing with cpp.
 	if (((uintptr_t)strrchr(line, ' ') - (uintptr_t)line) != (uint64_t)xpm->cpp)
 		return (false);
 	if (!isspace(line[xpm->cpp]) || line[xpm->cpp + 1] != '#' || !isalnum(line[xpm->cpp + 2]))
@@ -91,7 +91,7 @@ static bool mlx_insert_xpm_entry(xpm_t* xpm, char* line, uint32_t* ctable, size_
  * @param file The filepath to the XPM42 file.
  * @param ctable The color hash table.
  * @param s Size of the hash table.
- * @return True or false depending on if it sucessfully parsed the line.
+ * @return True or false depending on if it successfully parsed the line.
  */
 static bool mlx_read_data(xpm_t* xpm, FILE* file, uint32_t* ctable, size_t s)
 {
@@ -123,8 +123,8 @@ static bool mlx_read_data(xpm_t* xpm, FILE* file, uint32_t* ctable, size_t s)
  * table with every ascii character in it. This should help avoid a O(n)
  * case and give us a O(1) for very fast look ups.
  * 
- * Downside is we still need to iterate of each pixel to solve its color.
- * So I hope this makes it atleast a bit faster.
+ * Downside is we still need to iterate over each pixel to solve its color.
+ * So I hope this makes it at least a bit faster.
  * 
  * TODO: This buffer might be way to big! Do actual collision checks, 
  * for now just straight up raw dog this.
@@ -203,5 +203,6 @@ xpm_t* mlx_load_xpm42(const char* path)
 void mlx_delete_xpm42(xpm_t* xpm)
 {
 	MLX_NONNULL(xpm);
+	free(xpm->texture.pixels);
 	free(xpm);
 }

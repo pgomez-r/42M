@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mlx_window.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2wizard <w2wizzard@gmail.com>               +#+                     */
+/*   By: W2wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/08 01:14:59 by W2wizard      #+#    #+#                 */
-/*   Updated: 2022/06/29 15:34:25 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2022/11/22 09:06:54 by jvan-hal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
  * Recalculate the view projection matrix, used by images for screen pos
  * Reference: https://bit.ly/3KuHOu1 (Matrix View Projection)
  */
-void mlx_update_matrix(const mlx_t* mlx, int32_t width, int32_t height)
+void mlx_update_matrix(const mlx_t* mlx)
 {
 	const mlx_ctx_t* mlxctx = mlx->context;
 	const float depth = mlxctx->zdepth;
 
 	/**
-	 * Incase the setting to stretch the image is set, we maintain the width and height but not
+	 * In case the setting to stretch the image is set, we maintain the width and height but not
 	 * the depth.
 	 */
-	width = mlx_settings[MLX_STRETCH_IMAGE] ? mlxctx->initialWidth : mlx->width;
-	height = mlx_settings[MLX_STRETCH_IMAGE] ? mlxctx->initialHeight : mlx->height;
+	const float width = mlx_settings[MLX_STRETCH_IMAGE] ? mlxctx->initialWidth : mlx->width;
+	const float height = mlx_settings[MLX_STRETCH_IMAGE] ? mlxctx->initialHeight : mlx->height;
 
 	const float matrix[16] = {
 		2.f / width, 0, 0, 0,
@@ -87,7 +87,13 @@ void mlx_set_icon(mlx_t* mlx, mlx_texture_t* image)
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(image);
 
-	glfwSetWindowIcon(mlx->window, 1, (const GLFWimage*)image);
+	const GLFWimage icon = {
+		.width = image->width,
+		.height = image->height,
+		.pixels = image->pixels
+	};
+
+	glfwSetWindowIcon(mlx->window, 1, &icon);
 }
 
 void mlx_set_window_pos(mlx_t* mlx, int32_t xpos, int32_t ypos)

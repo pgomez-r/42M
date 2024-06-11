@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:51:16 by pgomez-r          #+#    #+#             */
-/*   Updated: 2023/06/26 20:23:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/06/11 06:03:28 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 /*libs*/
 # include "./libft/libft.h"
 # include "./MLX42/include/MLX42/MLX42.h"
-# include "./MLX42/include/MLX42/MLX42_Input.h"
 
 # define NAME "So_(so)_LONG"
 # define PIX 64

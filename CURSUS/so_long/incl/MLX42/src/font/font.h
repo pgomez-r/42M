@@ -3,7 +3,7 @@
 /*                                                        ::::::::            */
 /*   font.h                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 12:42:53 by W2Wizard      #+#    #+#                 */
 /*   Updated: 2022/03/03 13:05:57 by lde-la-h      ########   odam.nl         */
@@ -19,10 +19,10 @@
 // GIMP RGBA C-Source image dump (font.c)
 static struct s_font
 {
-	uint32_t	width;
-	uint32_t	height;
-	uint32_t	bpp;
-	uint8_t		pixels[1140 * 20 * 4 + 1];
+	uint32_t		width;
+	uint32_t		height;
+	uint32_t		bpp;
+	char*			pixels;
 }	font_atlas = {
 	1140, 20, 4,
 	"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
