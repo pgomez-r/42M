@@ -1,3 +1,4 @@
+
 ##### Main workspace for `42 Network` by `pgomez-r`
 
 This is my primary workspace for all 42 School cursus **projects, exams, and other** related tasks. All folders and files in this repository are ***continuously updated and being used, so some may be incomplete or not working properly yet***. Final or complete versions of each project can be found in their own repositories, which can be accessed by clicking the links in the **[common core progress](#common-core-progress)** table bellow.
