@@ -1,10 +1,55 @@
-##### Main workspace for `42 Network` by `pgomez-r`
 
-This is my primary workspace for all 42 School cursus **projects, exams, and other** related tasks. All folders and files in this repository are ***continuously updated and being used, so some may be incomplete or not working properly yet***. Final or complete versions of each project can be found in their own repositories, which can be accessed by clicking the links in the **[common core progress](#common-core-progress)** table bellow.
+## **pgomez-r🧉**  
 
-Feel free to *use, download and share* anything in here if you think it can help you or others. Good luck in your journey through 42 and **happy coding**!
+<br>
 
-### **COMMON CORE PROGRESS**
+<div align="center"style="display: flex; justify-content: space-between;">
+  <a href="https://billowy-vermicelli-8e6.notion.site/42-M-laga-5d9a971e88244325a734d7a13b8eb37d">
+    <img src="https://github.com/pgomez-r/pgomez-r/assets/115219064/38019e20-dc47-418b-bdd9-3dcc50fb2cf1" alt="Image 1" style="width:48%;">
+  </a>
+  <a href="https://github.com/pgomez-r/42M">
+    <img src="https://github.com/pgomez-r/pgomez-r/assets/115219064/ea9ab00e-cf1b-4ecd-90aa-2e0badadc8de" alt="Image 2" style="width:48%;">
+  </a>
+</div>
+
+<br>
+
+<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 20px; width: 100%;">
+  <a href="https://linkedin.com/in/pedro-gómez-ruiz-258b24208/" target="_blank">
+    <img src="https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" style="height: 25px;" />
+  </a>
+   <a href="https://profile.intra.42.fr/users/pgomez-r" target="_blank">
+    <img src="https://github.com/pgomez-r/pgomez-r/assets/115219064/8afbae1f-9e15-4d33-a313-eac3885ce0f3" alt="intraprofile" style="height: 25px;" />
+  </a>
+  <a href="https://instagram.com/pgruz.11" target="_blank">
+    <img src="https://img.shields.io/badge/instagram-%23000000.svg?&style=for-the-badge&logo=instagram&logoColor=white" alt="instagram" style="height: 25px;" />
+  </a>
+  <a href="https://github.com/pgomez-r" target="_blank">
+    <img src="https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white" alt="github" style="height: 25px;" />
+  </a>
+  <img src="https://komarev.com/ghpvc/?username=pgomez-r&&style=flat-square" alt="profile views" style="height: 25px;" />
+</div>
+
+## About me
+
+- Becoming a `software developer` at [**42 Málaga**](https://www.42malaga.com/) while working as *data entry operator* for an app/website and carrying out my own projects. 
+- Interested in `Backend`, `AI`, `Videogames development`, `Script Automation`.
+
+## **Skills** 
+
+<div align="center">
+
+[![Current Skills](https://skillicons.dev/icons?i=c,cpp,bash,linux,vim,vscode,atom,git,github&perline=12)](https://skillicons.dev)
+</div>
+
+### Learning / Interested in
+
+<div align="center">
+
+[![Learning / Interested in](https://skillicons.dev/icons?i=py,java,docker,html,css,js&perline=12)](https://skillicons.dev)
+</div>
+
+## **42 Málaga Progress**  
 
 <div align="center">
 
@@ -31,16 +76,11 @@ Feel free to *use, download and share* anything in here if you think it can help
 
 <br>
 
-[![Lista de recursos en NOTION](https://github.com/pgomez-r/pgomez-r/assets/115219064/38019e20-dc47-418b-bdd9-3dcc50fb2cf1)](https://billowy-vermicelli-8e6.notion.site/42-M-laga-5d9a971e88244325a734d7a13b8eb37d)
-
-
-### EXAMS
-<div align="center">
-
-| Exam Rank | Language | Finish Date | Grade | Time |
-| :--- | :--- | :--- | :--- | :--- |
-| Exam 02 | `C` | 29-09-2023 | <img src="https://img.shields.io/badge/100%20%2F%20100%20%20%E2%98%85-sucess"/> | `3 hours` |
-| Exam 03 | `C` | 08-03-2024 | <img src="https://img.shields.io/badge/100%20%2F%20100%20%20%E2%98%85-sucess"/> | `3 hours` |
-| Exam 04 | `C` | 22-03-2024 | <img src="https://img.shields.io/badge/100%20%2F%20100%20%20%E2%98%85-sucess"/> | `3 hours` |
-| Exam 05 | `C++` | - | - | `3 hours` |
-| Exam 06 | `C++` | - | - | `3 hours` |
+<div align="center"style="display: flex; justify-content: space-between;">
+  <a href="https://github.com/oakoudad/badge42">
+    <img src="https://badge.mediaplus.ma/colorfulwaves/pgomez-r" alt="Image 1" style="width:45%;">
+  </a>
+  <a href="https://github.com/pgomez-r/42M">
+    <img src="https://github.com/pgomez-r/pgomez-r/assets/115219064/88a56ee8-e826-425e-a03e-afea29dfe660" alt="Image 2" style="width:30%;">
+  </a>
+</div>
