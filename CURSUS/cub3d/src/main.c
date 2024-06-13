@@ -6,13 +6,13 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/08 15:11:17 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/13 04:53:03 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	paint_miniplayer(mlx_image_t *mini, size_t *x, size_t *y)
+int	paint_miniplayer(mlx_image_t *mini, size_t *x, size_t *y)
 {
 	size_t	i;
 	size_t	j;
@@ -29,7 +29,8 @@ void	paint_miniplayer(mlx_image_t *mini, size_t *x, size_t *y)
 		i++;
 	}
 	*(x) += 4;
-	*(y) += 4;
+	//*(y) += 4;
+	return (4);
 }
 
 void	update_minimap(t_mlx_st *st)
@@ -43,14 +44,7 @@ void	update_minimap(t_mlx_st *st)
 		x = 0;
 		while (x < st->d->mini_w)
 		{
-			if (st->gfx.player->instances[0].y / 4 == (int)y
-				&& st->gfx.player->instances[0].x / 4 == (int)x)
-			{
-				paint_miniplayer(st->gfx.minimap, &x, &y);
-				break ;
-				//mlx_put_pixel(st->gfx.minimap, x, y, 0xFF0000FF);
-			}
-			else if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
+			if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
 				mlx_put_pixel(st->gfx.minimap, x, y, 0x000000FF);
 			else
 				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
@@ -58,6 +52,10 @@ void	update_minimap(t_mlx_st *st)
 		}
 		y++;
 	}
+	x = st->gfx.player->instances[0].x / 4;
+	y = st->gfx.player->instances[0].y / 4;
+	paint_miniplayer(st->gfx.minimap, &x, &y);
+	basic_ray(st);
 }
 
 void	game_hook(void *param)
@@ -69,11 +67,14 @@ void	game_hook(void *param)
 	{
 		key_control(st);
 		update_minimap(st);
+		//basic_ray(st);
 	}
 }
 
+
 void	init_data(t_struct *d, t_mlx_st *st)
 {
+	st->fpp.ang = M_PI / 2;
 	d->map[0] = "11111111";
 	d->map[1] = "10100001";
 	d->map[2] = "10110001";
