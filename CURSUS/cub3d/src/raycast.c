@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:58:21 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/13 12:03:24 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:19:01 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	basic_ray(t_mlx_st *st)
 	r_y = st->gfx.player->instances[0].y;
 	while (42)
 	{
-		mlx_put_pixel(st->gfx.minimap, (r_x * scale_x), (r_y * scale_y), 0xFF00FF00);
+		mlx_put_pixel(st->gfx.minimap, (int)(r_x * scale_x), (int)(r_y * scale_y), 0x00FF00FF);
 		if (st->fpp.ang >= 0 && st->fpp.ang < M_PI)
     		r_y -= sin(st->fpp.ang);
 		else
