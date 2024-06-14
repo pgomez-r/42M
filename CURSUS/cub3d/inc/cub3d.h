@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:13:53 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/13 02:55:11 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:02:44 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define PIX 64
 # define MOV 4
 
-# include "libft/libft.h"
+# include "libft/inc/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_struct		t_struct; //general program data
@@ -38,6 +38,8 @@ typedef struct s_struct
 	size_t	width;
 	size_t	mini_h;
 	size_t	mini_w;
+	float	scale_x;
+	float	scale_y;
 }	t_struct;
 
 typedef struct s_player
@@ -46,6 +48,8 @@ typedef struct s_player
 	double		x;
 	double		y;
 	double		ang;
+	double		fov;
+	int			n_rays;
 }	t_player;
 typedef struct s_graphic
 {
@@ -69,4 +73,6 @@ void			load_images(t_mlx_st *st);
 void			key_control(t_mlx_st *st);
 void			basic_ray(t_mlx_st *st);
 void			update_minimap(t_mlx_st *st);
+void			cast_rays_range(t_mlx_st *st);
+
 #endif

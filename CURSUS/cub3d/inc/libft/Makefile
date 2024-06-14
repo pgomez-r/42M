@@ -3,38 +3,50 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 09:29:12 by pgomez-r          #+#    #+#              #
-#    Updated: 2023/05/04 21:42:03 by pgomez-r         ###   ########.fr        #
+#    Updated: 2024/06/14 01:26:42 by pgruz11          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = $(wildcard *.c)
+NAME = libft.a
 
-OBJS	=	$(SRCS:.c=.o)
-			
 CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -Iinc
+
+SRC_PATH = src/
+OBJ_PATH = obj/
+
+
+SRC 	= $(wildcard $(SRC_PATH)*.c) # List all .c files in SRC_PATH
+OBJ		= $(SRC:$(SRC_PATH)%.c=%.o) # Transform .c to .o without path
+OBJS	= $(addprefix $(OBJ_PATH),$(OBJ)) # 
+
+# SRC 	= $(wildcard $(SRC_PATH)*.c)
+# SRCS 	= $(addprefix $(SRC_PATH), $(SRC))
+# OBJ		= $(SRC:.c=.o)
+# OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Wextra -Werror
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-NAME = libft.a
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@echo "\033[0;32mLibft42 compilada!\033[0m"
 
-all: $(NAME)
-
-%.o: %.c
-	@$(CC) -c $(CFLAGS) $?
-
 clean:
-	@$(RM) $(OBJS) $(BONUS_OBJS)
+	@${RM} ${OBJS}
+	@rmdir -p $(OBJ_PATH) 2>/dev/null || true
+
 fclean: clean
 	@$(RM) $(NAME)
+
 re: fclean all
 
 .PHONY:	all clean fclean re bonus

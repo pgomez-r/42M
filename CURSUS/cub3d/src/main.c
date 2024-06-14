@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/13 04:53:03 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:02:16 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	update_minimap(t_mlx_st *st)
 	x = st->gfx.player->instances[0].x / 4;
 	y = st->gfx.player->instances[0].y / 4;
 	paint_miniplayer(st->gfx.minimap, &x, &y);
-	basic_ray(st);
+	//basic_ray(st);
+	cast_rays_range(st);
 }
 
 void	game_hook(void *param)
@@ -67,7 +68,6 @@ void	game_hook(void *param)
 	{
 		key_control(st);
 		update_minimap(st);
-		//basic_ray(st);
 	}
 }
 
@@ -75,6 +75,8 @@ void	game_hook(void *param)
 void	init_data(t_struct *d, t_mlx_st *st)
 {
 	st->fpp.ang = M_PI / 2;
+	st->fpp.fov = 60 * (M_PI / 180);
+	st->fpp.n_rays = 120;
 	d->map[0] = "11111111";
 	d->map[1] = "10100001";
 	d->map[2] = "10110001";

@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:07:49 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/13 02:55:49 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/14 01:01:07 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,24 @@ void	key_control(t_mlx_st *st)
 		st->d->exit_code = -1;
 		mlx_close_window(st->game);
 	}
-	if (mlx_is_key_down(st->game, MLX_KEY_UP)
-		|| mlx_is_key_down(st->game, MLX_KEY_W))
+	if (mlx_is_key_down(st->game, MLX_KEY_W))
 		move_up(st);
-	if (mlx_is_key_down(st->game, MLX_KEY_DOWN)
-		|| mlx_is_key_down(st->game, MLX_KEY_S))
+	if (mlx_is_key_down(st->game, MLX_KEY_S))
 		move_down(st);
-	if (mlx_is_key_down(st->game, MLX_KEY_LEFT)
-		|| mlx_is_key_down(st->game, MLX_KEY_A))
+	if (mlx_is_key_down(st->game, MLX_KEY_A))
 		move_left(st);
-	if (mlx_is_key_down(st->game, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(st->game, MLX_KEY_D))
+	if (mlx_is_key_down(st->game, MLX_KEY_D))
 		move_right(st);
+	if (mlx_is_key_down(st->game, MLX_KEY_LEFT))
+	{
+		st->fpp.ang += (M_PI / 180);
+		if (st->fpp.ang >= 2 * M_PI)
+			st->fpp.ang -= 2 * M_PI;
+	}
+	if (mlx_is_key_down(st->game, MLX_KEY_RIGHT))
+	{
+		st->fpp.ang -= (M_PI / 180);
+		if (st->fpp.ang < 0)
+			st->fpp.ang += 2 * M_PI;
+	}
 }
