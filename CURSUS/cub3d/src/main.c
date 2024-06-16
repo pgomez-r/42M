@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/14 14:02:16 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:55:02 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	update_minimap(t_mlx_st *st)
 	y = st->gfx.player->instances[0].y / 4;
 	paint_miniplayer(st->gfx.minimap, &x, &y);
 	//basic_ray(st);
-	cast_rays_range(st);
+	cast_rays_range(st, &st->rc);
 }
 
 void	game_hook(void *param)
