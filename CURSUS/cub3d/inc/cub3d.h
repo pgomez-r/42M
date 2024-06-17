@@ -35,6 +35,7 @@ typedef struct s_struct
 {
 	int		exit_code;
 	char	*map[8];
+	int		wall_color;
 	size_t	height;
 	size_t	width;
 	size_t	mini_h;
@@ -49,8 +50,9 @@ typedef struct s_player
 	double		x;
 	double		y;
 	double		ang;
-	double		fov;
+	double		fov;	
 	int			n_rays;
+	float		proj_plane;
 }	t_player;
 typedef struct s_graphic
 {
@@ -78,6 +80,7 @@ typedef struct s_mlx_st
 	t_player	fpp;
 	mlx_t		*game;
 	t_rays		rc;
+	mlx_image_t	*game_view;
 }	t_mlx_st;
 
 void			render_map(t_mlx_st *st);

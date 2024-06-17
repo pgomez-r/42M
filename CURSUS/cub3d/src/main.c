@@ -76,6 +76,7 @@ void	init_data(t_struct *d, t_mlx_st *st)
 {
 	st->fpp.ang = M_PI / 2;
 	st->fpp.fov = 60 * (M_PI / 180);
+	st->fpp.proj_plane = ((d->width * PIX) / 2) / tan(st->fpp.fov / 2);
 	st->fpp.n_rays = 120;
 	d->map[0] = "11111111";
 	d->map[1] = "10100001";
@@ -90,6 +91,7 @@ void	init_data(t_struct *d, t_mlx_st *st)
 	d->exit_code = 0;
 	st->d = d;
 	st->gfx.st_ptr = st;
+	d->wall_color = 0xFFFFFFFF;
 }
 
 int	main(void)
@@ -101,8 +103,11 @@ int	main(void)
 	if (d.exit_code == 0)
 	{
 		st.game = mlx_init(d.height * PIX, d.width * PIX, "test", false);
-		load_images(&st);
-		render_map(&st);
+		//load_images(&st);
+		st->game_view = mlx_new_image(st->game, d.width * PIX, d.height * PIX);
+		mlx_set_instance_depth(&st->gfx.minimap->instances[0], 10);
+		//render_map(&st);
+		create_minipmap(&st);
 		mlx_loop_hook(st.game, game_hook, &st);
 		mlx_loop(st.game);
 		mlx_terminate(st.game);

@@ -52,17 +52,50 @@ void	cast_rays_range(t_mlx_st *st, t_rays *rc)
 			rc->ray_y -= sin(rc->curr_ang);
 			rc->ray_x += cos(rc->curr_ang);
 			if (st->d->map[(int)rc->ray_y / PIX][(int)rc->ray_x / PIX] == '1')
-				ft_wall_render(st, rc);
+				ft_wall_render(st, rc, i);
 		}
 		rc->curr_ang += rc->incr_ang;
 	}
 }
 
-int	ft_wall_render(t_mlx_st *st, t_rays *rc)
+float	ft_wall_distance(t_mlx_st *st, t_rays *rc)
 {
-	rc->wall_dist = ft_wall_distance();
-	rc->wall_height = ft_wall_heigth();
-	ft_draw_wall();
+	return (sqrt(pow(rc->ray_x - st->gfx.player->instances[0].x, 2))
+		+ pow(rc->ray_y - st->gfx.player->instances[0].y, 2));
+}
+
+int	ft_wall_heigth(t_mlx_st *st, float distance, float plane)
+{
+	return ((int)st->d->height / distance * plane);
+}
+
+void ft_draw_wall(t_mlx_st *st, t_rays *rc, int win_x)
+{
+	int	start;
+	int	end;
+	int	i;
+	int	mid_win;
+
+	mid_win = (st->d->height * PIX) / 2
+	start = mid_screen - ((st->d->height * PIX) / 2);
+	if (start < 0) 
+		start = 0;
+	end = mid_screen + ((st->d->height * PIX) / 2);
+	if (end >= (st->d->height * PIX))
+		end = (st->d->height * PIX) - 1;
+	i = start;
+	while (i < end)
+	{
+		mlx_put_pixel(st->game_view, win_x, i, st->d->wall_color);
+		i++;
+	}
+}
+
+int	ft_wall_render(t_mlx_st *st, t_rays *rc, int ray_num)
+{
+	rc->wall_dist = ft_wall_distance(st, rc);
+	rc->wall_height = ft_wall_heigth(st, rc->wall_dist, st->fpp.proj_plane);
+	ft_draw_wall(t_mlx_st *st, t_rays *rc, ray_num);
 	return (0);
 }
 
