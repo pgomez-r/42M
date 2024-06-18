@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:58:21 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/16 21:37:08 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/18 02:50:53 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,6 @@ void	basic_ray(t_mlx_st *st)
 	}
 }
 
-/*Another test, this time multiple rays covering the whole player's FOV*/
-void	cast_rays_range(t_mlx_st *st, t_rays *rc)
-{
-	int		i;
-	int		flag;
-
-	rc->incr_ang = st->fpp.fov / (st->fpp.n_rays - 1);
-	rc->curr_ang = st->fpp.ang - (st->fpp.fov / 2);
-	i = -1;
-	while (++i < st->fpp.n_rays)
-	{
-		flag = 42;
-		rc->ray_x = st->gfx.player->instances[0].x;
-		rc->ray_y = st->gfx.player->instances[0].y;
-		while (flag)
-		{
-			mlx_put_pixel(st->gfx.minimap, (int)(rc->ray_x * st->d->scale_x),
-				(int)(rc->ray_y * st->d->scale_y), 0x00FF00FF);
-			rc->ray_y -= sin(rc->curr_ang);
-			rc->ray_x += cos(rc->curr_ang);
-			if (st->d->map[(int)rc->ray_y / PIX][(int)rc->ray_x / PIX] == '1')
-				ft_wall_render(st, rc, i);
-		}
-		rc->curr_ang += rc->incr_ang;
-	}
-}
-
 float	ft_wall_distance(t_mlx_st *st, t_rays *rc)
 {
 	return (sqrt(pow(rc->ray_x - st->gfx.player->instances[0].x, 2))
@@ -69,19 +42,19 @@ int	ft_wall_heigth(t_mlx_st *st, float distance, float plane)
 	return ((int)st->d->height / distance * plane);
 }
 
-void ft_draw_wall(t_mlx_st *st, t_rays *rc, int win_x)
+void ft_draw_wall(t_mlx_st *st, int win_x)
 {
 	int	start;
 	int	end;
 	int	i;
 	int	mid_win;
 
-	mid_win = (st->d->height * PIX) / 2
-	start = mid_screen - ((st->d->height * PIX) / 2);
+	mid_win = (st->d->height * PIX) / 2;
+	start = mid_win - ((st->d->height * PIX) / 2);
 	if (start < 0) 
 		start = 0;
-	end = mid_screen + ((st->d->height * PIX) / 2);
-	if (end >= (st->d->height * PIX))
+	end = mid_win + ((st->d->height * PIX) / 2);
+	if (end >= (int)(st->d->height * PIX))
 		end = (st->d->height * PIX) - 1;
 	i = start;
 	while (i < end)
@@ -95,7 +68,7 @@ int	ft_wall_render(t_mlx_st *st, t_rays *rc, int ray_num)
 {
 	rc->wall_dist = ft_wall_distance(st, rc);
 	rc->wall_height = ft_wall_heigth(st, rc->wall_dist, st->fpp.proj_plane);
-	ft_draw_wall(t_mlx_st *st, t_rays *rc, ray_num);
+	ft_draw_wall(st, ray_num);
 	return (0);
 }
 
@@ -165,3 +138,31 @@ int	ft_wall_render(t_mlx_st *st, t_rays *rc, int ray_num)
 // to draw the line centered vertically on the screen
 
 // }
+
+/*Another test, this time multiple rays covering the whole player's FOV*/
+void	cast_rays_range(t_mlx_st *st, t_rays *rc)
+{
+	int		i;
+	int		flag;
+
+	rc->incr_ang = st->fpp.fov / (st->fpp.n_rays - 1);
+	rc->curr_ang = st->fpp.ang - (st->fpp.fov / 2);
+	i = -1;
+	while (++i < st->fpp.n_rays)
+	{
+		flag = 42;
+		rc->ray_x = st->gfx.player->instances[0].x;
+		rc->ray_y = st->gfx.player->instances[0].y;
+		while (flag)
+		{
+			mlx_put_pixel(st->gfx.minimap, (int)(rc->ray_x * st->d->scale_x),
+				(int)(rc->ray_y * st->d->scale_y), 0x00FF00FF);
+			rc->ray_y -= sin(rc->curr_ang);
+			rc->ray_x += cos(rc->curr_ang);
+			if (st->d->map[(int)rc->ray_y / PIX][(int)rc->ray_x / PIX] == '1')
+				flag = ft_wall_render(st, rc, i);
+				//break ;
+		}
+		rc->curr_ang += rc->incr_ang;
+	}
+}

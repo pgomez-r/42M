@@ -40,7 +40,7 @@ void	create_minipmap(t_mlx_st *st)
 	st->gfx.minimap = mlx_new_image(st->game, st->d->mini_w, st->d->mini_h);
 	paint_map(st, st->d->mini_w, st->d->mini_h);
 	mlx_image_to_window(st->game, st->gfx.minimap, 0, 0);
-	mlx_set_instance_depth(&st->gfx.minimap->instances[0], 20);
+	//mlx_set_instance_depth(&st->gfx.minimap->instances[0], 10);
 	st->d->scale_x = (float)st->gfx.minimap->width / (st->d->width * PIX);
 	st->d->scale_y = (float)st->gfx.minimap->height / (st->d->height * PIX);
 }
@@ -106,5 +106,6 @@ void	load_images(t_mlx_st *st)
 	paint_square(st->gfx.ground, PIX, 0xFFFFFFFF);
 	st->gfx.player = mlx_new_image(st->game, PIX / 4, PIX / 4);
 	paint_square(st->gfx.player, PIX / 4, 0xFF0000FF);
+	st->game_view = mlx_new_image(st->game, st->d->width * PIX, st->d->height * PIX);
 	create_minipmap(st);
 }

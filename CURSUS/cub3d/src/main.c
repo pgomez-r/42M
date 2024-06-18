@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/16 19:55:02 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/18 02:51:36 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,27 @@ void	init_data(t_struct *d, t_mlx_st *st)
 	d->wall_color = 0xFFFFFFFF;
 }
 
+void	place_player(t_mlx_st *st)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < (int)st->d->height)
+	{
+		x = -1;
+		while (++x < (int)st->d->width)
+		{
+			if (st->d->map[y][x] == 'P')
+			{
+				mlx_image_to_window(st->game, st->gfx.player, (x * PIX) + 24, (y * PIX) + 24);
+				//mlx_set_instance_depth(&st->gfx.player->instances[0], 10);
+				st->gfx.player->enabled = false;
+			}
+		}
+	}
+}
+
 int	main(void)
 {
 	t_struct	d;
@@ -102,12 +123,12 @@ int	main(void)
 	init_data(&d, &st);
 	if (d.exit_code == 0)
 	{
-		st.game = mlx_init(d.height * PIX, d.width * PIX, "test", false);
-		//load_images(&st);
-		st->game_view = mlx_new_image(st->game, d.width * PIX, d.height * PIX);
-		mlx_set_instance_depth(&st->gfx.minimap->instances[0], 10);
+		st.game = mlx_init(d.width * PIX, d.height * PIX, "test", false);
+		load_images(&st);
+		place_player(&st);
 		//render_map(&st);
-		create_minipmap(&st);
+		//create_minipmap(&st);
+		mlx_image_to_window(st.game, st.game_view, 0, 0);
 		mlx_loop_hook(st.game, game_hook, &st);
 		mlx_loop(st.game);
 		mlx_terminate(st.game);
