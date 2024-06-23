@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:58:21 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/18 02:50:53 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/22 11:01:42 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,113 +33,69 @@ void	basic_ray(t_mlx_st *st)
 
 float	ft_wall_distance(t_mlx_st *st, t_rays *rc)
 {
-	return (sqrt(pow(rc->ray_x - st->gfx.player->instances[0].x, 2))
-		+ pow(rc->ray_y - st->gfx.player->instances[0].y, 2));
+	return (sqrt(pow(rc->ray_x - st->gfx.player->instances[0].x, 2)
+		+ pow(rc->ray_y - st->gfx.player->instances[0].y, 2)));
 }
 
 int	ft_wall_heigth(t_mlx_st *st, float distance, float plane)
 {
-	return ((int)st->d->height / distance * plane);
+	float	wall_gh;
+	float	height;
+
+	(void)st;
+	wall_gh = 64.0;
+	height = (wall_gh * plane) / distance;
+	if (height < 1.0)
+		height = 1.0;
+	return ((int)height);
 }
 
-void ft_draw_wall(t_mlx_st *st, int win_x)
+// Calculate wall_height using the correct perspective projection formula.
+// Calculate start as screen_height / 2 - wall_height / 2.
+// Calculate end as start + wall_height.
+// Ensure win_x is correctly mapped from ray number to screen coordinates.
+
+void ft_draw_wall(t_mlx_st *st, t_rays *rc, int win_x, int col_width)
 {
 	int	start;
 	int	end;
 	int	i;
 	int	mid_win;
+	int	x;
 
-	mid_win = (st->d->height * PIX) / 2;
-	start = mid_win - ((st->d->height * PIX) / 2);
+	mid_win = st->game_view->height / 2;
+	start = mid_win - (int)(rc->wall_height / 2);
 	if (start < 0) 
 		start = 0;
-	end = mid_win + ((st->d->height * PIX) / 2);
-	if (end >= (int)(st->d->height * PIX))
-		end = (st->d->height * PIX) - 1;
-	i = start;
-	while (i < end)
+	end = start + (int)rc->wall_height;
+	if (end >= (int)st->game_view->height)
+		end = st->game_view->height - 1;
+	x = win_x;
+	while (x < (win_x + col_width))
 	{
-		mlx_put_pixel(st->game_view, win_x, i, st->d->wall_color);
-		i++;
+		i = start;
+		while (i < end)
+		{
+			mlx_put_pixel(st->game_view, x, i, WHITE);
+			i++;
+		}
+		x++;
 	}
 }
 
 int	ft_wall_render(t_mlx_st *st, t_rays *rc, int ray_num)
 {
+	int	win_x;
+	int	col_width;
+
+	col_width = st->game_view->width / st->fpp.n_rays;
+	win_x = ray_num * col_width;
 	rc->wall_dist = ft_wall_distance(st, rc);
 	rc->wall_height = ft_wall_heigth(st, rc->wall_dist, st->fpp.proj_plane);
-	ft_draw_wall(st, ray_num);
+	ft_draw_wall(st, rc, win_x, col_width);
 	return (0);
 }
 
-// ### **1. Calculate Ray Distance and Wall Height**
-// - For each ray, when it hits '1', calculate the distance from the player to the wall. 
-// - Use this distance to calculate the height of the wall slice (vertical) to draw on the screen. 
-// `wallHeight = (screenHeight / distanceToWall) * distanceToProjectionPlane`
-//	`distanceToProjectionPlane` is a fixed value that depends on the FOV and the screen width.
-
-// ### **2. Draw Walls**
-// - For each ray, draw a vertical line on the screen. The height of the line depends of wall height
-// The position (x-coordinate) on the screen corresponds to the ray's index or angle.
-// - The color of the line can be determined by the type of wall hit or its distance (to simulate lighting effects).
-
-// SUMARY_for each ray:
-// - calculate distance to wall
-// - calculate wall slice height
-// - draw vertical line at ray's x-coordinate with calculated height
-
-
-// Within cast_rays_range, right before increase `ang_curr` call another function to draw a vertical line
-// This line's height will be determined by the distance from the player to the wall
-//	which you can calculate based on the final `r_x` and `r_y` values for each ray when it '1'
-
-// Here's a conceptual outline of how you might implement this:
-
-// 1. **Calculate the Distance:** Calculate the distance from the player to the wall for each ray
-//This can be done using the difference between the player's position and the ray's collision point with the wall.
-// 2. **Determine Wall Height:** 
-// Use the calculated distance to determine the height of the wall slice to draw
-//The height can be inversely proportional to the distance (closer walls are taller).
-// 3. **Draw the Wall Slice:** Call a function to draw a vertical line
-//on the screen at the appropriate position, with the calculated height.
-
-// ### **Example Pseudocode**
-// *float* distanceToWall = calculate_distance(st->gfx.player->instances[0].x, st->gfx.player->instances[0].y, r_x, r_y);
-
-// *int* wallHeight = calculate_wall_height(distanceToWall, st->d->*projectionPlane*);
-
-// draw_wall_slice(st, i, wallHeight); // i is the current ray's screen x-coordinate
-
-// ### **Supporting Functions**
-// You would need to implement or define `calculate_distance`, `calculate_wall_height`, and `draw_wall_slice`
-
-// *float* calculate_distance(*float* *x1*, *float* *y1*, *float* *x2*, *float* *y2*) {
-
-// Use Pythagorean theorem to calculate distance
-
-// return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-
-// }
-
-// *int* calculate_wall_height(*float* *distance*, *float* *projectionPlane*) {
-
-// Example calculation, adjust based on your FOV and screen dimensions
-
-// return (*int*)(SCREEN_HEIGHT / distance * projectionPlane);
-
-// }
-
-// *void* draw_wall_slice(t_mlx_st **st*, *int* *x*, *int* *height*) {
-
-// Draw a vertical line at x-coordinate [`x`] with the given `height`
-
-// You might need to adjust the starting y-coordinate based on the height
-
-// to draw the line centered vertically on the screen
-
-// }
-
-/*Another test, this time multiple rays covering the whole player's FOV*/
 void	cast_rays_range(t_mlx_st *st, t_rays *rc)
 {
 	int		i;
@@ -165,4 +121,5 @@ void	cast_rays_range(t_mlx_st *st, t_rays *rc)
 		}
 		rc->curr_ang += rc->incr_ang;
 	}
+	//mlx_image_to_window(st->game, st->game_view, 0, 0);
 }

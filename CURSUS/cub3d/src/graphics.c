@@ -98,6 +98,25 @@ void	render_map(t_mlx_st *st)
 	}
 }
 
+void	ft_set_background(mlx_image_t *img)
+{
+	int y;
+	int	x;
+
+	y = -1;
+	while ((unsigned int)++y < img->width)
+	{
+		x = -1;
+		while ((unsigned int)++x < img->height)
+		{
+			if ((unsigned int)y < (img->width / 2))
+				mlx_put_pixel(img, x, y, BLUE);
+			else
+				mlx_put_pixel(img, x, y, GREEN);
+		}
+	}
+}
+
 void	load_images(t_mlx_st *st)
 {
 	st->gfx.wall = mlx_new_image(st->game, PIX, PIX);
@@ -107,5 +126,7 @@ void	load_images(t_mlx_st *st)
 	st->gfx.player = mlx_new_image(st->game, PIX / 4, PIX / 4);
 	paint_square(st->gfx.player, PIX / 4, 0xFF0000FF);
 	st->game_view = mlx_new_image(st->game, st->d->width * PIX, st->d->height * PIX);
+	ft_set_background(st->game_view);
+	mlx_image_to_window(st->game, st->game_view, 0, 0);
 	create_minipmap(st);
 }

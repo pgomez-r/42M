@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/18 02:51:36 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/22 10:56:35 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ void	game_hook(void *param)
 
 void	init_data(t_struct *d, t_mlx_st *st)
 {
-	st->fpp.ang = M_PI / 2;
-	st->fpp.fov = 60 * (M_PI / 180);
-	st->fpp.proj_plane = ((d->width * PIX) / 2) / tan(st->fpp.fov / 2);
-	st->fpp.n_rays = 120;
 	d->map[0] = "11111111";
 	d->map[1] = "10100001";
 	d->map[2] = "10110001";
@@ -92,6 +88,10 @@ void	init_data(t_struct *d, t_mlx_st *st)
 	st->d = d;
 	st->gfx.st_ptr = st;
 	d->wall_color = 0xFFFFFFFF;
+	st->fpp.ang = M_PI / 2;
+	st->fpp.fov = 60 * (M_PI / 180);
+	st->fpp.proj_plane = ((d->width * PIX) / 2) / tan(st->fpp.fov / 2);
+	st->fpp.n_rays = 120;
 }
 
 void	place_player(t_mlx_st *st)
@@ -128,7 +128,6 @@ int	main(void)
 		place_player(&st);
 		//render_map(&st);
 		//create_minipmap(&st);
-		mlx_image_to_window(st.game, st.game_view, 0, 0);
 		mlx_loop_hook(st.game, game_hook, &st);
 		mlx_loop(st.game);
 		mlx_terminate(st.game);

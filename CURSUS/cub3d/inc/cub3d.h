@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:13:53 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/17 22:25:13 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/22 09:34:19 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define NAME "CVB3D"
 # define PIX 64
 # define MOV 4
+
+# define BLACK 0x000000FF
+# define WHITE 0xFFFFFFFF
+# define BLUE 0xADD8E6
+# define PINK 0xFFC0CBFF
+# define RED 0xFF0000FF
+# define GREEN 0x007F007F
+# define TRANSP 0xFF000000
 
 # include "libft/inc/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
@@ -92,4 +100,4 @@ void			cast_rays_range(t_mlx_st *st, t_rays *rc);
 void			create_minipmap(t_mlx_st *st);
 void			paint_square(mlx_image_t *square, int size, int color);
 
-#endif
+# endif
