@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:13:53 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/22 09:34:19 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/27 19:34:53 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ void			update_minimap(t_mlx_st *st);
 void			cast_rays_range(t_mlx_st *st, t_rays *rc);
 void			create_minipmap(t_mlx_st *st);
 void			paint_square(mlx_image_t *square, int size, int color);
+void			ft_set_background(mlx_image_t *img);
 
 # endif

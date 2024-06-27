@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:58:21 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/22 11:01:42 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/27 20:18:17 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,9 @@ void	cast_rays_range(t_mlx_st *st, t_rays *rc)
 
 	rc->incr_ang = st->fpp.fov / (st->fpp.n_rays - 1);
 	rc->curr_ang = st->fpp.ang - (st->fpp.fov / 2);
-	i = -1;
-	while (++i < st->fpp.n_rays)
+	ft_set_background(st->game_view);
+	i = st->fpp.n_rays;
+	while (i >= 0)
 	{
 		flag = 42;
 		rc->ray_x = st->gfx.player->instances[0].x;
@@ -120,6 +121,8 @@ void	cast_rays_range(t_mlx_st *st, t_rays *rc)
 				//break ;
 		}
 		rc->curr_ang += rc->incr_ang;
+		i--;
 	}
 	//mlx_image_to_window(st->game, st->game_view, 0, 0);
+	//mlx_set_instance_depth(&st->game_view->instances[0], 15);
 }
