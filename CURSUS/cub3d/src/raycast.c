@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:58:21 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/06/27 20:18:17 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/06/27 21:07:51 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,22 @@ void ft_draw_wall(t_mlx_st *st, t_rays *rc, int win_x, int col_width)
 
 int	ft_wall_render(t_mlx_st *st, t_rays *rc, int ray_num)
 {
-	int	win_x;
-	int	col_width;
+	double	win_x;
+	double	col_width;
+	int		end_x;
 
-	col_width = st->game_view->width / st->fpp.n_rays;
-	win_x = ray_num * col_width;
+	col_width = (double)st->game_view->width / st->fpp.n_rays;
+	if (ray_num == 0)
+		win_x = 0;
+	else
+		win_x = round(ray_num * col_width);
+	if (ray_num == st->fpp.n_rays - 1)
+		end_x = st->game_view->width;
+	else
+		end_x = round((ray_num + 1) * col_width) - 1;
 	rc->wall_dist = ft_wall_distance(st, rc);
 	rc->wall_height = ft_wall_heigth(st, rc->wall_dist, st->fpp.proj_plane);
-	ft_draw_wall(st, rc, win_x, col_width);
+	ft_draw_wall(st, rc, win_x, (end_x - win_x) + 1);
 	return (0);
 }
 
