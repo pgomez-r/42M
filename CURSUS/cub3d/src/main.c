@@ -6,131 +6,61 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/06/24 18:08:17 by pgruz11          ###   ########.fr       */
+/*   Updated: 2024/07/02 22:12:53 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	paint_miniplayer(mlx_image_t *mini, size_t *x, size_t *y)
+void	ft_paint_miniplayer(t_data *d)
 {
-	size_t	i;
-	size_t	j;
+	float	player_x;
+	float	player_y;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (i < 4)
+	player_x = d->ply.x * d->maps.map_scale_x;
+	player_y = d->ply.y * d->maps.map_scale_y;
+	i = -1;
+	while (i < 2)
 	{
-		j = 0;
-		while (j < 4)
+		j = -1;
+		while (j < 2)
 		{
-			mlx_put_pixel(mini, *x + j, *y + i, 0xFF0000FF);
+			mlx_put_pixel(d->imgs.mini_src, (int)player_x + j,
+				(int)player_y + i, RED);
 			j++;
 		}
 		i++;
 	}
-	*(x) += 4;
-	//*(y) += 4;
-	return (4);
 }
 
-void	update_minimap(t_mlx_st *st)
+void	ft_game_hook(void *param)
 {
-	size_t	y;
-	size_t	x;
+	t_data	*d;
 
-	y = 0;
-	while (y < st->d->mini_h)
+	d = (t_data *)param;
+	if (d->exit_code == 0)
 	{
-		x = 0;
-		while (x < st->d->mini_w)
-		{
-			if (st->d->map[y / (PIX / 4)][x / (PIX / 4)] == '1')
-				mlx_put_pixel(st->gfx.minimap, x, y, 0x000000FF);
-			else
-				mlx_put_pixel(st->gfx.minimap, x, y, 0xFFFFFFFF);
-			x++;
-		}
-		y++;
-	}
-	x = st->gfx.player->instances[0].x / 4;
-	y = st->gfx.player->instances[0].y / 4;
-	paint_miniplayer(st->gfx.minimap, &x, &y);
-	//basic_ray(st);
-	cast_rays_range(st, &st->rc);
-}
-
-void	game_hook(void *param)
-{
-	t_mlx_st	*st;
-
-	st = (t_mlx_st *)param;
-	if (st->d->exit_code == 0)
-	{
-		key_control(st);
-		update_minimap(st);
-	}
-}
-
-
-void	init_data(t_struct *d, t_mlx_st *st)
-{
-	d->map[0] = "11111111";
-	d->map[1] = "10100001";
-	d->map[2] = "10110001";
-	d->map[3] = "10010001";
-	d->map[4] = "10000001";
-	d->map[5] = "10P00101";
-	d->map[6] = "10000001";
-	d->map[7] = "11111111";
-	d->height = 8;
-	d->width = 8;
-	d->exit_code = 0;
-	st->d = d;
-	st->gfx.st_ptr = st;
-	d->wall_color = 0xFFFFFFFF;
-	st->fpp.ang = M_PI / 2;
-	st->fpp.fov = 60 * (M_PI / 180);
-	st->fpp.proj_plane = ((d->width * PIX) / 2) / tan(st->fpp.fov / 2);
-	st->fpp.n_rays = 120;
-}
-
-void	place_player(t_mlx_st *st)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < (int)st->d->height)
-	{
-		x = -1;
-		while (++x < (int)st->d->width)
-		{
-			if (st->d->map[y][x] == 'P')
-			{
-				mlx_image_to_window(st->game, st->gfx.player, (x * PIX) + 24, (y * PIX) + 24);
-				//mlx_set_instance_depth(&st->gfx.player->instances[0], 10);
-				st->gfx.player->enabled = false;
-			}
-		}
+		ft_key_control(d);
+		ft_paint_minimap(d, d->maps.minimap_w, d->maps.minimap_h);
+		ft_paint_miniplayer(d);
+		ft_raycast(d, &d->rc, d->maps.map_scale_x, d->maps.map_scale_y);
 	}
 }
 
 int	main(void)
 {
-	t_struct	d;
-	t_mlx_st	st;
+	t_data	d;
 
-	init_data(&d, &st);
+	ft_init(&d);
 	if (d.exit_code == 0)
 	{
-		st.game = mlx_init(d.width * PIX, d.height * PIX, "test", false);
-		load_images(&st);
-		place_player(&st);
-		//render_map(&st);
-		//create_minipmap(&st);
-		mlx_loop_hook(st.game, game_hook, &st);
-		mlx_loop(st.game);
-		mlx_terminate(st.game);
+		d.game = mlx_init(WIDTH, HEIGTH, "CVB3D", false);
+		ft_load_images(&d);
+		mlx_loop_hook(d.game, ft_game_hook, &d);
+		mlx_loop(d.game);
+		mlx_terminate(d.game);
 	}
 	return (0);
 }
