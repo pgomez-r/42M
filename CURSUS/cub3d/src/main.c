@@ -1,38 +1,31 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/02 00:12:36 by codespace         #+#    #+#             */
-/*   Updated: 2024/07/02 22:12:53 by pgruz11          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
-void	ft_paint_miniplayer(t_data *d)
+void	print_map_info(t_info_map *info_map)
 {
-	float	player_x;
-	float	player_y;
-	int		i;
-	int		j;
+	int	y;
 
-	player_x = d->ply.x * d->maps.map_scale_x;
-	player_y = d->ply.y * d->maps.map_scale_y;
-	i = -1;
-	while (i < 2)
+	y = 0;
+	printf("North texture: %s\n", info_map->north_texture_path);
+	printf("South texture: %s\n", info_map->south_texture_path);
+	printf("East texture: %s\n", info_map->east_texture_path);
+	printf("West texture: %s\n", info_map->west_texture_path);
+	printf("Floor: %d, %d, %d\n", info_map->floor[0],
+		info_map->floor[1], info_map->floor[2]);
+	printf("Ceiling: %d, %d, %d\n", info_map->ceiling[0],
+		info_map->ceiling[1], info_map->ceiling[2]);
+	printf("Map_width: %d\n", info_map->map_width);
+	printf("Map_HEIGHT: %d\n", info_map->map_height);
+	printf("Map_status: %d\n", info_map->map_status);
+	printf("Player_view: %c\n", info_map->player_view);
+	printf("Map:\n");
+	while (info_map->map[y])
 	{
-		j = -1;
-		while (j < 2)
-		{
-			mlx_put_pixel(d->imgs.mini_src, (int)player_x + j,
-				(int)player_y + i, RED);
-			j++;
-		}
-		i++;
+		printf("%s\n", info_map->map[y]);
+		y++;
 	}
+	printf("\n");
 }
 
 void	ft_game_hook(void *param)
@@ -49,18 +42,27 @@ void	ft_game_hook(void *param)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_data	d;
+	t_data		d;
+	t_info_map	info_map;
 
 	ft_init(&d);
+	ft_check_args(argc, argv);
+	info_map = ft_init_map();
+	ft_get_map_info(argv[1], &info_map);
+	ft_map_parse(&d, &info_map);
 	if (d.exit_code == 0)
 	{
-		d.game = mlx_init(WIDTH, HEIGTH, "CVB3D", false);
-		ft_load_images(&d);
-		mlx_loop_hook(d.game, ft_game_hook, &d);
-		mlx_loop(d.game);
-		mlx_terminate(d.game);
+		d.game = mlx_init(WIDTH, HEIGHT, NAME, false);
+		d.exit_code = ft_load_images(&d, &info_map);
+		if (d.exit_code == 0)
+		{
+			mlx_loop_hook(d.game, ft_game_hook, &d);
+			mlx_loop(d.game);
+			mlx_terminate(d.game);
+		}
 	}
-	return (0);
+	ft_free_map(&info_map);
+	return (d.exit_code);
 }
