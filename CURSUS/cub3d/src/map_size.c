@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_size.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/07/24 20:55:50 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -49,12 +59,10 @@ void	ft_get_map_size(int fd, t_info_map *info_map)
 		free (line);
 	}
 	info_map->map_height = count;
-	info_map->map = (char **)malloc(sizeof(char *) * info_map->map_height);
+	info_map->map = (char **)malloc(sizeof(char *) * info_map->map_height + 1);
+	info_map->map[info_map->map_height] = NULL;
 	if (!info_map->map)
-	{
-		write(2, "Error: Memory allocation failled\n", 33);
-		exit(1);
-	}
+		return (write(2, "Error: Memory allocation failled\n", 33), exit(1));
 	else if (info_map->player != 1)
 		ft_invalid_map(1);
 }

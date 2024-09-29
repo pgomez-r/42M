@@ -6,7 +6,7 @@
 #    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 21:49:44 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/07/17 05:19:48 by pgruz11          ###   ########.fr        #
+#    Updated: 2024/08/14 06:18:31 by pgruz11          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,17 +37,18 @@ SRC      =	main.c \
 			key_control.c \
 			key_control_utils.c \
 			load_images.c \
+			load_images_utils.c \
 			raycast.c \
 			check_args.c \
 			check_map.c \
 			colors_and_textures.c \
-			error.c \
 			free.c \
 			map_size.c \
 			map.c \
 			minimap.c \
 			wall_render.c \
 			wall_render_utils.c \
+			background_render.c
 
 SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
 OBJ		 = $(SRC:.c=.o)

@@ -2,6 +2,9 @@
 
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat(void){
+}
+
 Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._grade){
 }
 

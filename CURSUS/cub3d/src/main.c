@@ -1,32 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/08/14 06:35:22 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	print_map_info(t_info_map *info_map)
-{
-	int	y;
-
-	y = 0;
-	printf("North texture: %s\n", info_map->north_texture_path);
-	printf("South texture: %s\n", info_map->south_texture_path);
-	printf("East texture: %s\n", info_map->east_texture_path);
-	printf("West texture: %s\n", info_map->west_texture_path);
-	printf("Floor: %d, %d, %d\n", info_map->floor[0],
-		info_map->floor[1], info_map->floor[2]);
-	printf("Ceiling: %d, %d, %d\n", info_map->ceiling[0],
-		info_map->ceiling[1], info_map->ceiling[2]);
-	printf("Map_width: %d\n", info_map->map_width);
-	printf("Map_HEIGHT: %d\n", info_map->map_height);
-	printf("Map_status: %d\n", info_map->map_status);
-	printf("Player_view: %c\n", info_map->player_view);
-	printf("Map:\n");
-	while (info_map->map[y])
-	{
-		printf("%s\n", info_map->map[y]);
-		y++;
-	}
-	printf("\n");
-}
 
 void	ft_game_hook(void *param)
 {
@@ -36,9 +20,11 @@ void	ft_game_hook(void *param)
 	if (d->exit_code == 0)
 	{
 		ft_key_control(d);
+		ft_movement_animation(d);
 		ft_paint_minimap(d, d->maps.minimap_w, d->maps.minimap_h);
 		ft_paint_miniplayer(d);
 		ft_raycast(d, &d->rc, d->maps.map_scale_x, d->maps.map_scale_y);
+		ft_paint_miniview(d);
 	}
 }
 
@@ -59,9 +45,11 @@ int	main(int argc, char **argv)
 		if (d.exit_code == 0)
 		{
 			mlx_loop_hook(d.game, ft_game_hook, &d);
+			mlx_cursor_hook(d.game, ft_mouse_hook, &d);
 			mlx_loop(d.game);
 			mlx_terminate(d.game);
 		}
+		ft_free_textures(&d);
 	}
 	ft_free_map(&info_map);
 	return (d.exit_code);

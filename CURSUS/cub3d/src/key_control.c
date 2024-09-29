@@ -1,13 +1,23 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/08/14 06:27:49 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
 void	ft_move_up(t_data *d)
 {
-	double		y;
-	double		x;
-	double		x_mov;
-	double		y_mov;
+	double	y;
+	double	x;
+	double	x_mov;
+	double	y_mov;
 
 	x_mov = cos(d->ply.ang) * MOV;
 	y_mov = -sin(d->ply.ang) * MOV;
@@ -17,15 +27,16 @@ void	ft_move_up(t_data *d)
 	{
 		d->ply.x = x;
 		d->ply.y = y;
+		d->ply.step_count++;
 	}
 }
 
 void	ft_move_down(t_data *d)
 {
-	double		y;
-	double		x;
-	double		x_mov;
-	double		y_mov;
+	double	y;
+	double	x;
+	double	x_mov;
+	double	y_mov;
 
 	x_mov = cos(d->ply.ang + M_PI) * MOV;
 	y_mov = -sin(d->ply.ang + M_PI) * MOV;
@@ -35,15 +46,16 @@ void	ft_move_down(t_data *d)
 	{
 		d->ply.x = x;
 		d->ply.y = y;
+		d->ply.step_count++;
 	}
 }
 
 void	ft_move_left(t_data *d)
 {
-	double		y;
-	double		x;
-	double		x_mov;
-	double		y_mov;
+	double	y;
+	double	x;
+	double	x_mov;
+	double	y_mov;
 
 	x_mov = cos(d->ply.ang + M_PI_2) * MOV;
 	y_mov = -sin(d->ply.ang + M_PI_2) * MOV;
@@ -53,15 +65,16 @@ void	ft_move_left(t_data *d)
 	{
 		d->ply.x = x;
 		d->ply.y = y;
+		d->ply.step_count++;
 	}
 }
 
 void	ft_move_right(t_data *d)
 {
-	double		y;
-	double		x;
-	double		x_mov;
-	double		y_mov;
+	double	y;
+	double	x;
+	double	x_mov;
+	double	y_mov;
 
 	x_mov = +cos(d->ply.ang - M_PI_2) * MOV;
 	y_mov = -sin(d->ply.ang - M_PI_2) * MOV;
@@ -71,6 +84,7 @@ void	ft_move_right(t_data *d)
 	{
 		d->ply.x = x;
 		d->ply.y = y;
+		d->ply.step_count++;
 	}
 }
 

@@ -19,7 +19,7 @@ class   Bureaucrat
 		Bureaucrat  &operator=(const Bureaucrat &rhs);
 
 		std::string getName(void);
-		std::string getGrade(void);
+		int getGrade(void);
 		void        gradeUp(void);    
 		void        gradeDown(void);
 
@@ -39,6 +39,6 @@ class   Bureaucrat
 		};
 };
 
-std::ostream	&operator<<(std::ostream &output, const Bureaucrat);
+std::ostream	&operator<<(std::ostream &output, const Bureaucrat &rhs);
 
 #endif

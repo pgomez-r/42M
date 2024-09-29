@@ -1,0 +1,36 @@
+# CVB3D_TESTER
+
+- [ ]  Makefile sin relink (run make command twice)
+- [ ]  Nombre del ejecutable cub3D
+- [ ]  Minimizar/maximizar ventana, abrir otras ventanas, mover otras ventanas sobre la del juego, etc.
+- [ ]  1 textura diferente por cada punto cardinal
+- [ ]  SUELO - CIELO de dos colores diferentes
+- [ ]  Comprobar que el personaje inicia según la orientación que marca el mapa (N,S,W,E)
+- [ ]  ← y → rotan la vista del jugador
+- [ ]  W - S mueven el jugador hacía delante-atras, A - D mueven en lateral a los lados
+- [ ]  Probar a “aporrear” el teclado (sin pulsar ESC) para probar que no se produce nada inesperado
+- [ ]  Los movimientos deben ser fluidos y que no se ralentice el juego
+- [ ]  ESC sale del juego, el programa termina de manera limpia y sin leaks de memoria
+- [ ]  Cerrar la ventana pulsando la X de la ventana se comporta igual que ESC
+- [ ]  El programa recibe 1 solo argumento la ruta a el archivo del mapa
+    - [ ]  Probar sin argumentos
+    - [ ]  Probar con más de un argumento
+    - [ ]  Probar mapa que no existe
+    - [ ]  Probar mapa sin permisos
+    - [ ]  Probar mapa con extensión errónea
+- [ ]  El mapa tiene 6 caracteres permitidos (0,1,N,S,E,W) y debe estar rodeado de muros (1) TESTS:
+    - [ ]  Mapa con caracteres diferentes - expected: error
+    - [ ]  Mapa que no esté rodeado de muros - expected: error
+    - [ ]  Parámetros del mapa con saltos de línea y tabs - expected: OK
+    - [ ]  Parámetros del mapa desordenados (siendo el mapa siempre el último) - expected: OK
+    - [ ]  Mapa antes de los parámetros - expected: OK
+    - [ ]  Mapa con “islas” (rodeadas por muros ‘1’) - expected: OK
+    - [ ]  Mapa con “islas” (una o varias sin rodear por muros; mapa principal sí rodeado) - expected: error
+    - [ ]  Identificador de parámetro inventado - expected: error
+    - [ ]  Identificador de parámetro duplicado - expected: error
+    - [ ]  Ruta a textura inválida - expected: error
+    - [ ]  RGB colors fuera de rango - expected: error? (no estoy seguro)
+    - [ ]  C o F con formato diferente a “X,X,X” - expected: error (creo)
+    - [ ]  Mapa mínimo posible (muros justos y personaje en medio) - expected: OK
+    - [ ]  Mapa ENORME - expected: OK
+- [ ]  Comprobar memory leaks - Saliendo bien (con ESC por ejemplo) y también saliendo por error (fallo al iniciar por argumentos erroneos)

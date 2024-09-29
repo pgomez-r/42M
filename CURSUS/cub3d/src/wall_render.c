@@ -1,11 +1,24 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_render.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/07/24 04:37:23 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
 void	ft_wall_render(t_data *d, t_rays *rc, int ray_num)
 {
+	float	plane;
+
+	plane = (WIDTH / 2) / tan(d->ply.fov / 2);
 	rc->wall_dist = ft_wall_distance(d, rc);
-	rc->wall_height = ft_wall_height(rc->wall_dist, PP);
+	rc->wall_height = ft_wall_height(rc->wall_dist, plane);
 	ft_wall_hitpoint(rc);
 	ft_draw_wall(d, rc, ray_num);
 }
@@ -18,7 +31,7 @@ void	ft_draw_wall(t_data *d, t_rays *rc, int ray_num)
 
 	d->tx.mid_win = HEIGHT / 2;
 	start = d->tx.mid_win - (int)(rc->wall_height / 2);
-	if (start < 0) 
+	if (start < 0)
 		start = 0;
 	end = start + (int)rc->wall_height;
 	if (end >= HEIGHT)

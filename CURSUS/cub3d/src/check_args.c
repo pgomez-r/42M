@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/07/23 06:56:55 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -33,4 +43,28 @@ void	ft_check_args(int argc, char **argv)
 		exit(1);
 	}
 	return ;
+}
+
+void	ft_check_rgb_color(char *color)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(color);
+	if (color[0] == ',' || color[len - 1] == ',')
+		ft_invalid_map(1);
+	while (color[i] == ',' || ft_isdigit(color[i]))
+		i++;
+	if (i < len)
+		ft_invalid_map(1);
+}
+
+void	ft_invalid_map(int mode)
+{
+	if (mode == 1)
+	{
+		write (2, "Error: Invalid map\n", 19);
+		exit (1);
+	}
 }

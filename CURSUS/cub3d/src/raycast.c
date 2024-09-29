@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/08/14 04:16:22 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -36,8 +46,6 @@ void	ft_init_delta_step(t_rays *rc)
 	rc->delta_y = CELL / fabs(sin(rc->curr_ang));
 }
 
-/*0 = the ray is moving horizontally, so the wall found is vertical in 2map
-	1 = the ray is moving vertically, so the wall found is horizontal in 2map*/
 int	ft_push_ray(t_rays *rc)
 {
 	if (rc->init_x < rc->init_y)
@@ -58,11 +66,11 @@ void	ft_raycast(t_data *d, t_rays *rc, float scale_x, float scale_y)
 {
 	int		i;
 
-	rc->incr_ang = FOV / (WIDTH - 1);
-	rc->curr_ang = d->ply.ang - (FOV / 2);
+	rc->incr_ang = d->ply.fov / (WIDTH - 1);
+	rc->curr_ang = d->ply.ang - (d->ply.fov / 2);
 	rc->curr_ang = ft_normalize_angle(rc->curr_ang);
-	ft_set_background(d->imgs.game_view);
-	i = N_RAYS;
+	ft_background_render(d, &d->tx);
+	i = WIDTH;
 	while (--i >= 0)
 	{
 		rc->ray_x = d->ply.x;

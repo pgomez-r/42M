@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors_and_textures.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 06:56:52 by pgruz11           #+#    #+#             */
+/*   Updated: 2024/07/24 20:42:12 by pgruz11          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -14,24 +24,26 @@ void	ft_get_texture(char **texture, t_info_map *info_map)
 		info_map->west_texture_path = ft_strdup(texture[1]);
 }
 
-void	ft_get_color(char **texture, t_info_map *info_map)
+void	ft_get_color(char **rgb_color, t_info_map *info_map)
 {
 	char	**color;
 
-	color = ft_split(texture[1], ',');
+	ft_check_rgb_color(rgb_color[1]);
+	color = ft_split(rgb_color[1], ',');
 	if (!color || color[3])
 	{
 		write (2, "Error: Invalid map\n", 19);
+		ft_free_split(color);
 		exit (1);
 		return ;
 	}
-	if (!ft_strncmp(texture[0], "F", 2))
+	if (!ft_strncmp(rgb_color[0], "F", 2))
 	{
 		info_map->floor[0] = ft_atoi(color[0]);
 		info_map->floor[1] = ft_atoi(color[1]);
 		info_map->floor[2] = ft_atoi(color[2]);
 	}
-	else if (!strncmp(texture[0], "C", 2))
+	else if (!strncmp(rgb_color[0], "C", 2))
 	{
 		info_map->ceiling[0] = ft_atoi(color[0]);
 		info_map->ceiling[1] = ft_atoi(color[1]);
@@ -59,6 +71,7 @@ void	ft_get_textures_and_colors(char *line, t_info_map *info_map, int *n)
 	{
 		write (2, "Error: Invalid map\n", 19);
 		free (line);
+		ft_free_split(texture);
 		exit (1);
 		return ;
 	}
@@ -74,4 +87,13 @@ void	ft_get_textures_and_colors(char *line, t_info_map *info_map, int *n)
 		*n += 1;
 	}
 	ft_free_split(texture);
+}
+
+void	ft_rgb_to_hex(t_info_map *info_map)
+{
+	info_map->floor_hex = (info_map->floor[0] << 24)
+		| (info_map->floor[1] << 16) | info_map->floor[2] << 8 | 0xFF;
+	info_map->ceiling_hex = (info_map->ceiling[0] << 24)
+		| (info_map->ceiling[1] << 16) | info_map->ceiling[2] << 8 | 0xFF;
+	return ;
 }
