@@ -1,4 +1,7 @@
-### C ###
+### C / C++ ###
+# This project executable name
+ircserv
+
 # Prerequisites
 *.d
 
@@ -6,7 +9,10 @@
 *.o
 *.ko
 *.obj
+*.obj/
 *.elf
+*.slo
+*.lo
 
 # Linker output
 *.ilk
@@ -19,6 +25,7 @@
 
 # Libraries
 *.lib
+*.lai
 *.a
 *.la
 *.lo
@@ -45,6 +52,7 @@
 
 # Kernel Module Compile Results
 *.mod*
+*.smod
 *.cmd
 .tmp_versions/
 modules.order
