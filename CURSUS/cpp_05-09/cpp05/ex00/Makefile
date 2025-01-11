@@ -3,28 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 16:21:04 by pgomez-r          #+#    #+#              #
-#    Updated: 2024/05/30 08:54:49 by pgruz11          ###   ########.fr        #
+#    Updated: 2025/01/11 13:51:44 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Bureaucrat
 
 CC = c++
-CFLAGS = -std=c++98 -Wall -Wextra -Werror
+CFLAGS = -std=c++98 -Wall -Wextra -Werror -I./inc
 
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC = main.cpp Bureaucrat.cpp
+SRC			= main Bureaucrat
 
-SRCS	 = $(addprefix $(SRC_PATH), $(SRC))
-OBJ		 = $(SRC:.cpp=.o)
-OBJS	 = $(addprefix $(OBJ_PATH), $(OBJ))
+SRCS		= $(addsuffix .cpp, $(addprefix $(SRC_PATH), $(SRC)))
 
-RM = rm -f
+OBJS		= $(SRCS:$(SRC_PATH)%.cpp=$(OBJ_PATH)/%.o)
+
+RM			= rm -f
 
 all: $(NAME)
 
@@ -33,16 +33,16 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 $(NAME):	$(OBJS)
 	@${CC} $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "\033[0;32m\n	 ##### Program is ready! #####\n\033[0m"
+	@echo "\033[0;32m\n	 ##### ✅ Program $(NAME) is ready! ✅ #####\n\033[0m"
 
 clean:
 	@$(RM) $(OBJS) 
-	@rmdir -p $(OBJ_PATH) 2>/dev/null || true
-	@echo "\033[0;32m\n	##### Object files have been removed #####\n\033[0m"
+	@if [ -d $(OBJ_PATH) ]; then find $(OBJ_PATH) -type d -empty -delete; fi
+	@echo "\033[0;32m\n	##### ✅ Object files and folders removed ✅ #####\n\033[0m"
 
 fclean: clean
-	@$(RM) $(OBJ) $(NAME)
-	@echo "\033[0;32m\n	##### FCLEAN done! #####\n\033[0m"
+	@$(RM) $(NAME)
+	@echo "\033[0;32m\n	##### ✅ Full clean done! ✅ #####\n\033[0m"
 
 re: fclean all
 
