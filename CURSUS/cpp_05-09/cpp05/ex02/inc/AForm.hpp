@@ -26,7 +26,7 @@ class AForm
 		AForm &operator=(const AForm &);
 		virtual ~AForm();
 
-		std::string			getName() const;
+		const std::string	getName() const;
 		bool				checkSigned() const;
 		virtual void 		execute(Bureaucrat const &officer) const = 0;
 		int 				getSignGrade() const;

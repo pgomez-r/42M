@@ -37,7 +37,7 @@ AForm &AForm::operator=(const AForm &src)
 	return (*this);
 }
 
-std::string AForm::getName() const
+const std::string AForm::getName() const
 {
 	return(this->_name);
 }
@@ -61,7 +61,7 @@ void AForm::beSigned(const Bureaucrat &src)
 	if (src.getGrade() <= getSignGrade())
 	{
 		this->_isSigned = true;
-		src.signAForm(*this);
+		src.signForm(*this);
 	}
 	else
 		throw(GradeTooLowException());
