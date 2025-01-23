@@ -33,9 +33,6 @@ const std::string	Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-/**
- * TODO: why did i do this in this manner? check and understand!
- */
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)
@@ -81,6 +78,7 @@ void	Bureaucrat::signForm(Form &form) const
 std::ostream	&operator<<(std::ostream &output, const Bureaucrat &rhs)
 {
 	output << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
+	return (output);
 }
 
 const char	*Bureaucrat::GradeTooHighException::what()const throw(){

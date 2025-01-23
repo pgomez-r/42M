@@ -47,11 +47,11 @@ bool Form::checkSigned() const
 	return (this->_isSigned);
 }
 
-const int Form::getSignGrade() const{
+int Form::getSignGrade() const{
 	return (this->_signGrade);
 }
 
-const int Form::getExecGrade() const
+int Form::getExecGrade() const
 {
 	return (this->_execGrade);
 }
@@ -77,14 +77,14 @@ const char *Form::GradeTooLowException::what() const throw()
 	return ("Error: Form Grade too low");
 }
 
-/**
- * TODO: check ternary "? :" and understand properly or replace
- */
-std::ostream &operator<<(std::ostream &op, Form& src)
+std::ostream &operator<<(std::ostream &output, Form &src)
 {
-	op << "Form name is: " << src.getName() << std::endl;
-	op << (src.checkSigned() ?  "Form is signed" : "Form is not signed") << std::endl;
-	op << "Form's grade to sign " << src.getSignGrade()  << std::endl;
-	op << "Form's grade to execute " << src.getExecGrade();
-	return (op);
+	output << "Form name is: " << src.getName() << std::endl;
+	if (src.checkSigned())
+		output << "Form is signed" << std::endl;
+	else
+		output << "Form is not signed" << std::endl;
+	output << "Form's grade to sign " << src.getSignGrade()  << std::endl;
+	output << "Form's grade to execute " << src.getExecGrade();
+	return (output);
 }

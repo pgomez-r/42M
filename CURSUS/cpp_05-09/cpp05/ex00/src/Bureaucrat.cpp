@@ -5,11 +5,13 @@
 Bureaucrat::Bureaucrat(void) : _name("Default Bureaucrat")
 {
 	this->_grade = 150;
+	std::cout << "Bureaucrat default constructor called " << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name)
 {
 	this->_grade = src._grade;
+	std::cout << "Bureaucrat copy constructor called " << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
@@ -24,9 +26,12 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade
 		throw Bureaucrat::GradeTooLowException();
 		this->_grade = 150;
 	}
+	std::cout << "Bureaucrat custom constructor called " << std::endl;
 }
 
-Bureaucrat::~Bureaucrat(void){
+Bureaucrat::~Bureaucrat(void)
+{
+	std::cout << "Bureaucrat default constructor called " << std::endl;
 }
 
 const std::string	Bureaucrat::getName(void) const
@@ -34,9 +39,6 @@ const std::string	Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-/**
- * TODO: why did i do this in this manner? check and understand!
- */
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)
@@ -68,12 +70,15 @@ void	Bureaucrat::gradeDown(void)
 std::ostream	&operator<<(std::ostream &output, const Bureaucrat &rhs)
 {
 	output << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
+	return (output);
 }
 
-const char	*Bureaucrat::GradeTooHighException::what()const throw(){
+const char	*Bureaucrat::GradeTooHighException::what()const throw()
+{
 	return ("Error: Grade too high");
 }
 
-const char	*Bureaucrat::GradeTooLowException::what()const throw(){
+const char	*Bureaucrat::GradeTooLowException::what()const throw()
+{
 	return ("Error: Grade too low");
 }
