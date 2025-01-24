@@ -34,7 +34,8 @@ AForm *Intern::makeForm(std::string formName, std::string formTarget)
 {
 	AForm	*formPtr = NULL;
 	std::string	name = formName;
-	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+	for (size_t i = 0; i < name.length(); i++)
+		name[i] = std::tolower(name[i]);
 	name.erase(name.find_last_not_of(" \t\n\r") + 1);
 	int	i = 0;
 	while (i < 3 && this->_formNames[i] != name)

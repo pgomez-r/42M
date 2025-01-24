@@ -1,5 +1,5 @@
 
-#include "Bureaucrat.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(void) : _name("Default Bureaucrat")
 {
