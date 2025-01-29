@@ -14,15 +14,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name)
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
 {
 	if (grade < 1)
-	{
 		throw Bureaucrat::GradeTooHighException();
-		this->_grade = 150;
-	}
 	if (grade > 150)
-	{
 		throw Bureaucrat::GradeTooLowException();
-		this->_grade = 150;
-	}
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -34,9 +28,6 @@ const std::string	Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-/**
- * TODO: why did i do this in this manner? check and understand!
- */
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)

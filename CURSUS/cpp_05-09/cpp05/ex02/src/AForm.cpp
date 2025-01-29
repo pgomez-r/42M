@@ -16,7 +16,7 @@ AForm::AForm(std::string name, int toSign, int toExecute): _name(name), _signGra
 	else
 	{
 		this->_isSigned = false;
-		std::cout << name << " AForm custom constructor called " << std::endl;
+		std::cout << "AForm custom constructor called" << std::endl;
 	}
 }
 
@@ -59,36 +59,33 @@ int AForm::getExecGrade() const
 void AForm::beSigned(const Bureaucrat &src)
 {
 	if (src.getGrade() <= getSignGrade())
-	{
 		this->_isSigned = true;
-		src.signForm(*this);
-	}
 	else
 		throw(GradeTooLowException());
 }
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-	return ("Error: Form Grade too High");
+	return ("Error: Form: Grade too High");
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-	return ("Error: Form Grade too low");
+	return ("Error: Form: Grade too low");
 }
 
 const char *AForm::FormNotSigned::what() const throw()
 {
-	return ("Error: Form is NOT signed or Grade is too low/high to execute");
+	return ("Error: Form is NOT signed or grade is too low/high to execute");
 }
 
-/**
- * TODO: check ternary "? :" and understand properly or replace
- */
 std::ostream &operator<<(std::ostream &op, AForm& src)
 {
 	op << "AForm name is: " << src.getName() << std::endl;
-	op << (src.checkSigned() ?  "AForm is signed" : "AForm is not signed") << std::endl;
+	if (src.checkSigned())
+		op << "AForm is signed" << std::endl;
+	else
+		op << "AForm is not signed" << std::endl;
 	op << "AForm's grade to sign " << src.getSignGrade()  << std::endl;
 	op << "AForm's grade to execute " << src.getExecGrade();
 	return (op);

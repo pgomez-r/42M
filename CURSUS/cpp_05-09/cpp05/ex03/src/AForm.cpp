@@ -59,10 +59,7 @@ int AForm::getExecGrade() const
 void AForm::beSigned(const Bureaucrat &src)
 {
 	if (src.getGrade() <= getSignGrade())
-	{
 		this->_isSigned = true;
-		src.signForm(*this);
-	}
 	else
 		throw(GradeTooLowException());
 }
@@ -82,13 +79,13 @@ const char *AForm::FormNotSigned::what() const throw()
 	return ("Error: Form is NOT signed or Grade is too low/high to execute");
 }
 
-/**
- * TODO: check ternary "? :" and understand properly or replace
- */
 std::ostream &operator<<(std::ostream &op, AForm& src)
 {
 	op << "AForm name is: " << src.getName() << std::endl;
-	op << (src.checkSigned() ?  "AForm is signed" : "AForm is not signed") << std::endl;
+	if (src.checkSigned())
+		op << "AForm is signed" << std::endl;
+	else
+		op << "AForm is not signed" << std::endl;
 	op << "AForm's grade to sign " << src.getSignGrade()  << std::endl;
 	op << "AForm's grade to execute " << src.getExecGrade();
 	return (op);

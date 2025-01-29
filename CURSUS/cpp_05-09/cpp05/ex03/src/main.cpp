@@ -5,56 +5,34 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
+/**
+ * TODO: ex02 - ex03: check mains with
+ */
+
 int main()
 {
-	Bureaucrat b2("tbib", 20);
 	try
 	{
-		Bureaucrat b1("fermli" ,140);
-		ShrubberyCreationForm okk("target1");
-		okk.beSigned(b1);
-		okk.execute(b1);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		RobotomyRequestForm kk("target2");
-		kk.beSigned(b2);
-		kk.execute(b2);
-		kk.execute(b2);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat b3("malik", 1);
-		PresidentialPardonForm ko("target3");
-		ko.beSigned(b2);
-		b3.exeForm(ko);
-		ko.execute(b3);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		Intern someRandomIntern;
-		AForm* rrf;
-		rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
-		Bureaucrat op("rajol",2);
-		rrf->beSigned(op);
-		rrf->execute(op);
-		delete rrf;
+		std::cout << "Creating new intern... Welcome to the company!" << std::endl;
+		Intern		morty;
+		std::cout << "Creating new bureaucrat..." << std::endl;
+		Bureaucrat	b1("Rick",2);
+		std::cout << b1 << std::endl;
+		std::cout << "Creating an auxiliar pointer to AForm..." << std::endl;
+		AForm		*form_ptr;
+	
+		std::string	form_type = "presidential pardon";
+		std::string	form_name = "Bender";
+		std::cout << "Intern will try create a form of type " << form_type << " and that will be called " << form_name << std::endl;
+		form_ptr = morty.makeForm("presidential pardon", "Bender");
+		b1.signForm(*form_ptr);
+		form_ptr->beSigned(b1);
+		form_ptr->execute(b1);
+		delete(form_ptr);
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << "Unhandled exception: " << e.what() << std::endl;
 	}
 	return (0);
 }

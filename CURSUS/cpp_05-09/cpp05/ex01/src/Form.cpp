@@ -16,7 +16,7 @@ Form::Form(std::string name, int toSign, int toExecute): _name(name), _signGrade
 	else
 	{
 		this->_isSigned = false;
-		std::cout << name << " Form custom constructor called " << std::endl;
+		std::cout << "Form custom constructor called" << std::endl;
 	}
 }
 
@@ -66,12 +66,12 @@ void Form::beSigned(const Bureaucrat &officer)
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Error: Form Grade too High");
+	return ("Form error: Grade too high");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Error: Form Grade too low");
+	return ("Form error: Grade too low");
 }
 
 std::ostream &operator<<(std::ostream &output, const Form &src)

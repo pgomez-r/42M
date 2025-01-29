@@ -3,7 +3,6 @@
 
 
 /**
- * TODO: check names 42M/cursus on form and bureacrat ex01
  * TODO: what about "AForm &operator=(const AForm &);" no name after &
  * TODO: no definition for virtual void execute??
  */

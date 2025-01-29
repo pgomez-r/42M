@@ -4,60 +4,67 @@
 
 int main()
 {
-    try
+	try
 	{
-        Bureaucrat b1("bolisi", 100);
-        std::cout << "Bureaucrat b1 created successfully." << std::endl;
-        try
-		{
-            Bureaucrat b2("benay",200); // Throws std::exception (invalid grade)
-            std::cout << "This line should not be printed." << std::endl;
-        }
-        catch (std::exception &e)
-		{
-            std::cout << "Exception caught: " << e.what() << std::endl;
-        }
+		Bureaucrat	b1("Paco", 100);
+		std::cout << "Bureaucrat B1 created successfully" << std::endl;
+		std::cout << b1 << std::endl;
 
-        Form formula("ostora", 1, 130);
-        std::cout << "Form formula created successfully." << std::endl;
-        std::cout << formula << std::endl;
+		try
+		{
+			std::cout << "Trying to create Bureaucrat with a grade value out of range..." << std::endl;
+			Bureaucrat	b2("Paquito",200); // Throws std::exception (invalid grade)
+			std::cout << "This line should not be printed." << std::endl;
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Exception caught: " << e.what() << std::endl;
+		}
 
-        try
-		{
-            Form invalidForm("invalid", 0, 200); // Throws std::exception (invalid parameters)
-            std::cout << "This line should not be printed." << std::endl;
-        }
-        catch (std::exception &e)
-		{
-            std::cout << "Exception caught: " << e.what() << std::endl;
-        }
+		Form	document("Form 42", 10, 130);
+		std::cout << "Form document created successfully." << std::endl;
+		std::cout << document << std::endl;
 
-        Bureaucrat B2("mo7ami", 50);
-        try
+		try
 		{
-            formula.beSigned(B2);
-            std::cout << "Form signed successfully." << std::endl;
-            std::cout << formula << std::endl;
-        }
-        catch(std::exception &e)
+			std::cout << "Trying to create Form with a grade value out of range..." << std::endl;	
+			Form	invalidForm("Non-valid form", 100, -20); // Throws std::exception (invalid parameters)
+			std::cout << "This line should not be printed." << std::endl;
+		}
+		catch (std::exception &e)
 		{
-            std::cout << e.what() << std::endl;
-        }
+			std::cout << "Exception caught: " << e.what() << std::endl;
+		}
 
-        try
+		std::cout << "Creating a valid bureaucrat..." << std::endl;
+		Bureaucrat	b2("Fernanda", 5);
+		std::cout << b2 << std::endl;
+		try
 		{
-            Bureaucrat B3("benay",150); 
-            formula.beSigned(B3); // Throws std::exception (insufficient grade)
-            std::cout << "This line should not be printed." << std::endl;
-        }
-        catch (std::exception &e)
+			b2.signForm(document);
+			std::cout << "Form signed successfully" << std::endl;
+			std::cout << document << std::endl;
+		}
+		catch(std::exception &e)
 		{
-            std::cout << "Exception caught: " << e.what() << std::endl;
-        }
-    }
-    catch (std::exception &e)
+			std::cout << e.what() << std::endl;
+		}
+		try
+		{
+			std::cout << "Creating bureaucrat with not enough grade to sign form..." << std::endl;
+			Bureaucrat b3("Bernie", 150); 
+			std::cout << b3 << std::endl;
+			document.beSigned(b3); // Throws std::exception (insufficient grade)
+			std::cout << "This line should not be printed" << std::endl;
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Exception caught: " << e.what() << std::endl;
+		}
+	}
+	catch (std::exception &e)
 	{
-        std::cerr << "Unhandled exception: " << e.what() << std::endl;
-    }
-    return (0);
+		std::cerr << "Unhandled exception: " << e.what() << std::endl;
+	}
+	return (0);
 }
