@@ -35,10 +35,9 @@ void RobotomyRequestForm::execute(Bureaucrat const &officer) const
 
 	std::cout << "<Drilling noises> BzzzZZzzzBzzz..." << std::endl;
 
-	static bool lastResult = false;
-	lastResult = !lastResult;
-
-	if (lastResult)
+	std::srand(std::time(0));
+	int n = std::rand();
+	if (n % 2)
 		std::cout << this->getName() << " has been robotomized successfully!" << std::endl;
 	else
 		std::cout << "The robotomy for " << this->getName() << " has failed!" << std::endl;

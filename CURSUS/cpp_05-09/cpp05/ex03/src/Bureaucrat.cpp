@@ -77,7 +77,10 @@ void Bureaucrat::exeForm(AForm const &form)
 	else if (this->getGrade() > form.getExecGrade())
 		throw (GradeTooLowException());
 	else
+	{
+		form.execute(*this);
 		std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
 }
 
 std::ostream	&operator<<(std::ostream &output, const Bureaucrat &rhs)

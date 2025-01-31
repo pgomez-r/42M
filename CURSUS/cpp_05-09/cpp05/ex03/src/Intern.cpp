@@ -60,5 +60,5 @@ AForm *Intern::makeForm(std::string formName, std::string formTarget)
 
 const char *Intern::notFoundForm::what() const throw()
 {
-	return ("Error: Form name does not exist, cannot create form");
+	return ("Error: Form type name does not exist, cannot create form");
 }

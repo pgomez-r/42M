@@ -1,12 +1,6 @@
 #ifndef	AFORM_HPP
 #define	AFORM_HPP
 
-
-/**
- * TODO: what about "AForm &operator=(const AForm &);" no name after &
- * TODO: no definition for virtual void execute??
- */
-
 #include "Bureaucrat.hpp"
 #include <iostream>
 

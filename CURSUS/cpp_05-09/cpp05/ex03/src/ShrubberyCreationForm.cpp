@@ -45,7 +45,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &officer ) const
 		else
 		{
 			std::ofstream out;
-			out.open(this->getName() + "_shrubbery");
+			out.open(fileName.c_str());
 			out << "        _-_\n";
 			out << "     /~~   ~~\\\n";
 			out << "  /~~         ~~\\\n";

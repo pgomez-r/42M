@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 06:11:09 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/08/14 06:34:49 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/01/30 12:09:27 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 /*PRE-DEFINED VALUES FOR THE GAME*/
 # define NAME "CVB3D"
-# define WIDTH 1000
-# define HEIGHT 800
+# define WIDTH 1400
+# define HEIGHT 1000
 # define CELL 64
 # define MOV 4
 # define FX_TIMER 8
