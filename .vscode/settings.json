@@ -87,7 +87,8 @@
 		"ranges": "cpp",
 		"span": "cpp",
 		"cinttypes": "cpp",
-		"mlx42.h": "c"
+		"mlx42.h": "c",
+		"map": "cpp"
 	},
 	"todo-tree.tree.scanMode": "workspace"
 }
