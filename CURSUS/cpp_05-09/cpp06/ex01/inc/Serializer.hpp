@@ -15,4 +15,27 @@
 
 #include <iostream>
 
+/**
+ * TODO: check if struct definition is allowed in the Class.hpp file by the norm
+ */
+
+struct Data
+{
+	int			n;
+	float		f;
+	std::string	str;
+};
+
+class Serializer
+{
+	private:
+		Serializer(void);
+		Serializer(const Serializer &src);
+		~Serializer(void);
+		Serializer &operator=(const Serializer &src);
+	public:
+		static uintptr_t	serialize(Data	*ptr);
+		static Data			*deserialize(uintptr_t raw);
+};
+
 #endif
