@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:46:25 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/05 20:04:49 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:16:54 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
+#include "../inc/iter.hpp"
 #include <iostream>
 
-/**
- * Evaluation sheet test
- * TODO: check using the template function without specifying type?
- */
+// EVAL SHEET TEST MAIN
 class Awesome
 {
 	public:
@@ -39,6 +36,7 @@ int main()
 	return 0;
 }
 
+// MY OWN MAIN
 // Function to be used with iter
 // template <typename T>
 // void	printElement(const T &element)
@@ -53,15 +51,15 @@ int main()
 // 	std::string stringArray[] = {"hello", "world", "this", "is", "iter"};
 
 // 	std::cout << "Int array: ";
-// 	iter(intArray, 5, printElement<int>);
+// 	iter(intArray, 5, printElement);
 // 	std::cout << std::endl;
 
 // 	std::cout << "Double array: ";
-// 	iter(doubleArray, 5, printElement<double>);
+// 	iter(doubleArray, 5, printElement);
 // 	std::cout << std::endl;
 
 // 	std::cout << "String array: ";
-// 	iter(stringArray, 5, printElement<std::string>);
+// 	iter(stringArray, 5, printElement);
 // 	std::cout << std::endl;
 
 // 	return 0;

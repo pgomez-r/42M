@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:03:53 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/05 17:47:41 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:26:39 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include "B.hpp"
 #include "C.hpp"
 
-/**
- * TODO: Check if functions implementation is allowd in this file - SUBJECT
- */
-
 Base::~Base()
 {
 	std::cout << "Class 'Base' destructor called" << std::endl;
@@ -26,6 +22,7 @@ Base::~Base()
 
 Base *generate(void)
 {
+	srand(time(0));
 	int n = rand() % 3;
 
 	if (n == 0)
@@ -74,7 +71,7 @@ void identify(Base& p)
 	try
 	{
 		(void)dynamic_cast<C &>(p);
-		std::cout << "Object of type A C" << std::endl;
+		std::cout << "Object of type C" << std::endl;
 		return ;
 	}
 	catch(...){

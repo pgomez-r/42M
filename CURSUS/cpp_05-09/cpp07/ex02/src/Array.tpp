@@ -3,21 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:18:54 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/06 09:05:51 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:38:36 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Array.hpp"
+#include "../inc/Array.hpp"
 
 template <typename T>
-Array<T>::Array() : data(nullptr), _size(0){
+Array<T>::Array()
+{
+	this->_data = NULL;
+	this->_size = 0;
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n) : data(new T[n]()), _size(n){
+Array<T>::Array(unsigned int n)
+{
+	this->_data = new T[n]();
+	this->_size(n);
 }
 
 template <typename T>
@@ -25,6 +31,12 @@ Array<T>::Array(const Array& other) : data(new T[other._size]), _size(other._siz
 {
 	for (unsigned int i = 0; i < _size; ++i)
 		data[i] = other.data[i];
+}
+
+template <typename T>
+Array<T>::~Array()
+{
+	delete[] (data);
 }
 
 template <typename T>
@@ -41,11 +53,6 @@ Array<T>& Array<T>::operator=(const Array& other)
 	return (*this);
 }
 
-template <typename T>
-Array<T>::~Array()
-{
-	delete[] (data);
-}
 
 template <typename T>
 T& Array<T>::operator[](unsigned int index)

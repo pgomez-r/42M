@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:13:20 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/05 20:17:59 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:24:19 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITER_HPP
 #define ITER_HPP
-
-/**
- * TODO: review and understand this "trick" well enough before eval
- */
 
 #include <iostream>
 

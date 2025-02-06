@@ -6,15 +6,11 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:53:44 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/03 14:13:35 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:31:41 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-
-/**
- * TODO: delete comments and debug-prints before submitting to intra
- */
 
 ScalarConverter::ScalarConverter(void)
 {
@@ -89,17 +85,17 @@ void	ScalarConverter::convert(const std::string &input)
 		else
 			std::cout << "Non displayable" << std::endl;
 		std::cout << "int: ";
-		if (input_double <= std::numeric_limits<int>::max() && input_double >= std::numeric_limits<int>::min())
+		if (input_double <= std::numeric_limits<int>::max() && input_double >= -std::numeric_limits<int>::max())
 			std::cout << static_cast<int>(input_double) << std::endl;
 		else
 			std::cout << "impossible" << std::endl;
 		if (input_double == static_cast<int>(input_double))
 			std::cout << std::fixed << std::setprecision(1);
-		if (input_double <= std::numeric_limits<float>::max() && input_double >= std::numeric_limits<float>::min())
+		if (input_double <= std::numeric_limits<float>::max() && input_double >= -std::numeric_limits<float>::max())
 			std::cout << "float: " <<  static_cast<float>(input_double) << "f" << std::endl;
 		else
 			std::cout << "float: impossible" << std::endl;
-		if (input_double <= std::numeric_limits<double>::max() && input_double >= std::numeric_limits<double>::min())
+		if (input_double <= std::numeric_limits<double>::max() && input_double >= -std::numeric_limits<double>::max())
 			std::cout << "double: " << input_double << std::endl;
 		else
 			std::cout << "double: impossible" << std::endl;
@@ -111,23 +107,24 @@ void	ScalarConverter::convert(const std::string &input)
 	float	input_float = strtof(input.c_str(), &ptr);
 	if (input_float && *ptr == 'f')
 	{
+		std::cout << "FLOAT" << std::endl;
 		std::cout << "char: ";
 		if (input_float >= 32 && input_float <= 126)
 			std::cout <<  static_cast<char>(input_float)<< std::endl;
 		else
 			std::cout << "Non displayable" << std::endl;
 		std::cout << "int: ";
-		if (input_float <= std::numeric_limits<int>::max() && input_float >= std::numeric_limits<int>::min())
+		if (input_float <= std::numeric_limits<int>::max() && input_float >= -std::numeric_limits<int>::max())
 			std::cout << static_cast<int>(input_float) << std::endl;
 		else
 			std::cout << "impossible" << std::endl;
-		if (input_float == static_cast<int>(input_float))
-			std::cout << std::fixed << std::setprecision(1);
-		if (input_float <= std::numeric_limits<float>::max() && input_float >= std::numeric_limits<float>::min())
+		// if (input_float == static_cast<int>(input_float))
+		// 	std::cout << std::fixed << std::setprecision(1);
+		if (input_float <= std::numeric_limits<float>::max() && input_float >= -std::numeric_limits<float>::max())
 			std::cout << "float: " << input_float << "f" << std::endl;
 		else
 			std::cout << "float: impossible" << std::endl;
-		if (input_float <= std::numeric_limits<double>::max() && input_float >= std::numeric_limits<double>::min())
+		if (input_float <= std::numeric_limits<double>::max() && input_float >= -std::numeric_limits<double>::max())
 			std::cout << "double: " << static_cast<double>(input_float) << std::endl;
 		else
 			std::cout << "double: impossible" << std::endl;
@@ -145,7 +142,7 @@ void	ScalarConverter::convert(const std::string &input)
 		else
 			std::cout << "Non displayable";
 		std::cout << std::endl << "int: ";
-		if (input_int <= std::numeric_limits<int>::max() && input_int >= std::numeric_limits<int>::min())
+		if (input_int <= std::numeric_limits<int>::max() && input_int >= -std::numeric_limits<int>::max())
 			std::cout << static_cast<int>(input_int);
 		else
 			std::cout << "impossible";

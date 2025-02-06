@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:18:58 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/06 09:07:50 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:39:49 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <exception>
 #include <stdexcept>
+#include "../src/Array.tpp"
 
 template <typename T>
 class Array
@@ -31,8 +32,8 @@ class Array
 		unsigned int size() const;
 
 	private:
-		T* data;
-		unsigned int _size;
+		T* 				_data;
+		unsigned int 	_size;
 };
 
 #endif
