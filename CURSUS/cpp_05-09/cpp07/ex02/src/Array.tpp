@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:18:54 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/06 15:38:36 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:10:17 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,51 +23,53 @@ template <typename T>
 Array<T>::Array(unsigned int n)
 {
 	this->_data = new T[n]();
-	this->_size(n);
+	this->_size = n;
 }
 
 template <typename T>
-Array<T>::Array(const Array& other) : data(new T[other._size]), _size(other._size)
+Array<T>::Array(const Array &src)
 {
+	this->_data = new T[src._size];
+	this->_size = src._size;
 	for (unsigned int i = 0; i < _size; ++i)
-		data[i] = other.data[i];
+		_data[i] = src._data[i];
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-	delete[] (data);
+	delete[] (_data);
 }
 
 template <typename T>
-Array<T>& Array<T>::operator=(const Array& other)
+Array<T>& Array<T>::operator=(const Array &src)
 {
-	if (this != &other)
+	if (this != &src)
 	{
-		delete[] (data);
-		_size = other._size;
-		data = new T[_size];
+		delete[] (_data);
+		_size = src._size;
+		_data = new T[_size];
 		for (unsigned int i = 0; i < _size; ++i)
-			data[i] = other.data[i];
+			_data[i] = src._data[i];
 	}
 	return (*this);
 }
 
 
 template <typename T>
-T& Array<T>::operator[](unsigned int index)
+T &Array<T>::operator[](unsigned int index)
 {
 	if (index >= _size)
 		throw (std::out_of_range("Index out of bounds"));
-	return (data[index]);
+	return (_data[index]);
 }
 
 template <typename T>
-const T& Array<T>::operator[](unsigned int index) const
+const T &Array<T>::operator[](unsigned int index) const
 {
 	if (index >= _size)
 		throw (std::out_of_range("Index out of bounds"));
-	return (data[index]);
+	return (_data[index]);
 }
 
 template <typename T>

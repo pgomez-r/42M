@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:35:08 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/05 19:37:50 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:54:54 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * TODO: Clean comments and eval_main_case before submit
- */
-
-#include "whatever.hpp"
+#include "../inc/whatever.hpp"
 #include <iostream>
 
 // /**
