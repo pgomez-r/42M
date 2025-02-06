@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:03:53 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/01/31 15:04:04 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:47:41 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 /**
- * TODO: Check if function implementation is allowd in this file
+ * TODO: Check if functions implementation is allowd in this file - SUBJECT
  */
 
 Base::~Base()
@@ -33,9 +36,6 @@ Base *generate(void)
 		return (new C());
 }
 
-/**
- * TODO: Check why there is no need to try/catch in this function
- */
 void identify(Base *p)
 {
 	if (!p)
@@ -61,15 +61,15 @@ void identify(Base& p)
 		std::cout << "Object of type A" << std::endl;
 		return ;
 	}
-	catch(std::bad_cast &e){
+	catch(...){
 	}
 	try
 	{
 		(void)dynamic_cast<B &>(p);
-		std::cout << "Object of type A B" << std::endl;
+		std::cout << "Object of type B" << std::endl;
 		return ;
 	}
-	catch(std::bad_cast &e){
+	catch(...){
 	}
 	try
 	{
@@ -77,7 +77,7 @@ void identify(Base& p)
 		std::cout << "Object of type A C" << std::endl;
 		return ;
 	}
-	catch(std::bad_cast &e){
-		std::cout << "Not valid reference: " << e.what() << std::endl;
+	catch(...){
+		std::cout << "Exception caught: dynamic_cast failed or not valid reference: " << std::endl;
 	}
 }

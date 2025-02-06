@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:03:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/01/31 15:03:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:47:17 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,11 @@
 
 int main()
 {
+	Base	*base = generate();
+
+	identify(base);
+	identify(*base);
+	delete (base);
+
 	return (0);
 }

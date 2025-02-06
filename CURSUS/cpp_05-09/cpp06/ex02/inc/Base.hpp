@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:02:48 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/01/31 15:02:49 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:40:23 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define BASE_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class   Base
 {

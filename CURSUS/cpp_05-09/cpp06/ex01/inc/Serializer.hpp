@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:55:05 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/01/31 14:56:21 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:45:02 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #define SERIALIZER_HPP
 
 #include <iostream>
+#include <stdint.h>
 
 /**
- * TODO: check if struct definition is allowed in the Class.hpp file by the norm
+ * TODO: check if struct definition is allowed in the Class.hpp file by the norm/subject
  */
 
 struct Data
