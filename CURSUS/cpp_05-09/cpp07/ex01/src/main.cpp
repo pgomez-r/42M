@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:46:25 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/06 15:16:54 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:02:52 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int main()
 // 	std::string stringArray[] = {"hello", "world", "this", "is", "iter"};
 
 // 	std::cout << "Int array: ";
-// 	iter(intArray, 5, printElement);
+// 	iter(intArray, 5, printElement<int>);
 // 	std::cout << std::endl;
 
 // 	std::cout << "Double array: ";
-// 	iter(doubleArray, 5, printElement);
+// 	iter(doubleArray, 5, printElement<double>);
 // 	std::cout << std::endl;
 
 // 	std::cout << "String array: ";

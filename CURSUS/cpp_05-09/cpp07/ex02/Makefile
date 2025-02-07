@@ -6,7 +6,7 @@
 #    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 14:51:45 by pgomez-r          #+#    #+#              #
-#    Updated: 2025/01/31 14:57:40 by pgomez-r         ###   ########.fr        #
+#    Updated: 2025/02/07 12:14:06 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,4 +46,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+leaks:
+	@valgrind --leak-check=full --track-origins=yes ./$(NAME)
+
+.PHONY: all clean fclean re leaks

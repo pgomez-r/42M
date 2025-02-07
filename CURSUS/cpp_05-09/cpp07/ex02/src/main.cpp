@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:18:08 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/06 17:12:36 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:01:29 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int main(void)
 			std::cout << "- assig_array[" << i << "] = " << assig_array[i] << std::endl;
 
 		// Test out of bounds exception
-		try{
+		try
+		{
 			std::cout << "Trying to acces [10] position in param_array with size '5'..." << std::endl;
 			std::cout << param_array[10] << std::endl;
 		}
