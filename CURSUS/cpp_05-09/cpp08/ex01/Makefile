@@ -18,7 +18,7 @@ CFLAGS = -std=c++98 -Wall -Wextra -Werror -I./inc
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC			= main
+SRC			= main Span
 
 SRCS		= $(addsuffix .cpp, $(addprefix $(SRC_PATH), $(SRC)))
 

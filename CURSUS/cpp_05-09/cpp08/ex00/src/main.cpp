@@ -61,12 +61,12 @@ int main()
 	deq.push_back(500);
 	try
 	{
-		easyFind(deq, 300);
+		easyFind(deq, 100);
 		easyFind(deq, 600);
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	return 0;
+	return (0);
 }

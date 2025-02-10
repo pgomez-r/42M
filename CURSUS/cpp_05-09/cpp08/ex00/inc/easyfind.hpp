@@ -18,10 +18,15 @@
 #include <vector>
 #include <iterator>
 
-class	notFound : public std::exception
+/**
+ * TODO: move code to .tpp file to ensure norm compliance
+ */
+
+class	NotFound : public std::exception
 {
 	public:
-		const char *what() const throw()
+		//virtual only in hpp, not tpp implementation
+		virtual const char *what() const throw()
 		{
 			return ("Element not found in the container");
 		}
@@ -34,11 +39,10 @@ void	easyFind(T &cont, int n)
 	if (std::find(cont.begin(), cont.end(), n) != cont.end())
 	{
 		int	pos = std::distance(cont.begin(), i);
-		std::cout << n << " value found in the container at index " << pos << std::endl;
+		std::cout << "Value \"" << n << "\" found in the container at index " << pos << std::endl;
 	}
 	else
-		throw (notFound());
+		throw (NotFound());
 }
-
 
 #endif
