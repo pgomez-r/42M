@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:16:31 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/10 14:43:14 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:52:12 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,9 @@
 #include <vector>
 #include <iterator>
 
-/**
- * TODO: move code to .tpp file to ensure norm compliance
- */
-
-class	NotFound : public std::exception
-{
-	public:
-		//virtual only in hpp, not tpp implementation
-		virtual const char *what() const throw()
-		{
-			return ("Element not found in the container");
-		}
-};
-
 template <typename T>
-void	easyFind(T &cont, int n)
-{
-	typename T::iterator	i = std::find(cont.begin(), cont.end(), n);
-	if (std::find(cont.begin(), cont.end(), n) != cont.end())
-	{
-		int	pos = std::distance(cont.begin(), i);
-		std::cout << "Value \"" << n << "\" found in the container at index " << pos << std::endl;
-	}
-	else
-		throw (NotFound());
-}
+void	easyFind(T &cont, int n);
+
+#include "../src/easyfind.tpp"
 
 #endif

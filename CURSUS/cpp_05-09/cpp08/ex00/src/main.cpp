@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:16:27 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/10 14:40:55 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:15:59 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int main()
 	vec.push_back(1);
 	vec.push_back(2);
 	vec.push_back(3);
-	vec.push_back(4);
+	vec.push_back(-4);
 	vec.push_back(5);
 	try
 	{
-		easyFind(vec, 3);
+		easyFind(vec, -4);
 		easyFind(vec, 6);
 	}
 	catch (const std::exception &e)

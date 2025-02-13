@@ -2,19 +2,33 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <sys/stat.h>
+#include <stdexcept>
+#include <string>
+
 class	BitcoinExchange
 {
 	private:
-		const std::string				_file;
-		std::map<std::string, float>	_rateValues;
+		std::map<std::string, float>	_rates;
+		std::string						_readLine;
+		std::string						_key;
+		float							_value;
+	public:
 		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &src);
-	public:
-		BitcoinExchange(const std::string &fileName);
+		//BitcoinExchange(const std::string &fileName);
 		BitcoinExchange &operator=(const BitcoinExchange &src);
 		~BitcoinExchange();
 
-		void	validateFile();
+		void	storeDataBase();
+		void	readFile(const std::string &path);
+		void    readLine();
+		bool	isLineValid();
+		void	calculateValue();
 };
 
 #endif

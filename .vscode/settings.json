@@ -90,7 +90,8 @@
 		"mlx42.h": "c",
 		"map": "cpp",
 		"list": "cpp",
-		"set": "cpp"
+		"set": "cpp",
+		"*.tpp": "cpp"
 	},
 	"todo-tree.tree.scanMode": "workspace"
 }
