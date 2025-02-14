@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:11:23 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/13 16:14:19 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:04:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	BitcoinExchange btc;
 	try
 	{
-		btc.readFile(av[1]);
+		btc.readInput(av[1]);
 	}
 	catch(const std::exception& e)
 	{
