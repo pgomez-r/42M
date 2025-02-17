@@ -13,21 +13,14 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
-/**
- * @brief: Performs a binary search on an array to find the position where
- * a value should be inserted. It uses a standard binary search algorithm:
- * (1) Calculate the middle index (mid).
- * (2) Compare the middle element with value.
- * (3) Adjust the search range (left and right) based on the comparison.
- * (4) Continue until the correct position is found.
- * @param mainChain the array to look for the correct position
- * @param value the value to insert in the array
- * @param left search range
- * @param right search range
- * @return size_t the index (left) where value should be inserted.
- * TODO: Won't be easier to just use std::lower_bound/std::upper_bound? CHECK(?)
- */
+// Function to generate Jacobsthal number
+long jacobNum(long n)
+{
+	return (round((pow(2, n + 1) + pow(-1, n)) / 3));
+}
+
 size_t binarySearch(const std::vector<int>& mainChain, int value, size_t left, size_t right)
 {
 	while (left <= right)
@@ -43,6 +36,56 @@ size_t binarySearch(const std::vector<int>& mainChain, int value, size_t left, s
 		}
 	}
 	return (left);
+}
+
+// Insert elements in Jacobsthal order
+// This function will be called to insert numbers from pend to main chain
+void insertJacobsthalOrder(std::vector<int>& mainChain, std::vector<int>& pend)
+{
+	int prev_jacobsthal = jacobNum(1);
+	int inserted_numbers = 0;
+	int offset = 0;
+
+	for (int k = 2; ; k++)
+	{
+		int curr_jacobsthal = jacobNum(k);
+		int jacobsthal_diff = curr_jacobsthal - prev_jacobsthal;
+
+		if (jacobsthal_diff > static_cast<int>(pend.size()))
+			break ;
+
+		int nbr_of_times = jacobsthal_diff;
+		std::vector<int>::iterator pend_it = pend.begin() + (jacobsthal_diff - 1);
+		std::vector<int>::iterator bound_it = mainChain.begin() + (curr_jacobsthal + inserted_numbers);
+
+		while (nbr_of_times)
+		{
+			int value = *pend_it;
+			size_t pos = binarySearch(mainChain, value, 0, mainChain.size() - 1);
+			std::vector<int>::iterator inserted = mainChain.insert(mainChain.begin() + pos, value);
+
+			nbr_of_times--;
+			pend_it = pend.erase(pend_it);
+			if (pend_it != pend.begin())
+				pend_it--;
+
+			// Handle offset logic
+			offset += (inserted - mainChain.begin()) == (curr_jacobsthal + inserted_numbers);
+			bound_it = mainChain.begin() + (curr_jacobsthal + inserted_numbers - offset);
+		}
+
+		prev_jacobsthal = curr_jacobsthal;
+		inserted_numbers += jacobsthal_diff;
+		offset = 0;
+	}
+
+	// Insert the first element (if any)
+	if (!pend.empty())
+	{
+		int value = pend[0];
+		size_t pos = binarySearch(mainChain, value, 0, mainChain.size() - 1);
+		mainChain.insert(mainChain.begin() + pos, value);
+	}
 }
 
 // Ford-Johnson (Merge-Insertion Sort)
@@ -87,32 +130,15 @@ void fordJohnsonSort(std::vector<int>& arr)
 		if (i + 1 < arr.size())
 			mainChain.push_back(arr[i + 1]); // Larger elements of the remaining pairs
 	}
-
-	// Step 4: Insert pend elements into the main chain using Jacobsthal order
-	// TDO: Jacobsthal order is not currently implemented in this code
-	for (size_t i = 0; i < pend.size(); ++i)
-	{
-		int value = pend[i];
-		size_t pos = binarySearch(mainChain, value, 0, mainChain.size() - 1);
-		mainChain.insert(mainChain.begin() + pos, value);
-	}
-
-	// (!) THIS IS PROBLEMATIC, AS WE DO HANDLE THE OOD NUMBER ABOVE (!)
-	// Step 5: Handle the odd element (if any)
-	// if (arr.size() % 2 != 0)
-	// {
-	// 	int oddElement = arr.back();
-	// 	size_t pos = binarySearch(mainChain, oddElement, 0, mainChain.size() - 1);
-	// 	mainChain.insert(mainChain.begin() + pos, oddElement);
-	// }
-
-	// Update the original array with the sorted result
+	// Step 4: Insert pend elements to mainChain in Jacobsthal order
+	insertJacobsthalOrder(mainChain, pend);
 	arr = mainChain;
 }
 
 int main()
 {
-	std::vector<int> numbers = {6, 2, 11, 0, 17, 9, 18, 14, 19, 5, 12};
+	std::vector<int> numbers = {6, 2, 11, 0, 17, 9, 18, 14, 19, 5, 12, 12, 13};
+	std::cout << "Vector size: " << numbers.size() << std::endl;
 
 	std::cout << "Original vector: ";
 	for (int num : numbers)
@@ -129,33 +155,3 @@ int main()
 
 	return (0);
 }
-
-/**
- * Explanation of the Code
- * Pair and Sort:
- *
- * The algorithm starts by pairing elements and sorting each pair so the smaller number comes first.
- * 
- * Recursively Sort Pairs:
- * 
- * The larger elements of the pairs are recursively sorted to build a hierarchy of sorted pairs.
- * 
- * Main Chain and Pend:
- * 
- * The mainChain is initialized with the smallest element and the larger elements of the pairs.
- * 
- * The pend contains the smaller elements of the remaining pairs.
- * 
- * Insert Pend Elements:
- * 
- * Elements from the pend are inserted into the mainChain using binary search to minimize comparisons.
- * 
- * Handle Odd Element:
- * 
- * If there’s an odd element (unpaired), it is inserted into the mainChain using binary search.
- * 
- * Final Sorted Vector:
- * 
- * The mainChain becomes the fully sorted vector. 
- * 
- */
