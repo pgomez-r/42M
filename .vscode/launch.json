@@ -6,12 +6,13 @@
 	"configurations": [
 		
 		{
-			"type": "lldb",
+			"name": "clang++ - Debug active file",
+			"type": "cppdbg",
 			"request": "launch",
-			"name": "Debug",
-			"program": "${workspaceFolder}/philosophers/debug",
-			"args": ["5", "800", "200", "200", "7"],
-			"cwd": "${workspaceFolder}"
+			"args": [],
+			"program": "${workspaceFolder}/CURSUS/cpp_05-09/cpp09/ex02/PmergeMe",
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
 		}
 	]
 }
