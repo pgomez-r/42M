@@ -13,6 +13,14 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#define RESET	"\033[0m"
+#define RED		"\033[31m"
+#define GREEN	"\033[32m"
+#define YELLOW	"\033[33m"
+#define BLUE	"\033[34m"
+#define MAGENTA	"\033[35m"
+#define CYAN	"\033[36m"	
+
 #include <vector>
 #include <list>
 #include <iostream>
@@ -65,38 +73,64 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 		it = next_it;
 		++it;
 	}
+	std::cout << "ARRAY AFTER SWAPING PAIRS: ";
+    for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+
 	// Step 2: Recursively sort the pairs by their larger element
 	if (arr.size() > 2)
 	{
-		Container	largerElements;
-		for (typename Container::iterator it = ++arr.begin(); it != arr.end(); std::advance(it, 2))
-			largerElements.push_back(*it);
+		Container	largerElements, smallerElements;
+		typename Container::iterator ptr = arr.begin();
+	
+		while(ptr != arr.end())
+		{
+			typename Container::iterator next = ptr;
+			++next;
+			if (next == arr.end())
+			{
+				smallerElements.push_back(*ptr);
+				break ;
+			}
+			largerElements.push_back(*next);
+			smallerElements.push_back(*ptr);
+			std::advance(ptr, 2);
+		}
 		this->_fordJohnsonSort(largerElements);
-
+		this->_fordJohnsonSort(smallerElements);
+	
 		// Rebuild the array based on sorted larger elements
 		Container	sortedArr;
 		typename Container::iterator larger_it = largerElements.begin();
-		typename Container::iterator arr_it = arr.begin();
-		while (larger_it != largerElements.end())
+		typename Container::iterator smaller_it = smallerElements.begin();
+		while (larger_it != largerElements.end() && smaller_it != smallerElements.end())
 		{
-			sortedArr.push_back(*arr_it);
+			sortedArr.push_back(*smaller_it);
 			sortedArr.push_back(*larger_it);
-			std::advance(arr_it, 2);
+			++smaller_it;
 			++larger_it;
 		}
-		if (arr.size() % 2 != 0)
-			sortedArr.push_back(arr.back());
+		while (smaller_it != smallerElements.end())
+		{
+			sortedArr.push_back(*smaller_it);
+			++smaller_it;
+		}
 		arr = sortedArr;
+		std::cout << "ARRAY AFTER REBUILDING: ";
+		for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
+			std::cout << *it << " ";
+		std::cout << std::endl;
 	}
-
 	// Step 3: Create the main chain and pend
-	Container mainChain;
+	Container mainChain, pend;
+
 	mainChain.push_back(*arr.begin());
 	typename Container::iterator second = arr.begin();
 	++second;
-	mainChain.push_back(*second);
+	if (second != arr.end())
+		mainChain.push_back(*second);
 
-	Container pend;
 	typename Container::iterator i = arr.begin();
 	std::advance(i, 2);
 	while (i != arr.end())
@@ -106,17 +140,34 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 		++next;
 		if (next != arr.end())
 			mainChain.push_back(*next);
+		else
+			break ;
 		std::advance(i, 2);
 	}
-
+	std::cout << "mainChain: ";
+		for (typename Container::iterator it = mainChain.begin(); it != mainChain.end(); ++it)
+			std::cout << *it << " ";
+		std::cout << std::endl;
+	std::cout << "pend: ";
+		for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it)
+			std::cout << *it << " ";
+		std::cout << std::endl;
 	// Step 4: Insert pend elements to mainChain in Jacobsthal order
-	this->_insertJacobsthalOrder(mainChain, pend);
+	if (pend.size() > 0)
+		this->_insertJacobsthalOrder(mainChain, pend);
 	arr = mainChain;
+	std::cout << "ARRAY AFTER INSERTING PEND: ";
+	for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
 }
 
 template <typename Container>
 void 	PmergeMe::_insertJacobsthalOrder(Container &mainChain, Container &pend)
 {
+	if (pend.empty())
+		return ;
+
 	int prev_jacobsthal = static_cast<int>(this->_jacobNum(1));
 	int inserted_numbers = 0;
 	int offset = 0;

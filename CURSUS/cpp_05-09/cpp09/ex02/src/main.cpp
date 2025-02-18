@@ -12,43 +12,78 @@
 
 #include "../inc/PmergeMe.hpp"
 
+template <typename Container>
+bool	isSorted(const Container &arr)
+{
+	if (arr.size() < 2)
+		return (true);
+	typename Container::const_iterator it = arr.begin();
+	typename Container::const_iterator next_it = it;
+	++next_it;
+	while (next_it != arr.end())
+	{
+		if (*it > *next_it)
+			return (false);
+		++it;
+		++next_it;
+	}
+	return (true);
+}
+
 int	main()
 {
-	std::vector<int> vec;
-	std::list<int> lst;
+	std::vector<int>	vec;
+	std::list<int>		lst;
 	
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
 	
-	for (int i = 0; i < 21; ++i)
+	for (int i = 0; i < 11; ++i)
 	{
 		int value = std::rand() % 100;
 		vec.push_back(value);
-		lst.push_back(value);
+		// vec.push_back(93);
+		// lst.push_back(93);
+		// vec.push_back(95);
+		// lst.push_back(95);
+		// vec.push_back(34);
+		// lst.push_back(34);
+		// vec.push_back(32);
+		// lst.push_back(32);
 	}
 
-	std::cout << "Vector before: ";
+	std::cout << "VECTOR OF SIZE: " << vec.size() << " - before: ";
 	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 
-	std::cout << "List before:   ";
+	std::cout << "LIST OF SIZE:   " << lst.size() << " - before: ";
 	for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
 		std::cout << *it << " ";
+	std::cout << std::endl;
 	std::cout << std::endl;
 
 	PmergeMe merger;
 	merger.sortVector(vec);
-	merger.sortList(lst);
+	std::cout << std::endl;
+	//merger.sortList(lst);
 
-	std::cout << "Vector after:  ";
+	std::cout << YELLOW << "Vector after:  ";
 	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << " ";
-	std::cout << std::endl;
+	std::cout << RESET << std::endl;
+	if (isSorted(vec))
+		std::cout << GREEN << "VECTOR OF SIZE: " << vec.size() << " ORDER: OK" << RESET << std::endl;
+	else
+		std::cout << RED << "VECTOR OF SIZE: " << vec.size() << " ORDER: NOK" << RESET << std::endl;
 
-	std::cout << "List after:    ";
-	for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	// std::cout << YELLOW << "List after:    ";
+	// for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
+	// 	std::cout << *it << " ";
+	// std::cout << RESET << std::endl;
+	// if (isSorted(lst))
+	// 	std::cout << GREEN << "LIST OF SIZE: " << lst.size() << " ORDER: OK" << RESET << std::endl;
+	// else
+	// 	std::cout << RED << "LIST OF SIZE: " << lst.size() << " ORDER: NOK" << RESET << std::endl;
 
 	return (0);	
 }

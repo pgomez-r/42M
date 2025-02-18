@@ -14,13 +14,11 @@
 
 PmergeMe::PmergeMe()
 {
-	std::cout << "PmergeMe object created with default constructor" << std::endl;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &src)
 {
 	(void)src;
-	std::cout << "PmergeMe object created with copy constructor" << std::endl;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &src)
@@ -31,9 +29,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &src)
 
 PmergeMe::~PmergeMe()
 {
-	std::cout << "PmergeMe object destroyed" << std::endl;
 }
-
 
 void	PmergeMe::sortVector(std::vector<int> &arr)
 {
