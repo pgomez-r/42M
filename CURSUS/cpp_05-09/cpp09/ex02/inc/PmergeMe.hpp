@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 01:39:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/18 10:56:33 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:42:36 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,32 @@ class	PmergeMe
 };
 
 template <typename Container>
+void simpleInsert(Container &mainChain, Container &pend)
+{
+	for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it)
+	{
+		typename Container::iterator insert_pos = std::lower_bound(mainChain.begin(), mainChain.end(), *it);
+		mainChain.insert(insert_pos, *it);
+	}
+}
+
+template <typename Container>
+void	printContainer(const Container &arr, const std::string &msg)
+{
+	if (!msg.empty())
+		std::cout << msg << std::endl;
+	//std::cout << "Size: " << arr.size() << std::endl;
+	for (typename Container::const_iterator it = arr.begin(); it != arr.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+template <typename Container>
 void 	PmergeMe::_fordJohnsonSort(Container &arr)
 {
 	if (arr.size() < 2)
 		return ;
-
+	
 	// Step 1: Pair elements and sort each pair
 	typename Container::iterator it = arr.begin();
 	while (it != arr.end())
@@ -73,10 +94,6 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 		it = next_it;
 		++it;
 	}
-	std::cout << "ARRAY AFTER SWAPING PAIRS: ";
-    for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
 
 	// Step 2: Recursively sort the pairs by their larger element
 	if (arr.size() > 2)
@@ -90,7 +107,10 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 			++next;
 			if (next == arr.end())
 			{
-				smallerElements.push_back(*ptr);
+				if (!smallerElements.empty() && *ptr > smallerElements.back())
+					largerElements.push_back(*ptr);
+				else
+					smallerElements.push_back(*ptr);
 				break ;
 			}
 			largerElements.push_back(*next);
@@ -99,8 +119,8 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 		}
 		this->_fordJohnsonSort(largerElements);
 		this->_fordJohnsonSort(smallerElements);
-	
-		// Rebuild the array based on sorted larger elements
+
+		// Step 2.5: Rebuild the array based on sorted larger elements
 		Container	sortedArr;
 		typename Container::iterator larger_it = largerElements.begin();
 		typename Container::iterator smaller_it = smallerElements.begin();
@@ -116,11 +136,12 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 			sortedArr.push_back(*smaller_it);
 			++smaller_it;
 		}
+		while (larger_it != largerElements.end())
+		{
+			sortedArr.push_back(*larger_it);
+			++larger_it;
+		}
 		arr = sortedArr;
-		std::cout << "ARRAY AFTER REBUILDING: ";
-		for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
-			std::cout << *it << " ";
-		std::cout << std::endl;
 	}
 	// Step 3: Create the main chain and pend
 	Container mainChain, pend;
@@ -144,22 +165,11 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 			break ;
 		std::advance(i, 2);
 	}
-	std::cout << "mainChain: ";
-		for (typename Container::iterator it = mainChain.begin(); it != mainChain.end(); ++it)
-			std::cout << *it << " ";
-		std::cout << std::endl;
-	std::cout << "pend: ";
-		for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it)
-			std::cout << *it << " ";
-		std::cout << std::endl;
 	// Step 4: Insert pend elements to mainChain in Jacobsthal order
 	if (pend.size() > 0)
+		//simpleInsert(mainChain, pend);
 		this->_insertJacobsthalOrder(mainChain, pend);
 	arr = mainChain;
-	std::cout << "ARRAY AFTER INSERTING PEND: ";
-	for (typename Container::iterator it = arr.begin(); it != arr.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
 }
 
 template <typename Container>
@@ -170,7 +180,6 @@ void 	PmergeMe::_insertJacobsthalOrder(Container &mainChain, Container &pend)
 
 	int prev_jacobsthal = static_cast<int>(this->_jacobNum(1));
 	int inserted_numbers = 0;
-	int offset = 0;
 
 	for (int k = 2; ; k++)
 	{
@@ -186,36 +195,32 @@ void 	PmergeMe::_insertJacobsthalOrder(Container &mainChain, Container &pend)
 		typename Container::iterator bound_it = mainChain.begin();
 		std::advance(bound_it, curr_jacobsthal + inserted_numbers);
 
-		while (nbr_of_times)
+		while (nbr_of_times > 0 && pend_it != pend.end())
 		{
 			int value = *pend_it;
 			size_t pos = this->_binarySearch(mainChain, value, 0, mainChain.size() - 1);
 			typename Container::iterator insert_pos = mainChain.begin();
 			std::advance(insert_pos, pos);
-			typename Container::iterator inserted = mainChain.insert(insert_pos, value);
-
-			nbr_of_times--;
+		
+			mainChain.insert(insert_pos, value);
 			pend_it = pend.erase(pend_it);
-			if (pend_it != pend.begin())
-				pend_it--;
-	
-			offset += (std::distance(mainChain.begin(), inserted)) == (curr_jacobsthal + inserted_numbers);
-			bound_it = mainChain.begin();
-			std::advance(bound_it, curr_jacobsthal + inserted_numbers - offset);
-		}
+			if (pend_it != pend.begin() && pend_it != pend.end())
+				--pend_it;
+			nbr_of_times--;
 
+		}
 		prev_jacobsthal = curr_jacobsthal;
 		inserted_numbers += jacobsthal_diff;
-		offset = 0;
 	}
 
-	if (!pend.empty())
+	while (!pend.empty())
 	{
 		int value = *pend.begin();
 		size_t pos = this->_binarySearch(mainChain, value, 0, mainChain.size() - 1);
 		typename Container::iterator insert_pos = mainChain.begin();
-		std::advance(insert_pos, pos);
+		std::advance(insert_pos, pos);	
 		mainChain.insert(insert_pos, value);
+		pend.erase(pend.begin());
 	}
 }
 
