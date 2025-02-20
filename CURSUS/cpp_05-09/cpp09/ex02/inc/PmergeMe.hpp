@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 01:39:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/19 14:42:36 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/20 13:33:57 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 #define RED		"\033[31m"
 #define GREEN	"\033[32m"
 #define YELLOW	"\033[33m"
-#define BLUE	"\033[34m"
+#define ORANGE	"\033[34m"
 #define MAGENTA	"\033[35m"
 #define CYAN	"\033[36m"	
+#define BLUE	"\033[34m"
 
 #include <vector>
 #include <list>
@@ -30,6 +31,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <climits>
+#include <sstream>
+#include <iomanip>
 
 /**
  * Class PmergeMe; canonical form elements + sortVector + sortList
@@ -54,27 +58,18 @@ class	PmergeMe
 		size_t	_binarySearch(const Container &mainChain, int value, size_t left, size_t right);
 };
 
-template <typename Container>
-void simpleInsert(Container &mainChain, Container &pend)
-{
-	for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it)
-	{
-		typename Container::iterator insert_pos = std::lower_bound(mainChain.begin(), mainChain.end(), *it);
-		mainChain.insert(insert_pos, *it);
-	}
-}
+/**
+ * Parsing and aux functions used in main.cpp
+ * (i) Subject does not ask for any class implementation, but
+ * 		it does limit the files into PmergeMe.cpp/hpp dnd main.cpp;
+ * 	For better readability, main functions are defined here
+ */
+bool 	isNumInVector(const std::vector<int>& vec, int num);
 
-template <typename Container>
-void	printContainer(const Container &arr, const std::string &msg)
-{
-	if (!msg.empty())
-		std::cout << msg << std::endl;
-	//std::cout << "Size: " << arr.size() << std::endl;
-	for (typename Container::const_iterator it = arr.begin(); it != arr.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
-
+/**
+ * Sorting template methods definition
+ * (i) Subject do not allow .tpp file...
+ */
 template <typename Container>
 void 	PmergeMe::_fordJohnsonSort(Container &arr)
 {
@@ -167,7 +162,6 @@ void 	PmergeMe::_fordJohnsonSort(Container &arr)
 	}
 	// Step 4: Insert pend elements to mainChain in Jacobsthal order
 	if (pend.size() > 0)
-		//simpleInsert(mainChain, pend);
 		this->_insertJacobsthalOrder(mainChain, pend);
 	arr = mainChain;
 }
@@ -255,12 +249,5 @@ size_t 	PmergeMe::_binarySearch(const Container &mainChain, int value, size_t le
 	}
 	return (left);
 }
-
-
-/**
- * Auxiliary functions for the main.cpp file (or leave them in the main.cpp file?)
- * TODO: check if allowed to add functions in Class.cpp file that are not part of the class
- */
-// Will add functions here as needed
 
 #endif
