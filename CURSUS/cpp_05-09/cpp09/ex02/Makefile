@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+         #
+#    By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 14:51:45 by pgomez-r          #+#    #+#              #
-#    Updated: 2025/02/18 11:14:28 by pgruz11          ###   ########.fr        #
+#    Updated: 2025/02/21 18:13:16 by pgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PmergeMe
 
 CC = c++
-CFLAGS = -g -std=c++98 -Wall -Wextra -Werror -I./inc
+CFLAGS = -std=c++98 -Wall -Wextra -Werror -I./inc
 
 SRC_PATH = src/
 OBJ_PATH = obj/

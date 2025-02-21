@@ -52,7 +52,7 @@ Cualquiera de estos significa que debes marcar el proyecto con *"Función prohib
 *Tricky tests*
 - 2011-01-03 | 1....2 -> No es un número válido, pero muchos se lo comen como '1' y ejecutan con normalidad
 
-- Si la fecha no existe en base de datos: ir a fecha más cercana *INFERIOR* (si no hay inferior, más cercana superior, pero solo en caso que no haya inferior)
+- Si la fecha no existe en base de datos: ir a fecha más cercana *INFERIOR*; en mi caso he decidido también gestionar cuando una fecha es inferior que cualquiera de la base de datos, en ese caso usamos la primera fecha.
 
 ### Ejercicio 01: Notación polaca inversa
 *Revisión de código*
@@ -69,25 +69,35 @@ Cualquiera de estos significa que debes marcar el proyecto con *"Función prohib
 
 - El programa se ejecuta correctamente utilizando diferentes fórmulas de tu elección.
 
+- Subject: Your program must take an inverted Polish mathematical expression as *an argument.*
+
 - No es necesario que el programa maneje expresiones con paréntesis o números decimales.
 
 *Uso avanzado*
 
 Aquí hay algunas pruebas:
 
-8 9 * 9 - 9 - 9 - 4 - 1 +
+./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
 
 > Resultado: 42
 
 
-9 8 * 4 * 4 / 2 + 9 -8 -8 -1 -6 -
+./RPN "9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -"
 
 > Resultado: 42
 
 
-1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /
+./RPN "1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /"
 
 > Resultado: 15
+
+*Tricky tests*
+
+- División / 0 debe dar error.
+
+- Inputs con operadores pegados al número:
+./RPN "9 8 * 4 * 4 / 2 + 9 -8 -8 -1 -6 -"
+Gestionarlo de alguna forma, o bien como invalid character/number, o interpretando los operadores como si estuvieran separados
 
 ### Ejercicio 02: PmergeMe
 
@@ -112,7 +122,7 @@ Aquí hay algunas pruebas:
 - Ejecuta el programa utilizando el siguiente comando:
 
 ```
-./PmergeMe shuf -i 1-1000 -n 3000 | tr "\n" " "
+./PmergeMe `shuf -i 1-1000 -n 3000 | tr "\n" " "`
 ```
 
 - Explicar la diferencia de tiempo utilizada para cada contenedor seleccionado.

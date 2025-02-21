@@ -9,8 +9,8 @@
 			"name": "clang++ - Debug active file",
 			"type": "cppdbg",
 			"request": "launch",
-			"args": ["\"4 8 2\"", "4", "8", "\"21 0 524 5 7812\""],
-			"program": "${workspaceFolder}/CURSUS/cpp_05-09/cpp09/ex02/PmergeMe",
+			"args": ["9 -8 -1"],
+			"program": "${workspaceFolder}/CURSUS/cpp_05-09/cpp09/ex01/RPN",
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 		}

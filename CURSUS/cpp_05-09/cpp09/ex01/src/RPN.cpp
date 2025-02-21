@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 23:01:47 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/15 00:06:33 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:09:53 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,24 @@ RPN::~RPN()
 
 void RPN::calculate()
 {
-	std::istringstream iss(this->_input);
-	std::string token;
+	std::string			clean_input;
+	for (size_t i = 0; i < this->_input.size(); i++)
+	{
+		char c = this->_input[i];
+		if (isOp(std::string(1, c)))
+		{
+			if (!clean_input.empty() && this->_input[i - 1] != ' ')
+				clean_input += ' ';
+			clean_input += c;
+			if (i < this->_input.size() - 1 && this->_input[i + 1] != ' ')
+				clean_input += ' ';
+		}
+		else
+			clean_input += c;
+	}
 
+	std::istringstream	iss(clean_input);
+	std::string 		token;
 	while (std::getline(iss, token, ' '))
 	{
 		if (isOp(token))
