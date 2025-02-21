@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 20:07:25 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/30 17:07:27 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:09:22 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int	main(int ac, char **av)
 			flag = ft_action(input, agenda);
 		std::cin.clear();
 	}
+
 	return (0);
 }

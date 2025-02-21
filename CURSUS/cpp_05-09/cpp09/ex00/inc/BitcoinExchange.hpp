@@ -30,7 +30,6 @@ class	BitcoinExchange
 
 		void							storeDataBase();
 		void							readInput(const std::string &path);
-		void    						handleLine();
 
 		bool							parseLine();
 		bool							checkDate();

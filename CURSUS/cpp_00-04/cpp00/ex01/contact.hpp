@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:46:54 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/04/30 17:11:13 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:06:40 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class	Contact
 		std::string	darkestSecret;
 		int			index;
 		std::string	ft_formatStr(std::string str);
+	
 	public:
 		Contact();
 		~Contact();

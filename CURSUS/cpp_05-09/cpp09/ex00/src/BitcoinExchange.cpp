@@ -6,14 +6,10 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 23:10:46 by pgomez-r          #+#    #+#             */
-/*   Updated: 2025/02/14 23:17:56 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:52:51 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * TODO: refactor - handle vs parse
- * TODO: refactor - handle vs parse
- */
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange()
@@ -94,17 +90,12 @@ void	BitcoinExchange::readInput(const std::string &path)
 		throw (std::runtime_error("Could not find or open file: " + path));
 	while (std::getline(file, this->_readLine))
 	{	
-		this->handleLine();
+		if (this->parseLine())
+			this->calculateValue();
 		this->_readLine.clear();
 		this->_firstLine = false;
 	}
 	file.close();
-}
-
-void	BitcoinExchange::handleLine()
-{
-	if (this->parseLine())
-		this->calculateValue();
 }
 
 bool	BitcoinExchange::parseLine()
@@ -126,7 +117,13 @@ bool	BitcoinExchange::parseLine()
 	value_str.erase(value_str.find_last_not_of(" \t\n\r\f\v") + 1);
 	if (!this->checkDate())
 		return (false);
-	this->_value = atof(value_str.c_str());
+	char *ptr;
+	this->_value = strtof(value_str.c_str(), &ptr);
+	if (*ptr != '\0')
+	{
+		std::cout << "Error: invalid value format: " << value_str << std::endl;
+		return (false);
+	}
 	if (!this->checkValue())
 		return (false);
 	return (true);
@@ -233,10 +230,23 @@ void	BitcoinExchange::calculateValue()
 	for (std::map<std::string, float>::iterator i = _rates.begin(); i != _rates.end(); ++i)
 	{
 		int diff = dateDifference(i->first, this->_key);
-		if (diff < minDiff)
+		if (diff <= 0 && abs(diff) < minDiff)
 		{
-			minDiff = diff;
+			minDiff = abs(diff);
 			closest = i;
+		}
+	}
+	if (closest == _rates.end())
+	{
+		minDiff = INT_MAX;
+		for (std::map<std::string, float>::iterator i = _rates.begin(); i != _rates.end(); ++i)
+		{
+			int diff = dateDifference(i->first, this->_key);
+			if (diff > 0 && diff < minDiff)
+			{
+				minDiff = diff;
+				closest = i;
+			}
 		}
 	}
 	exchage_value = closest->second * this->_value;
@@ -254,5 +264,5 @@ int	BitcoinExchange::dateDifference(const std::string &date1, const std::string 
 	int month2 = atoi(date2.substr(5, 2).c_str());
 	int day2 = atoi(date2.substr(8, 2).c_str());
 
-	return (abs((year1 - year2) * 365 + (month1 - month2) * 30 + (day1 - day2)));
+	return ((year1 - year2) * 365 + (month1 - month2) * 30 + (day1 - day2));
 }

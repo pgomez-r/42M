@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 23:04:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2024/05/31 11:30:13 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:19:50 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <iostream>
 
-class   ClapTrap{
+class   ClapTrap
+{
 	private:
 		std::string				_name;
 		unsigned int			_hitPts;
