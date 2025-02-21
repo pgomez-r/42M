@@ -6,21 +6,11 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 01:35:56 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/20 13:44:02 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/21 02:03:59 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/PmergeMe.hpp"
-
-template <typename Container>
-void	printContainer(const Container &arr, const std::string &msg)
-{
-	if (!msg.empty())
-		std::cout << msg << std::endl;
-	for (typename Container::const_iterator it = arr.begin(); it != arr.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
 
 template <typename Container>
 bool	isSorted(const Container &arr)
@@ -40,40 +30,6 @@ bool	isSorted(const Container &arr)
 	return (true);
 }
 
-std::string	validateInput(std::vector<std::string> av)
-{
-	for (size_t i = 0; i < av.size(); i++)
-	{
-		long	n = strtol(av[i].c_str(), NULL, 10);
-		if (n == 0 && av[i] != "0")
-			return ("non-number arguments not allowed");
-		if (av[i][0] == '-')
-			return ("negative numbers not allowed");
-		if (n > INT_MAX)
-			return ("only integer numbers allowed");
-	}
-	return ("");
-}
-
-std::vector<std::string>	argvToStr(int ac, char **av)
-{
-	std::vector<std::string>	args;
-	for (int i = 1; i < ac; i++)
-		args.push_back(std::string(av[i]));
-	if (args.size() == 1)
-	{
-		std::vector<std::string>	split;
-		std::string word;
-		std::stringstream ss(args[0]);
-		while (getline(ss, word, ' '))
-		{
-			if(!word.empty())
-				args.push_back(word);
-		}
-		return (split);
-	}
-	return (args);
-}
 template <typename Container>
 Container	initContainer(std::vector<std::string> &args)
 {
@@ -136,9 +92,9 @@ int	main(int ac, char **av)
 		lst_color = RED;
 	}
 	std::cout << "Time to process a range of " << print_vec.size() << " elements with " << vec_color
-		<< "std::vector: " << std::fixed << std::setprecision(6) << vec_time << RESET << std::endl;
+		<< "std::vector: " << std::fixed << std::setprecision(6) << vec_time << " us" << RESET << std::endl;
 	std::cout << "Time to process a range of " << print_vec.size() << " elements with " << lst_color
-		<< "std::list  : " << std::fixed << std::setprecision(6) << lst_time << RESET << std::endl;
+		<< "std::list  : " << std::fixed << std::setprecision(6) << lst_time << " us" << RESET << std::endl;
 	
 	return (0);	
 }

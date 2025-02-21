@@ -6,7 +6,7 @@
 /*   By: pgruz11 <pgruz11@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 01:39:05 by pgruz11           #+#    #+#             */
-/*   Updated: 2025/02/20 13:33:57 by pgruz11          ###   ########.fr       */
+/*   Updated: 2025/02/21 02:08:08 by pgruz11          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #define RED		"\033[31m"
 #define GREEN	"\033[32m"
 #define YELLOW	"\033[33m"
-#define ORANGE	"\033[34m"
 #define MAGENTA	"\033[35m"
 #define CYAN	"\033[36m"	
 #define BLUE	"\033[34m"
@@ -64,8 +63,8 @@ class	PmergeMe
  * 		it does limit the files into PmergeMe.cpp/hpp dnd main.cpp;
  * 	For better readability, main functions are defined here
  */
-bool 	isNumInVector(const std::vector<int>& vec, int num);
-
+std::vector<std::string>	argvToStr(int ac, char **av);
+std::string					validateInput(std::vector<std::string> av);
 /**
  * Sorting template methods definition
  * (i) Subject do not allow .tpp file...

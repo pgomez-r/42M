@@ -9,7 +9,7 @@
 			"name": "clang++ - Debug active file",
 			"type": "cppdbg",
 			"request": "launch",
-			"args": [],
+			"args": ["\"4 8 2\"", "4", "8", "\"21 0 524 5 7812\""],
 			"program": "${workspaceFolder}/CURSUS/cpp_05-09/cpp09/ex02/PmergeMe",
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
