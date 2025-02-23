@@ -1,4 +1,4 @@
-nstalling Debian Linux in Virtualbox
+Installing Debian Linux in VM with Virtualbox 
 
 ## Step 1. Download
 
