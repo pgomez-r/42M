@@ -35,7 +35,7 @@ So, let's start configuring the server with Nginx.
 
 ## Step 1. Introduction to Docker
 
-A docker image is a set of environments required to run certain software. It differs from virtualbox-type emulators in that the container does not contain a full-fledged operating system, the container uses the Linux kernel and not everything is placed inside it, but only the programs and libraries necessary to run the software.
+A docker image is a set of environments required to run certain software. It differs from virtualbox-type emulators in that the container does not contain a full operating system, the container uses the Linux kernel and not everything is placed inside it, but only the programs and libraries necessary to run the software.
 
 Thus, the container weighs significantly less than the emulated system. Let's see this clearly. Let's see how much our OS weighs when installed.:
 
@@ -47,17 +47,17 @@ And let's compare this with the same image of the eleventh debian on [Docker Hub
 
 The image weighs only 50 MB in compressed form (the compressed Debian disk weighed 950 MB!). After unpacking, this image will weigh about 150 MB. That's such a significant difference. And this is far from the limit.
 
-That's because you don't need a full-fledged operating system to run a separate software, just a working kernel and some environment made up of all the dependencies - modules, libraries, packages, and scripts. This is how wine works, the very name of which says that Wine Is Not An Emulator. It helps to run Windows applications in the Linux environment, installing only the necessary dependencies and nothing superfluous.
+That's because you don't need a full operating system to run a separate software, just a working kernel and some environment made up with all the dependencies - modules, libraries, packages, and scripts.
 
-We will use the lightweight alpine system, which is used for containers and microcontrollers, but can also be installed in an emulator or on real hardware. The system is extremely light in weight: about 50 megabytes with the core, 30 megabytes unpacked and 2.5 (!) megabytes compressed (yes, linux repositories use advanced compression methods to save traffic, but a full-fledged OS weighing 2.5 MB is still surprising):
+We will use the lightweight alpine system, which is used for containers and microcontrollers, but can also be installed in an emulator or on real hardware. The system is extremely light in weight: about 50 megabytes with the core, 30 megabytes unpacked and 2.5 megabytes compressed:
 
 ![nginx configuration](media/nginx_deploy/step_7.png)
 
-The difference between the compressed format and debian is as much as 20 times! This was achieved by optimizing everything and everything, but it also imposes limitations. So the system uses a lightweight apk instead of the usual apt, there is no full-fledged bash, sh is used instead, of course, [its own set of repositories] (https://pkgs.alpinelinux.org/packages "alpine package list") and many other features.
+The difference between the compressed format and debian is as much as 20 times! This was achieved by optimizing everything and everything, but it also imposes limitations. So the system uses a lightweight apk instead of the usual apt, there is no full-developed bash, sh is used instead, of course, [its own set of repositories] (https://pkgs.alpinelinux.org/packages "alpine package list") and many other features.
 
 However, as with any open-source linux, a lot can be added here. And it is this distr that has become the main one for many docker projects due to its low weight, high speed and high fault tolerance. The larger and more complex the system, the more points of failure, which means that lightweight distributions have great advantages in this case.
 
-So, when we have finished the review and figured out the difference between emulators and containers, we proceed to study how Docker works.
+So, when we have finished the review and figured out the difference between virtual machine and containers, we proceed to study how Docker works.
 
 ## Step 2. Create a Dockerfile
 
@@ -71,19 +71,21 @@ Creating a Dockerfile in it:
 
 ```nano Dockerfile```
 
-And we write in it the FROM instruction, which indicates from which image we will deploy our container. By subject, we are prohibited from specifying labels like alpine:latest, which are automatically assigned to the latest versions of alpine in the dockerhub repositories. Therefore, we go to the [official website](https://www.alpinelinux.org / "alpine versions") of the system and see which is the latest release. At the time of writing the guide, it was alpine 3.16.2, but for the FROM instructions, it will be enough to specify the younger version.:
+And we write in it the FROM instruction, which indicates from which image we will deploy our container. By subject, we are prohibited from specifying labels like alpine:latest, which are automatically assigned to the latest versions of alpine in the dockerhub repositories. Therefore, we go to the [official website](https://www.alpinelinux.org / "alpine versions") of the system and see which is the latest release. At the time of writing the guide, it was alpine 3.21, but for the FROM instructions, it will be enough to specify the younger version.:
 
-```FROM alpine:3.16```
+```FROM alpine:3.21```
 
-More information about the instructions can be found in [this video](https://www.youtube.com/watch?v=wskg5903K8I "docker by Anton Pavlenko"), here we will analyze just a few of them.
+More information about Dockerfile instructions can be found in [this video](https://www.youtube.com/watch?v=wskg5903K8I "docker by Anton Pavlenko"), here we will analyze just a few of them.
 
 Next, we specify which software and how we want to install it inside the container. The RUN instruction will help us with this.
 
-The `RUN` instruction creates a new image layer with the result of the called command, similar to how the snapshot system saves changes in a virtual machine. Actually, the image itself consists of such layers of changes.
+The `RUN` instruction creates a new image layer with the result of the called command, similar to how the snapshot system saves changes in a virtual machine. Actually, the image itself consists of this kind of layers of changes.
 
-It is not possible to launch the application directly from `RUN`. In some cases, this can be done through a script, but in general, the `CMD` and `ENTRYPOINT" instructions are used to run. "RUN` creates a static layer, changes inside which are written to the image, but do not cause anything, `CMD` and `ENTRYPOINT" run something, but DO NOT WRITE changes to the image. Therefore, it is not necessary to execute scripts with them, the result of which must be "put" into the final image or partition. There is a "RUN" for this.
+It is not possible to launch the application directly from `RUN`. In some cases, this can be done through a script, but in general, the `CMD` and `ENTRYPOINT" instructions are used to run. 
+`RUN` creates a static layer, changes inside which are written to the image, but do not cause anything. 
+`CMD` and `ENTRYPOINT` run something, but DO NOT WRITE changes to the image. Therefore, it is not necessary to execute scripts with them.
 
-We can say that the changes made through `RUN" are static. For example, installing packages in a system is usually done like this:
+We can say that the changes made through `RUN` are static. For example, installing packages in a system is usually done like this:
 
 ```RUN	apk update && apk upgrade && apk add --no-cache nginx```
 
@@ -97,7 +99,7 @@ Eventually we have to run the installed configuration. To do this, use the instr
 
 ```CMD ["nginx", "-g", "daemon off;"]```
 
-This way we run nginx directly, rather than in daemon mode. Daemon mode, on the other hand, is a startup mode in which an application starts in the background, or in Windows parlance, as a service. For the convenience of debugging, we disable this mode and receive all nginx logs directly into the tty of the container.
+This way we run nginx directly, rather than in daemon mode. Daemon mode, on the other hand, is a startup mode in which an application starts in the background, or as in Windows equivalence, a service. For the convenience of debugging, we disable this mode and receive all nginx logs directly into the tty(?) of the container.
 
 ```
 FROM alpine:3.16
