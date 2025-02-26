@@ -1,5 +1,9 @@
 # Installing the necessary software in Debian
 
+### About this step
+
+As said before, this guide uses a Debian system without integrated GUI; if you chose a OS that do have GUI by default, some of the following steps will not be needed.
+
 ### Step 1. Login to the system
 
 After installation and the first download, we will be asked to choose our system.:
@@ -22,7 +26,7 @@ Update the repositories with the `apt update` command:
 
 After that, we will install the applications we need with the following command:
 
-```apt install -y sudo ufw docker docker-compose make openbox xinit kitty firefox-esr```
+```apt install -y sudo ufw openssh-server docker docker-compose make openbox xinit kitty firefox-esr```
 
 We will enter this command manually, since it is impossible to copy-paste into a virtual machine. Later, we will open the ports and connect to the VM via the console, as to a local server.
 
@@ -68,8 +72,4 @@ So, we've checked all the software we need. Now we can exit the GUI by selecting
 
 ![software installation](media/install_soft/install_step_10.png)
 
-So, we've made the necessary settings, and now we have something called lol.:
-
-![system installation](media/stickers/lol.png)
-
-And in the next guide, we will introduce ports to this something.
+So, we've made the necessary settings.

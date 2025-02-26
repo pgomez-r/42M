@@ -1,5 +1,11 @@
 Installing Debian Linux in VM with Virtualbox 
 
+### About this step
+
+The original guide this translation follows uses a light version of debian without "native" GUI, but in my case, I did install Debian with GUI, as we need to use a web browser within the VM during the evaluation, so I find this way easier. 
+
+Also, some of the following steps may differ from what you get while installing the OS in your VM, depeding on the OS that you chose, but the important thing is to know the minimum or recommended settings for your VM.
+
 ## Step 1. Download
 
 Go to the [official website](https://www.debian.org / "download debian") and download the web installer
