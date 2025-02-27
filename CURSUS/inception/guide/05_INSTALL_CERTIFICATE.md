@@ -4,8 +4,6 @@
 
 According to the assignment, we need to install a self-signed ssl certificate and work on port 443, as well as change our domain name to username.42.fr . Let's start with a self-signed certificate - SSL.
 
-![system installation](media/stickers/ensign.png)
-
 Self-signed certificates are usually used for local development. And to generate a self-signed certificate, it is very convenient to use the mkcert utility.
 
 Update the list of repositories:

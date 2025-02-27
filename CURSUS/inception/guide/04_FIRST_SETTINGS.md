@@ -72,7 +72,7 @@ After a while, our container will crash and we will see a message about a succes
 
 This means that we can test the running container and the correct configuration settings. Open the browser of the host machine to check it.
 
-If we did everything correctly in step 02 during port forwarding, then port 80 is open, and by logging into the browser at the local host address ``http://127.0.0.1 `` (*exactly http, not https!*) we will see the following picture:
+If we did everything correctly in step 02 during port forwarding, then port 80 is open (if you set HTTP rule to a different port, you will need to edit docker-compose.yml to match that port), and by logging into the browser at the local host address ``http://127.0.0.1 `` (*exactly http, not https!*) we will see the following picture:
 
 ![Docker Configuration](media/setting_docker/step_4.png)
 
@@ -147,5 +147,3 @@ After that, you can run it.:
 ``./make_directories.sh``
 
 And that's it, all the directories of our project (and even some necessary files in them) have been created!
-
-![system installation](media/stickers/e.png)

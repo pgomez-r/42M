@@ -2,8 +2,6 @@
 
 When working on a project, there may be a need to transfer the configuration to another computer. This may seem silly when you can do everything with the same PC and do not worry. But if that is not the case, the portability of the project becomes a very useful feature.
 
-![system installation](media/stickers/foundation.png)
-
 For this project, you could use your phone, USB stick, SSD, or cloud. Any alternative realted to use an external memory it would be as easy as copy and paste all needed files into it. In case you want or need to use an alternative way, here we will see how to store the project on the cloud.
 
 No matter the method you use to keep your files save, something you do need to learn is how to create snapshots of the system state, and save the system with them. Let's start with that.

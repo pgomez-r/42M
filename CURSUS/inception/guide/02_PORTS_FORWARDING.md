@@ -8,15 +8,22 @@ Log in as superuser and open the file ``/etc/ssh/sshd_config``
 
 All that happens next is unsafe settings for the virtual guest system, do not repeat on vps servers!
 
-Following most guides, now we would change the port to 42. But in 42Málaga, ports 42 and 22 are currently occupied. Then, ignore what you see in the following image and use a port of your choosing, in my case, I will use 43. Allow logging in under the superuser
+Following most guides, now we would change the port to 42. But in 42Málaga, ports 42 and 22 are currently occupied. Then, ignore what you see in the following images and use a port of your choosing, in my case, I will use 1142. 
+
+Allow logging in under the superuser:
 
 ![redocting ssh config](media/ports_forwarding/step_1.png)
 
-We disable the login with the key (generally optional, but I did) and confirm the login with the password.:
+We disable the login with the key (generally optional, but I did) and confirm the login with the password:
 
 ![ssh config editing](media/ports_forwarding/step_2.png)
 
 After that, we save the configuration and restart ssh and sshd services (in general, sshd is enough, but we get into the habit of doing both to be sure):
+
+```
+service ssh restart
+service sshd restart
+```
 
 ![ssh restart](media/ports_forwarding/step_3.png)
 
@@ -24,7 +31,7 @@ After that, we save the configuration and restart ssh and sshd services (in gene
 
 In the `system installation` step, we have already installed the ufw firewall..
 
-Next, we need to open our port 43 for ssh in the firewall, as well as ports 80 and 443 for the website.
+Next, we need to open our port 1142 for ssh in the firewall, as well as ports 80 and 443 for the website. Port 443 is mandatory by subject, in my case I use 8080 instead of 80 to avoid security warnings in my personal PC, but you should have no problems to use it.
 
 First, we launch our firewall with the command ``ufw enable``, then we allow each port with the command ``ufw allow N`', where N is the port number:
 
@@ -42,7 +49,9 @@ The `shutdown` command will shut down the server in a minute, so we use `shutdow
 
 It's not enough to open ports on the guest machine, you also need to redirect traffic from the host machine to the guest machine. Traffic traveling on certain ports must be redirected by forwarding ports from the guest machine to the host machine.
 
-In Virtualbox, go to settings -> network -> advanced -> port forwarding, and specify the following rules (change 42 port for the one you chose before):
+In Virtualbox, go to *setting/network/advanced/port forwarding*, and specify the following rules (change 42 port for the one you chose before):
+
+![port forwarding](media/ports_forwarding/step_6_0.png)
 
 ![port forwarding](media/ports_forwarding/step_6.png)
 

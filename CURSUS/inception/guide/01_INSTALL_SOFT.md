@@ -26,7 +26,7 @@ Update the repositories with the `apt update` command:
 
 After that, we will install the applications we need with the following command:
 
-```apt install -y sudo ufw openssh-server docker docker-compose make openbox xinit kitty firefox-esr```
+```apt install -y sudo ufw openssh-server docker docker-compose make vim openbox xinit kitty firefox-esr```
 
 We will enter this command manually, since it is impossible to copy-paste into a virtual machine. Later, we will open the ports and connect to the VM via the console, as to a local server.
 
@@ -47,6 +47,18 @@ When installing, we will see output like this:
 ![software installation](media/install_soft/install_step_6.png)
 
 It means that we did everything right. At the end of the installation, we will see the console output again.
+
+### Step 3.1. Updating PATH in env variables
+
+In some cases, depending on the OS image you installed, you may need to update your PATH env variable to correctly "find" some commands, to do so:
+
+- Open your shell's configuration file in any text editor or using vim/nano. If your shell is bash open `~/.bashrc` , if your shell is zsh open `~/.zshrc`. (Note that `~` refers to your home directory).
+
+- Add line `export PATH="$PATH:/usr/sbin"` . The path `/usr/sbin` is just the most common example, but your location might be different. (If so, try to navigate through your directories until you find sbin folder, which will contain folders and files relative to terminal commands - ls, cat..)
+
+- Save the file, exit and run `source ~/.zshrc` or `source ~/.bashrc` to make the current terminal to "notice" the changes.
+
+**(From this point, the steps are only needed if your OS has no integrated GUI)**
 
 Now let's check the software we have installed. First, let's launch the openbox graphical environment.
 

@@ -6,9 +6,11 @@ The original guide this translation follows uses a light version of debian witho
 
 Also, some of the following steps may differ from what you get while installing the OS in your VM, depeding on the OS that you chose, but the important thing is to know the minimum or recommended settings for your VM.
 
+> (!)TIP: If you are going to set you VM in a external memory or even on the cloud, so you can work in different places and devices, it is strongly recommended to always use the same exact version of VirtualBox when doing so. Otherwise, you may face several compatibilty problems. Version 7.0.18 is the current version installed in 42 Málaga as I write this guide (27/02/2025).
+
 ## Step 1. Download
 
-Go to the [official website](https://www.debian.org / "download debian") and download the web installer
+Go to https://www.debian.org and download the ISO image for the OS.
 
 ## Step 2. Launch
 
@@ -16,31 +18,21 @@ Go to the [official website](https://www.debian.org / "download debian") and dow
 
 Create a virtual machine. We call our project something (I just called it inception) and set the correct system configuration. If the project is being done on a 42 School device, its folder should be placed in sgoinfre:
 
-![virtualbox setup](media/install_debian/install_step_1.jpeg )
+![virtualbox setup](media/install_debian/install_step_1.png )
+
+![virtualbox setup](media/install_debian/install_step_1-1.png )
 
 ### 2.2 Resources setting
 
-RAM for the project can be allocated from 512MB (if your PC has 4 GB RAM) to 4096MB (if your device has 16GB or even more RAM). It is pointless to allocate more than 4 GB of memory for this project.
+RAM for the project can be allocated from 512MB (if your PC has 4 GB RAM) to 4096MB (if your device has 16GB or even more RAM). It is pointless to allocate more than 4 GB of memory for this project. Also you can add more cores, but there is not real need to do so:
 
-![virtualbox setup](media/install_debian/install_step_2.jpeg )
+![virtualbox setup](media/install_debian/install_step_2.png )
 
-The format we choose is VDI or VHD:
+The format we choose is VDI or VHD (newer versions of VBox won't ask for this), and we allocate between 8 and 12 GB for the disk:
 
 ![virtualbox setup](media/install_debian/install_step_3.png)
 
-Select a dynamic format and allocate 8 gigabytes for the disk.
-
-![virtualbox setup](media/install_debian/install_step_4.png)
-
-Also, do not forget to set a convenient screen resolution (zoom level) if you are working on MAC (200% or 300% is usually fine for this):
-
-![zoom level](media/install_debian/install_step_5.png)
-
-### 2.3 Allocation of processor resources
-
-You can also add more cores to the system. Adding more than four is redundant, no need at all:
-
-![CPU](media/install_debian/install_step_6.png)
+Also, do not forget to set a convenient screen resolution (zoom level) if you are working on MAC you will need 200-300%, for Linux system about 120-150% seems to be fine:
 
 ## Step 3. Installation
 
