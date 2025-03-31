@@ -1,33 +1,121 @@
-# Inception Guide
+# Inception
 
-*(!) Work in progress (!)*
-This is an ongoing work of translation of the guide by codesshaman at https://github.com/codesshaman/inception/tree/main?tab=readme-ov-file. 
+This project is a system administration exercise focused on Docker containerization. The goal is to set up a small infrastructure with multiple services using Docker containers, following specific rules and best practices.
 
-> Currently stopped developing in this repository, most recent changes and undergoing work in this repository https://github.com/pgomez-r/inception I will update here only once the project is totally finished.
+### Project Requirements
 
-This guide is divided into several steps ordered as they should be learnt (or studied, you could say) and done.
+**Infrastructure Components**
 
-## Project steps
+- NGINX container with TLSv1.2 or TLSv1.3 only
 
-Brief info about the stages of the project:
+- WordPress + PHP-FPM container (without NGINX)
 
-- [X] Installing the OS in virtualbox - [guide 00](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/00_INSTALL_SYSTEM.md "Installing the OS in virtualbox")
-- [X] Installing software inside the OS - [guide 01](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/01_INSTALL_SOFT.md "Installing software inside the OS")
-- [ ] Port forwarding to the host - [guide 02](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/02_PORTS_FORWARDING.md "Forwarding ports to the host")
-- [ ] Saving snapshots to the cloud - [guide 03](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/03_CLOUD_STORAGE.md "Saving snapshots to the cloud")
-- [ ] Pre-setup - [guide 04](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/04_FIRST_SETTINGS.md "Pre-setup")
-- [ ] Certificate Installation - [guide 05](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/05_INSTALL_CERTIFICATE.md "Installing the certificate")
-- [ ] Creating a Makefile - [guide 06](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/06_MAKEFILE_CREATION.md "Creating a Makefile")
-- [ ] nginx Deployment - [guide 07](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/07_DOCKER_NGINX.md "nginx Deployment")
-- [ ] mariadb Deployment - [guide 08](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/08_DOCKER_MARIADB.md "mariadb Deployment")
-- [ ] wordpress Deployment - [guide 09](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/09_DOCKER_WORDPRESS.md "Wordpress Deployment")
+- MariaDB container (without NGINX)
 
-***BONUS PART***
+- Two volumes:
+        - One for WordPress database
+        - One for WordPress website files
 
-- [ ] Redis Installation - [guide 10](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/10_WORDPRESS_REDIS.md "Installing Redis")
-- [ ] Installing vsftpd - [guide 11](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/11_VSFTPD_SERVER.md "Installing vsftpd")
-- [ ] Installing Adminler - [guide 12](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/12_INSTALL_ADMINER.md "Install Adminler")
-- [ ] Install portainer - guide [guide 13](https://github.com/pgomez-r/42M/tree/main/CURSUS/inception/guide/13_PORTAINER_INSTALL.md "Installing the portainer")
+- A Docker network to connect all containers
 
-For a deeper understanding of Docker:
-https://ivan-shamaev.ru/docker-compose-tutorial-container-image-install/
+**Technical Specifications**
+
+- Must be completed on a Virtual Machine
+
+- All configuration files must be placed in a srcs folder
+
+- Must include a Makefile at the root to build the entire application
+
+- Containers must be built from either Alpine or Debian (penultimate stable version)
+
+- Each service must have its own Dockerfile
+
+- Forbidden to use pre-made images (except Alpine/Debian base images)
+
+- Containers must restart automatically on crash
+
+**Security Requirements**
+
+- No passwords in Dockerfiles
+
+- Must use environment variables
+
+- Recommended to use .env file and Docker secrets
+
+- WordPress admin username must not contain variations of "admin"
+
+- NGINX must be the sole entry point (port 443 only)
+
+- Domain name must be login.42.fr (replace "login" with your actual login)
+
+### Directory Structure
+```text
+.
+├── Makefile
+├── secrets/
+│   ├── credentials.txt
+│   ├── db_password.txt
+│   ├── db_root_password.txt
+└── srcs/
+    ├── docker-compose.yml
+    ├── .env
+    └── requirements/
+        ├── mariadb/
+        │   ├── Dockerfile
+        │   ├── .dockerignore
+        │   ├── conf/
+        │   └── tools/
+        ├── nginx/
+        │   ├── Dockerfile
+        │   ├── .dockerignore
+        │   ├── conf/
+        │   └── tools/
+        └── wordpress/
+            ├── Dockerfile
+            ├── .dockerignore
+            ├── conf/
+            └── tools/
+```
+### Setup Instructions
+
+1. Prerequisites:
+
+- Virtual Machine
+
+- Docker and Docker Compose installed
+
+2. Configuration:
+
+- Update the .env file with your specific variables
+
+- Place all secrets in the secrets directory
+
+- Configure your domain name (login.42.fr) to point to your local IP
+
+3. Building and Running:
+
+- Run make at the root directory to build and start all containers
+
+- The Makefile will use docker-compose.yml to build and run the containers
+
+4. Access:
+
+- Access your WordPress site via HTTPS at https://login.42.fr
+
+### Important Notes
+
+- Do not use network: host or --link
+
+- Do not use infinite loop commands (tail -f, bash, sleep infinity, etc.)
+
+- The latest tag is prohibited
+
+- All containers must be properly daemonized
+
+- Follow Docker best practices for PID 1
+
+### Security Reminder
+
+All credentials, API keys, and passwords must be stored securely and never committed to version control. Use the provided secrets mechanism and .env file for configuration.
+
+This implementation covers only the mandatory part of the project as specified in the subject.

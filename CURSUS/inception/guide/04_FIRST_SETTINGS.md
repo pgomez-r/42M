@@ -14,7 +14,7 @@ By default, docker is run either with superuser privilege, or by any user in the
 
 In order for our user to make such requests in the system, we edit the /etc/sudoers config.:
 
-```nano /etc/sudoers```
+```vim /etc/sudoers```
 
 Our task is to add an entry with our user name and rights equivalent to root rights.:
 
@@ -46,45 +46,19 @@ And check that the addition has occurred.:
 
 As we can see, the docker group has been added to the list of groups at the very end. This means that now we can call our docker from under a regular user
 
-## Step 3. Test configuration
-
-So let's switch to our user and go to his home directory.:
+So let's switch to our user and go to his home directory
 
 ```su <your_nickname>```
 
 ```cd ~/```
 
-We will also download a simple configuration from a single docker container to the root to check the operation of the system.:
+## Step 3. Create project directories and files
 
-```git clone https://github.com/codesshaman/simple_docker_nginx_html.git```
+Next, we need to create some directories and files according to the subject.
 
-![Setting up Docker](media/setting_docker/step_2.png)
+This is a routine task in which there is nothing complicated: you can create them on file manager, VSCode if ssh connected or with the terminal commands `mkdir`, `touch`... and so on. 
 
-Now we can go to this folder and launch the container.:
-
-```cd simple_docker_nginx_html```
-
-```docker-compose up -d```
-
-After a while, our container will crash and we will see a message about a successful launch.:
-
-![Docker Configuration](media/setting_docker/step_3.png)
-
-This means that we can test the running container and the correct configuration settings. Open the browser of the host machine to check it.
-
-If we did everything correctly in step 02 during port forwarding, then port 80 is open (if you set HTTP rule to a different port, you will need to edit docker-compose.yml to match that port), and by logging into the browser at the local host address ``http://127.0.0.1 `` (*exactly http, not https!*) we will see the following picture:
-
-![Docker Configuration](media/setting_docker/step_4.png)
-
-If suddenly we see something else, it means that our ports are not open or port 80 is busy with something on the host machine. Go through guide 01 and make sure that the ports are open, as well as check all running applications. If there are servers or other applications for working with the local host among them, disable them.
-
-## Step 4. Create project directories and files
-
-Next, we need to create many directories and files according to the task.
-
-This is a routine task in which there is nothing complicated: the `mkdir` command creates a directory, the `touch` command creates a file, the `cd` command moves us along the relative or absolute path indicated after the command, and the `cd..`` takes us to the catalog above. Also, `pwd` shows where we are, `cd~" returns us to the home directory.
-
-If you don't want to do this routine, the author of the original guide made a script: ``make_directories.sh`` , which performs all these actions automatically. If you want to use it, you should edit it in order to add your nickname or change any folder name if wanted.
+If you want to do this quicker, the author of the reference guide made a script called ``make_directories.sh``, which performs all these actions automatically and which is placed at the same directory of this guide. If you are going use it, you should edit it and add your nickname or change any folder name if wanted.
 
 ``nano make_directories.sh``
 
@@ -134,8 +108,6 @@ echo ".env" >> project/srcs/requirements/wordpress/.dockerignore
 ```
 
 > Don't forget to change <your_nickname> to your nickname!
-
-In the tools directories of wordpress and mariadb, we create an empty file.gitkeep, which only serves to get these empty folders into git indexing. Without it, they will not be uploaded to the repository. We will not use these folders, since mariadb and wp will have only one configuration each. We will perform most of the simple operations directly in the dockerfile, eliminating the need for unnecessary files from the outside. (This will be explained better and, hopefully, understood later on)
 
 To execute the script, it must be given permission:
 `chmod +x make_directories.sh `

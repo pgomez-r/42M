@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+        DB_ROOT: ${DB_ROOT}
+    container_name: mariadb
+    networks:
+      - inception
+    volumes:
+      - db-volume:/var/lib/mysql
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        WP_USER: ${WP_USER}
+        WP_PASS: ${WP_PASS}
+    container_name: wordpress
+    environment:
+    - DB_NAME=${DB_NAME}
+    - DB_USER=${DB_USER}
+    - DB_PASS=${DB_PASS}
+    - DOMAIN_NAME=${DOMAIN_NAME}
+    - WP_USER=${WP_USER}
+    - WP_PASS=${WP_PASS}
+    depends_on:
+      mariadb:
+       condition: service_healthy
+    networks:
+      - inception
+    volumes:
+      - wp-volume:/var/www/html
+    restart: on-failure
+
+  nginx:
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    depends_on:
+     - wordpress
+    ports:
+      - "443:443"
+    networks:
+     - inception
+    volumes:
+      - ./requirements/nginx/conf/:/etc/nginx/http.d/
+      - wp-volume:/var/www/html
+    restart: on-failure
+
+volumes:
+  wp-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/wordpress
+
+  db-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/mariadb
+
+networks:
+  inception:
+    driver: bridge

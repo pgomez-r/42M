@@ -1,14 +1,16 @@
 # Port forwarding in the virtual system
 
-## Step 1. Setting ssh Configuration
+As we did for B2BR project, we need to map (portforward) some ports between host and VM. According to the subject, we just need to have port 443 por website https protocol, but I will also allow another port for ssh connection, you can skip that if you want, but I do think it is quite convenient to have remote connection, especially via VSCode.
 
-Log in as superuser and open the file ``/etc/ssh/sshd_config``
+## Step 1. Setting SSH Configuration
 
-![ssh config editing](media/ports_forwarding/step_0.png)
+First, let's modify sshd_config file, to set the configuration of remote connection of our system on the virtual machine.
 
-All that happens next is unsafe settings for the virtual guest system, do not repeat on vps servers!
+Run ``sudo vim /etc/ssh/sshd_config``
 
-Following most guides, now we would change the port to 42. But in 42Málaga, ports 42 and 22 are currently occupied. Then, ignore what you see in the following images and use a port of your choosing, in my case, I will use 1142. 
+We can use any port we want for the ssh communication, but remember that it has to be an available port. 
+
+> In 42Málaga, ports 42 and 22 are currently occupied. Then, do not follow the example in the following images and use a port of your choosing, in my case, I will use 1142.
 
 Allow logging in under the superuser:
 
@@ -31,9 +33,11 @@ service sshd restart
 
 In the `system installation` step, we have already installed the ufw firewall..
 
-Next, we need to open our port 1142 for ssh in the firewall, as well as ports 80 and 443 for the website. Port 443 is mandatory by subject, in my case I use 8080 instead of 80 to avoid security warnings in my personal PC, but you should have no problems to use it.
+Next, we need to open our port 1142 for ssh in the firewall, as well as port 443 for the website -443 port is mandatory by subject-.
 
 First, we launch our firewall with the command ``ufw enable``, then we allow each port with the command ``ufw allow N`', where N is the port number:
+
+> Again, do not follow the ports in the images, they are just examples, but we need to use only 443 and the one you chose for ssh connection
 
 ![opening ports](media/ports_forwarding/step_4.png)
 
@@ -49,7 +53,7 @@ The `shutdown` command will shut down the server in a minute, so we use `shutdow
 
 It's not enough to open ports on the guest machine, you also need to redirect traffic from the host machine to the guest machine. Traffic traveling on certain ports must be redirected by forwarding ports from the guest machine to the host machine.
 
-In Virtualbox, go to *setting/network/advanced/port forwarding*, and specify the following rules (change 42 port for the one you chose before):
+In Virtualbox, go to *setting/network/advanced/port forwarding*, and specify the following rule HTPPS and SSH (*ignore HTTP and remember not to use ports 42 or 22 if you are in Malaga campus*):
 
 ![port forwarding](media/ports_forwarding/step_6_0.png)
 
@@ -71,8 +75,8 @@ To log in as a regular user, we use the username we created.:
 
 ```ssh <your_nickname>@localhost -p <port_number>```
 
-Click yes to accept the settings in known_hosts, enter our password and voila - we are in!
+Click yes to accept the settings in known_hosts, enter our password and we are in!
 
 ![ssh login](media/ports_forwarding/step_7.png)
 
-Alternatively, we could also use the extension SSHRemote on VSCode, which process log in is quite similar and intuitive.
+Alternatively, we could also use the extension **Remote - SSH** on VSCode, which login process from command palette is quite similar and intuitive. You could just launch the VM, go to VSCode in you host machine (your everyday laptop or 42 machine) and connect to the the VM with this extension. That way, you will have access to the whole VM directories and files, you can add, delete, edit... use the editor terminal, and most important, do all the work in VSCode ^_^

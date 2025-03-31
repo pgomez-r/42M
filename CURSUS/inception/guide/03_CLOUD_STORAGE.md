@@ -1,12 +1,22 @@
 # Project storing and portability
 
-When working on a project, there may be a need to transfer the configuration to another computer. This may seem silly when you can do everything with the same PC and do not worry. But if that is not the case, the portability of the project becomes a very useful feature.
+When working on a project, you may need to transfer the configuration to another computer. This may seem pointless if you can do everything on the same PC and do not worry. But if that is not the case, the portability of the project becomes a very useful feature, so it is important to think and plan it from the beginning.
 
-For this project, you could use your phone, USB stick, SSD, or cloud. Any alternative realted to use an external memory it would be as easy as copy and paste all needed files into it. In case you want or need to use an alternative way, here we will see how to store the project on the cloud.
+In my case, I develop and run the project in a USB stick formatted in ext4 -only usable on Linux distributions-. I created the VM there from the beginning when using VBox installation wizard, but you could also copy all files into it if you created the VM on your device or the school sgoinfre previously.
 
-No matter the method you use to keep your files save, something you do need to learn is how to create snapshots of the system state, and save the system with them. Let's start with that.
+Working on a external memory is quite easy and convenient, but I found some issues -due to my own lack of knowledge- so let me point some tips in case it may help you to avoid some headaches:
+
+> TIP #1: It is strongly recommended to always use the same exact version of VirtualBox when doing so. Otherwise, you may face several compatibilty problems. Version 7.0.18 is the current version installed in 42 Málaga as I write this guide (27/02/2025).
+
+> TIP #2: ANY TIME YOU FINISH WORKING, SHUTDOWN THE VM PROPERLY (using commmand `sudo shutdown now` or using VBox interface option), DO NOT USE 'SAVE CURRENT STATE'. Saving state only lets you relaunch the machine again in the same host machine that you saved when quitting, so that won't work if you want to work in different devices!
+
+> TIP #3: Depending on the file system format of your memory device and/or the version of VBox you are using, you may find that any time you launch the VM, VBox changes the permissions of the .vbox files to only root. This may be problematic if you are not root or superuser on the next device you try to launch the VM again -which will happen in 42, most likely- so take into consideration.
+
+In case you want or need to use an alternative way, the reference guide explains how to store the project on the cloud, so I also let that info here.
 
 ## Step 1. Learn how to create snapshots
+
+No matter the method you use to keep your files save, something you do need to learn is how to create snapshots of the system state, and save the system with them. Let's start with that.
 
 A snapshot is like a photograph of the system status; it's like saving in a videogame. Just as in a game you should not move to the next boss fight without saving, in the inception project you should not do rush actions without snapshots. If something goes wrong, the system can be rolled back to the previous snapshot.
 
