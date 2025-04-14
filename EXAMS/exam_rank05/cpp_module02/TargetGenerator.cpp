@@ -1,25 +1,26 @@
 #include "TargetGenerator.hpp"
 
-TargetGenerator::TargetGenerator() {}
+TargetGenerator::TargetGenerator(){}
 
-TargetGenerator::~TargetGenerator() {}
-
-void TargetGenerator::learnTargetType(ATarget* targetName)
+TargetGenerator::~TargetGenerator()
 {
-	if (_TargetBook.find(targetName->getType()) == _TargetBook.end())
-		_TargetBook[targetName->getType()] = targetName->clone();
 }
 
-void TargetGenerator::forgetTargetType(std::string const & targetName)
+void TargetGenerator::learnTargetType(ATarget *ptr)
 {
-	if (_TargetBook.find(targetName) != _TargetBook.end())
-		_TargetBook.erase(_TargetBook.find(targetName));
+	if(ptr)
+		map[ptr->getType()] = ptr->clone();
+}
+void TargetGenerator::forgetTargetType(const std::string &name)
+{
+	if(map.find(name) != map.end())
+		map.erase(map.find(name));
 }
 
-ATarget* TargetGenerator::createTarget(std::string const &targetName)
+ATarget *TargetGenerator::createTarget(const std::string &name)
 {
-	ATarget *target = NULL;
-	if (_TargetBook.find(targetName) != _TargetBook.end()){
-		target = _TargetBook[targetName];}
-	return (target);
+	ATarget *aux = NULL;
+	if(map.find(name) != map.end())
+		aux = this->map[name];
+	return(aux);
 }
