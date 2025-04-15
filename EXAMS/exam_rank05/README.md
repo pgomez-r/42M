@@ -14,11 +14,19 @@
 
 - All classes have to be canonical, but the exam's tester does only check for this matter on your *.hpp files*.. So, if you don't need to use some of the canonical parts **do not waste time implementing them in the .cpp files** (for instance: overload, copy constructor...)
 
-- There are many files to create on this exam, so in order to save time and avoid typos, it would be wise to **copy/paste them from the subject and use the `touch` command on terminal**
+- Use `#pragma once` on first line of your .hpp file, this replaces `#ifndef `- `#define `- `#endif`, which will save you lines and time
 
-- Same happens with logs or outputs messages, the exam tester can fail your submission if you miss a final dot on a sentence, so better keep the subject aside and **copy/paste all required output messages!**
+- There are so many files to create on this exam, so in order to save time and avoid typos, it would be wise to **copy/paste them from the subject and use the `touch` command on terminal**
 
-- **Pre-configure Vim**; the exam will have vim cofigured the less user friendly as possible, you can activate some features in each editor if you want, but each time you open a new one, those will be lost. In order to make this features persistent, we can modify `~/.vimrc`, which is the configuration file for vim. This file may not even exist on the exam session, don't worry, we can create it.
+- You will realize that several files are quite similar, so you can use the command `cat FileOne.cpp > FileTwo.cpp` (being FileTwo.cpp empty before using the command, obviously), then search/replace a few words and that's it, you are done with it
+
+- Having in mind the two previous ideas, your workflow between modules could be: copy needed files from previous module (modify them later if needed by subject) - created new required files with `touch` - use `cat FileOne > FileTwo` for similar files - search/replace in new files to modify them as needed - create rest of needed files from scratch
+
+- Be careful with logs or outputs messages, the exam tester can fail your submission if you miss a final dot on a sentence, so better keep the subject aside and **copy/paste all required output messages!**
+
+### Pre-configure Vim for a better exam experience
+
+The exam session will have vim cofigured as less user friendly as possible. You can activate some features in each editor if you want, but each time you open a new one, those will be lost. In order to make this features persistent, we can modify `~/.vimrc`, which is the configuration file for vim. This file may not even exist on the exam session, don't worry, we can create it.
 
 ```bash
 	vim ~/.vimrc
@@ -27,8 +35,8 @@
 ```bash
 	# On vimrc file, add these lines:
 	set number
-	syntax enable
 	set mouse=a
+	syntax enable
 ```
 
 - **Copy/paste in Vim** -> in visual mode -> *Y*(copY) - *P*(Paste); this will paste after cursor
