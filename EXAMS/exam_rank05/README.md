@@ -12,15 +12,35 @@
 
 ### Tips for exam
 
-- All classes have to be canonical, but the exam's tester does only check for this matter on your *.hpp files*.. So, if you don't need to use some of the canonical parts, **do not waste time implementing them in the .cpp files** (for instance, overload, copy constructor...)
+- All classes have to be canonical, but the exam's tester does only check for this matter on your *.hpp files*.. So, if you don't need to use some of the canonical parts **do not waste time implementing them in the .cpp files** (for instance: overload, copy constructor...)
 
-- There are many files to create on this exam, so in order to save time and avoid typos, it would be wise to copy them from the subject and use the `touch` command on terminal
+- There are many files to create on this exam, so in order to save time and avoid typos, it would be wise to **copy/paste them from the subject and use the `touch` command on terminal**
 
-- Same happens with logs or outputs messages, the exam tester can fail your submission if you miss a final dot on a sentence, so better keep the subject aside and *copy/paste all required output messages!*
+- Same happens with logs or outputs messages, the exam tester can fail your submission if you miss a final dot on a sentence, so better keep the subject aside and **copy/paste all required output messages!**
 
-- TODO: Search and replace on vim?
+- **Pre-configure Vim**; the exam will have vim cofigured the less user friendly as possible, you can activate some features in each editor if you want, but each time you open a new one, those will be lost. In order to make this features persistent, we can modify `~/.vimrc`, which is the configuration file for vim. This file may not even exist on the exam session, don't worry, we can create it.
 
-- TODO: Copy paste on vim?
+```bash
+	vim ~/.vimrc
+```
+
+```bash
+	# On vimrc file, add these lines:
+	set number
+	syntax enable
+	set mouse=a
+```
+
+- **Copy/paste in Vim** -> in visual mode -> *Y*(copY) - *P*(Paste); this will paste after cursor
+
+- **Allow copy/paste with cursor** -> in visual mode -> just try to select with cursor and then use right-mouse-button or `CTRL+C`, `CTRL+V` for copy and paste; if not working	you need to enable in vim configuration as explained before.
+
+- **Search/replace in Vim** -> `:%s/old/new/g` -> will replace any occurency of *"old"* for *"new"* in the whole file (because of `g` flag, without it, it would replace only first occurency)
+> Tip: in visual mode, you can use `*` to store the word on cursor, then you can just do `:%s//new/g` and the first param of the command will be replaced by the word 'stored' by `*` (or /search)
+
+- **Safer search/replace in Vim** -> `:%s/\<old\>/new/gc` -> using word boundries (`\<` and `\>`) will replace only whole exactly words occurencies, e.g. *old* → new (replaced); *old*er → older (unchanged)...; also the `c` flag will add confirmation for each replacement
+
+- **Undo/redo in Vim** -> `u` undo last change; `CTRL+R` redo last undone change
 
 ### Total Excepted Files
 
