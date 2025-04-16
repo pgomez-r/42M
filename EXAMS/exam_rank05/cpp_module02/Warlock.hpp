@@ -13,7 +13,7 @@ class Warlock{
 		Warlock &operator=(const Warlock &src);
 		std::string _name;
 		std::string _title;
-		SpellBook _book;
+		SpellBook *_book;
 	public:
 		Warlock(const std::string &name, const std::string &title);
 		~Warlock();
