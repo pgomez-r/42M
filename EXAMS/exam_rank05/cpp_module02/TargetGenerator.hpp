@@ -1,20 +1,20 @@
 #pragma once
 
+#include <map>
 #include <iostream>
 #include "ASpell.hpp"
 #include "ATarget.hpp"
-#include <map>
 
-class TargetGenerator
-{
+class TargetGenerator{
 	private:
-			std::map<std::string,ATarget *> map;
-			TargetGenerator &operator=(const TargetGenerator &data);
-			TargetGenerator(const TargetGenerator &data);			
+		std::map<std::string,ATarget *> _book;
+		TargetGenerator(const TargetGenerator &src);
+		TargetGenerator &operator=(const TargetGenerator &src);
 	public:
-			TargetGenerator();
-			~TargetGenerator();
-			void learnTargetType(ATarget *ptr);
-			void forgetTargetType(const std::string &name);
-			ATarget *createTarget(const std::string &name);
+		TargetGenerator();
+		~TargetGenerator();
+		void learnTargetType(ATarget *target);
+		void forgetTargetType(const std::string &type);
+		ATarget* createTarget(const std::string &target);
 };
+

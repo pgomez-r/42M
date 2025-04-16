@@ -1,22 +1,20 @@
-//#pragma once replaces ifndef - def - endif
 #pragma once
 
 #include <iostream>
 
-class Warlock
-{
-	// Beside the attributes, we define not allowed constructors as private
+class Warlock{
 	private:
-			std::string _name;
-			std::string _title;
-			Warlock();
-			Warlock(const Warlock &src);
-			Warlock &operator=(const Warlock &src);
+		Warlock();
+		Warlock(const Warlock &src);
+		Warlock &operator=(const Warlock &src);
+		std::string _name;
+		std::string _title;
 	public:
-			Warlock(const std::string &name,const std::string &title);
-			const std::string &getName() const;
-			const std::string &getTitle() const;
-			void setTitle(const std::string &name);
-			~Warlock();
-			void introduce() const;
+		Warlock(const std::string &name, const std::string &title);
+		~Warlock();
+		const std::string &getName() const;
+		const std::string &getTitle() const;
+		void setTitle(const std::string &str);
+		void introduce() const;
 };
+
