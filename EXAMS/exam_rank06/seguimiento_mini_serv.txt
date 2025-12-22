@@ -1,0 +1,53 @@
+1º Copiar todo el main que nos dan.
+2º Reemplazar las librerias 1º y 4º.
+3º Crear la estructura s_client con int fd, y char msg[3700000].
+4º Crear variable t_client clients[2048].
+5º Declarar variables, fd_set read_set, write_set, current.
+6º Crear variable int maxfd = 0, gid = 0;
+7º Crear variable char send_buffer[400000], recv_buffer[400000].
+8º Crear funcion void err.
+9º Crear funcion void send_to_all(int except).
+	-FD_ISSET(fd,&write_set) && fd != except.
+		-send(fd,send_buffer,strlen(send_buffer),0) == -1.
+10º Borrar funciones del main que nos dan.
+11º Revisar el numero de argumentos sea correcto.
+12º Obtener solo el sockfd, y el servaddr.
+13º Crear socklen_t len = sizeof(struct sockaddr);
+14º bzero a clients.
+15º Aplicar FD_ZERO(&current) y FD_SET(sockfd,&current).
+16º htons(atoi(argv[1])).
+17º Cambiar el bind a == -1, y el listen cambiarlo a 100 y == -1.
+18º Bucle infinito
+	18º a-
+		1º- iniciar read_set = write_set = current.
+		2º- select(maxfd + 1, &read_set,&write_set,0,0) == -1. continue;
+	18º b-
+		1º bucle for.
+		2º if(FD_ISSET(fd,&read_set))
+		3º if(sockfd == fd)
+			1º int clientfd = accept(fd,(struct sockaddr *)&servaddr,&len);
+			2º clientfd == -1 continue;
+			3º clientfd > maxfd. maxfd = clientfd;
+			4º clients[clientfd].id = gid++;
+			5º FD_SET(clientfd,&current);
+			6º sprintf(send_buffer,"server: client %d just arrived\n",clients[clientfd].id);
+			7º send_to_all(clientfd);
+			8º break;
+		4º int ret = recv(fd,recv_buffer,sizeof(recv_buffer), 0);
+		5º if ret <= 0
+			1º sprintf(send_buffer,"server: client %d just left\n",clients[clientfd].id);
+			2º send_to_all(clientfd);
+			3º FD_CLR(fd &current);
+			4º bzero(clients[fd].msg,strlen(clients[fd].msg));
+			5º close(fd);
+			6º break;
+		6º else
+		7º for(int i = 0, j = strlen(clients[fd].msg); i < ret; i++; j++)
+		8º clients[fd].msg[j] = recv_buffer[i];
+		9º if (clients[fd].msg[j] == '\n')
+			1º clients[fd].msg[j] = '\0';
+			2º sprintf(send_buffer,"client %d: %s\n",clients[fd].id,clients[fd].msg);
+			3º send_to_all(fd);
+			4º bzero(clients[fd].msg,strlen(clients[fd].msg));
+			5º j = -1;
+

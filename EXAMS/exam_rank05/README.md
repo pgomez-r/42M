@@ -14,13 +14,13 @@
 
 - All classes have to be canonical, but the exam's tester does only check for this matter on your *.hpp files*.. So, if you don't need to use some of the canonical parts **do not waste time implementing them in the .cpp files** (for instance: overload, copy constructor...)
 
-- Use `#pragma once` on first line of your .hpp file, this replaces `#ifndef `- `#define `- `#endif`, which will save you lines and time
+- Use `#pragma once` on first line of your .hpp files, this replaces `#ifndef `- `#define `- `#endif`, which will save you lines and time
 
 - There are so many files to create on this exam, so in order to save time and avoid typos, it would be wise to **copy/paste them from the subject and use the `touch` command on terminal**
 
 - You will realize that several files are quite similar, so you can use the command `cat FileOne.cpp > FileTwo.cpp` (being FileTwo.cpp empty before using the command, obviously), then search/replace a few words and that's it, you are done with it
 
-- Having in mind the two previous ideas, your workflow between modules could be: copy needed files from previous module (modify them later if needed by subject) - created new required files with `touch` - use `cat FileOne > FileTwo` for similar files - search/replace in new files to modify them as needed - create rest of needed files from scratch
+- Having in mind the two previous ideas, your workflow between modules could be: copy needed files from previous module (modify them later if needed by subject) - create new required files with `touch` - use `cat FileOne > FileTwo` for similar files - search/replace in new files to modify them as needed - create rest of needed files from scratch
 
 - Be careful with logs or outputs messages, the exam tester can fail your submission if you miss a final dot on a sentence, so better keep the subject aside and **copy/paste all required output messages!**
 
