@@ -54,8 +54,8 @@ char *str_join(char *buf, char *add)
 
 
 int main() {
-	int sockfd, connfd, len; // SOLO OBTENER EL sockfd;
-	struct sockaddr_in servaddr, cli; // SOLO OBTENER el servaddr;
+	int sockfd, connfd, len;
+	struct sockaddr_in servaddr, cli;
 
 	// socket create and verification 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0); 
@@ -70,7 +70,7 @@ int main() {
 	// assign IP, PORT 
 	servaddr.sin_family = AF_INET; 
 	servaddr.sin_addr.s_addr = htonl(2130706433); //127.0.0.1
-	servaddr.sin_port = htons(8081); //atoi del argv[1];
+	servaddr.sin_port = htons(8081);
   
 	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) { 

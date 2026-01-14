@@ -12,8 +12,11 @@ typedef struct s_client
 }	t_client;
 
 t_client clients[2048];
+
 fd_set read_set, write_set, current;
+
 int maxfd = 0, gid = 0;
+
 char send_buffer[400000],recv_buffer[400000];
 
 void err(char *msg)
@@ -32,7 +35,7 @@ void send_to_all(int except)
 	{
 		if(FD_ISSET(fd,&write_set) && fd != except)
 		{
-			if(send(fd,send_buffer,strlen(send_buffer),0) == -1)
+			if(send(fd, send_buffer, strlen(send_buffer), 0) == -1)
 				err(NULL);
 		}
 	}
@@ -42,17 +45,20 @@ void send_to_all(int except)
 int main(int argc, char **argv) {
 	if (argc != 2)
 		err("Wrong number of arguments");
+	
 	int sockfd;
 	struct sockaddr_in servaddr;
-       	socklen_t len = sizeof(struct sockaddr);
+	socklen_t len = sizeof(struct sockaddr);
 
 	// socket create and verification 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0); 
 	if (sockfd == -1)
-	       err(NULL);
+	    err(NULL);
+
 	maxfd = sockfd;
+
 	bzero(&servaddr, sizeof(servaddr)); 
-	bzero(clients,sizeof(clients));
+	bzero(clients, sizeof(clients));
 	FD_ZERO(&current);
 	FD_SET(sockfd,&current);
 
@@ -66,37 +72,44 @@ int main(int argc, char **argv) {
 	    err(NULL);	
 	if (listen(sockfd, 100) == -1)
 		err(NULL);
+
 	while(1)
 	{
 		read_set = write_set = current;
-		if(select(maxfd + 1,&read_set,&write_set,0,0) == -1)
+	
+		if(select(maxfd + 1, &read_set ,&write_set, 0, 0) == -1)
 			continue;
+	
 		for (int fd = 0; fd <= maxfd; fd++)
 		{
-			if(FD_ISSET(fd,&read_set))
+			if(FD_ISSET(fd, &read_set))
 			{
 				if(sockfd == fd)
 				{
 					int clientfd = accept(fd,(struct sockaddr *)&servaddr,&len);
 					if (clientfd == -1)
 						continue;
+					
 					if (clientfd > maxfd)
 						maxfd = clientfd;
+					
 					clients[clientfd].id = gid++;
 					FD_SET(clientfd,&current);
-					sprintf(send_buffer,"server: client %d just arrived\n",clients[clientfd].id);
+
+					sprintf(send_buffer, "server: client %d just arrived\n", clients[clientfd].id);
 					send_to_all(clientfd);
 					break ;
 				}
 				else
 				{
-					int ret = recv(fd,recv_buffer,sizeof(recv_buffer),0);
+					int ret = recv(fd, recv_buffer, sizeof(recv_buffer), 0);
 					if (ret <= 0)
 					{
-						sprintf(send_buffer,"server: client %d just left\n",clients[fd].id);
+						sprintf(send_buffer,"server: client %d just left\n", clients[fd].id);
 						send_to_all(fd);
-						FD_CLR(fd,&current);
-						bzero(clients[fd].msg,strlen(clients[fd].msg));
+
+						FD_CLR(fd, &current);
+						bzero(clients[fd].msg, strlen(clients[fd].msg));
 						close(fd);
 						break ;
 					}
@@ -108,9 +121,9 @@ int main(int argc, char **argv) {
 							if(clients[fd].msg[j] == '\n')
 							{
 								clients[fd].msg[j] = '\0';
-								sprintf(send_buffer,"client %d: %s\n",clients[fd].id,clients[fd].msg);
+								sprintf(send_buffer, "client %d: %s\n", clients[fd].id, clients[fd].msg);
 								send_to_all(fd);
-								bzero(clients[fd].msg,strlen(clients[fd].msg));
+								bzero(clients[fd].msg, strlen(clients[fd].msg));
 								j = -1;
 							}
 						}
